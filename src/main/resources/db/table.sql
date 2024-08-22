@@ -81,3 +81,25 @@ create table user_cash_history(
     spend_amount Long,
     created_at Timestamp default now()
 );
+
+-- 커뮤니티 게시판 테이블
+create table board_tb (
+	id int primary key auto_increment not null,
+    category_id int not null,
+    title varchar(20) not null,
+    content text not null,
+    author int not null,
+    view_num int default 0,
+    good int default 0,
+    created_at timestamp default current_timestamp
+);
+
+-- 댓글 테이블
+create table comment_tb (
+	id int primary key auto_increment not null,
+    post_id int not null,
+    content text not null,
+    author int not null,
+    create_at timestamp default current_timestamp
+);
+
