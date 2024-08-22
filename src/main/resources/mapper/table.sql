@@ -17,7 +17,7 @@ create table user_tb(
     birth_date date not null,
     email varchar(50) unique key,
     origin_file_name varchar(200),
-    upload_file_name varchar(200)l,
+    upload_file_name varchar(200),
     cash Long not null default 200, -- 캐시, 가입 시 200점
     challenge_point Long not null default 200, -- 내기 포인트, 가입시 200점 
     status int not null default 0  -- 0 회원 가입 유지, 1 탈퇴
