@@ -8,9 +8,15 @@
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 <style>
+
 body {
 	margin: 0;
 	font-family: Arial, sans-serif;
+}
+
+p{
+	margin: 0;
+	padding: 0;
 }
 
 .container {
@@ -139,7 +145,17 @@ h2{
             box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);  
             transform:translateY(-50%);  
         }
+        
+.footer{
+	background-color: orange;	
+	height: 100px;
+	align-content: center;
+}
 
+.footer p{
+	text-align: center;
+}
+        
 
 </style>
 </head>
@@ -148,11 +164,10 @@ h2{
 		<div class="header">
 			<h1>관리자 페이지</h1>
 			<div class="header-menu">
-			   	<button class="btn-open-modal-alarm">알림</button>
-			   	<button class="btn-open-modal-qna">Q&A</button>
-			   	<button class="btn-open-modal-report">신고내역</button>
+				<button class="btn-open-modal-alarm">알림</button>
+				<button class="btn-open-modal-qna">Q&A</button>
+				<button class="btn-open-modal-report">신고내역</button>
 			</div>
-			
 		</div>
 		<div class="main-content">
 			<div class="sidebar">
@@ -180,6 +195,8 @@ h2{
 						<canvas id="myChart3"></canvas>
 					</div>
 				</div>
+				
+				
 				
 				
 				<script>
@@ -386,9 +403,13 @@ h2{
 				            }
 				        });
 			    </script> 
-
 			</div>
 		</div>
+		<footer>
+			<div class="footer">
+				<p>footer</p>
+			</div>
+		</footer>
 	</div>
 </body>
 </html>
