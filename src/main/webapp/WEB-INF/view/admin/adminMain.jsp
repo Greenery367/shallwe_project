@@ -158,12 +158,12 @@ h2{
 			<div class="sidebar">
 				<h2>관리 목록</h2>
 				<ul>
-					<li><a href="#">대시보드</a></li>
-					<li><a href="#">광고 / 배너</a></li>
-					<li><a href="#">카테고리 / 게시판</a></li>
-					<li><a href="#">캐쉬</a></li>
-					<li><a href="#">고객 지원</a></li>
-					<li><a href="#">뉴스 / 공지</a></li>
+					<li><a href="dashboard">대시보드</a></li>
+					<li><a href="advertisement">광고 / 배너</a></li>
+					<li><a href="category">카테고리 / 게시판</a></li>
+					<li><a href="cash">캐쉬</a></li>
+					<li><a href="support">고객 지원</a></li>
+					<li><a href="notice">뉴스 / 공지</a></li>
 				</ul>
 			</div>
 			<div class="content">
