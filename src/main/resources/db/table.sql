@@ -8,19 +8,33 @@ create table role_tb(
 
 -- 사용자 테이블
 create table user_tb(
-	user_id int primary key auto_increment not null,
-    role_id int not null, -- 직함 id
+	id int primary key auto_increment not null,
+    role_id int, -- 직함 id
     username varchar(20) not null,
-    id varchar(20) unique key not null,
+    user_id varchar(20) unique key not null,
     password varchar(20) not null,
+    phone_number char(13) not null unique key,
     nickname varchar(20) not null unique key, 
     birth_date date not null,
-    email varchar(50) unique key not null,
-    origin_file_name varchar(200) not null,
-    upload_file_name varchar(200) not null,
+    email varchar(50) unique key,
+    origin_file_name varchar(200),
+    upload_file_name varchar(200),
     cash Long not null default 200, -- 캐시, 가입 시 200점
     challenge_point Long not null default 200, -- 내기 포인트, 가입시 200점 
-    status int not null -- 0 회원 가입 유지, 1 탈퇴
+    status int not null default 0  -- 0 회원 가입 유지, 1 탈퇴
+);
+
+-- 관리자 정보 테이블
+create table admin_tb(
+	id int primary key auto_increment not null,
+    role_id int,
+    admin_name varchar(20) not null,
+    admin_id varchar(20) not null,
+    password varchar(20) not null,
+    email varchar(50) unique key,
+    origin_file_name varchar(200),
+    upload_file_name varchar(200),
+    status int not null default 0 
 );
 
 -- mbti 테이블
@@ -51,7 +65,7 @@ create table report_tb(
 -- 장르 테이블
 create table genre_tb(
 	id int auto_increment primary key,
-    genre_name varchar(20) not null primary key
+    genre_name varchar(20)
 );
 
 -- 게임 카테고리 테이블
@@ -81,3 +95,5 @@ create table user_cash_history(
     spend_amount Long,
     created_at Timestamp default now()
 );
+
+
