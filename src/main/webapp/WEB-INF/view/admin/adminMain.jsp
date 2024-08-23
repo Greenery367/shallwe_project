@@ -26,11 +26,22 @@ p{
 }
 
 .header {
+	display:flex;
+	justify-content: space-between;
 	background-color: #333;
+	align-items:flex-end;
 	color: #fff;
 	padding: 10px;
 	text-align: center;
 	flex-shrink: 0;
+	height: 120px;
+}
+
+.admin-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 120px;
 }
 
 .main-content {
@@ -64,7 +75,25 @@ p{
 
 .header-menu{
 	display: flex;
-	float: right;
+	flex-direction: row;
+}
+
+.btn-open-modal-alarm,
+.btn-open-modal-qna,
+.btn-open-modal-report{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 2px;
+}
+
+
+
+
+.header img{
+	float: left;
+	width: 300px;
+	height: 120px;
 }
 
 .main-canvas{
@@ -98,41 +127,25 @@ h2{
 	text-align: center;
 }
 
-.modal-alarm{
-	position:absolute;
-	display:none;
-	justify-content: center;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background-color: rgba(0,0,0,0.4);
+h1{
+	width: 250px;
 }
 
-.modal-qna{
-	position:absolute;
-	display:none;
-	justify-content: center;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background-color: rgba(0,0,0,0.4);
-}
-
+.modal-alarm,
+.modal-qna,
 .modal-report{
 	position:absolute;
 	display:none;
 	justify-content: center;
 	top:0;
 	left:0;
+	bottom: 0;
 	width:100%;
-	height:100%;
+	height:100vh;
 	background-color: rgba(0,0,0,0.4);
 }
 
-.modal_body{
-			display:flex;
+.modal-body{
 			flex-direction: column;
             position:absolute;
             top:50%;  
@@ -145,10 +158,17 @@ h2{
             box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);  
             transform:translateY(-50%);  
         }
+.modal_body-content{
+	height: 100%;
+}
+        
         
 .footer{
 	background-color: orange;	
-	height: 100px;
+	height: 6rem;
+	left: 0;
+    right: 0;
+    bottom: 0;
 	align-content: center;
 }
 
@@ -162,7 +182,12 @@ h2{
 <body>
 	<div class="container">
 		<div class="header">
-			<h1>관리자 페이지</h1>
+			<div>		
+				<img src = "../images/logo.png" alt = "로고">
+			</div>
+			<div class="admin-title">
+				<h1>관리자 페이지</h1>
+			</div>
 			<div class="header-menu">
 				<button class="btn-open-modal-alarm">알림</button>
 				<button class="btn-open-modal-qna">Q&A</button>
@@ -325,15 +350,17 @@ h2{
 				</script>
 				
 				<div class="modal-alarm">
-		        	<div class="modal_body">
-		            	<h2>알림</h2>
-		            	<p>알림내용 </p>
-		           	<button class="close-btn-alarm">닫기</button>
+		        	<div class="modal-body">
+		        		<div class="modal_body-content">
+			        		<h2>알림</h2>
+			            	<p>알림내용 </p>
+			           		<button class="close-btn-alarm">닫기</button>
+		        		</div>
 		        	</div>
 		    	</div>
 		    	
 		    	<div class="modal-qna">
-		        	<div class="modal_body">
+		        	<div class="modal-body">
 		            	<h2>Q&A</h2>
 		            	<p>Q&A내용 </p>
 		           	<button class="close-btn-qna">닫기</button>
@@ -341,7 +368,7 @@ h2{
 		    	</div>
 		    	
 		    	<div class="modal-report">
-		        	<div class="modal_body">
+		        	<div class="modal-body">
 		            	<h2>신고</h2>
 		            	<p>신고내용 </p>
 		           	<button class="close-btn-report">닫기</button>
