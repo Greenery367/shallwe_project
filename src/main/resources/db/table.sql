@@ -18,8 +18,8 @@ create table user_tb(
     email varchar(50) unique key not null,
     origin_file_name varchar(200) not null,
     upload_file_name varchar(200) not null,
-    cash Long not null default 200, -- 캐시, 가입 시 200점
-    challenge_point Long not null default 200, -- 내기 포인트, 가입시 200점 
+    current_cash bigint not null default 200, -- 캐시, 가입 시 200점
+    challenge_point bigint not null default 200, -- 내기 포인트, 가입시 200점 
     status int not null -- 0 회원 가입 유지, 1 탈퇴
 );
 
@@ -68,7 +68,7 @@ create table report_type_tb(
 );
 
 -- 캐시 사용 타입 테이블
-create table cash_tyoe_tb(
+create table cash_type_tb(
 	id int primary key auto_increment not null,
     type varchar(10) not null
 );
@@ -77,11 +77,12 @@ create table cash_tyoe_tb(
 create table user_cash_history(
 	id int primary key auto_increment not null,
     user_id int primary key auto_increment not null,
-    charge_amount Long,
-    spend_amount Long,
+    charge_amount bigint,
+    spend_amount bigint,
     created_at Timestamp default now()
 );
 
+<<<<<<< HEAD
 -- 커뮤니티 게시판 테이블
 create table board_tb (
 	id int primary key auto_increment not null,
@@ -102,4 +103,9 @@ create table comment_tb (
     author int not null,
     create_at timestamp default current_timestamp
 );
+=======
+
+
+
+>>>>>>> songhyun
 
