@@ -1,0 +1,6 @@
+@charset "UTF-8";
+.chatroom {
+	display : flex;
+	flex-direction: column;
+	justify-content: center;
+}
