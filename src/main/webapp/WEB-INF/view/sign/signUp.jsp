@@ -9,7 +9,14 @@
 </head>
 <body>
     <div class="login-wrapper">
-        <h2>회원가입</h2>
+        <div class="upper">
+    		<div>
+        		<h2>회원 가입</h2>
+    	    </div>
+	        <div>
+        		<a href="mainPage"><img class="img-concert" src="/images/logo.png"></a>
+        	</div>
+        </div>
         <form method="post" action="test/signUp" id="login-form">
             <p>아이디</p>
             <input type="text" id ="id" name="id" placeholder="ID를 입력하세요.">
