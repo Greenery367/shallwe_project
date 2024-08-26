@@ -48,17 +48,10 @@ create table report_tb(
     created_at timestamp default now() -- 신고 시간
 );
 
--- 장르 테이블
-create table genre_tb(
-	id int auto_increment primary key,
-    genre_name varchar(20)
-);
-
 -- 게임 카테고리 테이블
 create table game_tb(
 	id int primary key not null auto_increment,
-    game_name varchar(20) not null,
-    genre_id int not null
+    game_name varchar(20) not null
 );
 
 -- 신고 타입 테이블
