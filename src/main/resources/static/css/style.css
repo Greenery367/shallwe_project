@@ -1,0 +1,124 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 400px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.chat-list {
+    margin: 20px 0;
+}
+
+.chat-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.chat-list li {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-list li:hover {
+    background-color: #e0e0e0;
+}
+
+.create-room {
+    display: flex;
+    justify-content: space-between;
+}
+
+#createRoomButton {
+    padding: 8px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#createRoomButton:hover {
+    background-color: #0056b3;
+}
+
+#createRoomButton:active {
+    background-color: #003f7f;
+}
+
+#createRoomButton:focus {
+    outline: none;
+}
+
+#createRoomButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#createRoomButton[disabled]:hover {
+    background-color: #cccccc;
+}
+
+#createRoomButton[disabled]:active {
+    background-color: #cccccc;
+}
+
+#createRoomButton[disabled]:focus {
+    outline: none;
+}
+
+#createRoomButton[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#createRoomButton[disabled]:hover {
+    background-color: #cccccc;
+}
+
+#createRoomButton[disabled]:active {
+    background-color: #cccccc;
+}
+
+#createRoomButton[disabled]:focus {
+    outline: none;
+}
+
+#createRoomButton[disabled]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#createRoomButton[disabled]:hover {
+    background-color: #cccccc;
+}
+
+#createRoomButton[disabled]:active {
+    background-color: #cccccc;
+}
+
+#createRoomButton[disabled]:focus {
+    outline: none;
+}

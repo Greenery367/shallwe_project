@@ -19,5 +19,8 @@ public class WebServer implements WebSocketConfigurer{
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(webSocketHandler, "/chat")
 		.addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
+		
+		registry.addHandler(webSocketHandler, "/match")
+		.addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
 	}
 }
