@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Board {
 	
-	private int id;
-	private int categoryId;
+	private Integer id;
+	private Integer categoryId;
 	private String title;
 	private String content;
-	private int author;
-	private int viewNum;
-	private int good;
+	private Integer author;
+	private Integer viewNum;
+	private Integer good;
 	private Timestamp createdAt;
 	
 }

@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.repository.BoardRepository;
+import com.example.demo.repository.model.Board;
 
 @Service
 public class BoardService {
@@ -22,7 +25,7 @@ public class BoardService {
 	 * @param author
 	 */
 	@Transactional
-	public void createBoard(String title, String content, String author){
+	public void createBoard(String title, String content, Integer author){
 		try {
 			boardRepository.insert(title, content, author);
 		} catch (Exception e) {
@@ -58,6 +61,32 @@ public class BoardService {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 게시글 전체 죄회
+	 * @return
+	 */
+	public List<Board> findAll() {
+		List<Board> boardListEntity = null;
+		
+		try {
+			boardListEntity = boardRepository.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+        return boardListEntity;
+    }
+	
+	public Board readBoardDetail(Integer id) {
+		try {
+			return boardRepository.findById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("디테일 조회 이상", e);
+		}
+	}
+	
 	
 	
 	

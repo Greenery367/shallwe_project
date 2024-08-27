@@ -12,7 +12,7 @@ import com.example.demo.repository.model.Board;
 public interface BoardRepository {
 	
 	//게시글 입력
-	public int insert(@Param("title")String title,@Param("content") String content,@Param("author") String author);
+	public int insert(@Param("title")String title,@Param("content") String content,@Param("author") Integer author);
 	
 	// 게시글 수정
 	public int updateBoard(@Param("id")Integer id,@Param("title")String title, @Param("content")String content, @Param("author")Integer author);

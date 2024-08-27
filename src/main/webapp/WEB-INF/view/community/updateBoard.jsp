@@ -4,9 +4,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 수정 페이지</title>
+<title>게시글 수정</title>
 </head>
-<body>
-
+<body> 
+	<h1>게시글 수정</h1>
+	<form action="${pageContext.request.contextPath}/community/update" method="post">
+		<input type="hidden" name="author" value="${board.author}" required/>
+		<table>
+			<tr>
+				<th>제목</th>
+				<td><input type="text" name="title" value="${board.title}" required /></td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td><input type="text" name="author" value="${board.author}" readonly /></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea name="content" rows="10" cols="50" required>${board.content}</textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="수정하기" />
+					<input type="reset" value="초기화" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	<a href="${pageContext.request.contextPath}/community/">목록으로 돌아가기</a>
 </body>
 </html>
