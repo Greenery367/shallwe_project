@@ -16,10 +16,10 @@
         		<h2>Login</h2>
     	    </div>
 	        <div>
-        		<a href="mainPage"><img class="img-concert" src="/images/logo.png"></a>
+        		<a href="main"><img class="img-concert" src="/images/logo.png"></a>
         	</div>
         </div>
-        <form method="post" action="sign/signIn" id="login-form">
+        <form method="post" action="user/signIn" id="login-form">
             <input type="text" name="username" placeholder="Id">
             <input type="password" name="password" placeholder="Password">
             <label for="remember-check">

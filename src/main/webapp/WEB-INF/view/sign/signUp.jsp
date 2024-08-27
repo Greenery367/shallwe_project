@@ -17,7 +17,7 @@
         		<a href="mainPage"><img class="img-concert" src="/images/logo.png"></a>
         	</div>
         </div>
-        <form method="post" action="test/signUp" id="login-form">
+        <form method="post" action="user/signUp" id="login-form">
             <p>아이디</p>
             <input type="text" id ="id" name="id" placeholder="ID를 입력하세요.">
             <label class="id-check">ID 중복 여부를 확인해 주세요</label>
@@ -33,7 +33,7 @@
             <p>생년월일</p>
             <input type="text" name="birthDate" placeholder="ex)19980307 (-은 제외하고 8자리 숫자로 입력)">
             <p>이메일</p>
-            <input class = "email-input" type="text"name="emailBody" placeholder="">
+            <input class = "email-input" type="text"name="emailBody" >
             @
             <input class="email-input" type="text" name="emailDomain" id="emailDomain">
         	<select name="domain" id="domainList">
