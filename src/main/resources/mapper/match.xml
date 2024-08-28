@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.AdminRepository">
+
+	<select id="getCompatibilityListByMbti" resultType ="com.example.demo.dto.CompatibilityListDTO">
+		select * from Compatibility_tb where my_mbti_id = #{id}
+	</select>
+	
+	
+</mapper>

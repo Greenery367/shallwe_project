@@ -77,3 +77,12 @@ body {
 	border-radius: 10px;
 	background-color: #e0e0e0;
 }
+
+.my-message {
+	position: relative;
+	left: 50px;
+	margin: 5px 0;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #e0e0e0;
+}

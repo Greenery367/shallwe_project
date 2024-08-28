@@ -8,4 +8,5 @@ public class TestUser {
 	private int id;
 	private String nickname;
 	private String mbti;
+	private String fileName;
 }

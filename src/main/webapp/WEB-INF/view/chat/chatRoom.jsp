@@ -23,8 +23,15 @@
 	
 	input.addEventListener('keyup', (event) => {
 		if(event.keyCode === 13 && input.value.trim() !== "") {
+			const chatWindow = document.getElementById("chatWindow");
+			const myMessage = document.createElement("div");
+			myMessage.classList.add("my-message");
+			myMessage.innerText = input.value;
+			chatWindow.appendChild(myMessage);
 			socket.send(`${principal.nickname}` + " : " + input.value);
 			input.value = "";
+			
+			chatWindow.scrollTop = chatWindow.scrollHeight;
 		}
 	});
 	
