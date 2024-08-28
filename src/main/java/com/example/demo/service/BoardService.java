@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.dto.BoardCreateDTO;
 import com.example.demo.repository.BoardRepository;
 import com.example.demo.repository.model.Board;
 
@@ -25,9 +26,9 @@ public class BoardService {
 	 * @param author
 	 */
 	@Transactional
-	public void createBoard(String title, String content, Integer author){
+	public void createBoard(BoardCreateDTO boardCreateDTO){
 		try {
-			boardRepository.insert(title, content, author);
+			boardRepository.insert(boardCreateDTO.getTitle(), boardCreateDTO.getContent(), boardCreateDTO.getAuthor());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -78,7 +79,13 @@ public class BoardService {
         return boardListEntity;
     }
 	
+	/**
+	 * 게시글 상세 보기
+	 * @param id
+	 * @return
+	 */
 	public Board readBoardDetail(Integer id) {
+//		boardRepository.increaseViewNum(id);
 		try {
 			return boardRepository.findById(id);
 		} catch (Exception e) {
@@ -87,7 +94,20 @@ public class BoardService {
 		}
 	}
 	
+	/**
+	 * 카테고리 별 게시판 조회
+	 * @param categoryId
+	 * @return
+	 */
+	public List<Board> getBoardByCategroy(Integer categoryId) {
+		
+		return boardRepository.findCategory(categoryId);
+	}
 	
+	
+	public void increaseViewNum(Integer id) {
+        boardRepository.increaseViewNum(id);
+    }
 	
 	
 	

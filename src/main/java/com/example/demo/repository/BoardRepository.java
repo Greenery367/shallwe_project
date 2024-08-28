@@ -35,6 +35,12 @@ public interface BoardRepository {
 	// 게시글 검색 - 닉네임 기준
 	public List<Board> findByAuthor(Integer author);
 	
+	// 카테고리별 게시글 조회
+	public List<Board> findCategory(Integer categoryId);
+	
+	// 조회수 증가
+	public void increaseViewNum(Integer id);
+	
 	
 	
 }

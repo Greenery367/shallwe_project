@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="board" items="${boards}">
+            <c:forEach var="board" items="${boardList}">
                 <tr>
                     <th>${board.id}</th>
                     <td><a href="/community/boardDetail/${board.id}">${board.title}</a></td>

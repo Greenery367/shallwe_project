@@ -45,8 +45,10 @@
             </tr>
         </table>
     </c:if>
+    
+    <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/updateBoard/${board.id}';">수정</button>
 
     <!-- 버튼: 목록으로 돌아가기 -->
-    <a href="${pageContext.request.contextPath}/community/">목록으로 돌아가기</a>
+    <a href="${pageContext.request.contextPath}/community/category/${board.categoryId}">목록으로 돌아가기</a>
 </body>
 </html>

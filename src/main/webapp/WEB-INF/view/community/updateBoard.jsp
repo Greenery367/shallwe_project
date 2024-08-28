@@ -8,7 +8,7 @@
 </head>
 <body> 
 	<h1>게시글 수정</h1>
-	<form action="${pageContext.request.contextPath}/community/update" method="post">
+	<form action="${pageContext.request.contextPath}/community/update/${board.id}" method="post">
 		<input type="hidden" name="author" value="${board.author}" required/>
 		<table>
 			<tr>
@@ -31,6 +31,6 @@
 			</tr>
 		</table>
 	</form>
-	<a href="${pageContext.request.contextPath}/community/">목록으로 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/community/category/${board.categoryId}">목록으로 돌아가기</a>
 </body>
 </html>

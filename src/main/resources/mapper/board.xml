@@ -9,7 +9,7 @@
 		(#{category_id}, #{title}, #{content}, #{author}, now())
 </insert>
 
-<update id="update">
+<update id="updateBoard">
 	update board_tb set title = #{title}, content = #{content}
 		where id = #{id} and author = #{author}
 </update>
@@ -39,5 +39,17 @@
 	select * from board_tb where id = #{id}
 </select>
 
+<select id="findCategory">
+	select * from board_tb as b
+	inner join game_tb as g
+	on b.category_id = g.id
+	where category_id = #{category_id};
+</select>
+
+<update id="increaseViewNum">
+    UPDATE board_tb 
+    SET view_num = view_num + 1
+    WHERE id = #{id}
+</update>
 
 </mapper>
