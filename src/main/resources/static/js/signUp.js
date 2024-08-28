@@ -1,27 +1,47 @@
-const domainListEl = document.querySelector('#domainList')
-const domainInputEl = document.querySelector('#emailDomain')
-// select 옵션 변경 시
-domainListEl.addEventListener('change', function () {
-  // option에 있는 도메인 선택 시
-  if(domainListEl.value !== "") {
-    // 선택한 도메인을 input에 입력하고 disabled
-    domainInputEl.value = domainListEl.value
-    domainInputEl.disabled = true
-  } else { // 직접 입력 시
-    // input 내용 초기화 & 입력 가능하도록 변경
-    domainInputEl.value = ""
-    domainInputEl.disabled = false
-  }
-})
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.id-btn').addEventListener('click', function(event) {
+        event.preventDefault(); // 폼 제출 방지
+        checkId(); // 아이디 중복 체크 함수 호출
+    });
+});
 
-function checkid(){
-	const id = document.getElementById("id").value;
-	if(id == "" || id.length < 0){
-		alert('아이디를 입력하세요.');
-		id.focus();
-		return;
-	} else {
-		window.open("idCheck?id="+id,"","width=500, height=300");
-	}
+function checkId() {
+    // 아이디 입력 필드의 값 가져오기
+    const id = document.getElementById('id').value;
+
+    // 아이디가 빈 경우 처리
+    if (id.trim() === '') {
+        alert('아이디를 입력해주세요.');
+        return;
+    }
+
+    // AJAX 요청 생성
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/user/checkId', true); // '/checkId'는 서버에서 아이디 중복 여부를 확인하는 엔드포인트
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    // 요청 처리
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const response = JSON.parse(xhr.responseText);
+            const result = response.result;
+
+            if (result === 'available') {
+                alert('사용 가능한 아이디입니다.');
+                document.querySelector('.id-check').style.color = 'green';
+                document.querySelector('.id-check').textContent = '사용 가능한 아이디입니다.';
+                document.querySelector('.id-input').readOnly = true;
+            } else if (result === 'unavailable') {
+                alert('이미 사용 중인 아이디입니다.');
+                document.querySelector('.id-check').style.color = 'red';
+                document.querySelector('.id-check').textContent = '이미 사용 중인 아이디입니다.';
+                document.querySelector('.id-input').focus();
+            }
+        } else {
+            alert('서버 오류가 발생했습니다. 나중에 다시 시도해주세요.');
+        }
+    };
+
+    // 요청 보내기
+    xhr.send('id=' + encodeURIComponent(id));
 }
- 

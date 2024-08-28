@@ -36,7 +36,7 @@
         <fieldset>
         	<legend>소셜 로그인</legend>
         	<ul>
-        		<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=61e5a7465f3248de0332e984c98de103&redirect_uri=http://localhost:8080/test/kakaoLogin"><img src="/images/kakao_login.png"></a></li>
+        		<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91ee64c4cb4fb2b4397fccb575dab52e&redirect_uri=http://localhost:8080/user/kakao"><img src="/images/kakao_login.png"></a></li>
         		<li><a href="naverLogin"><img src="/images/naver_login.png"></a></li>
         		<li><a href="googleLogin"><img src="/images/google_login.png"></a></li>
         	</ul>

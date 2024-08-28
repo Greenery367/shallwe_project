@@ -19,7 +19,7 @@ public class User {
 	private String username;
 	private String password;
 	private String nickname;
-	private Date birthDate;
+	private String birthDate;
 	private String email;
 	private String phoneNumber;
 	private String originFileName;

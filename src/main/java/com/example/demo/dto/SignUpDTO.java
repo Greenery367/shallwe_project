@@ -22,12 +22,9 @@ public class SignUpDTO {
 	private String password;
 	private String username;
 	private String nickname;
-	private Date birthDate;
+	private String birthDate;
 	private String email;
 	private String phoneNumber;
-	private MultipartFile mFile;
-	private String originFileName;
-	private String uploadFileName;
 	
 	public User toUser(){
 		return User.builder()
@@ -38,8 +35,6 @@ public class SignUpDTO {
 				.birthDate(this.birthDate)
 				.email(this.email)
 				.phoneNumber(this.phoneNumber)
-				.originFileName(this.originFileName)
-				.uploadFileName(this.uploadFileName)
 				.build();
 	}
 	

@@ -9,5 +9,6 @@ import com.example.demo.repository.model.User;
 @Mapper
 public interface UserRepository {
 	
-	public User findByUsername(@Param("username")String username);
+	public int insert(User user);
+	public User findById(@Param("id")String id);
 }
