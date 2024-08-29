@@ -4,6 +4,17 @@
     margin: 0;
     border: none;
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox  */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
 body{
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
@@ -19,7 +30,49 @@ body{
     font-size: 24px;
     color: #FD6F22;
     margin-bottom: 20px;
+    display: inline-block;
 }
+h2{
+	font-size: 24px;
+    color: #FD6F22;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.upper{
+	display: flex;
+	justify-content: space-between;
+}
+.login-wrapper > h2 >a{
+    display: inline-block;
+}
+.img-concert {
+	width: 100px;
+	height: 40px;
+	display: flex;
+    
+}
+
+fieldset{
+	margin-top:10px;
+	display: flex;
+}
+
+legend{
+	text-align: center;
+}
+
+ul{
+	display: flex;
+	list-style: none;
+}
+li{
+	margin-top: 10px;
+	display: inline-block;
+	margin-right: 15px;
+}
+
+
 .su-btn{
 	text-align: center;
 }
@@ -41,6 +94,7 @@ body{
 form > p{
 	margin-bottom: 15px;
 }
+
 
 #login-form > input{
     width: 100%;

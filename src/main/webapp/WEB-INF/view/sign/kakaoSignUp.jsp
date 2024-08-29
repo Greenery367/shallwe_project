@@ -5,33 +5,24 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/login.css">
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>소셜로그인-회원가입</title>
 </head>
 <body>
     <div class="login-wrapper">
         <div class="upper">
     		<div>
-        		<h2>회원 가입</h2>
+        		<h2>소셜 회원가입</h2>
     	    </div>
 	        <div>
         		<a href="mainPage"><img class="img-concert" src="/images/logo.png"></a>
         	</div>
         </div>
-        <form method="post" action="signUp" id="login-form">
-            <p>아이디</p>
-            <input type="text" id ="id" name="id" placeholder="ID를 입력하세요." class="id-input">
-            <label class="id-check">ID 중복 여부를 확인해 주세요</label>
-            <button class="id-btn" type="button" onclick="checkId();">중복 체크</button>
-            <p>비밀번호</p>
-            <input type="password" name="password" placeholder="영문/숫자가 모두 포함된 6글자 이상 15글자 이내로 입력하시오">
-            <p>비밀번호 확인</p>
-            <input type="password" name="confirmPassword" placeholder="비밀번호 재확인">
+        <form method="post" action="kakaoSignUp" id="login-form">
             <p>이름</p>
             <input type="text" name="username" placeholder="이름을 입력하세요">
-            <p>닉네임</p>
-            <input type="text" name="nickname" maxlength="20" placeholder="닉네임을 입력하세요(20자 제한)">
             <p>생년월일</p>
-            <input type="number" name="birthDate" maxlength="8" placeholder="ex)19980307 (-은 제외하고 8자리 숫자로 입력)">
+            <input type="number" name="birthDate"  maxlength="8" 
+            placeholder="ex)19980307(-은 제외하고 8자리 숫자로 입력)">
             <p>이메일</p>
             <input class = "email-input" type="text"name="emailBody" >
             @
@@ -45,6 +36,9 @@
        		<p>연락처</p>
             <input type="number" name="phoneNumber" maxlength="11" placeholder="-제외하고 숫자만 입력">
             <input type="submit" value="회원가입">
+            
+        	<input type="hidden" id="id" name="id" value="${dto.id}">
+        	<input type="hidden" id="nickname" name="nickname" value="${dto.nickname}">
         </form>
     </div>   
 </body>
