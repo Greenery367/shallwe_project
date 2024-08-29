@@ -4,6 +4,35 @@ insert into user_tb(username, user_id, password, nickname, birth_date)
 values('홍길동','asd123','1111','전우치','1992-01-01');
 
 -- mbti 테이블
+insert into user_tb(username, user_id, password, nickname, birth_date, email, tel)
+                values('고길동', '1111', '1234', '검성', '1999-11-11', 'a@gmail.com', '01011111111'),
+                ('둘리', '2222', '1234', '깐따삐야', '1983-04-22', 'b@naver.com', '01022222222');
+
+insert into notice_tb(title, content, author_id ) 
+values('공지1', '공지내용1', 1),
+        ('공지2', '공지내용2', 2),
+        ('공지3', '공지내용3', 3);
+        
+insert into qna_question_tb(title, content, author_id, answer_id) 
+values('Q&A1', 'Q&A내용1', 1, 1),
+('Q&A2', 'Q&A내용2', 1, 2),
+('Q&A3', 'Q&A내용3', 2, 1),
+('Q&A4', 'Q&A내용4', 2, 2);
+
+insert into qna_answer_tb(content, author_id) 
+values('답변1', 1),
+    ('답변2', 1),
+    ('답변3', 1),
+    ('답변4', 2),
+    ('답변5', 2);
+    
+insert into admin_tb(username, id, password, email, phone_number, status) 
+values('가가가', 'aaa123', '123', 'aaa@naver.com', '010-1234-1234', 0),
+('나나나', 'bbb123', '123', 'bbb@naver.com', '010-5151-1515', 1),
+('다다다', 'ccc123', '123', 'ccc@naver.com', '010-2323-3232', 0),
+('라라라', 'ddd123', '123', 'ddd@naver.com', '010-6666-6666', 1),
+('마마마', 'eee123', '123', 'eee@naver.com', '010-7777-7777', 0);
+    
 insert into mbti_tb(name, nickname, content) 
 values('SQRT','용사','팀원들과의 소통을중시하고 길잡이가 되어 팀원들을 이끄는걸 좋아한다 하지만 승부의 결과에 연연하지 않고 결과보단 내용을 중시 재미가 있었다면 OK!!'),
 ('SQRC','장군 ','팀원들을 조율하고 직접 오더를 내리는것을 좋아하며 남들과 똑같은 방식으로 이기는것보다 자신의 팀만의 색깔로 이기는것이 중요함!!'),

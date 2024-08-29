@@ -11,8 +11,15 @@
 </head>
 <body>
     <div class="login-wrapper">
-        <h2>Login</h2>
-        <form method="post" action="sign/signIn" id="login-form">
+    	<div class="upper">
+    		<div>
+        		<h2>Login</h2>
+    	    </div>
+	        <div>
+        		<a href="main"><img class="img-concert" src="/images/logo.png"></a>
+        	</div>
+        </div>
+        <form method="post" action="user/signIn" id="login-form">
             <input type="text" name="username" placeholder="Id">
             <input type="password" name="password" placeholder="Password">
             <label for="remember-check">
@@ -22,8 +29,18 @@
             <input type="submit" value="Login">
         </form>
         <div class="su-btn">
-        	<a href="signUp">회원가입</a>
+        	<a href="findId">아이디 찾기</a> | <a href="findPw">비밀번호 찾기</a> | <a href="signUp">회원가입</a>
         </div>
+        
+        
+        <fieldset>
+        	<legend>소셜 로그인</legend>
+        	<ul>
+        		<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91ee64c4cb4fb2b4397fccb575dab52e&redirect_uri=http://localhost:8080/user/kakao"><img src="/images/kakao_login.png"></a></li>
+        		<li><a href="naverLogin"><img src="/images/naver_login.png"></a></li>
+        		<li><a href="googleLogin"><img src="/images/google_login.png"></a></li>
+        	</ul>
+        </fieldset>
     </div>
 </body>
 </html>
