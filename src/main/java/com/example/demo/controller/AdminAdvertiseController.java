@@ -6,35 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.dto.UserDTO;
+import com.example.demo.dto.Advertise;
 import com.example.demo.service.AdminService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/advertisement")
 @RequiredArgsConstructor
-public class AdminController {
+public class AdminAdvertiseController {
 
 	@Autowired
 	private final HttpSession session;
 	private final AdminService adminService;
 	
-	@GetMapping({"/", "/dashboard"})
-	public String adminMainPage(Model model) {
+	@GetMapping("")
+	public String adminAdvertisementPage(Model model) {
 		
-		int numberOfUser = adminService.countUser();
-		int numberOfChargeCash = adminService.countChargeCash();
-		double cashUseRate = adminService.countSpendCashRate();
+		List<Advertise> advertiseList = adminService.selectAllAdvertise();
+		model.addAttribute("advertiseList", advertiseList);		
 		
-		model.addAttribute("numberOfUser", numberOfUser);
-		model.addAttribute("numberOfChargeCash", numberOfChargeCash);
-		model.addAttribute("cashUseRate", cashUseRate);
-		return "admin/adminMain";
+		return "admin/adminAdvertisement";
 	}
+	
+	@PostMapping("/insertAdvertise")
+	public String insertAdvertiseProc(Model model ) {
+		adminService.insertAdvertise();
+		
+		return "admin/adminAdvertisement";
+	}
+	
 	
 	
 }
