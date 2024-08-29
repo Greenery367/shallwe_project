@@ -9,4 +9,5 @@ public class TestUser {
 	private String nickname;
 	private String mbti;
 	private String fileName;
+	
 }

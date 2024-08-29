@@ -10,6 +10,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.example.demo.dto.TestUser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class MatchHandler extends TextWebSocketHandler{
@@ -35,10 +36,13 @@ public class MatchHandler extends TextWebSocketHandler{
 		TestUser user = (TestUser)session.getAttributes().get("principal");
 		for(String key : MBTIS.keySet()) {
 			if(message.getPayload().contains(MBTIS.get(key).getMbti())) {
-				TextMessage opponent = new TextMessage(MBTIS.get(key).toString());
-				TextMessage myProfile = new TextMessage(user.toString());
-				CLIENTS.get(key).sendMessage(myProfile);
-				session.sendMessage(opponent);
+				ObjectMapper objectMapper = new ObjectMapper();
+				String MyDTO = objectMapper.writeValueAsString(user);
+				String userDTO = objectMapper.writeValueAsString(MBTIS.get(key));
+				TextMessage opponent = new TextMessage(userDTO);
+				TextMessage myProfile = new TextMessage(MyDTO);
+				CLIENTS.get(key).sendMessage(myProfile); // 내 userDTO를 상대에게 전송
+				session.sendMessage(opponent); // 상대의 userDTO를 나에게 전송
 				break;
 			}
 		}

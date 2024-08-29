@@ -12,10 +12,10 @@
     <!-- 왼쪽: 내 정보 -->
     <div class="left">
         <div class="profile-pic"></div>
-        <h3>내 이름</h3>
-        <p>MBTI: INFP</p>
+        <h3>${principal.nickname}</h3>
+        <p>MBTI: ${principal.mbti}</p>
         <div class="mbti-description">
-            INFP는 이상적이고, 창의적이며, 깊이 있는 생각을 하는 성격 유형입니다.
+            ${principal.mbtiDetail}
         </div>
     </div>
 
@@ -41,7 +41,7 @@
             var socket = new WebSocket("ws://192.168.0.131:8080/match");
             document.getElementById('matchingTime').textContent = '매칭 중...';
 
-            setInterval(function() {
+            let interval = setInterval(function() {
                 const now = new Date().getTime();
                 const elapsed = Math.floor((now - startTime) / 1000);
                 document.getElementById('matchingTime').textContent = '매칭 시간: ' + elapsed + '초';
@@ -50,6 +50,7 @@
             
             socket.onmessage = function(event) {
             	console.log(event.data);
+            	clearInterval(interval);
             }
         }
         
