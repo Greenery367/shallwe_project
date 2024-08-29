@@ -35,7 +35,7 @@ public class AdminAdvertiseController {
 	
 	@PostMapping("/insertAdvertise")
 	public String insertAdvertiseProc(Model model ) {
-		adminService.insertAdvertise();
+		// adminService.insertAdvertise();
 		
 		return "admin/adminAdvertisement";
 	}

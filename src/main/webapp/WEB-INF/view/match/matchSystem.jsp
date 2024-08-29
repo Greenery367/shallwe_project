@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -12,10 +13,10 @@
     <!-- 왼쪽: 내 정보 -->
     <div class="left">
         <div class="profile-pic"></div>
-        <h3>${principal.nickname}</h3>
-        <p>MBTI: ${principal.mbti}</p>
+        <h3>nickname</h3>
+        <p>MBTI: mbti</p>
         <div class="mbti-description">
-            ${principal.mbtiDetail}
+            mbtidetail
         </div>
     </div>
 
@@ -29,9 +30,9 @@
     <div class="right">
         <div class="profile-pic"></div>
         <h3 id = "opponent">상대방</h3>
-        <p id="opponent-mbti">MBTI: ENFJ</p>
+        <p id="opponent-mbti">MBTI: INTP</p>
         <div class="mbti-description" id="mbti-detail">
-            ENFJ는 타인을 돕고, 리더십을 발휘하며, 대인 관계에서 능숙한 성격 유형입니다.
+            DD
         </div>
     </div>
 </div>
@@ -46,14 +47,12 @@
                 const elapsed = Math.floor((now - startTime) / 1000);
                 document.getElementById('matchingTime').textContent = '매칭 시간: ' + elapsed + '초';
             }, 1000);
-            socket.send(`${principal}`);
             
             socket.onmessage = function(event) {
             	console.log(event.data);
             	clearInterval(interval);
             }
         }
-        
         
     </script>
 </body>
