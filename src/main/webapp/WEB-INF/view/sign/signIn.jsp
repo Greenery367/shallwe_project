@@ -19,7 +19,7 @@
         		<a href="main"><img class="img-concert" src="/images/logo.png"></a>
         	</div>
         </div>
-        <form method="post" action="user/signIn" id="login-form">
+        <form method="post" action="user/sign-in" id="login-form">
             <input type="text" name="username" placeholder="Id">
             <input type="password" name="password" placeholder="Password">
             <label for="remember-check">
@@ -29,7 +29,7 @@
             <input type="submit" value="Login">
         </form>
         <div class="su-btn">
-        	<a href="findId">아이디 찾기</a> | <a href="findPw">비밀번호 찾기</a> | <a href="signUp">회원가입</a>
+        	<a href="find-id">아이디 찾기</a> | <a href="find-pw">비밀번호 찾기</a> | <a href="sign-up">회원가입</a>
         </div>
         
         

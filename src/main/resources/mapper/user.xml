@@ -7,6 +7,10 @@
 		select * from user_tb
 		where id = #{id}
 	</select>
+	<select id="findByNickname" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where nickname = #{nickname}
+	</select>
 	
 	
 	

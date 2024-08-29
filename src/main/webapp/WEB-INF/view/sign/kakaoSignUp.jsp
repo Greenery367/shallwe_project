@@ -17,7 +17,7 @@
         		<a href="mainPage"><img class="img-concert" src="/images/logo.png"></a>
         	</div>
         </div>
-        <form method="post" action="kakaoSignUp" id="login-form">
+        <form method="post" action="kakao-sign-up" id="login-form">
             <p>이름</p>
             <input type="text" name="username" placeholder="이름을 입력하세요">
             <p>생년월일</p>
