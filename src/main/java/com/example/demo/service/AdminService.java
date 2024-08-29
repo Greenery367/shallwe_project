@@ -35,10 +35,10 @@ public class AdminService {
 	}
 	
 	// 광고 추가
-	public int insertAdvertise() {
+	//public int insertAdvertise() {
 		
-		return adminRepository.insertAdvertise();
-	}
+		// return adminRepository.insertAdvertise();
+	// }
 	
 	// 광고 상태 변경 
 	@Transactional

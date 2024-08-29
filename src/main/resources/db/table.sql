@@ -1,5 +1,3 @@
-drop database shallwe_db;
- 
 
 create database shallwe_db;
 use shallwe_db;
