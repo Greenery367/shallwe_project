@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 	
 	@Autowired
@@ -49,17 +50,6 @@ public class UserController {
 	private String tencoKey;
 	
 	
-	/**
-	 * 메인 페이지 이동
-	 * @return
-	 */
-	// http://localhost:8080/user/main
-	@GetMapping("/main")
-	public String mainPage() {
-		return "mainPage";
-	}
-	
-<<<<<<< HEAD
 	@GetMapping("/kakao")
 	public String getCode(@RequestParam(name ="code") String code, Model model) throws ParseException {
 		
@@ -167,11 +157,4 @@ public class UserController {
 		request.setAttribute("id", id);
 		return "sign/idCheck";
 	}
-=======
-	// http://localhost:8080/user/start-test
-		@GetMapping("/start-test")
-		public String testPage() {
-			return "startTestPage";
-		}
->>>>>>> songhyun1
 }

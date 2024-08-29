@@ -27,6 +27,6 @@
 			</tr>
 		</table>
 	</form>
-	<a href="${pageContext.request.contextPath}/community/">목록으로 돌아가기</a>
+	<a href="${pageContext.request.contextPath}/community/category/${board.categoryId}?currentPage=${currentPage}">목록으로 돌아가기</a>
 </body>
 </html>

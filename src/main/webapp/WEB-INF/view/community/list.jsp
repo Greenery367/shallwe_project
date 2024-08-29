@@ -31,7 +31,7 @@
                 <tr>
                     <th>${board.id}</th>
                     <td><a href="/community/boardDetail/${board.id}">${board.title}</a></td>
-                    <th>${board.author}</th>
+                    <th>${board.authorId}</th>
                      <td><fmt:formatDate value="${board.createdAt}" type="DATE" pattern="yyyy-MM-dd"/></td>
                     <th>${board.viewNum}</th>
                     <th>${board.good}</th>
@@ -39,6 +39,8 @@
             </c:forEach>
         </tbody>
     </table>
-
+	<c:forEach var="page" begin="1" end="${totalPage}">
+		<a href="?currentPage=${page}">${page}</a>
+	</c:forEach>
 </body>
 </html>
