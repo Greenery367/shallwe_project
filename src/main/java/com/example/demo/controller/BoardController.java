@@ -41,9 +41,24 @@ public class BoardController {
 	
 	// 카테고리별 이동
 	@GetMapping("/category/{categoryId}")
-    public String getBoardByCategory(@PathVariable("categoryId") Integer categoryId, Model model) {
-        List<Board> boardList = boardService.getBoardByCategroy(categoryId);
+    public String getBoardByCategory(@PathVariable("categoryId") Integer categoryId,
+    		@RequestParam(name = "currentPage", defaultValue = "1") int currentPage,
+    		Model model) {
+		
+		int totalBoardNum = boardService.findByCategoryTotalBoard(categoryId);
+		int limit=10;
+		int calculatedOffset = limit*(currentPage -1);
+		int totalPage = (int) Math.ceil((double) totalBoardNum / limit);
+        List<Board> boardList = boardService.getBoardByCategroy(categoryId, limit, calculatedOffset);
         model.addAttribute("boardList", boardList);
+        System.out.println("boardList :: " + boardList);
+        model.addAttribute("limit", limit);
+		System.out.println("limit : " + limit);
+		model.addAttribute("totalPage", totalPage);
+		System.out.println("totalPage : " + totalPage);
+		model.addAttribute("calculatedOffset", calculatedOffset);
+		System.out.println("calculatedOffset : " + calculatedOffset);
+		model.addAttribute("currentPage", currentPage); // currentPage 추가
         return "community/list"; 
     }
 
@@ -56,17 +71,23 @@ public class BoardController {
 	
 	// 글 상세보기 이동
 	@GetMapping("/boardDetail/{id}")
-	public String boardDetail(@PathVariable("id") Integer id, Model model) {
+	public String boardDetail(@PathVariable("id") Integer id,
+			 @RequestParam(name = "currentPage", defaultValue = "1") int currentPage,
+			Model model) {
 		boardService.increaseViewNum(id);
 	    Board board = boardService.readBoardDetail(id);
 	    model.addAttribute("board", board);
+	    model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
 	    return "/community/boardDetail";
 	}
 	
 	// 게시글 작성 페이지 이동
     @GetMapping("/createBoard")
-    public String createBoardForm(Model model) {
+    public String createBoardForm(
+    		@RequestParam(name = "currentPage", defaultValue = "1") int currentPage,
+    		Model model) {
         model.addAttribute("board", new Board());
+        model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
         return "community/createBoard";
     }
     
@@ -84,7 +105,9 @@ public class BoardController {
     
  // 게시글 수정 페이지 이동
     @GetMapping("/updateBoard/{id}")
-    public String updateBoardForm(Model model, @PathVariable("id") Integer id) {
+    public String updateBoardForm(
+    		@PathVariable("id") Integer id,
+    		Model model) {
     	System.out.println("아이디다!!" + id);
     	Board board = boardService.readBoardDetail(id);
         model.addAttribute("board", board);
@@ -95,10 +118,10 @@ public class BoardController {
     // 수정된거 넘기기
     @PostMapping("/update/{id}")
     public String updateBoard(Model model, Board board, @PathVariable("id") Integer id) {
-    	boardService.updateBoard(board.getId(), board.getTitle(), board.getContent(), board.getAuthor());
+    	boardService.updateBoard(board.getId(), board.getTitle(), board.getContent(), board.getAuthorId());
         Board newBoard = boardService.readBoardDetail(id);
 	    model.addAttribute("board", newBoard);
-        return "/community/boardDetail"; // 수정 후 상세 페이지로 이동
+        return "redirect:/community/boardDetail/" + id; // 수정 후 상세 페이지로 이동
     }
 	
 	

@@ -4,19 +4,19 @@
 <mapper namespace="com.example.demo.repository.BoardRepository">
 
 <insert id="insert">
-	insert into board_tb (category_id, title, content, author, created_at)
+	insert into board_tb (category_id, title, content, author_id, created_at)
 		values
-		(#{category_id}, #{title}, #{content}, #{author}, now())
+		(#{category_id}, #{title}, #{content}, #{authorId}, now())
 </insert>
 
 <update id="updateBoard">
 	update board_tb set title = #{title}, content = #{content}
-		where id = #{id} and author = #{author}
+		where id = #{id} and author_id = #{authorId}
 </update>
 
 <delete id="delete">
 	delete from board_tb 
-	where id = #{id} and author = #{author}
+	where id = #{id} and author_id = #{authorId}
 </delete>
 	
 <select id="findAll">
@@ -31,19 +31,21 @@
 	select * from board_tb where content like CONCAT('%', #{content}, '%')
 </select>
 
+<!-- author_id와 user join으로 바꿔야함 -->
 <select id="findByAuthor">
-	select * from board_tb where author like CONCAT('%', #{author}, '%')
+	select * from board_tb where author_id like CONCAT('%', #{authorId}, '%')
 </select>
 
 <select id="findById">
 	select * from board_tb where id = #{id}
 </select>
 
-<select id="findCategory">
+<select id="findByCategroyBoardForPage" resultType="com.example.demo.repository.model.Board">
 	select * from board_tb as b
 	inner join game_tb as g
 	on b.category_id = g.id
-	where category_id = #{category_id};
+	where category_id = #{categoryId}
+	limit #{limit} offset #{offset}
 </select>
 
 <update id="increaseViewNum">
@@ -51,5 +53,10 @@
     SET view_num = view_num + 1
     WHERE id = #{id}
 </update>
+
+<select id="findByCategoryTotalBoard">
+	select count(*) from board_tb where category_id = #{categoryId}
+</select>
+
 
 </mapper>

@@ -5,20 +5,19 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.demo.dto.BoardCreateDTO;
 import com.example.demo.repository.model.Board;
 
 @Mapper
 public interface BoardRepository {
 	
 	//게시글 입력
-	public int insert(@Param("title")String title,@Param("content") String content,@Param("author") Integer author);
+	public int insert(@Param("title")String title,@Param("content") String content,@Param("authorId") Integer authorId);
 	
 	// 게시글 수정
-	public int updateBoard(@Param("id")Integer id,@Param("title")String title, @Param("content")String content, @Param("author")Integer author);
+	public int updateBoard(@Param("id")Integer id,@Param("title")String title, @Param("content")String content, @Param("authorId")Integer authorId);
 	
 	// 게시글 삭제
-	public int deleteById(@Param("id")Integer id, @Param("author")Integer author);
+	public int deleteById(@Param("id")Integer id, @Param("authorId")Integer authorId);
 	
 	// 게시글 전체 조회
 	public List<Board> findAll();
@@ -33,13 +32,21 @@ public interface BoardRepository {
 	public List<Board> findByContent(String content);
 	
 	// 게시글 검색 - 닉네임 기준
-	public List<Board> findByAuthor(Integer author);
+	public List<Board> findByAuthor(Integer authorId);
 	
 	// 카테고리별 게시글 조회
 	public List<Board> findCategory(Integer categoryId);
 	
 	// 조회수 증가
 	public void increaseViewNum(Integer id);
+	
+	// 페이징 처리 
+	public List<Board> findByCategroyBoardForPage(@Param("categoryId")Integer categoryId, 
+			@Param("limit")Integer limit,
+			@Param("offset")Integer offset);
+	
+	// 
+	public int findByCategoryTotalBoard(Integer categoryId);
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,9 @@ public class BoardService {
 	 * @param content
 	 */
 	@Transactional
-	public void updateBoard(Integer id, String title, String content, Integer author) {
+	public void updateBoard(Integer id, String title, String content, Integer authorId) {
 		try {
-			boardRepository.updateBoard(id, title, content, author);			
+			boardRepository.updateBoard(id, title, content, authorId);			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("게시글 수정 오류 발생");
@@ -85,7 +86,6 @@ public class BoardService {
 	 * @return
 	 */
 	public Board readBoardDetail(Integer id) {
-//		boardRepository.increaseViewNum(id);
 		try {
 			return boardRepository.findById(id);
 		} catch (Exception e) {
@@ -99,15 +99,32 @@ public class BoardService {
 	 * @param categoryId
 	 * @return
 	 */
-	public List<Board> getBoardByCategroy(Integer categoryId) {
-		
-		return boardRepository.findCategory(categoryId);
+	public List<Board> getBoardByCategroy(Integer categoryId , int limit, int offset) {
+		List<Board> catagoryBoardList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		catagoryBoardList =	boardRepository.findByCategroyBoardForPage(categoryId, limit, calculatedOffset);
+		System.out.println("Service caboard : " + catagoryBoardList);
+		return catagoryBoardList;
 	}
 	
-	
+	/**
+	 * 조회수 +1
+	 * @param id
+	 */
 	public void increaseViewNum(Integer id) {
         boardRepository.increaseViewNum(id);
     }
+	
+	
+	public List<Board> readBoardListByCategoryForPage(Integer categoryId, int limit, int offset){
+		List<Board> list = boardRepository.findByCategroyBoardForPage(categoryId, categoryId, categoryId);
+		return list;
+	};
+	
+	public int findByCategoryTotalBoard(Integer categoryId) {
+		int totalNum = boardRepository.findByCategoryTotalBoard(categoryId);
+		return totalNum;
+	}
 	
 	
 	
