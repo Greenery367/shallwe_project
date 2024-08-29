@@ -43,6 +43,15 @@ public class UserService {
 		}
     }
 	
+	public boolean isNicknameAvailable(String nickname) {
+        // 데이터베이스에서 아이디 존재 여부 확인
+		if(userRepository.findByNickname(nickname) == null){
+			return true; 
+		}else {
+			return false;
+		}
+    }
+	
 	@Transactional
 	public void createUser(SignUpDTO dto) {
 		int result = 0;

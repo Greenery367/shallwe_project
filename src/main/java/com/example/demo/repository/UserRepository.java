@@ -9,6 +9,7 @@ import com.example.demo.repository.model.User;
 @Mapper
 public interface UserRepository {
 	
+	public User findByNickname(@Param("nickname")String nickname);
 	public int insert(User user);
 	public User findById(@Param("id")String id);
 }

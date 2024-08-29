@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,12 +12,15 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -30,11 +34,13 @@ import com.example.demo.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class userController {
+public class UserController {
 	
 	@Autowired
 	private final UserService userService;
@@ -43,7 +49,7 @@ public class userController {
 	
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	
+	Random random = new Random();
 
 	
 	@Value("${tenco.key}")
@@ -96,7 +102,7 @@ public class userController {
 			// 사용자가 최초로 소셜 로그인을 하는 사람
 			SignUpDTO dto = new SignUpDTO();
 			dto.setId("kakao_auth"+String.valueOf(kakaoProfile.getId()));
-			dto.setNickname(kakaoProfile.getProperties().getNickname());
+			dto.setNickname(kakaoProfile.getProperties().getNickname()+"#"+random.nextInt(9000)+1000);
 			model.addAttribute("dto", dto);
 			return "sign/kakaoSignUp";
 		}
@@ -106,7 +112,7 @@ public class userController {
 	}
 	
 	
-	@PostMapping("/kakaoSignUp")
+	@PostMapping("/kakao-sign-up")
 	public String kakaoSignUp(SignUpDTO dto, Model model, HttpServletRequest request) {
 		dto.setPassword(tencoKey);
 		dto.setUsername(request.getParameter("username"));
@@ -120,7 +126,7 @@ public class userController {
 	/*
 	 * 로그인 페이지 요청 
 	 */
-	@GetMapping("/signIn")
+	@GetMapping("/sign-in")
 	public String signIn() {
 		return "sign/signIn";
 	}
@@ -128,7 +134,7 @@ public class userController {
 	/*
 	 * 회원가입 페이지 요청
 	 */
-	@GetMapping("/signUp")
+	@GetMapping("/sign-up")
 	public String signUp() {
 		return "sign/signUp";
 	}
@@ -136,7 +142,7 @@ public class userController {
 	/*
 	 * 회원가입 폼 -> 회원가입 처리 요청
 	 */
-	@PostMapping("/signUp")
+	@PostMapping("/sign-up")
 	public String postMethodName(HttpServletRequest request) {
 		SignUpDTO dto = new SignUpDTO();
 		dto.setId(request.getParameter("id"));
@@ -150,7 +156,7 @@ public class userController {
 		return "sign/signIn";
 	}
 	
-	@PostMapping("/checkId")
+	@PostMapping("/check-id")
  	public ResponseEntity<Map<String, String>> checkId(@RequestParam("id") String id) {
 	       boolean isAvailable = userService.isIdAvailable(id);
 	       Map<String, String> response = new HashMap<>();
@@ -158,12 +164,14 @@ public class userController {
 	       return ResponseEntity.ok(response);
 	}
 	
-	
-
-	
-	@GetMapping("/idCheck")
-	public String abc(@RequestParam(name = "id") String id, HttpServletRequest request) {
-		request.setAttribute("id", id);
-		return "sign/idCheck";
+	@PostMapping("/check-nickname")
+ 	public ResponseEntity<Map<String, String>> checkNickname(@RequestParam("nickname") String nickname) {
+	       boolean isAvailable = userService.isNicknameAvailable(nickname);
+	       Map<String, String> response = new HashMap<>();
+	       response.put("result", isAvailable ? "available" : "unavailable");
+	       return ResponseEntity.ok(response);
 	}
+	
+	
+	
 }
