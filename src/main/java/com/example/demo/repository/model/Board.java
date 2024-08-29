@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.repository.model;
 
 import java.sql.Timestamp;
 
@@ -11,14 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class community {
+public class Board {
 	
-	private int id;
-	private int categoryId;
+	private Integer id;
+	private Integer categoryId;
 	private String title;
-	private int author;
-	private int veiwNum;
-	private int good;
+	private String content;
+	private Integer author;
+	private Integer viewNum;
+	private Integer good;
 	private Timestamp createdAt;
 	
 }

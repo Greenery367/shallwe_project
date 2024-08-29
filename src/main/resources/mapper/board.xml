@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.BoardRepository">
+
+<insert id="insert">
+	insert into board_tb (category_id, title, content, author, created_at)
+		values
+		(#{category_id}, #{title}, #{content}, #{author}, now())
+</insert>
+
+<update id="updateBoard">
+	update board_tb set title = #{title}, content = #{content}
+		where id = #{id} and author = #{author}
+</update>
+
+<delete id="delete">
+	delete from board_tb 
+	where id = #{id} and author = #{author}
+</delete>
+	
+<select id="findAll">
+	select * from board_tb
+</select>
+
+<select id="findByTitle">
+	select * from board_tb where title like CONCAT('%', #{title}, '%')
+</select>
+
+<select id="findByContent">
+	select * from board_tb where content like CONCAT('%', #{content}, '%')
+</select>
+
+<select id="findByAuthor">
+	select * from board_tb where author like CONCAT('%', #{author}, '%')
+</select>
+
+<select id="findById">
+	select * from board_tb where id = #{id}
+</select>
+
+<select id="findCategory">
+	select * from board_tb as b
+	inner join game_tb as g
+	on b.category_id = g.id
+	where category_id = #{category_id};
+</select>
+
+<update id="increaseViewNum">
+    UPDATE board_tb 
+    SET view_num = view_num + 1
+    WHERE id = #{id}
+</update>
+
+</mapper>
