@@ -47,6 +47,7 @@
     </c:if>
     
     <button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/updateBoard/${board.id}';">수정</button>
+    
 
     <!-- 버튼: 목록으로 돌아가기 -->
     <a href="${pageContext.request.contextPath}/community/category/${board.categoryId}?currentPage=${currentPage}">목록으로 돌아가기</a>

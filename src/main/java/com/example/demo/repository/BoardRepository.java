@@ -11,13 +11,20 @@ import com.example.demo.repository.model.Board;
 public interface BoardRepository {
 	
 	//게시글 입력
-	public int insert(@Param("title")String title,@Param("content") String content,@Param("authorId") Integer authorId);
+	public int insert(@Param("categoryId") Integer categoryId,
+            		  @Param("authorId") Integer authorId,
+            		  @Param("content") String content,
+            		  @Param("title") String title);
 	
 	// 게시글 수정
-	public int updateBoard(@Param("id")Integer id,@Param("title")String title, @Param("content")String content, @Param("authorId")Integer authorId);
+	public int updateBoard(@Param("id")Integer id,
+						   @Param("title")String title, 
+						   @Param("content")String content, 
+						   @Param("authorId")Integer authorId);
 	
 	// 게시글 삭제
-	public int deleteById(@Param("id")Integer id, @Param("authorId")Integer authorId);
+	public int deleteById(@Param("id")Integer id, 
+						  @Param("authorId")Integer authorId);
 	
 	// 게시글 전체 조회
 	public List<Board> findAll();

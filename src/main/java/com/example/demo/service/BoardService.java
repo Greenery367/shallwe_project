@@ -27,12 +27,18 @@ public class BoardService {
 	 * @param author
 	 */
 	@Transactional
-	public void createBoard(BoardCreateDTO boardCreateDTO){
-		try {
-			boardRepository.insert(boardCreateDTO.getTitle(), boardCreateDTO.getContent(), boardCreateDTO.getAuthor());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void createBoard(BoardCreateDTO boardCreateDTO) {
+	    try {
+	        // 실제 로그인된 사용자 ID를 가져와야 함
+	        Integer userId = 1; // 현재 하드코딩된 부분을 수정해야 함
+	        boardCreateDTO.setAuthorId(userId);
+
+	        // 게시글 작성
+	        boardRepository.insert(boardCreateDTO.getCategoryId(), boardCreateDTO.getAuthorId(), boardCreateDTO.getContent(), boardCreateDTO.getTitle());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("게시글 작성 오류 발생", e);
+	    }
 	}
 	
 	/**

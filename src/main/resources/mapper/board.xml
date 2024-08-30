@@ -6,7 +6,7 @@
 <insert id="insert">
 	insert into board_tb (category_id, title, content, author_id, created_at)
 		values
-		(#{category_id}, #{title}, #{content}, #{authorId}, now())
+		(#{categoryId}, #{title}, #{content}, #{authorId}, now())
 </insert>
 
 <update id="updateBoard">
