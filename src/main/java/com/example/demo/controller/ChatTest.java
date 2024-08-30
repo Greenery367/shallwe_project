@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.dto.CompatibilityListDTO;
+import com.example.demo.dto.MbtiDTO;
 import com.example.demo.dto.TestUser;
 import com.example.demo.service.MatchService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -50,16 +53,21 @@ public class ChatTest {
 			String name = "694399bb-cb96-4e8c-ac4c-056a12427d7d_winter3.jpeg";
 			user.setUploadFileName(name);
 		}
+		MbtiDTO myMbti = matchService.getMbtiNameById(user.getMbti());
 		session.setAttribute("principal", user);
-		return "chat/chatRoom";
+		session.setAttribute("mbti", myMbti);
+		return "redirect:/chat/match";
 	}
 	
 	@GetMapping("/match")
-	public String matchPage(Model model) {
+	public String matchPage(HttpServletRequest request) throws JsonProcessingException {
 		TestUser user = (TestUser)session.getAttribute("principal");
-		int mbtiId = matchService.getMbtiIdByUserId(user.getId());
-		List<CompatibilityListDTO> compatibility = matchService.getCompatibilityList(mbtiId);
-		model.addAttribute("compatibility",compatibility);
+		// int mbtiId = matchService.getMbtiIdByUserId(user.getId()); -- 추후 mbti받아오는거로 수정
+		List<CompatibilityListDTO> compatibility = matchService.getCompatibilityList(user.getMbti());
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(compatibility);
+		request.setAttribute("compatibilityList",compatibility);
+		request.setAttribute("compatibilityJson", json);
 		return "match/matchSystem";
 	}
 	

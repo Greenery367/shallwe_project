@@ -20,6 +20,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	
 	@Override // 웹 소켓 연결시 
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+		System.out.println("채팅으로 들어옴!!!!!!!!!!!!!!!!!!!!!!!!");
 		 TestUser user  = (TestUser)session.getAttributes().get("principal");
 		 ObjectMapper objectMapper = new ObjectMapper();
 		 String message = " 님이 들어오셧습니다.";
