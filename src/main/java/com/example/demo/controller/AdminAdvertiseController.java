@@ -33,11 +33,29 @@ public class AdminAdvertiseController {
 		return "admin/adminAdvertisement";
 	}
 	
-	@PostMapping("/insertAdvertise")
-	public String insertAdvertiseProc(Model model ) {
-		adminService.insertAdvertise();
+	// 광고 추가 요청
+	@PostMapping("/insert-advertise")
+	public String insertAdvertiseProc(Advertise advertise) {
+		adminService.insertAdvertise(advertise);
 		
-		return "admin/adminAdvertisement";
+		return "redirect:/admin/advertisement";
+	}
+	
+	// 광고 수정 요청
+	@PostMapping("/update-advertise")
+	public String updateAdvertiseProc(Advertise advertise) {
+		
+		adminService.updateAdvertise(advertise);
+		
+		return "redirect:/admin/advertisement";
+	}
+	
+	// 광고 삭제 요청
+	@PostMapping("/delete-advertise")
+	public String deleteAdvertiseProc(Advertise advertise) {
+		adminService.deleteAdvertise(advertise);
+		
+		return "redirect:/admin/advertisement";
 	}
 	
 	

@@ -25,14 +25,36 @@
 	
 	<!-- 전체 광고 조회 -->
 	<select id="selectAllAdvertise">
-		select * from advertise_tb;
+		select * from advertise_tb
+	</select>
+	
+	<!-- id로 광고 조회 -->
+	<select id="selectAdvertiseById">
+		select * from advertise_tb where id = #{id}
 	</select>
 	
 	<!-- 광고 추가 -->
 	<insert id="insertAdvertise">
-		insert into advertise_tb(place_id, title, customer, link, origin_file_name, upload_file_name, start_date, end_date)
-		values(#{placeId}, #{title}, #{customer}, #{link}, #{originFileName}, #{uploadFileName}, #{startDate}, #{endDate})
+		insert into advertise_tb(place_id, title, customer, link, start_date, end_date, status)
+		values(#{placeId}, #{title}, #{customer}, #{link}, #{startDate}, #{endDate}, #{status})
 	</insert>
+	
+	<!-- 광고 수정 -->
+	<update id="updateAdvertise">
+			update advertise_tb set place_id = #{placeId},
+							title = #{title},
+	                        customer = #{customer},
+	                        link = #{link},
+	                        start_date = #{startDate},
+	                        end_date = #{endDate} 
+	                        where id=#{id}
+	</update>
+	
+	<!-- 광고 삭제 -->
+	<delete id="deleteAdvertiseById">
+		delete from advertise_tb where id=#{id}
+	</delete>
+	
 	
 	<!-- 광고 상태 변경 -->
 	<update id="updateAdvertiseStatus">

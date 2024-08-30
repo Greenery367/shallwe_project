@@ -463,32 +463,32 @@ h1{
 					
 				</script>
 				
-				<div class="modal-alarm">
-					<div class="modal-body">
-						<div class="modal_body-content">
-							<h2>알림</h2>
-							<p>알림내용</p>
-							<button class="close-btn-alarm">닫기</button>
+					<div class="modal-alarm">
+						<div class="modal-body">
+							<div class="modal_body-content">
+								<h2>알림</h2>
+								<p>알림내용</p>
+								<button class="close-btn-alarm">닫기</button>
+							</div>
+						</div>
+					</div>
+	
+					<div class="modal-qna">
+						<div class="modal-body">
+							<h2>Q&A</h2>
+							<p>Q&A내용</p>
+							<button class="close-btn-qna">닫기</button>
+						</div>
+					</div>
+	
+					<div class="modal-report">
+						<div class="modal-body">
+							<h2>신고</h2>
+							<p>신고내용</p>
+							<button class="close-btn-report">닫기</button>
 						</div>
 					</div>
 				</div>
-
-				<div class="modal-qna">
-					<div class="modal-body">
-						<h2>Q&A</h2>
-						<p>Q&A내용</p>
-						<button class="close-btn-qna">닫기</button>
-					</div>
-				</div>
-
-				<div class="modal-report">
-					<div class="modal-body">
-						<h2>신고</h2>
-						<p>신고내용</p>
-						<button class="close-btn-report">닫기</button>
-					</div>
-				</div>
-			</div>
 			<script>
 				        const modalAlarm = document.querySelector('.modal-alarm');
 				        const modalQnA = document.querySelector('.modal-qna');

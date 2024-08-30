@@ -35,17 +35,23 @@ public class AdminService {
 	}
 	
 	// 광고 추가
-	public int insertAdvertise() {
+	public int insertAdvertise(Advertise advertise) {
 		
-		return adminRepository.insertAdvertise();
+		return adminRepository.insertAdvertise(advertise);
 	}
 	
-	// 광고 상태 변경 
+	// 광고 수정
 	@Transactional
-	public int updateAdvertiseStatus() {
-		
-		return adminRepository.updateAdvertiseStatus();
+	public void updateAdvertise(Advertise advertise) {
+		adminRepository.updateAdvertise(advertise);
 	}
+	
+	@Transactional
+	public void deleteAdvertise(Advertise advertise) {
+		adminRepository.deleteAdvertiseById(advertise.getId());
+	}
+	
+		
 	
 	// 전체 광고 조회
 	public List<Advertise> selectAllAdvertise(){

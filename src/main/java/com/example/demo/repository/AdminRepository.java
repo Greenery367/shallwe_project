@@ -21,13 +21,18 @@ public interface AdminRepository {
 	// 캐쉬 사용률 
 	public double countSpendAmountRate();
 	
-	// 광고추가 
-	public int insertAdvertise(Advertise advertise);
-	
-	// 광고 상태 변경 -- stauts
-	public int updateAdvertiseStatus();
-	
 	// 전체 광고 조회
 	public List<Advertise> selectAllAdvertise();
+	// id로 광고 조회
+	public Advertise selectAdvertiseById(@Param("id") Integer id);
+	
+	// 광고추가 
+	public int insertAdvertise(Advertise advertise);
+	// 광고 수정
+	public int updateAdvertise(Advertise advertise);
+	// 광고 삭제
+	public int deleteAdvertiseById(Integer id);
+	
+	
 	
 }

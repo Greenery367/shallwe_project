@@ -207,6 +207,10 @@ h1 {
 .table {
 	border: 1px solid;
 }
+
+.advertise{
+	border: 1px solid;
+}
 </style>
 </head>
 <body>
@@ -271,22 +275,83 @@ h1 {
 
 				</div>
 				<div>광고 추가</div>
-				<form action="advertisement/insertAdvertise" method="post">
+				<form action="/admin/advertisement/insert-advertise" method="post" class="advertise">
 					<div class="form-group">
-						<label for="place_Id">위치 :</label> 
-						<input type="number" id="place_Id" name="placeId" value="1">
+						<label for="placeId">위치 :</label> 
+						<input type="number" id="placeId" name="placeId" value="1">
 					</div>
 					<div class="form-group">
-						<label for="title">광고명:</label> 
+						<label for="title">광고명 :</label> 
 						<input type="text" id="title" name="title" value="예나의 화장품 광고">
 					</div>
 					<div class="form-group">
-						<label for="customer">광고주:</label> 
+						<label for="customer">광고주 :</label> 
 						<input type="text" id="customer" name="customer" value="최예나">
+					</div>
+					<div class="form-group">
+						<label for="link">링크 :</label> 
+						<input type="text" id="link" name="link" value="rrrrrrr">
+					</div>
+					<div class="form-group">
+						<label for="startTime">시작시간 :</label> 
+						<input type="text" id="startTime" name="startTime" value="2024-09-01">
+					</div>
+					<div class="form-group">
+						<label for="endTime">종료시간 :</label> 
+						<input type="text" id="endTime" name="endTime" value="2024-09-06">
+					</div>
+					<div class="form-group">
+						<label for="status">현재상태 :</label> 
+						<input type="text" id="status" name="status" value="0">
 					</div>
 					<button type="submit">광고추가</button>
 				</form>
-
+				
+				<div>광고 수정</div>
+				<form action="advertisement/update-advertise" method="post" class="advertise">
+					<div class="form-group">
+						<label for="id">수정할 광고 id :</label> 
+						<input type="number" id="id" name="id" value="1">
+					</div>
+					<div class="form-group">
+						<label for="placeId">위치 :</label> 
+						<input type="number" id="placeId" name="placeId" value="2">
+					</div>
+					<div class="form-group">
+						<label for="title">광고명 :</label> 
+						<input type="text" id="title" name="title" value="예나의 치킨 광고">
+					</div>
+					<div class="form-group">
+						<label for="customer">광고주 :</label> 
+						<input type="text" id="customer" name="customer" value="최예나">
+					</div>
+					<div class="form-group">
+						<label for="link">링크 :</label> 
+						<input type="text" id="link" name="link" value="rrrrrrr">
+					</div>
+					<div class="form-group">
+						<label for="startTime">시작시간 :</label> 
+						<input type="text" id="startTime" name="startTime" value="2024-09-01">
+					</div>
+					<div class="form-group">
+						<label for="endTime">종료시간 :</label> 
+						<input type="text" id="endTime" name="endTime" value="2024-09-06">
+					</div>
+					<div class="form-group">
+						<label for="status">현재상태 :</label> 
+						<input type="text" id="status" name="status" value="0">
+					</div>
+					<button type="submit">광고수정</button>
+				</form>
+				
+				<div>광고 삭제</div>
+				<form action="advertisement/delete-advertise" method="post" class="advertise">
+					<div class="form-group">
+						<label for="id">삭제할 광고 id :</label> 
+						<input type="number" id="id" name="id" value="1">
+					</div>
+					<button type="submit">광고삭제</button>
+				</form>
 
 
 				<div class="modal-alarm">
