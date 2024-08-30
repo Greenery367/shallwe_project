@@ -9,6 +9,8 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateAdvertiseDTO {
 	
 		private Integer id;
@@ -26,10 +28,13 @@ public class CreateAdvertiseDTO {
 		// Advertise object로 반환
 		public Advertise toAdvertise() {
 			return Advertise.builder()
+				.id(this.id)
 				.placeId(this.placeId)
 				.title(this.title)
 				.customer(this.customer)
 				.link(this.link)
+				.originFileName(this.uploadFileName)
+				.uploadFileName(this.uploadFileName)
 				.startDate(this.startDate)
 				.endDate(this.endDate)
 				.status(this.status)

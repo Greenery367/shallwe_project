@@ -23,7 +23,7 @@ public class AdminController {
 	private final HttpSession session;
 	private final AdminService adminService;
 	
-	@GetMapping({"/", "/dashboard"})
+	@GetMapping({"", "/dashboard"})
 	public String adminMainPage(Model model) {
 		
 		int numberOfUser = adminService.countUser();

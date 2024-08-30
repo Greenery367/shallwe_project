@@ -239,7 +239,7 @@ h1{
 					<li><a href="user">이용자 관리</a></li>
 					<li><a href="cash">캐쉬</a></li>
 					<li><a href="support">고객 지원</a></li>
-					<li><a href="advertisement">광고 / 배너</a></li>
+					<li><a href="/admin/advertise">광고 / 배너</a></li>
 					<li><a href="category">카테고리 / 게시판</a></li>
 					<li><a href="notice">뉴스 / 공지</a></li>
 				</ul>

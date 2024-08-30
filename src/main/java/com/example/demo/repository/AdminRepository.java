@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.Admin;
 import com.example.demo.dto.Advertise;
+import com.example.demo.dto.CreateAdvertiseDTO;
+import com.example.demo.dto.FileUploadAdvertiseDTO;
 import com.example.demo.dto.User;
 
 @Mapper
@@ -27,7 +30,7 @@ public interface AdminRepository {
 	public Advertise selectAdvertiseById(@Param("id") Integer id);
 	
 	// 광고추가 
-	public int insertAdvertise(Advertise advertise);
+	public int insertAdvertise(CreateAdvertiseDTO dto);
 	// 광고 수정
 	public int updateAdvertise(Advertise advertise);
 	// 광고 삭제
