@@ -41,7 +41,7 @@ create table quit_user_tb(
     user_id int,
     reason int not null,
     reason_detail varchar(200),
-    createdAt date default now()
+    created_at timeStamp default now()
 );
 
 -- mbti 테이블
@@ -76,7 +76,7 @@ create table mbti_user_answer_tb(
 
 -- mbti-궁합 테이블
 create table compatibility_tb (
-    id int primary key, -- 주식별자
+    id int primary key auto_increment, -- 주식별자
     my_mbti_id int, -- 나의 mbti
     well_matched_mbti_id int, -- 잘맞는 mbti
     compatibility int -- 궁합도
