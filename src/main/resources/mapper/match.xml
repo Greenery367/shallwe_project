@@ -7,11 +7,16 @@
 		select * from Compatibility_tb as c
 		join mbti_tb as m
 		on c.well_matched_mbti_id = m.id
-		where c.my_mbti_id = #{id} ORDER BY compatibility DESC
+		where c.my_mbti_id = #{id} ORDER BY c.compatibility DESC
 	</select>
 	
 	<select id="getMbtiIdByUserId" resultType ="Integer">
 		select mbti_id from mbti_user_tb
 		where user_id = #{id}
+	</select>
+	
+	<select id="getMbtiNameByMbtiId" resultType ="com.example.demo.dto.MbtiDTO">
+		select * from mbti_tb
+		where id = #{id}
 	</select>
 </mapper>

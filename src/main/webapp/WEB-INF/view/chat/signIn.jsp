@@ -29,7 +29,7 @@ input {
 <body>
 	<div class="title">
 	<form action = "sign-in" method="POST" enctype="multipart/form-data">
-	닉네임을 입력해주세요<input type="hidden" value="INFP" name="mbti">
+	닉네임을 입력해주세요
 	<br>
 	<input type="text" name="nickname">
 	<br>

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.CompatibilityListDTO;
+import com.example.demo.dto.MbtiDTO;
 import com.example.demo.dto.TestUser;
 import com.example.demo.repository.MatchRepository;
 
@@ -41,6 +42,10 @@ public class MatchService {
 		return matchRepository.getMbtiIdByUserId(id);
 	}
 
+	public MbtiDTO getMbtiNameById(int id) {
+		MbtiDTO mbti = matchRepository.getMbtiNameByMbtiId(id);
+		return mbti;
+	}
 	
 	public TestUser createUser(TestUser dto) {
 		TestUser user = dto;

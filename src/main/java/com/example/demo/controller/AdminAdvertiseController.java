@@ -22,6 +22,7 @@ public class AdminAdvertiseController {
 
 	@Autowired
 	private final HttpSession session;
+	@Autowired
 	private final AdminService adminService;
 	
 	@GetMapping("")

@@ -8,12 +8,11 @@ import lombok.Data;
 public class TestUser {
 
 	private int id;
+	private int mbti;
 	private String nickname;
-	private String mbti;
 	private MultipartFile fileName;
 	private String originFileName;
 	private String uploadFileName;
-	private String content;
 	
 	public String setUpUserImage() {
 		System.out.println("파일 이름 : " + uploadFileName);
