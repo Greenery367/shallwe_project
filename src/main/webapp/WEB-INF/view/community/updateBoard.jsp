@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="authorId" value="${board.authorId}" readonly /></td>
+				<td><p>${board.nickName}</p></td>
 			</tr>
 			<tr>
 				<th>제목</th>

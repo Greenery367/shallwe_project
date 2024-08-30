@@ -23,27 +23,56 @@
 	select * from board_tb
 </select>
 
-<select id="findByTitle">
-	select * from board_tb where title like CONCAT('%', #{title}, '%')
+<select id="findByTitle" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and b.title like CONCAT('%', #{title}, '%')
+	limit #{limit} offset #{offset} 
 </select>
 
-<select id="findByContent">
-	select * from board_tb where content like CONCAT('%', #{content}, '%')
+<select id="findByContent" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and b.content like CONCAT('%', #{content}, '%')
+	limit #{limit} offset #{offset} 
 </select>
 
 <!-- author_id와 user join으로 바꿔야함 -->
-<select id="findByAuthor">
-	select * from board_tb where author_id like CONCAT('%', #{authorId}, '%')
+<select id="findByNickName" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and u.nickname like CONCAT('%', #{nickName}, '%')
+	limit #{limit} offset #{offset} 
 </select>
 
 <select id="findById">
-	select * from board_tb where id = #{id}
+	select b.*, u.nickname 
+	from board_tb as b 
+	left join user_tb as u
+	on u.user_id = b.author_id
+	where b.id = #{id}
+ 
 </select>
 
-<select id="findByCategroyBoardForPage" resultType="com.example.demo.repository.model.Board">
-	select * from board_tb as b
-	inner join game_tb as g
+<select id="findByCategoryBoardForPage" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
 	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
 	where category_id = #{categoryId}
 	limit #{limit} offset #{offset}
 </select>
@@ -57,6 +86,8 @@
 <select id="findByCategoryTotalBoard">
 	select count(*) from board_tb where category_id = #{categoryId}
 </select>
+
+
 
 
 </mapper>

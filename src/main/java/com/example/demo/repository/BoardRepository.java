@@ -26,13 +26,22 @@ public interface BoardRepository {
 	public Board findById(Integer id);
 	
 	// 게시글 검색 - 제목기준
-	public List<Board> findByTitle(String title);
+	public List<Board> findByTitle(@Param("categoryId")Integer categoryId, 
+									@Param("limit")Integer limit,
+									@Param("offset")Integer offset,
+									@Param("title") String title);
 	
 	// 게시글 검색 - 내용기준
-	public List<Board> findByContent(String content);
+	public List<Board> findByContent(@Param("categoryId")Integer categoryId, 
+									@Param("limit")Integer limit,
+									@Param("offset")Integer offset, 
+									@Param("content") String content);
 	
 	// 게시글 검색 - 닉네임 기준
-	public List<Board> findByAuthor(Integer authorId);
+	public List<Board> findByNickName(@Param("categoryId")Integer categoryId, 
+									@Param("limit")Integer limit,
+									@Param("offset")Integer offset,
+									@Param("nickName") String nickName);
 	
 	// 카테고리별 게시글 조회
 	public List<Board> findCategory(Integer categoryId);
@@ -41,11 +50,11 @@ public interface BoardRepository {
 	public void increaseViewNum(Integer id);
 	
 	// 페이징 처리 
-	public List<Board> findByCategroyBoardForPage(@Param("categoryId")Integer categoryId, 
+	public List<Board> findByCategoryBoardForPage(@Param("categoryId")Integer categoryId, 
 			@Param("limit")Integer limit,
 			@Param("offset")Integer offset);
 	
-	// 
+	// 게시글 전체 갯수 
 	public int findByCategoryTotalBoard(Integer categoryId);
 	
 	

@@ -99,10 +99,10 @@ public class BoardService {
 	 * @param categoryId
 	 * @return
 	 */
-	public List<Board> getBoardByCategroy(Integer categoryId , int limit, int offset) {
+	public List<Board> getBoardByCategory(Integer categoryId , int limit, int offset) {
 		List<Board> catagoryBoardList = new ArrayList<>(); 
 		int calculatedOffset = offset;
-		catagoryBoardList =	boardRepository.findByCategroyBoardForPage(categoryId, limit, calculatedOffset);
+		catagoryBoardList =	boardRepository.findByCategoryBoardForPage(categoryId, limit, calculatedOffset);
 		System.out.println("Service caboard : " + catagoryBoardList);
 		return catagoryBoardList;
 	}
@@ -116,15 +116,53 @@ public class BoardService {
     }
 	
 	
-	public List<Board> readBoardListByCategoryForPage(Integer categoryId, int limit, int offset){
-		List<Board> list = boardRepository.findByCategroyBoardForPage(categoryId, categoryId, categoryId);
-		return list;
-	};
-	
+	/**
+	 * 카테고리별 게시판 총 갯수 
+	 * @param categoryId
+	 * @return
+	 */
 	public int findByCategoryTotalBoard(Integer categoryId) {
 		int totalNum = boardRepository.findByCategoryTotalBoard(categoryId);
 		return totalNum;
 	}
+	
+	// 검색 공백처리
+	private String formatSearchTerm(String searchTerm) {
+		if (searchTerm == null) {
+			return "";
+		}
+		return "%" + searchTerm.trim().replace(" ", "%") + "%";
+	}
+	
+	public List<Board> findByContent(Integer categoryId , int limit, int offset, String content) {
+		List<Board> SearchContentList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		String formattedContent = formatSearchTerm(content);
+		SearchContentList =	boardRepository.findByContent(categoryId, limit, calculatedOffset, formattedContent);
+		System.out.println("Service caboard : " + SearchContentList);
+		return SearchContentList;
+	}
+	
+
+	
+	public List<Board> findByTitle(Integer categoryId , int limit, int offset, String title) {
+		List<Board> SearchTitleList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		String formattedTitle = formatSearchTerm(title);
+		SearchTitleList =	boardRepository.findByTitle(categoryId, limit, calculatedOffset, formattedTitle);
+		System.out.println("Service caboard : " + SearchTitleList);
+		return SearchTitleList;
+	}
+	
+	public List<Board> findByNickName(Integer categoryId , int limit, int offset, String nickName) {
+		List<Board> SearchTitleList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		String formattedNickName = formatSearchTerm(nickName);
+		SearchTitleList =	boardRepository.findByNickName(categoryId, limit, calculatedOffset, formattedNickName);
+		System.out.println("Service caboard : " + SearchTitleList);
+		return SearchTitleList;
+	}
+	
 	
 	
 	

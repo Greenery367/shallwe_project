@@ -18,6 +18,7 @@ public class Board {
 	private String title;
 	private String content;
 	private Integer authorId;
+	private String nickName;
 	private Integer viewNum;
 	private Integer good;
 	private Timestamp createdAt;

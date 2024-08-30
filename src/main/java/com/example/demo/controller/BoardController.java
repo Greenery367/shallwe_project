@@ -41,26 +41,40 @@ public class BoardController {
 	
 	// 카테고리별 이동
 	@GetMapping("/category/{categoryId}")
-    public String getBoardByCategory(@PathVariable("categoryId") Integer categoryId,
-    		@RequestParam(name = "currentPage", defaultValue = "1") int currentPage,
-    		Model model) {
-		
-		int totalBoardNum = boardService.findByCategoryTotalBoard(categoryId);
-		int limit=10;
-		int calculatedOffset = limit*(currentPage -1);
-		int totalPage = (int) Math.ceil((double) totalBoardNum / limit);
-        List<Board> boardList = boardService.getBoardByCategroy(categoryId, limit, calculatedOffset);
-        model.addAttribute("boardList", boardList);
-        System.out.println("boardList :: " + boardList);
-        model.addAttribute("limit", limit);
-		System.out.println("limit : " + limit);
-		model.addAttribute("totalPage", totalPage);
-		System.out.println("totalPage : " + totalPage);
-		model.addAttribute("calculatedOffset", calculatedOffset);
-		System.out.println("calculatedOffset : " + calculatedOffset);
-		model.addAttribute("currentPage", currentPage); // currentPage 추가
-        return "community/list"; 
-    }
+	public String getBoardByCategory(@PathVariable("categoryId") Integer categoryId,
+	        @RequestParam(name = "currentPage", defaultValue = "1") int currentPage,
+	        @RequestParam(name = "searchField", required = false) String searchField,
+	        @RequestParam(name = "searchValue", required = false) String searchValue,
+	        Model model) {
+
+	    int limit = 3;
+	    int calculatedOffset = limit * (currentPage - 1);
+	    List<Board> boardList;
+
+	    // 검색 필터에 따라 처리
+	    if ("content".equals(searchField) && searchValue != null && !searchValue.isEmpty()) {
+	        boardList = boardService.findByContent(categoryId, limit, calculatedOffset, searchValue);
+	    } else if ("title".equals(searchField) && searchValue != null && !searchValue.isEmpty()) {
+	        boardList = boardService.findByTitle(categoryId, limit, calculatedOffset, searchValue);
+	    } else if ("nickName".equals(searchField) && searchValue != null && !searchValue.isEmpty()) {
+	        boardList = boardService.findByNickName(categoryId, limit, calculatedOffset, searchValue);
+	    } else {
+	        boardList = boardService.getBoardByCategory(categoryId, limit, calculatedOffset);
+	    }
+
+	    int totalBoardNum = boardService.findByCategoryTotalBoard(categoryId);
+	    int totalPage = (int) Math.ceil((double) totalBoardNum / limit);
+
+	    model.addAttribute("boardList", boardList);
+	    model.addAttribute("limit", limit);
+	    model.addAttribute("totalPage", totalPage);
+	    model.addAttribute("calculatedOffset", calculatedOffset);
+	    model.addAttribute("currentPage", currentPage);
+	    model.addAttribute("searchValue", searchValue); // 검색어를 모델에 추가
+	    model.addAttribute("searchField", searchField); // 검색 필드를 모델에 추가
+
+	    return "community/list";
+	}
 
 	
 	// 글 수정 이동
@@ -123,6 +137,8 @@ public class BoardController {
 	    model.addAttribute("board", newBoard);
         return "redirect:/community/boardDetail/" + id; // 수정 후 상세 페이지로 이동
     }
+    
+ 
 	
 	
 	
