@@ -19,12 +19,11 @@
         		<a href="main"><img class="img-concert" src="/images/logo.png"></a>
         	</div>
         </div>
-        <form method="post" action="user/sign-in" id="login-form">
-            <input type="text" name="username" placeholder="Id">
+        <form method="post" action="sign-in" id="login-form">
+            <input type="text" name="id" placeholder="ID">
             <input type="password" name="password" placeholder="Password">
             <label for="remember-check">
                 <input type="checkbox" id="remember-check">아이디 저장하기
-                 
             </label>
             <input type="submit" value="Login">
         </form>
