@@ -218,6 +218,32 @@ h1 {
 width: 10px;
 height: 10px;
 }
+
+.advertise-one-line-box{
+	display: flex;
+	justify-content:space-around;
+	flex-wrap: nowrap;
+}
+
+.advertise-box{
+	margin: 20px;
+	padding: 20px;
+	width: 30vh;
+	height: 45vh;
+	background-color: yellow;
+}
+
+.advertise-img{
+	background-color: orange;
+	width: 100%;
+	height: 70%;
+}
+
+.advertise-content{
+	background-color: green;
+	width: 100%;
+	height: 30%;
+}
 </style>
 </head>
 <body>
@@ -243,12 +269,36 @@ height: 10px;
 					<li><a href="user">이용자 관리</a></li>
 					<li><a href="cash">캐쉬</a></li>
 					<li><a href="support">고객 지원</a></li>
-					<li><a href="advertisement">광고 / 배너</a></li>
+					<li><a href="/advertise">광고 / 배너</a></li>
 					<li><a href="category">카테고리 / 게시판</a></li>
 					<li><a href="notice">뉴스 / 공지</a></li>
 				</ul>
 			</div>
 			<div class="content">
+				<div class="advertise-list-content">
+				
+				<p>현재 게시중인 게시글</p>
+					<div class="advertise-one-line-box" id="advertise-container">
+                        <c:forEach var="advertise" items="${advertiseListNow}">
+                            <div class="advertise-box" data-id="${advertise.id}">
+                                <div class="advertise-img">
+                                    <img src="winterAdvertise1.jpg" alt="광고사진">
+                                </div>
+                                <div class="advertise-content">
+                                    <div>id : ${advertise.id}</div>
+                                    <div>제목 : ${advertise.title}</div>
+                                    <div>광고주 : ${advertise.customer}</div>
+                                    <div>시작시간 : ${advertise.startDate}</div>
+                                    <div>종료시간 : ${advertise.endDate}</div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+			
+			
+			
+			
 				<div>
 					<p>광고 리스트</p>
 					<table class="table">
@@ -279,8 +329,8 @@ height: 10px;
 							</c:forEach>
 						</tbody>
 					</table>
-
 				</div>
+				
 				<div>광고 추가</div>
 				<form action="/admin/advertise/insert-advertise" method="post" class="advertise" enctype="multipart/form-data">
 					<div class="form-group">
@@ -337,12 +387,12 @@ height: 10px;
 						<input type="text" id="link" name="link" value="rrrrrrr">
 					</div>
 					<div class="form-group">
-						<label for="startTime">시작시간 :</label> 
-						<input type="text" id="startTime" name="startTime" value="2024-09-01">
+						<label for="startDate">시작시간 :</label> 
+						<input type="text" id="startDate" name="startDate" value="2024-09-01">
 					</div>
 					<div class="form-group">
-						<label for="endTime">종료시간 :</label> 
-						<input type="text" id="endTime" name="endTime" value="2024-09-06">
+						<label for="endDate">종료시간 :</label> 
+						<input type="text" id="endDate" name="endDate" value="2024-09-06">
 					</div>
 					<div class="form-group">
 						<label for="status">현재상태 :</label> 
@@ -371,19 +421,7 @@ height: 10px;
 					</div>
 				</div>
 				
-				<script>
-					 // 파일 선택 시 파일 이름을 표시하도록 하는 코드
-					  $(".link-input").on("change", function() {
-					    // 선택된 파일의 전체 경로를 콘솔에 출력합니다.
-					    console.log($(this).val());
-					    
-					    // 파일 경로에서 파일 이름만 추출합니다.
-					    let link = $(this).val().split("\\").pop();
-					    
-					    // 해당 파일 이름을 사용하여 .link-label 요소의 내용과 스타일을 업데이트합니다.
-					    $(this).siblings(".link-label").addClass("selected").html(link);
-					  });
-				</script>
+				
 
 				<div class="modal-qna">
 					<div class="modal-body">
@@ -456,6 +494,35 @@ height: 10px;
 				            }
 				        });
 			    </script>
+			    <script>
+                    $(document).ready(function() {
+                        let $advertiseContainer = $('#advertise-container');
+                        let $advertises = $advertiseContainer.children('.advertise-box');
+                        let currentIndex = 0;
+
+                        function showNextAdvertise() {
+                            $advertises.hide();
+                            $advertises.eq(currentIndex).show();
+                            currentIndex = (currentIndex + 1) % $advertises.length;
+                        }
+
+                        showNextAdvertise(); // 처음 광고 표시
+                        setInterval(showNextAdvertise, 5000); // 5초마다 순환
+                    });
+                </script>
+                <script>
+					 // 파일 선택 시 파일 이름을 표시하도록 하는 코드
+					  $(".link-input").on("change", function() {
+					    // 선택된 파일의 전체 경로를 콘솔에 출력합니다.
+					    console.log($(this).val());
+					    
+					    // 파일 경로에서 파일 이름만 추출합니다.
+					    let link = $(this).val().split("\\").pop();
+					    
+					    // 해당 파일 이름을 사용하여 .link-label 요소의 내용과 스타일을 업데이트합니다.
+					    $(this).siblings(".link-label").addClass("selected").html(link);
+					  });
+				</script>
 
 		</div>
 

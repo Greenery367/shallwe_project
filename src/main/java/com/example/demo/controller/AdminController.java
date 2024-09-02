@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.dto.UserDTO;
@@ -26,6 +27,7 @@ public class AdminController {
 	@GetMapping({"", "/dashboard"})
 	public String adminMainPage(Model model) {
 		
+		// 대시보드 통계를 위한 계산
 		int numberOfUser = adminService.countUser();
 		int numberOfChargeCash = adminService.countChargeCash();
 		double cashUseRate = adminService.countSpendCashRate();

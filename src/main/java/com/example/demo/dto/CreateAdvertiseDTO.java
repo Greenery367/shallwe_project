@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +34,6 @@ public class CreateAdvertiseDTO {
 				.placeId(this.placeId)
 				.title(this.title)
 				.customer(this.customer)
-				.link(this.link)
 				.originFileName(this.uploadFileName)
 				.uploadFileName(this.uploadFileName)
 				.startDate(this.startDate)

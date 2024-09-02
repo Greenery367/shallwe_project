@@ -56,9 +56,19 @@
 	</delete>
 	
 	
-	<!-- 광고 상태 변경 -->
+	<!-- 현재 게시중인 광고 조회 -->
+	<select id="selectAdvertiseNow">
+		select * from advertise_tb where status = 1
+	</select>
+	
+	<!-- 만료된 광고 중 상태가 1인 광고 조회 -->
+	<select id="selectExpiredAdvertise" resultType="long">
+		select id from advertise_tb where end_date &lt; #{now} AND status = 1
+	</select>
+	
+	<!-- 광고 상태 업데이트 -->
 	<update id="updateAdvertiseStatus">
-		update advertise_tb set status = #{status} where id=#{id}
+		update advertise_tb set status = #{status} where id = #{id}
 	</update>
 
 

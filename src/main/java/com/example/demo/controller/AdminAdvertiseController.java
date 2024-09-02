@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.Advertise;
 import com.example.demo.dto.CreateAdvertiseDTO;
@@ -31,17 +34,42 @@ public class AdminAdvertiseController {
 	public String adminAdvertisementPage(Model model) {
 		
 		List<Advertise> advertiseList = adminService.selectAllAdvertise();
+		List<Advertise> advertiseListNow = adminService.selectAdvertiseNow();
 		model.addAttribute("advertiseList", advertiseList);		
+		model.addAttribute("advertiseListNow",advertiseListNow);
 		
-		return "admin/adminAdvertisement";
+		System.out.println("------------------------");
+		System.out.println(advertiseListNow);
+		System.out.println("------------------------");
+		
+		return "admin/adminAdvertisement"; 
 	}
 	
 	// 광고 추가 요청
 	@PostMapping("/insert-advertise")
-	public String insertAdvertiseProc(CreateAdvertiseDTO dto) {
-	    // 광고 추가 서비스 호출
-	   adminService.insertAdvertise(dto);
-
+	public String insertAdvertiseProc(@RequestParam("placeId") Integer placeId,
+										@RequestParam("title") String title,
+										@RequestParam("customer") String customer,
+										@RequestParam("link") MultipartFile link,
+										@RequestParam("startDate") String startDate,
+										@RequestParam("endDate") String endDate,
+										@RequestParam("status") Integer status
+										) throws IOException {
+		CreateAdvertiseDTO dto = new CreateAdvertiseDTO();
+		
+		dto.setPlaceId(placeId);
+	    dto.setTitle(title);
+	    dto.setCustomer(customer);
+	    dto.setStartDate(startDate);
+	    dto.setEndDate(endDate);
+	    dto.setStatus(status);
+	   // 광고 추가 서비스 호출
+		try {
+			adminService.insertAdvertise(dto, link);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	    return "redirect:/admin/advertise";
 	}
 	

@@ -1,9 +1,11 @@
 package com.example.demo.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.Admin;
@@ -13,7 +15,7 @@ import com.example.demo.dto.FileUploadAdvertiseDTO;
 import com.example.demo.dto.User;
 
 @Mapper
-public interface AdminRepository {
+public interface AdminRepository{
 	
 	// 전체 유저수
 	public int countNumberOfUser();
@@ -28,6 +30,9 @@ public interface AdminRepository {
 	public List<Advertise> selectAllAdvertise();
 	// id로 광고 조회
 	public Advertise selectAdvertiseById(@Param("id") Integer id);
+	// 현재 게시중인 광고 조회 (status = 1)
+	public List<Advertise> selectAdvertiseNow();
+	
 	
 	// 광고추가 
 	public int insertAdvertise(CreateAdvertiseDTO dto);
@@ -36,6 +41,10 @@ public interface AdminRepository {
 	// 광고 삭제
 	public int deleteAdvertiseById(Integer id);
 	
+	// 만료된 광고 중 상태가 1인 광고 조회
+	public List<Integer> selectExpiredAdvertise(@Param("now") LocalDateTime now);
+	// 광고 상태 업데이트
+	public void updateAdvertiseStatus(@Param("status") int status, @Param("id") Integer id);
 	
 	
 }
