@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/chat")
-public class ChatTest {
+public class chatTest {
 	
 	@Autowired
 	private HttpSession session;
