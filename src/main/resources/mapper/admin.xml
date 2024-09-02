@@ -10,17 +10,17 @@
 
 	<!-- 전체유저 충전 금액 -->
 	<select id="countChargeAmount"> 
-		select sum(charge_amount) from user_cash_history_tb where spend_amount is null
+		select sum(charge) from user_cash_history_tb where spend is null
 	</select>
 
 	<!-- 전체유저 사용 금액  -->
 	<select id="countSpendAmount"> 
-		select sum(spend_amount) from user_cash_history_tb where charge_amount is null
+		select sum(spend) from user_cash_history_tb where charge is null
 	</select>
 	
 	<!-- 캐쉬 사용률 -->
 	<select id="countSpendAmountRate">
-		select round(sum(spend_amount) / sum(charge_amount) * 100, 1) from user_cash_history_tb
+		select round(sum(spend) / sum(charge) * 100, 1) from user_cash_history_tb
 	</select>
 	
 	<!-- 전체 광고 조회 -->
