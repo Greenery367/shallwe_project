@@ -12,7 +12,7 @@
 	<h1>게시글 목록</h1>
 
 	<!-- 새 게시글 작성 버튼 -->
-	<button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/createBoard';">새글 작성</button>
+	<button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/createBoard/${categoryId}';">새글 작성</button>
 
 	<table border="1">
 		<thead>
