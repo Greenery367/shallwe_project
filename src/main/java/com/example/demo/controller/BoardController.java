@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.BoardCreateDTO;
+import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.model.Board;
+import com.example.demo.repository.model.Comment;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.CommentService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,11 +25,13 @@ import jakarta.servlet.http.HttpSession;
 public class BoardController {
 
 	private final BoardService boardService;
+	private final CommentService commentService;
 	private final HttpSession httpSession;
 
 	@Autowired
-	public BoardController(BoardService boardService, HttpSession httpSession) {
+	public BoardController(BoardService boardService, CommentService commentService, HttpSession httpSession) {
 		this.boardService = boardService;
+		this.commentService = commentService;
 		this.httpSession = httpSession;
 	}
 
@@ -93,7 +98,10 @@ public class BoardController {
 			@RequestParam(name = "currentPage", defaultValue = "1") int currentPage, Model model) {
 		boardService.increaseViewNum(id);
 		Board board = boardService.readBoardDetail(id);
+		List<Comment> comments = commentService.getCommentsByPostId(id); // 댓글 목록 조회
+		
 		model.addAttribute("board", board);
+		model.addAttribute("comments", comments); // 댓글 목록을 모델에 추가
 		model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
 		Integer authorId = board.getAuthorId(); // 또는 서비스에서 가져올 수 있음
 	    model.addAttribute("authorId", authorId);
@@ -177,7 +185,7 @@ public class BoardController {
 
 			
 	return "redirect:/community/category/" + categoryId;
-	}		
+	}
 			
 
 }

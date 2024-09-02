@@ -9,7 +9,7 @@
 <title>게시글 목록</title>
 </head>
 <body>
-	<h1>게시글 목록</h1>
+	<h1 href = "">게시글 목록</h1>
 
 	<!-- 새 게시글 작성 버튼 -->
 	<button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/createBoard/${categoryId}';">새글 작성</button>
@@ -49,7 +49,7 @@
 	<c:forEach var="page" begin="1" end="${totalPage}">
 		<a href="?searchField=${searchField}&searchValue=${searchValue}&currentPage=${page}">${page}</a>
 	</c:forEach>
-
+	
 	<div class="container">
 		<div class="row">
 			<form method="get" action="${pageContext.request.contextPath}/community/category/${categoryId}">
@@ -63,9 +63,7 @@
     <input type="text" name="searchValue" value="${searchValue}" placeholder="검색어 입력">
     <input type="hidden" name="currentPage" value="${currentPage}"> <!-- 현재 페이지 유지 -->
     <input type="submit" value="검색">
-			</form>
-			
-			
+			</form>		
 		</div>
 	</div>
 
