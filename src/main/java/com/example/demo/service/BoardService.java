@@ -62,9 +62,9 @@ public class BoardService {
 	 * 게시글 삭제
 	 * @param id
 	 */
-	public void deleteBoard(Integer id, Integer author) {
+	public void deleteBoard(Integer id, Integer authorId) {
 		try {
-			boardRepository.deleteById(id, author);
+			boardRepository.deleteBoard(id, authorId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,6 +131,22 @@ public class BoardService {
 		int totalNum = boardRepository.findByCategoryTotalBoard(categoryId);
 		return totalNum;
 	}
+	
+	public int SearchTitleTotalBoard(Integer categoryId, String title) {
+		int titleNum = boardRepository.SearchTitleTotalBoard(categoryId, title);
+		return titleNum;
+	}
+	
+	public int SearchContentTotalBoard(Integer categoryId, String content) {
+		int contentNum = boardRepository.SearchContentTotalBoard(categoryId, content);
+		return contentNum;
+	}
+	
+	public int SearchAuthorTotalBoard(Integer categoryId, String nickName) {
+		int nickNameNum = boardRepository.SearchAuthorTotalBoard(categoryId, nickName);
+		return nickNameNum;
+	}
+	
 	
 	// 검색 공백처리
 	private String formatSearchTerm(String searchTerm) {

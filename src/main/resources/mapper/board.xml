@@ -14,7 +14,7 @@
 		where id = #{id} and author_id = #{authorId}
 </update>
 
-<delete id="delete">
+<delete id="deleteBoard">
 	delete from board_tb 
 	where id = #{id} and author_id = #{authorId}
 </delete>
@@ -85,6 +85,25 @@
 
 <select id="findByCategoryTotalBoard">
 	select count(*) from board_tb where category_id = #{categoryId}
+</select>
+
+<select id="SearchTitleTotalBoard">
+	select count(*) from board_tb where category_id = #{categoryId} and title like CONCAT('%', #{title}, '%')
+</select>
+
+<select id="SearchContentTotalBoard">
+	select count(*) from board_tb where category_id = #{categoryId} and content like CONCAT('%', #{content}, '%')
+</select>
+
+<select id="SearchAuthorTotalBoard">
+	select count(*) 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and u.nickname like CONCAT('%', #{nickName}, '%')
+	
 </select>
 
 

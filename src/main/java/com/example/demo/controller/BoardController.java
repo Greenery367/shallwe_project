@@ -48,21 +48,27 @@ public class BoardController {
 		int limit = 3;
 		int calculatedOffset = limit * (currentPage - 1);
 		List<Board> boardList;
+		int totalBoardNum = 0;
 
 		// 검색 필터에 따라 처리
 		if ("content".equals(searchField) && searchValue != null && !searchValue.isEmpty()) {
 			boardList = boardService.findByContent(categoryId, limit, calculatedOffset, searchValue);
+			totalBoardNum = boardService.SearchContentTotalBoard(categoryId, searchValue);
 		} else if ("title".equals(searchField) && searchValue != null && !searchValue.isEmpty()) {
 			boardList = boardService.findByTitle(categoryId, limit, calculatedOffset, searchValue);
+			totalBoardNum = boardService.SearchTitleTotalBoard(categoryId, searchValue);
 		} else if ("nickName".equals(searchField) && searchValue != null && !searchValue.isEmpty()) {
 			boardList = boardService.findByNickName(categoryId, limit, calculatedOffset, searchValue);
+			totalBoardNum = boardService.SearchAuthorTotalBoard(categoryId, searchValue);
 		} else {
 			boardList = boardService.getBoardByCategory(categoryId, limit, calculatedOffset);
+			totalBoardNum = boardService.findByCategoryTotalBoard(categoryId);
 		}
-
-		int totalBoardNum = boardService.findByCategoryTotalBoard(categoryId);
+		
+		
 		int totalPage = (int) Math.ceil((double) totalBoardNum / limit);
-
+		currentPage = 1;
+		
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("limit", limit);
 		model.addAttribute("totalPage", totalPage);
@@ -89,6 +95,8 @@ public class BoardController {
 		Board board = boardService.readBoardDetail(id);
 		model.addAttribute("board", board);
 		model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
+		Integer authorId = board.getAuthorId(); // 또는 서비스에서 가져올 수 있음
+	    model.addAttribute("authorId", authorId);
 		return "/community/boardDetail";
 	}
 
@@ -123,8 +131,8 @@ public class BoardController {
         // 세션에서 작성자 ID 가져오기
 //        Integer authorId = (Integer) httpSession.getAttribute("userId");
     	Integer authorId = 1; // 임시 작성자 ID (예: 1)
-        boardCreateDTO.setAuthorId(authorId); // 작성자 ID 설정
-        boardCreateDTO.setAuthorId(categoryId);
+    	boardCreateDTO.setAuthorId(authorId); // 작성자 ID 설정
+        boardCreateDTO.setCategoryId(categoryId);
         boardService.createBoard(boardCreateDTO);
         model.addAttribute("categoryId", categoryId); // 카테고리 ID를 모델에 추가
         return "redirect:/community/category/" + categoryId; // 게시글 목록으로 리다이렉트
@@ -134,18 +142,42 @@ public class BoardController {
 	@GetMapping("/updateBoard/{id}")
 	public String updateBoardForm(@PathVariable("id") Integer id, Model model) {
 		System.out.println("아이디다!!" + id);
+		
+		
 		Board board = boardService.readBoardDetail(id);
 		model.addAttribute("board", board);
+		Integer authorId = board.getAuthorId();
+		model.addAttribute("authorId", authorId);
 		return "community/updateBoard";
 	}
 
 	// 수정된거 넘기기
 	@PostMapping("/update/{id}")
-	public String updateBoard(Model model, Board board, @PathVariable("id") Integer id) {
+	public String updateBoard(Model model, Board board, 
+								@PathVariable("id") Integer id,
+								@RequestParam(name = "authorId", required = false) Integer authorId) {
+		board.setAuthorId(authorId);
 		boardService.updateBoard(board.getId(), board.getTitle(), board.getContent(), board.getAuthorId());
 		Board newBoard = boardService.readBoardDetail(id);
 		model.addAttribute("board", newBoard);
+		model.addAttribute("authorId", authorId);
+		System.out.println("작스으으으응" + authorId);
 		return "redirect:/community/boardDetail/" + id; // 수정 후 상세 페이지로 이동
 	}
+	
+	// 삭제하기 
+	@PostMapping("/deletBoard/{id}")
+	public String deleteBoard(Model model, Board board,
+							@PathVariable("id") Integer id,
+							@RequestParam(name = "authorId", required = false) Integer authorId,
+							@RequestParam(name = "categoryId", required = false) Integer categoryId) {		
+				
+		 // 게시글 삭제 서비스 호출
+	    boardService.deleteBoard(id, authorId);
+
+			
+	return "redirect:/community/category/" + categoryId;
+	}		
+			
 
 }
