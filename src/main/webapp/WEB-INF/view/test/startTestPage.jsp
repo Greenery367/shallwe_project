@@ -32,16 +32,15 @@
 		<h1>모든 질문이 끝났습니다!</h1>
 		<h1 id="question-text"></h1>
 		<form id="test-form">
-			<input class="answerBtn" type="button">
+			<input class="answerBtn" type="button" onclick="showResult()" value="제출하기">
 		</form>
 	</div>
-
 
 	<script type="text/javascript">
 		// 질문 리스트 정의
 		const questionList = [
 			  { id: 1, title: "나는 여러사람들과 같이 하는 게임보다 혼자 할수있는 게임을 좋아한다", section: "SN" },
-			  { id: 2, title: "나는 게임에서 만난 사람과 빨리 친해지는 편이다", section: "SN" },
+			  { id: 2, title: "나는 게임에서 만난 사람과 친해지는 것이 힘들다", section: "SN" },
 			  { id: 3, title: "나는 게임에서 호흡이 좋았던 사람으로부터 친구 추가가 오면 받기가 부담스럽다", section: "SN" },
 			  { id: 4, title: "나는 게임이 잘 안풀릴때 공략을 찾아보는 편이다", section: "QM" },
 			  { id: 5, title: "나는 지금 메타에서 성능이 좋은 캐릭터만 키우는 편이다", section: "QM" },
@@ -54,11 +53,8 @@
 			  { id: 12, title: "나는 내 티어와 승률에 집착하는 편이다", section: "TC" }
 		];
 
-		// 로컬 스토리지에 questionList 저장
-		//localStorage.setItem('questionList', JSON.stringify(questionList));
-
 		// 로컬 스토리지에서 questionList 읽어오기
-		const storedQuestionList = JSON.parse(localStorage.getItem('questionList'));
+		const storedQuestionList = JSON.parse(localStorage.getItem('questionList')) || questionList;
 		
 		const progress = document.querySelector('.bar-progress'); 
 		const beforeTest = document.querySelector('.intro-container'); // 테스트 시작 div
@@ -69,28 +65,29 @@
 		let progressValue = 0; // 문제 인덱스
 		
 		// 대답 배열
-		var answerArray=new Array();
+		var answerArray = [];
 
 		// 페이지 진입
-		function enterPage(){
-			startTest.style.display='none';		
-			finishTest.style.display='none';		
+		function enterPage() {
+			startTest.style.display = 'none';		
+			finishTest.style.display = 'none';		
 		}
 		
 		// 테스트 시작
-		function startTestPage(){
-			beforeTest.style.display='none';
-			finishTest.style.display='none';
-			startTest.style.display='block';
+		function startTestPage() {
+			beforeTest.style.display = 'none';
+			finishTest.style.display = 'none';
+			startTest.style.display = 'block';
 			progress.value = 1;
 			testText.innerText = storedQuestionList[progressValue].title;
 		}
 		
 		// 답변 제출 처리
 		function submitAnswer(answer) {
-			if (progress.value == 12) {
-				beforeTest.style.display='none';
-				finishTest.style.display='none';
+			if (progress.value === 12) {
+				beforeTest.style.display = 'none';
+				startTest.style.display = 'none';
+				finishTest.style.display = 'block';
 				localStorage.setItem('answerArray', JSON.stringify(answerArray));
 				testText.innerText = "모든 질문이 끝났습니다";
 				return;
@@ -103,12 +100,27 @@
 			// 문제 텍스트 변경
 			if (progressValue < storedQuestionList.length) {
 				testText.innerText = storedQuestionList[progressValue].title;
-				answerArray[progressValue-1]=
-						{id: [progressValue],
-						answer: answer};
+				answerArray[progressValue - 1] = { answer: answer };
 				console.log(answer);
-				
 			}
+		}
+		
+		function showResult() {
+			var form = document.createElement('form');
+			form.setAttribute('method', 'post');
+	         form.setAttribute("charset", "UTF-8");
+			form.setAttribute('action', '/test/show-result');
+			
+			var data = document.createElement('input');
+			data.setAttribute('type', 'hidden');
+			data.setAttribute('name', 'answerArray');
+			data.setAttribute('value', JSON.stringify(answerArray));
+			form.appendChild(data);
+			
+			console.log(JSON.stringify(answerArray));
+			
+			document.body.appendChild(form);
+			form.submit();
 		}
 
 		enterPage();
