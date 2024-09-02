@@ -3,53 +3,123 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.BoardRepository">
 
+<!-- 게시글 작성 -->
 <insert id="insert">
-	insert into board_tb (category_id, title, content, author, created_at)
+	insert into board_tb (category_id, title, content, author_id, created_at)
 		values
-		(#{category_id}, #{title}, #{content}, #{author}, now())
+		(#{categoryId}, #{title}, #{content}, #{authorId}, now())
 </insert>
 
+<!-- 게시글 수정 -->
 <update id="updateBoard">
 	update board_tb set title = #{title}, content = #{content}
-		where id = #{id} and author = #{author}
+		where id = #{id} and author_id = #{authorId}
 </update>
 
-<delete id="delete">
+<!-- 게시글 삭제 -->
+<delete id="deleteBoard">
 	delete from board_tb 
-	where id = #{id} and author = #{author}
+	where id = #{id} and author_id = #{authorId}
 </delete>
 	
+<!-- 게시글 전체 조회 -->
 <select id="findAll">
 	select * from board_tb
 </select>
 
-<select id="findByTitle">
-	select * from board_tb where title like CONCAT('%', #{title}, '%')
-</select>
-
-<select id="findByContent">
-	select * from board_tb where content like CONCAT('%', #{content}, '%')
-</select>
-
-<select id="findByAuthor">
-	select * from board_tb where author like CONCAT('%', #{author}, '%')
-</select>
-
-<select id="findById">
-	select * from board_tb where id = #{id}
-</select>
-
-<select id="findCategory">
-	select * from board_tb as b
-	inner join game_tb as g
+<!-- 게시글 제목 기준 검색 -->
+<select id="findByTitle" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
 	on b.category_id = g.id
-	where category_id = #{category_id};
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and b.title like CONCAT('%', #{title}, '%')
+	limit #{limit} offset #{offset} 
 </select>
 
+<!-- 게시글 내용 기준 검색 -->
+<select id="findByContent" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and b.content like CONCAT('%', #{content}, '%')
+	limit #{limit} offset #{offset} 
+</select>
+
+<!-- 게시글 닉네임(작성자) 기준 검색 -->
+<select id="findByNickName" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and u.nickname like CONCAT('%', #{nickName}, '%')
+	limit #{limit} offset #{offset} 
+</select>
+
+<!-- id 기준 조회 -->
+<select id="findById">
+	select b.*, u.nickname 
+	from board_tb as b 
+	left join user_tb as u
+	on u.user_id = b.author_id
+	where b.id = #{id}
+ 
+</select>
+
+<!-- 카테고리별 페이징처리 -->
+<select id="findByCategoryBoardForPage" resultType="com.example.demo.repository.model.Board">
+	select b.*, u.nickname 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId}
+	limit #{limit} offset #{offset}
+</select>
+
+<!-- 게시글 조회수 증가 -->
 <update id="increaseViewNum">
     UPDATE board_tb 
     SET view_num = view_num + 1
     WHERE id = #{id}
 </update>
+
+<!-- 게시글 카테고리기준 조회 페이지 갯수 -->
+<select id="findByCategoryTotalBoard">
+	select count(*) from board_tb where category_id = #{categoryId}
+</select>
+
+<!-- 게시글 제목기준 조회 페이지 갯수 -->
+<select id="SearchTitleTotalBoard">
+	select count(*) from board_tb where category_id = #{categoryId} and title like CONCAT('%', #{title}, '%')
+</select>
+
+<!-- 게시글 내용기준 조회 페이지 갯수 -->
+<select id="SearchContentTotalBoard">
+	select count(*) from board_tb where category_id = #{categoryId} and content like CONCAT('%', #{content}, '%')
+</select>
+
+<!-- 게시글 닉네임(작성자)기준 조회 페이지 갯수 -->
+<select id="SearchAuthorTotalBoard">
+	select count(*) 
+	from board_tb as b
+	left join game_tb as g
+	on b.category_id = g.id
+    left join user_tb as u
+    on u.user_id = b.author_id
+	where category_id = #{categoryId} and u.nickname like CONCAT('%', #{nickName}, '%')
+	
+</select>
+
+
+
 
 </mapper>
