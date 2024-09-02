@@ -34,6 +34,15 @@ dependencies {
 	// TODO - check  
 	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 	
+	// email 인증 기능을 위한 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	
+	// email 인증 번호 유효 시간 설정을 위한 redis 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	
+	// validation 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
 	// 암호화 
 	implementation 'org.springframework.security:spring-security-crypto'
 	
