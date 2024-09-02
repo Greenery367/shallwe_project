@@ -2,12 +2,14 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.CompatibilityListDTO;
 import com.example.demo.dto.MbtiDTO;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -69,6 +72,13 @@ public class ChatTest {
 		request.setAttribute("compatibilityList",compatibility);
 		request.setAttribute("compatibilityJson", json);
 		return "match/matchSystem";
+	}
+	
+	@GetMapping("/profileInfo")
+	public String getMethodName(@RequestParam("name") String name,Model model) {
+		
+		model.addAttribute("name",name);
+		return "match/userInfo";
 	}
 	
 }
