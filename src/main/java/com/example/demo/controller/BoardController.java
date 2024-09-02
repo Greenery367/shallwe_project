@@ -67,6 +67,7 @@ public class BoardController {
 		model.addAttribute("limit", limit);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("calculatedOffset", calculatedOffset);
+		model.addAttribute("categoryId", categoryId);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("searchValue", searchValue); // 검색어를 모델에 추가
 		model.addAttribute("searchField", searchField); // 검색 필드를 모델에 추가
@@ -94,9 +95,9 @@ public class BoardController {
 	
 	// 게시글 작성 페이지 이동
 	// hint : 주소에서 카테고리 id를 동적으로 받아 넘겨야함 <-- 해라 꼭.. 
-    @GetMapping("/createBoard")
+    @GetMapping("/createBoard/{categoryId}")
     public String createBoardForm(@RequestParam(name = "currentPage", defaultValue = "1") int currentPage,
-    		 					  @RequestParam(name = "categoryId", required = false, defaultValue = "0") Integer categoryId,
+    		 					  @PathVariable("categoryId") Integer categoryId,
                                   Model model) {
         // 세션에서 작성자 ID 가져오기
 //        Integer authorId = (Integer) httpSession.getAttribute("userId");
@@ -104,24 +105,29 @@ public class BoardController {
 
         BoardCreateDTO boardCreateDTO = new BoardCreateDTO();
         boardCreateDTO.setAuthorId(authorId); // 작성자 ID 설정
+        boardCreateDTO.setCategoryId(categoryId); // 카테고리 ID 설정
 
         model.addAttribute("board", boardCreateDTO);
         model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
         model.addAttribute("authorId", authorId); // 작성자 ID를 모델에 추가
         model.addAttribute("categoryId", categoryId); // 카테고리 ID를 모델에 추가
-        return "community/createBoard";
+        return "/community/createBoard";
     }
 	
 
  // 게시글 작성 기능
     @PostMapping("/createBoard")
-    public String createBoard(BoardCreateDTO boardCreateDTO) {
+    public String createBoard(BoardCreateDTO boardCreateDTO,
+    		@RequestParam(name = "categoryId", required = false) Integer categoryId,
+    		Model model) {
         // 세션에서 작성자 ID 가져오기
 //        Integer authorId = (Integer) httpSession.getAttribute("userId");
     	Integer authorId = 1; // 임시 작성자 ID (예: 1)
         boardCreateDTO.setAuthorId(authorId); // 작성자 ID 설정
+        boardCreateDTO.setAuthorId(categoryId);
         boardService.createBoard(boardCreateDTO);
-        return "redirect:/community/"; // 게시글 목록으로 리다이렉트
+        model.addAttribute("categoryId", categoryId); // 카테고리 ID를 모델에 추가
+        return "redirect:/community/category/" + categoryId; // 게시글 목록으로 리다이렉트
     }
 
 	// 게시글 수정 페이지 이동
