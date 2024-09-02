@@ -25,8 +25,6 @@ public class MatchHandler extends TextWebSocketHandler{
 		TestUser user = (TestUser)session.getAttributes().get("principal");
 		TestMatch test = TestMatch.builder().mbti(user.getMbti()).uploadFileName(user.getUploadFileName())
 				.nickname(user.getNickname()).build();
-		MBTIS.put(session.getId(), test);
-		CLIENTS.put(session.getId(), session);
 	}
 	
 	@Override
@@ -40,18 +38,27 @@ public class MatchHandler extends TextWebSocketHandler{
 		TestUser user = (TestUser)session.getAttributes().get("principal");
 		TestMatch test = TestMatch.builder().mbti(user.getMbti()).uploadFileName(user.getUploadFileName())
 				.nickname(user.getNickname()).build();
+		MBTIS.put(session.getId(), test);
+		CLIENTS.put(session.getId(), session);
+		if(message.getPayload().equals("stop")) {
+			CLIENTS.remove(session.getId());
+			MBTIS.remove(session.getId());
+		} else {
 		ObjectMapper objectMapper = new ObjectMapper();
 		for(String key : MBTIS.keySet()) {
-			System.out.println("내가 보낸 mbti!!! :" +  message.getPayload());
-			System.out.println("찾은 mbti!!! : " + MBTIS.get(key).getMbti());
 			if(Integer.parseInt(message.getPayload()) == MBTIS.get(key).getMbti()) {
 				String MyDTO = objectMapper.writeValueAsString(test);
 				System.out.println("매칭 성공!!!!!!!!!!!!!!");
 				String userDTO = objectMapper.writeValueAsString(MBTIS.get(key));
 				CLIENTS.get(key).sendMessage(new TextMessage(MyDTO)); // 내 userDTO를 상대에게 전송
 				session.sendMessage(new TextMessage(userDTO)); // 상대의 userDTO를 나에게 전송
+				CLIENTS.remove(session.getId()); // 매칭 성공시 매칭하는 유저 정보 삭제 
+				MBTIS.remove(session.getId()); // 위와 같음
+				CLIENTS.remove(key);
+				MBTIS.remove(key);
 				break;
 			}
+		}
 		}
 	}
 }
