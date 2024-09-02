@@ -22,6 +22,7 @@ public class AdminAdvertiseController {
 
 	@Autowired
 	private final HttpSession session;
+	@Autowired
 	private final AdminService adminService;
 	
 	@GetMapping("")
@@ -35,7 +36,7 @@ public class AdminAdvertiseController {
 	
 	@PostMapping("/insertAdvertise")
 	public String insertAdvertiseProc(Model model ) {
-		adminService.insertAdvertise();
+		// adminService.insertAdvertise();
 		
 		return "admin/adminAdvertisement";
 	}

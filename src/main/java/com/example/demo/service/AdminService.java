@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import com.example.demo.dto.Advertise;
 import com.example.demo.repository.AdminRepository;
@@ -35,10 +34,10 @@ public class AdminService {
 	}
 	
 	// 광고 추가
-	public int insertAdvertise() {
+	//public int insertAdvertise() {
 		
-		return adminRepository.insertAdvertise();
-	}
+		// return adminRepository.insertAdvertise();
+	// }
 	
 	// 광고 상태 변경 
 	@Transactional
