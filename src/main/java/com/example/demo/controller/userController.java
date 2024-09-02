@@ -33,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class userController {
 	
 	private final UserService userService = null;
 	private final HttpSession session = null;
