@@ -47,7 +47,7 @@
 		</tbody>
 	</table>
 	<c:forEach var="page" begin="1" end="${totalPage}">
-		<a href="?currentPage=${page}">${page}</a>
+		<a href="?searchField=${searchField}&searchValue=${searchValue}&currentPage=${page}">${page}</a>
 	</c:forEach>
 
 	<div class="container">

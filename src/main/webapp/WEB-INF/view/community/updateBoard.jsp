@@ -24,6 +24,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
+					<input type="hidden" name="authorId" value="${board.authorId}" />
 					<input type="submit" value="수정하기" />
 					<input type="reset" value="초기화" />
 				</td>

@@ -23,7 +23,7 @@ public interface BoardRepository {
 						   @Param("authorId")Integer authorId);
 	
 	// 게시글 삭제
-	public int deleteById(@Param("id")Integer id, 
+	public int deleteBoard(@Param("id")Integer id, 
 						  @Param("authorId")Integer authorId);
 	
 	// 게시글 전체 조회
@@ -64,6 +64,13 @@ public interface BoardRepository {
 	// 게시글 전체 갯수 
 	public int findByCategoryTotalBoard(Integer categoryId);
 	
+	// 제목 검색 전체 갯수
+	public int SearchTitleTotalBoard(@Param("categoryId")Integer categoryId, @Param("title") String title);
 	
+	// 내용 검색 전체 갯수
+	public int SearchContentTotalBoard(@Param("categoryId")Integer categoryId, @Param("content") String content);
+	
+	// 작성자 검색 전체 갯수
+	public int SearchAuthorTotalBoard(@Param("categoryId")Integer categoryId, @Param("nickName") String nickName);
 	
 }
