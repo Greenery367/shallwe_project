@@ -10,5 +10,8 @@ import com.example.demo.repository.model.User;
 public interface UserRepository {
 	
 	public int insert(User user);
+	public User findByNickname(@Param("nickname")String nickname);
 	public User findById(@Param("id")String id);
+	public User findByEmail(@Param("email")String email);
+	public int updatePasswordByEmail(@Param("password")String password, @Param("email")String email);
 }

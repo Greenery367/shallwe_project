@@ -7,8 +7,19 @@
 		select * from user_tb
 		where id = #{id}
 	</select>
+	<select id="findByNickname" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where nickname = #{nickname}
+	</select>
+	<select id="findByEmail" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where email = #{email}
+	</select>
 	
-	
+	<update id="updatePasswordByEmail">
+		update user_tb set password = #{password}
+		where email = #{email}
+	</update>
 	
 	
 	

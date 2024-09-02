@@ -11,6 +11,11 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+form > p{
+	margin-bottom: 15px;
+	color: #FD6F22;
+}
+
 /* Firefox  */
 input[type='number'] {
   -moz-appearance: textfield;
@@ -37,6 +42,12 @@ h2{
     color: #FD6F22;
     margin-bottom: 20px;
     display: inline-block;
+}
+
+h5{
+	color: gray;
+	margin-bottom: 10px;
+	justify-content: center;
 }
 
 .upper{
@@ -91,10 +102,52 @@ li{
 	padding: 4px;
 	border-radius: 5px;
 }
-form > p{
+.nickname-check{
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+.nickname-btn{
+	margin-bottom: 10px;
+	color: white;
+	background-color: #FD6F22;
+	padding: 4px;
+	border-radius: 5px;
+}
+.email-check{
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+.email-btn{
+	margin-bottom: 10px;
+	color: white;
+	background-color: #FD6F22;
+	padding: 4px;
+	border-radius: 5px;
+}
+form > h4{
 	margin-bottom: 15px;
+	color: #FD6F22;
 }
 
+.mar{
+	margin-bottom: 15px;
+	color: #FD6F22;
+	margin-top:10px;
+}
+
+pw_show {
+	display: inline-block;
+	align-items: center;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+.pw_show input[type="checkbox"] {
+	display: inline-block;
+	align-items: center;
+	margin-right: 5px;
+	font-size: 12px; 
+	margin-bottom: 10px;
+}
 
 #login-form > input{
     width: 100%;
@@ -115,6 +168,22 @@ form > p{
     border-radius: 6px;
     background-color: #F8F8F8;
 }
+.email-auth-button{
+	width: 100%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    background-color: #FD6F22;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.pw-check {
+    font-size: 12px;
+    margin-top: 10px;
+}
 #login-form > input::placeholder{
     color: #D2D2D2;
 }
@@ -122,7 +191,7 @@ form > p{
     color: #fff;
     font-size: 16px;
     background-color: #FD6F22;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #login-form > input[type="checkbox"]{
