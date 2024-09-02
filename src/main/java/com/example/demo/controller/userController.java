@@ -301,6 +301,7 @@ public class userController {
 	       response.put("result", isAvailable ? "available" : "unavailable");
 	       return ResponseEntity.ok(response);
 	}
+
 	@PostMapping("/check-email")
  	public ResponseEntity<Map<String, String>> checkEmail(@RequestParam("email") String email) {
 	       boolean isAvailable = userService.isEmailAvailable(email);
@@ -309,10 +310,5 @@ public class userController {
 	       return ResponseEntity.ok(response);
 	}
 	
-	
-	// http://localhost:8080/user/start-test
-		@GetMapping("/start-test")
-		public String testPage() {
-			return "startTestPage";
-		}
+
 }
