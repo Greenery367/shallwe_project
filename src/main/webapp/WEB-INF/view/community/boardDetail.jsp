@@ -46,14 +46,49 @@
 	</c:if>
 
 	<button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/updateBoard/${board.id}';">수정</button>
-	
+
 	<!-- 게시글 삭제 폼 -->
 	<form action="${pageContext.request.contextPath}/community/deletBoard/${board.id}" method="post" style="display: inline;">
-		<input type="hidden" name="categoryId" value="${board.categoryId}" /> 
-		<input type="hidden" name="authorId" value="${board.authorId}" />
+		<input type="hidden" name="categoryId" value="${board.categoryId}" /> <input type="hidden" name="authorId" value="${board.authorId}" />
 		<button type="submit">삭제</button>
 	</form>
 
+	<!-- 댓글 목록 표시 -->
+	<h2>댓글</h2>
+	<c:if test="${not empty comments}">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>작성자</th>
+					<th>내용</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="comment" items="${comments}">
+					<tr>
+						<td>${comment.nickName}</td>
+						<td>${comment.content}</td>
+						<td><fmt:formatDate value="${comment.createdAt}" type="DATE" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:if>
+	<c:if test="${empty comments}">
+		<p>댓글이 없습니다.</p>
+	</c:if>
+
+	<!-- 댓글 작성 폼 -->
+	<h3>댓글 작성</h3>
+	<form action="${pageContext.request.contextPath}/community/addComment" method="post">
+		<input type="hidden" name="postId" value="${board.id}" /> <input type="hidden" name="authorId" value="${loggedInUserId}" />
+		<!-- 로그인한 사용자 ID -->
+		<div>
+			<textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요."></textarea>
+		</div>
+		<button type="submit">댓글 작성</button>
+	</form>
 
 	<!-- 버튼: 목록으로 돌아가기 -->
 	<a href="${pageContext.request.contextPath}/community/category/${board.categoryId}?currentPage=${currentPage}">목록으로 돌아가기</a>
