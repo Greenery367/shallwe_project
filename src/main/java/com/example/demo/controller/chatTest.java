@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.ChatRoomDTO;
 import com.example.demo.dto.CompatibilityListDTO;
 import com.example.demo.dto.MbtiDTO;
 import com.example.demo.dto.TestUser;
@@ -32,8 +33,8 @@ public class chatTest {
 	private MatchService matchService;
 	
 	@GetMapping("/room")
-	public String roomPage(HttpServletRequest request) {
-		TestUser user = (TestUser)session.getAttribute("principal");
+	public String roomPage(@RequestParam("key")String key) {
+		session.setAttribute("chat", key);
 		return "chat/chatRoom";
 	}
 	
@@ -75,7 +76,6 @@ public class chatTest {
 	
 	@GetMapping("/profileInfo")
 	public String getMethodName(@RequestParam("name") String name,Model model) {
-		
 		model.addAttribute("name",name);
 		return "match/userInfo";
 	}
