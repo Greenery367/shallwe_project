@@ -14,20 +14,31 @@
 	<header>
 		<div class="header">
 			<div class="account-menus">
-					<a href="">홈</a>
-					<a href="">로그인</a>
-					<a href="">회원가입</a>
+					<a href="/test/main"><b>홈</b></a>
+					<p>|</p>
+					<a href="/user/sign-in"><b>로그인</b></a>
+					<p>|</p>
+					<a href="/user/sign-up"><b>회원가입</b></a>
+					<p>|</p>
+					<div class="charge-cash">
+						<a href="#"><b>캐시충전</b></a>
+						 <img src="../static/images/cash.png"> 
+					</div>
 				</div>
 			</div>
 		</div>
 	</header>
+	<hr>
 				<div class="banner">
-					<img class="logo" alt="로고" src="../images/logo.png">
+					<img class="logo" alt="로고" src="../static/images/logo.png">
 				</div>
 	
 	<div class="nav-bar">
 		<div class="menus">
-			<a href="" class="menu">친구 찾기</a>
+			<a href="" class="menu"><b>친구 찾기</b></a>
+				<div class="drop-down-menus">
+					<a href="#">나와 맞는 친구 찾기</a>
+				</div>
 			<a href="" class="menu">게임 강의</a>
 			<a href="" class="menu">커뮤니티</a>
 			<p>|</p>
@@ -38,11 +49,5 @@
 		</div>
 	</div>
 	
-	<div class="main-board">
-		<div><img  class="admin-main-1" alt="로고" src="../images/banner1.png"></div>
-	
-		<div class="main-page">
-			<div class="swiper">
-				<div class="swiper-wrapper"></div>
-			</div>
+
 		

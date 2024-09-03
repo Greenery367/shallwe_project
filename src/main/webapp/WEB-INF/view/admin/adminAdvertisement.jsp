@@ -250,7 +250,7 @@ height: 10px;
 	<div class="container">
 		<div class="header">
 			<div>
-				<img src="../images/logo.png" alt="로고">
+				<img src="../static/images/logo.png" alt="로고">
 			</div>
 			<div class="admin-title">
 				<h1>관리자 페이지</h1>
@@ -279,7 +279,7 @@ height: 10px;
 				
 				<p>현재 게시중인 게시글</p>
 					<div class="advertise-one-line-box" id="advertise-container">
-                        <c:forEach var="advertise" items="${advertiseListNow}">
+                        <c:forEach var="advertise" items="${advertiseList}">
                             <div class="advertise-box" data-id="${advertise.id}">
                                 <div class="advertise-img">
                                     <img src="winterAdvertise1.jpg" alt="광고사진">

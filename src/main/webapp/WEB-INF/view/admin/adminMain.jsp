@@ -223,7 +223,7 @@ h1{
 	<div class="container">
 		<div class="header">
 			<div>
-				<img src="../images/logo.png" alt="로고">
+				<img src="../static/images/logo.png" alt="로고">
 			</div>
 			<div class="admin-title">
 				<h1>관리자 페이지</h1>
