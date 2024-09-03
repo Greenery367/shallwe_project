@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.repository.model.Advertise;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

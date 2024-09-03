@@ -1,6 +1,4 @@
-package com.example.demo.dto;
-
-import java.sql.Timestamp;
+package com.example.demo.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,21 +11,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class User {
+public class Admin {
 	
-	private Integer userId;
+	private Integer id;
 	private Integer roleId;
-	private String username;
+	private String adminName;
+	private String adminId;
 	private String password;
-	private String nickname;
-	private String birthDate;
 	private String email;
-	private String phoneNumber;
 	private String originFileName;
 	private String uploadFileName;
-	private Integer currentCash;
-	private Integer challengePoint;
-	private Timestamp createdAt;
-	private Integer status;
 	
+
 }

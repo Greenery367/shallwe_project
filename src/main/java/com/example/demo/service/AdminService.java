@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.dto.Advertise;
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.repository.AdminRepository;
+import com.example.demo.repository.model.Advertise;
 
 @Service
 public class AdminService {

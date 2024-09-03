@@ -165,7 +165,6 @@ public class userController {
 
         authNumber = Integer.parseInt(randomNumber);
     }
-	
 	@GetMapping("/kakao")
 	public String getCode(@RequestParam(name ="code") String code, Model model) throws ParseException {
 		
@@ -310,5 +309,11 @@ public class userController {
 	       return ResponseEntity.ok(response);
 	}
 	
+	
+	@GetMapping("/idCheck")
+	public String abc(@RequestParam(name = "id") String id, HttpServletRequest request) {
+		request.setAttribute("id", id);
+		return "sign/idCheck";
+	}
 
 }
