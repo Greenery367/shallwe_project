@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.dto.Advertise;
 import com.example.demo.dto.CreateAdvertiseDTO;
+import com.example.demo.repository.model.Advertise;
 import com.example.demo.service.AdminService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,11 +25,6 @@ import lombok.RequiredArgsConstructor;
 public class AdminAdvertiseController {
 
 	@Autowired
-<<<<<<< HEAD
-	private final HttpSession session;
-	@Autowired
-=======
->>>>>>> lee2
 	private final AdminService adminService;
 	
 	@Value("${file.upload-dir}")
@@ -43,18 +38,9 @@ public class AdminAdvertiseController {
 		model.addAttribute("advertiseList", advertiseList);		
 		model.addAttribute("advertiseListNow",advertiseListNow);
 		
-		System.out.println("------------------------");
-		System.out.println(advertiseListNow);
-		System.out.println("------------------------");
-		
 		return "admin/adminAdvertisement"; 
 	}
 	
-<<<<<<< HEAD
-	@PostMapping("/insertAdvertise")
-	public String insertAdvertiseProc(Model model ) {
-		// adminService.insertAdvertise();
-=======
 	// 광고 추가 요청
 	@PostMapping("/insert-advertise")
 	public String insertAdvertiseProc(@RequestParam("placeId") Integer placeId,
@@ -66,7 +52,6 @@ public class AdminAdvertiseController {
 										@RequestParam("status") Integer status
 										) throws IOException {
 		CreateAdvertiseDTO dto = new CreateAdvertiseDTO();
->>>>>>> lee2
 		
 		dto.setPlaceId(placeId);
 	    dto.setTitle(title);
