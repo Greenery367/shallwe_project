@@ -25,7 +25,7 @@ public class HttpSessionHandshakeInterceptor implements HandshakeInterceptor{
                 // HttpSession에서 저장된 Principal 객체를 가져옴
                 TestUser principal = (TestUser)httpSession.getAttribute("principal");
                 if (principal != null) {
-                	String key = (String)httpSession.getAttribute("chat");
+                	Integer key = (Integer)httpSession.getAttribute("chat");
                     // WebSocketSession의 attributes에 저장
                     attributes.put("principal", principal);
                     attributes.put("key", key);

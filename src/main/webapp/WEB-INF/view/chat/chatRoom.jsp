@@ -57,11 +57,8 @@
 			profileImage.addEventListener('click', function(event) {
 		    		const x = event.clientX + 3;
 			        const y = event.offsetY + 175;
-			        console.log(x);
-			        console.log(y);
 			        profileBox.style.left = x +"px";
 			        profileBox.style.top = y +"px";
-			        console.log(`${principal.nickname}`);
 			        document.querySelector(".profile-info").firstChild.
 			        setAttribute("onclick", "window.open('/chat/profileInfo?name=" + `${principal.nickname}` + "')");
 			        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
@@ -98,8 +95,6 @@
         profileImage.addEventListener('click', function(event) {
     		const x = event.clientX + 3;
 	        const y = event.offsetY + 115;
-	        console.log(x);
-	        console.log(y);
 	        profileBox.style.left = x +"px";
 	        profileBox.style.top = y +"px";
 	        console.log(message.name);
