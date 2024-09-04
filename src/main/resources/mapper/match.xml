@@ -19,4 +19,5 @@
 		select * from mbti_tb
 		where id = #{id}
 	</select>
+	
 </mapper>
