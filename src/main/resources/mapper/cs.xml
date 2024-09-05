@@ -23,8 +23,8 @@
 	</select>
 	
 	<insert id="insert">
-		insert into qna_question_tb(title, content, nickname, user_id)
-			values(#{title}, #{content}, #{nickname}, #{id})
+		insert into qna_question_tb(title, content, writer, user_id)
+			values(#{title}, #{content}, #{writer}, #{userId})
 	</insert>
 	
 </mapper>

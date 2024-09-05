@@ -1,14 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
-<div>
-	<table>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/WEB-INF/view/layout/header.jsp" %>
+<link rel="stylesheet" href="/static/css/cs.css">
+<div class="qna-container">
+	<nav class="qna-nav">
+		<ul>
+			<li><a href="main">자주 묻는 질문</a></li>
+			<li><a href="FAQ">FAQ</a></li>
+			<li><a href="#">1:1 문의</a></li>
+			<li><a href="#">공지사항</a></li>
+		</ul>
+	</nav>
+
+	<table class="qna-table">
 		<thead>
 			<tr>
 				<th>No</th>
@@ -20,53 +24,48 @@
 		<tbody>
 			<c:forEach var="post" varStatus="status" items="${postList}">
 				<tr>
-					<th>${status.count}</th>
-					<th>${post.title}</th>
-					<th>${post.writer}</th>
-					<th>${post.createdAt}</th>
+					<td>${status.count}</td>
+					<td>${post.title}</td>
+					<td>${post.writer}</td>
+					<td>${post.createdAt}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<div>
+
+	<div class="pagination">
 		<ul>
-			<!-- previous Page Link -->
 			<li class="page-item <c:if test='${curruntPage == 1}'>disabled</c:if>">
-				<a class="page-link" href="/page=1/size=${size}">First Page</a>
+				<a class="page-link" href="?page=1&size=${size}">First</a>
 			</li>
 			<li class="page-item <c:if test='${curruntPage == 1}'>disabled</c:if>">
-				<a class="page-link" href="/page=${curruntPage-1}/size=${size}">Previous</a>
+				<a class="page-link" href="?page=${curruntPage-1}&size=${size}">Previous</a>
 			</li>
-			
-			<!-- Page Numbers -->
 			<c:set var="beginPage" value="${curruntPage - 2}" />
 			<c:set var="endPage" value="${curruntPage + 2}" />
-			
-			<!-- ensure that beginPage is not less than 1 -->
 			<c:if test="${beginPage < 1}">
 				<c:set var="beginPage" value="1" />
 			</c:if>
-			
-			<!-- ensure that endPage does not exceed totalPages -->
 			<c:if test="${endPage > totalPages}">
 				<c:set var="endPage" value="${totalPages}" />
 			</c:if>
-			
 			<c:forEach begin="${beginPage}" end="${endPage}" var="page">
 				<li class="page-item <c:if test='${page == curruntPage}'>active</c:if>">
-					<a class="page-link" href="?type=${type}&page=${page}&size=${size}">${page}</a>
+					<a class="page-link" href="?page=${page}&size=${size}">${page}</a>
 				</li>
 			</c:forEach>
-			
-			<!-- next Page Link -->
 			<li class="page-item <c:if test='${curruntPage == totalPages}'>disabled</c:if>">
-				<a class="page-link" href="/page=${curruntPage+1}/size=${size}">Next</a>
+				<a class="page-link" href="?page=${curruntPage+1}&size=${size}">Next</a>
 			</li>
 			<li class="page-item <c:if test='${curruntPage == totalPages}'>disabled</c:if>">
-				<a class="page-link" href="/page=${totalPages}/size=${size}">Last Page</a>
+				<a class="page-link" href="?page=${totalPages}&size=${size}">Last</a>
 			</li>
 		</ul>
 	</div>
+	
+	<form class ="wrbtn" action="post-FAQ">
+		<button class="qna-write-btn" type="submit">문의글 작성</button>
+	</form>
 </div>
-</body>
-</html>
+
+<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
