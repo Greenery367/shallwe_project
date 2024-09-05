@@ -1,29 +1,33 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.QuestionRepository;
-import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.model.Question;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class QuestionService {
 	
 	@Autowired
 	private QuestionRepository questionRepository;
 	
-	/**
-	 * id로 질문 찾기
-	 * @param id
-	 * @return
-	 */
-	public Question selectAnswerById(Integer id) {
-		return questionRepository.selectQuestionById(id);
+	public QuestionService() {
+		this.questionRepository=questionRepository;
+	}
+	
+	public Question getQuestionById(Integer id) {
+		Question question = questionRepository.selectQuestionbyId(id);
+		return question;
+	}
+	
+	public List<Question> getAllQuestion() {
+		List<Question> questionList = new ArrayList<>();
+		questionList=questionRepository.selectAllQuestions();
+		return questionList;
 	}
 
 }

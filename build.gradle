@@ -29,11 +29,21 @@ dependencies {
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 	// TODO - check  
 	providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 	
+	// email 인증 기능을 위한 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	
+	// email 인증 번호 유효 시간 설정을 위한 redis 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	
+	// validation 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	
 	// 암호화 
+	
 	implementation 'org.springframework.security:spring-security-crypto'
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.15.0-rc1'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

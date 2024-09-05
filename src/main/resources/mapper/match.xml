@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.repository.AdminRepository">
+<mapper namespace="com.example.demo.repository.MatchRepository">
 
 	<select id="getCompatibilityListByMbti" resultType ="com.example.demo.dto.CompatibilityListDTO">
-		select * from Compatibility_tb where my_mbti_id = #{id}
+		select * from Compatibility_tb as c
+		join mbti_tb as m
+		on c.well_matched_mbti_id = m.id
+		where c.my_mbti_id = #{id} ORDER BY c.compatibility DESC
 	</select>
 	
+	<select id="getMbtiIdByUserId" resultType ="Integer">
+		select mbti_id from mbti_user_tb
+		where user_id = #{id}
+	</select>
+	
+	<select id="getMbtiNameByMbtiId" resultType ="com.example.demo.dto.MbtiDTO">
+		select * from mbti_tb
+		where id = #{id}
+	</select>
 	
 </mapper>

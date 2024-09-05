@@ -9,10 +9,12 @@ import lombok.ToString;
 @Data
 @ToString
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Question {
+	
 	private int id;
 	private String question;
 	private String section;
+
 }

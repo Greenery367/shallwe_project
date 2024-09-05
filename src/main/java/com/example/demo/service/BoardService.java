@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,18 @@ public class BoardService {
 	 * @param author
 	 */
 	@Transactional
-	public void createBoard(BoardCreateDTO boardCreateDTO){
-		try {
-			boardRepository.insert(boardCreateDTO.getTitle(), boardCreateDTO.getContent(), boardCreateDTO.getAuthor());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void createBoard(BoardCreateDTO boardCreateDTO) {
+	    try {
+	        // 실제 로그인된 사용자 ID를 가져와야 함
+	        Integer userId = 1; // 현재 하드코딩된 부분을 수정해야 함
+	        boardCreateDTO.setAuthorId(userId);
+
+	        // 게시글 작성
+	        boardRepository.insert(boardCreateDTO.getCategoryId(), boardCreateDTO.getAuthorId(), boardCreateDTO.getContent(), boardCreateDTO.getTitle());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw new RuntimeException("게시글 작성 오류 발생", e);
+	    }
 	}
 	
 	/**
@@ -41,9 +48,9 @@ public class BoardService {
 	 * @param content
 	 */
 	@Transactional
-	public void updateBoard(Integer id, String title, String content, Integer author) {
+	public void updateBoard(Integer id, String title, String content, Integer authorId) {
 		try {
-			boardRepository.updateBoard(id, title, content, author);			
+			boardRepository.updateBoard(id, title, content, authorId);			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("게시글 수정 오류 발생");
@@ -55,9 +62,10 @@ public class BoardService {
 	 * 게시글 삭제
 	 * @param id
 	 */
-	public void deleteBoard(Integer id, Integer author) {
+	@Transactional
+	public void deleteBoard(Integer id, Integer authorId) {
 		try {
-			boardRepository.deleteById(id, author);
+			boardRepository.deleteBoard(id, authorId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,7 +93,6 @@ public class BoardService {
 	 * @return
 	 */
 	public Board readBoardDetail(Integer id) {
-//		boardRepository.increaseViewNum(id);
 		try {
 			return boardRepository.findById(id);
 		} catch (Exception e) {
@@ -99,15 +106,86 @@ public class BoardService {
 	 * @param categoryId
 	 * @return
 	 */
-	public List<Board> getBoardByCategroy(Integer categoryId) {
-		
-		return boardRepository.findCategory(categoryId);
+	public List<Board> getBoardByCategory(Integer categoryId , int limit, int offset) {
+		List<Board> catagoryBoardList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		catagoryBoardList =	boardRepository.findByCategoryBoardForPage(categoryId, limit, calculatedOffset);
+		System.out.println("Service caboard : " + catagoryBoardList);
+		return catagoryBoardList;
 	}
 	
-	
+	/**
+	 * 조회수 +1
+	 * @param id
+	 */
 	public void increaseViewNum(Integer id) {
         boardRepository.increaseViewNum(id);
     }
+	
+	
+	/**
+	 * 카테고리별 게시판 총 갯수 
+	 * @param categoryId
+	 * @return
+	 */
+	public int findByCategoryTotalBoard(Integer categoryId) {
+		int totalNum = boardRepository.findByCategoryTotalBoard(categoryId);
+		return totalNum;
+	}
+	
+	public int SearchTitleTotalBoard(Integer categoryId, String title) {
+		int titleNum = boardRepository.SearchTitleTotalBoard(categoryId, title);
+		return titleNum;
+	}
+	
+	public int SearchContentTotalBoard(Integer categoryId, String content) {
+		int contentNum = boardRepository.SearchContentTotalBoard(categoryId, content);
+		return contentNum;
+	}
+	
+	public int SearchAuthorTotalBoard(Integer categoryId, String nickName) {
+		int nickNameNum = boardRepository.SearchAuthorTotalBoard(categoryId, nickName);
+		return nickNameNum;
+	}
+	
+	
+	// 검색 공백처리
+	private String formatSearchTerm(String searchTerm) {
+		if (searchTerm == null) {
+			return "";
+		}
+		return "%" + searchTerm.trim().replace(" ", "%") + "%";
+	}
+	
+	public List<Board> findByContent(Integer categoryId , int limit, int offset, String content) {
+		List<Board> SearchContentList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		String formattedContent = formatSearchTerm(content);
+		SearchContentList =	boardRepository.findByContent(categoryId, limit, calculatedOffset, formattedContent);
+		System.out.println("Service caboard : " + SearchContentList);
+		return SearchContentList;
+	}
+	
+
+	
+	public List<Board> findByTitle(Integer categoryId , int limit, int offset, String title) {
+		List<Board> SearchTitleList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		String formattedTitle = formatSearchTerm(title);
+		SearchTitleList =	boardRepository.findByTitle(categoryId, limit, calculatedOffset, formattedTitle);
+		System.out.println("Service caboard : " + SearchTitleList);
+		return SearchTitleList;
+	}
+	
+	public List<Board> findByNickName(Integer categoryId , int limit, int offset, String nickName) {
+		List<Board> SearchTitleList = new ArrayList<>(); 
+		int calculatedOffset = offset;
+		String formattedNickName = formatSearchTerm(nickName);
+		SearchTitleList =	boardRepository.findByNickName(categoryId, limit, calculatedOffset, formattedNickName);
+		System.out.println("Service caboard : " + SearchTitleList);
+		return SearchTitleList;
+	}
+	
 	
 	
 	

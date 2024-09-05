@@ -10,4 +10,14 @@
 
 
 
+	<select id="selectQuestionbyId">
+		select * from mbti_question_tb where id = #{id}
+	</select>
+
+	<!-- 모든 질문 가져오기 -->
+	<select id="selectAllQuestions"  resultType ="com.example.demo.repository.model.Question">
+		select * from mbti_question_tb
+	</select>
+
+
 </mapper>

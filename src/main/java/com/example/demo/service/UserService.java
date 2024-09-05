@@ -30,9 +30,22 @@ public class UserService {
 	 * @return
 	 */
 	
+	public int temporaryPassword(String password, String email) {
+		String hashpwd = passwordEncoder.encode(password);
+		return userRepository.updatePasswordByEmail(hashpwd, email);
+	}
+	
 	public User searchId(String id) {
 		return userRepository.findById(id);
 	}
+	
+	
+	public User searchByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+	
+	
+	
 	
 	public boolean isIdAvailable(String id) {
         // 데이터베이스에서 아이디 존재 여부 확인
@@ -42,6 +55,25 @@ public class UserService {
 			return false;
 		}
     }
+	
+	
+	
+	public boolean isNicknameAvailable(String nickname) {
+        // 데이터베이스에서 아이디 존재 여부 확인
+		if(userRepository.findByNickname(nickname) == null){
+			return true; 
+		}else {
+			return false;
+		}
+    }
+	public boolean isEmailAvailable(String email) {
+		// 데이터베이스에서 아이디 존재 여부 확인
+		if(userRepository.findByEmail(email) == null){
+			return true; 
+		}else {
+			return false;
+		}
+	}
 	
 	@Transactional
 	public void createUser(SignUpDTO dto) {
