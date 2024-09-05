@@ -2,13 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시글 목록</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/view/layout/header.jsp" %>
 	<h1 href = "">게시글 목록</h1>
 
 	<!-- 새 게시글 작성 버튼 -->
@@ -67,5 +61,4 @@
 		</div>
 	</div>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/view/layout/footer.jsp" %>

@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>강의 목록</h1>
+        <h1>${categoryId} 강의 목록</h1>
         <div class="lecture-grid">
             <c:forEach var="lecture" items="${lectureList}">
                 <div class="lecture-card">
