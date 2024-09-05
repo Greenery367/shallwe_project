@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/account/dashboard")
+@RequestMapping("/admin/dashboard")
 @RequiredArgsConstructor
 public class DashBoardController {
 

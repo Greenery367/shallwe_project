@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class Advertise {
 	
+	private String filePath; // 파일 경로를 저장할 필드
 	private Integer id;
 	private Integer placeId;
 	private String title;
@@ -24,5 +25,7 @@ public class Advertise {
 	private String startDate;
 	private String endDate;
 	private Integer status; 
+	private String someProperty;
+	
 
 }

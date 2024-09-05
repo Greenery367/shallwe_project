@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.MbtiRepository">
+
+	<!-- MBTI 결과값 찾기 (이름) -->
+	<select id="selectMbtiByName" resultType="com.example.demo.repository.model.Mbti">
+		select * from mbti_tb where name = #{name}
+	</select>
+	
+	<!-- MBTI 결과값 찾기 (아이디) -->
+	<select id="selectMbtiById" resultType="com.example.demo.repository.model.Mbti">
+		select * from mbti_tb where id = #{id}
+	</select>
+	
+	<!-- MBTI 궁합별 찾기 -->
+	<select  id="selectMbtiByCompatibility">
+		select c.well_matched_mbti_id
+		from mbti_tb as m
+		join Compatibility_tb as c
+		where m.id=c.my_mbti_id and c.compatibility=#{compatibility}
+		group by m.id=1 limit 1;
+	</select>
+
+
+</mapper>
