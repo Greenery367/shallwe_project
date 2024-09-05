@@ -33,7 +33,7 @@
 			<a href="" class="menu">커뮤니티</a>
 			<p>|</p>
 			<a href="" class="menu">뉴스</a>
-			<a href="" class="menu">고객 지원</a>
+			<a href="/cs/main" class="menu">고객 지원</a>
 			<a href="" class="menu">콘텐츠</a>
 			<a href="" class="menu">회원 정보</a>
 		</div>

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file='/WEB-INF/view/layout/header.jsp'%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/WEB-INF/view/layout/header.jsp" %>
 
 
 
@@ -8,7 +8,7 @@
 	<b>문의글 작성하기</b>
 </div>
 <div>
-	<form action="post-FAQ">
+	<form action="post-FAQ" method="post">
 		<div>
 			<input type="text" name="title" value="문의글 1">
 		</div>
@@ -19,5 +19,4 @@
 	</form>
 </div>
 
-
-<%@ include file='/WEB-INF/view/layout/footer.jsp'%>
+<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
