@@ -39,7 +39,7 @@ create table quit_user_tb(
     user_id int,
     reason int not null,
     reason_detail varchar(200),
-    createdAt date default now()
+    created_at timestamp default now()
 );
 
 -- mbti 테이블
@@ -47,7 +47,8 @@ create table mbti_tb(
 	id int primary key auto_increment not null,
     name varchar(10) not null,  -- mbti 명
     nickname varchar(20) not null, -- 직업
-    content text not null -- mbti 설명
+    content text not null, -- mbti 설명
+    icon_url text
 );
 
 -- mbti-user 테이블
@@ -117,14 +118,16 @@ create table user_cash_history_tb(
 
 -- 강의 테이블
 create table class_tb(
-	id int primary key auto_increment not null,
+    id int primary key auto_increment not null,
+    category_id int not null,
+    author_id int not null,
     title varchar(20) not null,
+    subtitle varchar(30) not null,
     content text not null,
     limit_num int,
     current_num int,
     price bigint,
     total_num int,
-    status int,
     created_at timestamp default now()
 );
 
@@ -171,13 +174,14 @@ create table event_tb(
     created_at timestamp default now()
 );
 
--- Q&A 테이블 (질문-유저)
+-- Q&A 테이블 (질문-유저)  
 create table qna_question_tb(
-	id int primary key auto_increment not null,
+    id int primary key auto_increment not null,
     title varchar(20) not null,
+    user_id varchar(30) not null,
+    writer varchar(30) not null,
     content text not null,
-    author_id int not null,
-    answer_id int not null,
+    reply_status int not null default 0, 
     created_at timestamp default now()
 );
 
@@ -189,6 +193,16 @@ create table qna_answer_tb(
     created_at timestamp default now()
 );
 
+-- 자주 묻는 질문 테이블
+create table frequently_questions_tb( 
+	id int auto_increment primary key,
+    title varchar(100) not null,
+    user_id varchar(30) not null,
+    writer varchar(30) not null,
+    content text not null,
+    reply_status int not null default 0,
+    created_at timestamp default now()
+);
 
 -- 커뮤니티 게시판 테이블
 create table board_tb (
@@ -211,10 +225,20 @@ create table comment_tb (
 );
 
 -- 채팅방 테이블
+create table chat_room_join_tb(
+    id int primary key auto_increment not null,
+    user_id int not null,
+    room_id int not null,
+    created_at timestamp default now(),
+    foreign key (room_id) references chat_room_tb(id),
+    foreign key (user_id) references user_tb(user_id)
+);
+
+-- 참여한 채팅방 테이블
 create table chat_room_tb(
-	id int primary key auto_increment not null,
-    user_id_1 int,
-    user_id_2 int,
+    id int primary key auto_increment,
+    name varchar(50) not null,
+    head_count int default 0,
     created_at timestamp default now()
 );
 

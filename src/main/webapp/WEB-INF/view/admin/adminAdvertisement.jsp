@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/adminAdvertise.css">
 
 <%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
-			
+
 				<div class="advertise-list-content">
 				
 				<p>현재 게시중인 게시글</p>
