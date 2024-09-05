@@ -41,7 +41,7 @@
 	}
 	
 	.account-menus{
-	color: orange;
+		color: orange;
 		height:50px;
 		width: 100%;
 		margin: 20px;
@@ -60,7 +60,7 @@
 	}
 	.logo{
 		width: 400px;
-		heigth: 150px;
+		height: 150px;
 		margin-bottom:20px;
 	}
 	.mini-logo{
