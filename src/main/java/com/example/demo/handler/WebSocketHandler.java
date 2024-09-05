@@ -67,17 +67,20 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		for(WebSocketSession users : KEYS.keySet()) {
 			if(KEYS.get(users) == key && users != session) {
 				users.sendMessage(new TextMessage(objectMapper.writeValueAsString(messageDTO)));
+				saveFile(user.getNickname(), message.getPayload(), key);
 			}
 		}
 	}
 	
 	// 파일를 저장하는 함수  
-	private void saveFile(String id, String message) {
+	private void saveFile(String id, String message, int roomId) {
 	// 메시지 내용
 	String msg = id + " : " + message + "\n";    
 	// 파일을 저장한다.
-	try (FileOutputStream stream = new FileOutputStream("d:\\chat\\chat", true)) {
+	try (FileOutputStream stream = new FileOutputStream("C:\\chatLog\roomId:" + roomId, true)) {
 		stream.write(msg.getBytes("UTF-8"));    
-		} catch (Throwable e) {      e.printStackTrace();    }  
+		} catch (Throwable e) {
+			e.printStackTrace();    
+			}  
 	}
 }
