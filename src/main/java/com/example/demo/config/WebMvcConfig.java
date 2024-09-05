@@ -35,6 +35,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		public void addResourceHandlers(ResourceHandlerRegistry registry) {
 			registry.addResourceHandler("/images/**")
 			.addResourceLocations("file:\\C:\\work_spring\\upload/");
+			
+			  // 정적 자원 파일 경로 (CSS, JS 등)
+	        registry.addResourceHandler("/static/**")
+	                .addResourceLocations("classpath:/static/");
 		}
 		
 		

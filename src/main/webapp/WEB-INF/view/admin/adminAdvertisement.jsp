@@ -2,278 +2,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<meta charset="UTF-8">
-<title>관리자 페이지</title>
-<style>
-body {
-	margin: 0;
-	font-family: "Jua", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-}
 
-p {
-	margin: 0;
-	padding: 0;
-}
+<link rel="stylesheet" href="/css/adminAdvertise.css">
 
-.container {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-}
-
-.header {
-	display: flex;
-	justify-content: space-between;
-	background-color: #333;
-	align-items: flex-end;
-	color: #fff;
-	padding: 10px;
-	text-align: center;
-	flex-shrink: 0;
-	height: 120px;
-}
-
-.admin-title {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 120px;
-}
-
-.main-content {
-	display: flex;
-	flex: 1;
-}
-
-.sidebar {
-	background-color: #f4f4f4;
-	width: 200px;
-	padding: 15px;
-	flex-shrink: 0;
-}
-
-.content {
-	background-color: #fff;
-	flex: 1;
-	padding: 15px;
-	height: 100vh;
-	overflow-y: auto;
-}
-
-.header a {
-	color: #fff;
-	text-decoration: none;
-	margin: 0 15px;
-}
-
-.header a:hover {
-	text-decoration: underline;
-}
-
-.header-menu {
-	display: flex;
-	flex-direction: row;
-}
-
-.btn-open-modal-alarm, .btn-open-modal-qna, .btn-open-modal-report {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	margin: 2px;
-	font-family: "Jua", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-}
-
-.header img {
-	float: left;
-	width: 300px;
-	height: 120px;
-}
-
-.main-canvas {
-	display: flex;
-}
-
-ul {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-	padding: 0;
-}
-
-li {
-	list-style: none;
-	padding: 10px;
-	background-color: #dddddd;
-	text-align: center;
-	align-content: center;
-	border-bottom: 1px solid #000;
-	border-top: 1px solid #000;
-}
-
-li a {
-	text-decoration: none;
-}
-
-h2 {
-	text-align: center;
-}
-
-h1 {
-	width: 250px;
-	font-family: "Jua", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-}
-
-.modal-alarm, .modal-qna, .modal-report {
-	position: absolute;
-	display: none;
-	justify-content: center;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.4);
-}
-
-.close-btn-alarm, .close-btn-qna, .close-btn-report {
-	font-family: "Jua", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-}
-
-.modal-body {
-	flex-direction: column;
-	position: absolute;
-	top: 50%;
-	width: 500px;
-	height: 700px;
-	padding: 40px;
-	text-align: center;
-	background-color: rgb(255, 255, 255);
-	border-radius: 10px;
-	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-	transform: translateY(-50%);
-}
-
-.modal_body-content {
-	height: 100%;
-}
-
-.footer {
-	background-color: orange;
-	height: 6rem;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	align-content: center;
-}
-
-.footer p {
-	text-align: center;
-}
-
-.statistics-user-box {
-	display: flex;
-	justify-content: space-around;
-}
-
-.number-of-user-box {
-	background-color: #FFB700;
-	border-radius: 1em;
-	padding: 10px;
-	margin: 3px;
-	width: 15%;
-}
-
-.main-canvas {
-	display: flex;
-	width: 100%;
-}
-
-.table {
-	border: 1px solid;
-}
-
-.advertise{
-	border: 1px solid;
-}
-
-.m--profile{
-width: 10px;
-height: 10px;
-}
-
-.advertise-one-line-box{
-	display: flex;
-	justify-content:space-around;
-	flex-wrap: nowrap;
-}
-
-.advertise-box{
-	margin: 20px;
-	padding: 20px;
-	width: 30vh;
-	height: 45vh;
-	background-color: yellow;
-}
-
-.advertise-img{
-	background-color: orange;
-	width: 100%;
-	height: 70%;
-}
-
-.advertise-content{
-	background-color: green;
-	width: 100%;
-	height: 30%;
-}
-</style>
-</head>
-<body>
-	<div class="container">
-		<div class="header">
-			<div>
-				<img src="../images/logo.png" alt="로고">
-			</div>
-			<div class="admin-title">
-				<h1>관리자 페이지</h1>
-			</div>
-			<div class="header-menu">
-				<button class="btn-open-modal-alarm">알림</button>
-				<button class="btn-open-modal-qna">Q&A</button>
-				<button class="btn-open-modal-report">신고내역</button>
-			</div>
-		</div>
-		<div class="main-content">
-			<div class="sidebar">
-				<h2>관리 목록</h2>
-				<ul>
-					<li><a href="dashboard">대시보드</a></li>
-					<li><a href="user">이용자 관리</a></li>
-					<li><a href="cash">캐쉬</a></li>
-					<li><a href="support">고객 지원</a></li>
-					<li><a href="/advertise">광고 / 배너</a></li>
-					<li><a href="category">카테고리 / 게시판</a></li>
-					<li><a href="notice">뉴스 / 공지</a></li>
-				</ul>
-			</div>
+<%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
+			
 			<div class="content">
 				<div class="advertise-list-content">
 				
@@ -282,7 +15,7 @@ height: 10px;
                         <c:forEach var="advertise" items="${advertiseListNow}">
                             <div class="advertise-box" data-id="${advertise.id}">
                                 <div class="advertise-img">
-                                    <img src="winterAdvertise1.jpg" alt="광고사진">
+                                    <img src="../static/images/advertise/yenaAdvertise1.jpg" alt="광고사진">
                                 </div>
                                 <div class="advertise-content">
                                     <div>id : ${advertise.id}</div>
@@ -411,6 +144,7 @@ height: 10px;
 				</form>
 
 
+				<!-- 푸터시작 -->
 				<div class="modal-alarm">
 					<div class="modal-body">
 						<div class="modal_body-content">
@@ -420,9 +154,6 @@ height: 10px;
 						</div>
 					</div>
 				</div>
-				
-				
-
 				<div class="modal-qna">
 					<div class="modal-body">
 						<h2>Q&A</h2>
@@ -439,77 +170,7 @@ height: 10px;
 					</div>
 				</div>
 			</div>
-			<script>
-				        const modalAlarm = document.querySelector('.modal-alarm');
-				        const modalQnA = document.querySelector('.modal-qna');
-				        const modalReport = document.querySelector('.modal-report');
-				        
-				        const btnOpenModalAlarm=document.querySelector('.btn-open-modal-alarm');
-				        const btnOpenModalQnA=document.querySelector('.btn-open-modal-qna');
-				        const btnOpenModalReport=document.querySelector('.btn-open-modal-report');
-				        
-				        const btnCloseModalAlarm = document.querySelector('.close-btn-alarm');
-				        const btnCloseModalQnA = document.querySelector('.close-btn-qna');
-				        const btnCloseModalReport = document.querySelector('.close-btn-report');
-				        
-				        
-				        btnOpenModalAlarm.addEventListener("click", ()=>{
-				        	modalAlarm.style.display="flex";
-				        });
-				        
-				        btnOpenModalQnA.addEventListener("click", ()=>{
-				        	modalQnA.style.display="flex";
-				        });
-				        
-				        btnOpenModalReport.addEventListener("click", ()=>{
-				        	modalReport.style.display="flex";
-				        });
-				        
-				        
-				        btnCloseModalAlarm.addEventListener("click", () => {
-				        	modalAlarm.style.display = "none";
-				        });
-				        
-				        btnCloseModalQnA.addEventListener("click", () => {
-				        	modalQnA.style.display = "none";
-				        });
-				        
-				        btnCloseModalReport.addEventListener("click", () => {
-				        	modalReport.style.display = "none";
-				        });
-
-				        window.addEventListener("click", (event) => {
-				            if (event.target === modalAlarm) {
-				            	modalAlarm.style.display = "none";
-				            }
-				        });
-				        window.addEventListener("click", (event) => {
-				            if (event.target === modalQnA) {
-				            	modalQnA.style.display = "none";
-				            }
-				        });
-				        window.addEventListener("click", (event) => {
-				            if (event.target === modalReport) {
-				            	modalReport.style.display = "none";
-				            }
-				        });
-			    </script>
-			    <script>
-                    $(document).ready(function() {
-                        let $advertiseContainer = $('#advertise-container');
-                        let $advertises = $advertiseContainer.children('.advertise-box');
-                        let currentIndex = 0;
-
-                        function showNextAdvertise() {
-                            $advertises.hide();
-                            $advertises.eq(currentIndex).show();
-                            currentIndex = (currentIndex + 1) % $advertises.length;
-                        }
-
-                        showNextAdvertise(); // 처음 광고 표시
-                        setInterval(showNextAdvertise, 5000); // 5초마다 순환
-                    });
-                </script>
+			
                 <script>
 					 // 파일 선택 시 파일 이름을 표시하도록 하는 코드
 					  $(".link-input").on("change", function() {
@@ -523,14 +184,37 @@ height: 10px;
 					    $(this).siblings(".link-label").addClass("selected").html(link);
 					  });
 				</script>
+				
+				<script>
+				    document.addEventListener('DOMContentLoaded', () => {
+				        // 광고 요소를 선택
+				        const advertiseContainers = document.querySelectorAll('#advertise-container .advertise-box');
+				        let currentIndex = 0;
+				
+				        // 광고를 변경하는 함수
+				        function showNextAd() {
+				            // 현재 광고를 숨김
+				            advertiseContainers[currentIndex].style.display = 'none';
+				
+				            // 다음 광고로 이동
+				            currentIndex = (currentIndex + 1) % advertiseContainers.length;
+				
+				            // 다음 광고를 표시
+				            advertiseContainers[currentIndex].style.display = 'flex';
+				        }
+				
+				        // 모든 광고를 숨김
+				        advertiseContainers.forEach(ad => ad.style.display = 'none');
+				
+				        // 첫 번째 광고를 표시
+				        advertiseContainers[currentIndex].style.display = 'flex';
+				
+				        // 5초마다 광고를 변경
+				        setInterval(showNextAd, 5000);
+				    });
+				</script>
 
 		</div>
 
-		<footer>
-			<div class="footer">
-				<p>footer</p>
-			</div>
-		</footer>
-	</div>
-</body>
-</html>
+
+<%@ include file="/WEB-INF/view/layout/adminFooter.jsp"%>

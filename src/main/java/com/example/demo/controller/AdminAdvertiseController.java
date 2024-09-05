@@ -38,10 +38,6 @@ public class AdminAdvertiseController {
 		model.addAttribute("advertiseList", advertiseList);		
 		model.addAttribute("advertiseListNow",advertiseListNow);
 		
-		System.out.println("------------------------");
-		System.out.println(advertiseListNow);
-		System.out.println("------------------------");
-		
 		return "admin/adminAdvertisement"; 
 	}
 	

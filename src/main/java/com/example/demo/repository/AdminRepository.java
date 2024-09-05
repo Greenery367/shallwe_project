@@ -5,14 +5,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.dto.Admin;
 import com.example.demo.dto.Advertise;
 import com.example.demo.dto.CreateAdvertiseDTO;
-import com.example.demo.dto.FileUploadAdvertiseDTO;
-import com.example.demo.dto.User;
 
 @Mapper
 public interface AdminRepository{
