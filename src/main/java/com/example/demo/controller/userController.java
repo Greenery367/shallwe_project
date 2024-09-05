@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -35,6 +36,7 @@ import com.example.demo.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+
 
 
 @Controller
@@ -316,4 +318,16 @@ public class userController {
 		return "sign/idCheck";
 	}
 
+	@GetMapping("/findUser")
+	public String getMethodName() {
+		return "friend/findFriend";
+	}
+	
+	@PostMapping("/findUser")
+	public String postMethodName(@RequestParam(name="name") String name, HttpServletRequest request) {
+		List<User>userList = userService.findLikeUser(name);
+		request.setAttribute("userList", userList);
+		return "friend/findFriend";
+	}
+	
 }

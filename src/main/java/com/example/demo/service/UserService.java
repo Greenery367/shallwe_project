@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -44,9 +46,6 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
-	
-	
-	
 	public boolean isIdAvailable(String id) {
         // 데이터베이스에서 아이디 존재 여부 확인
 		if(userRepository.findById(id) == null){
@@ -56,7 +55,11 @@ public class UserService {
 		}
     }
 	
-	
+	public User findUserByNickname(String nickname) {
+		User user = null;
+		user = userRepository.findByNickname(nickname);
+		return user;
+	}
 	
 	public boolean isNicknameAvailable(String nickname) {
         // 데이터베이스에서 아이디 존재 여부 확인
@@ -66,6 +69,7 @@ public class UserService {
 			return false;
 		}
     }
+	
 	public boolean isEmailAvailable(String email) {
 		// 데이터베이스에서 아이디 존재 여부 확인
 		if(userRepository.findByEmail(email) == null){
@@ -92,9 +96,10 @@ public class UserService {
 		}
 	}
 	
-	
-	
-	
-	
-	
+	// 친구 검색기능
+	public List<User> findLikeUser(String nickname) { 
+		List<User>userList = null;
+		 userList = userRepository.findLikeNickname(nickname);
+		 return userList;
+	}
 }

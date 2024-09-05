@@ -11,6 +11,10 @@
 		select * from user_tb
 		where nickname = #{nickname}
 	</select>
+	<select id="findLikeNickname" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where nickname like %#{nickname}%
+	</select>
 	<select id="findByEmail" resultType="com.example.demo.repository.model.User">
 		select * from user_tb
 		where email = #{email}

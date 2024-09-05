@@ -42,7 +42,7 @@
 	        const messageContent = document.createElement("div");
 			myMessage.classList.add("chat-message");
 			messageContent.classList.add("my-message");
-	        profileImage.src = "/images/uploads/" + `${principal.uploadFileName}`;
+	        profileImage.src = "/images/" + `${principal.uploadFileName}`;
 	        profileImage.alt = "/images/fukuoka4.gif";
 	        profileImage.classList.add("myProfile-image");
 	        textContent.innerText = input.value;
@@ -86,7 +86,8 @@
 		
     	// 프로필 이미지를 생성
         const profileImage = document.createElement("img");
-        profileImage.src = "/images/uploads/" + message.uploadFileName;
+    	console.log(message.uploadFileName);
+        profileImage.src = "/images/" + message.uploadFileName;
         profileImage.alt = "Profile Image";
         profileImage.classList.add("profile-image");
 
