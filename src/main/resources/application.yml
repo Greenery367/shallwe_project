@@ -10,6 +10,10 @@ spring:
     redis:
       host: localhost
       port: 6379
+  web:
+    resources:
+      static-locations:
+        - classpath:/static/ # 애플리케이션의 resources/static 디렉토리에서 정적 자원을 찾습니다.
 
   mvc:
     view:
