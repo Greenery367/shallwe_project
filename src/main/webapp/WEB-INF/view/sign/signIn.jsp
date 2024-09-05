@@ -16,7 +16,7 @@
         		<h2>Login</h2>
     	    </div>
 	        <div>
-        		<a href="main"><img class="img-concert" src="../static/images/logo.png"></a>
+        		<a href="main"><img class="img-concert" src="/static/images/logo.png"></a>
         	</div>
         </div>
         <form method="post" action="sign-in" id="login-form">
@@ -35,9 +35,9 @@
         <fieldset>
         	<legend>소셜 로그인</legend>
         	<ul>
-        		<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91ee64c4cb4fb2b4397fccb575dab52e&redirect_uri=http://localhost:8080/user/kakao"><img src="/images/kakao_login.png"></a></li>
-        		<li><a href="naverLogin"><img src="/images/naver_login.png"></a></li>
-        		<li><a href="googleLogin"><img src="/images/google_login.png"></a></li>
+        		<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91ee64c4cb4fb2b4397fccb575dab52e&redirect_uri=http://localhost:8080/user/kakao"><img src="/static/images/kakao_login.png"></a></li>
+        		<li><a href="naverLogin"><img src="/static/images/naver_login.png"></a></li>
+        		<li><a href="googleLogin"><img src="/static/images/google_login.png"></a></li>
         	</ul>
         </fieldset>
     </div>
