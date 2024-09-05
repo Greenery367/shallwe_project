@@ -44,4 +44,4 @@
 					<li><a href="notice">뉴스 / 공지</a></li>
 				</ul>
 			</div>
-			
+			<div class="content">

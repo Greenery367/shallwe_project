@@ -2,7 +2,7 @@
 
 <%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
 			
-			<div class="content">
+			
 				<h2>대시 보드</h2>
 				<p>유저</p>
 				<div class="statistics-user-box">
