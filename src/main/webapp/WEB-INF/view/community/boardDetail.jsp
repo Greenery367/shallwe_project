@@ -2,13 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시글 상세보기</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/view/layout/header.jsp" %>
 	<h1>게시글 상세보기</h1>
 
 	<!-- 게시글 정보 표시 -->
@@ -98,5 +92,5 @@
 	<c:if test="${not empty authorId}">
 		<p>작성자 ID: ${authorId}</p>
 	</c:if>
-</body>
-</html>
+	
+<%@ include file="/WEB-INF/view/layout/footer.jsp" %>

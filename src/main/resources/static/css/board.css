@@ -1,0 +1,149 @@
+/* 기본 스타일 설정 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* .main-page 스타일 */
+.main-page {
+    width: 850px;
+    height: auto; /* 자동 높이 조정 */
+    margin: 20px auto 60px; /* 위쪽과 아래쪽 여백 및 가운데 정렬 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 자식 요소를 수평으로 가운데 정렬 */
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-radius: 18px;
+    box-shadow: 0px 8px 6px -6px #d3d3d3;
+    padding: 20px; /* 내부 여백 추가 */
+}
+
+/* 제목 스타일 */
+h1 {
+    margin: 0 0 20px;
+    font-size: 24px;
+}
+
+/* 새 게시글 작성 버튼 스타일 */
+.new-post-button {
+    align-self: flex-start; /* 왼쪽 정렬 */
+    background-color: #FD6F22;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px; /* 버튼 아래 여백 추가 */
+}
+
+
+.new-post-button:hover {
+    background-color: #45A049;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* 열 너비 조정 */
+th:nth-child(1), td:nth-child(1) {
+    width: 10%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 30%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 20%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+    width: 15%;
+}
+
+th:nth-child(5), td:nth-child(5) {
+    width: 10%;
+}
+
+th:nth-child(6), td:nth-child(6) {
+    width: 15%;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+/* 링크 스타일 */
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    display: flex; /* 플렉스 박스 레이아웃 사용 */
+    justify-content: center; /* 중앙 정렬 */
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #FD6F22;
+}
+
+.pagination a:hover {
+    background-color: #f4f4f4;
+    border-color: #ccc;
+}
+
+/* 검색 폼 스타일 */
+form {
+    display: flex; /* 플렉스 박스 레이아웃 사용 */
+    align-items: center; /* 자식 요소 수직 가운데 정렬 */
+    margin-top: 20px;
+}
+
+select, input[type="text"] {
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #FD6F22;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45A049;
+}
