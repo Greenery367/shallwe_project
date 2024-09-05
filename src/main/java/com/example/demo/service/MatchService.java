@@ -54,7 +54,6 @@ public class MatchService {
 			
 			user.setOriginFileName(fileNames[0]);
 			user.setUploadFileName(fileNames[1]);
-			
 		}
 		return user;
 	}
