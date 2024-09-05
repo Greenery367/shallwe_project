@@ -29,6 +29,11 @@
 		<div class="personal-test">
 			<div class="intro-container">
 				<h1>나의 게임 성향을 알아보는 MBTI 테스트</h1>
+				<div class="icon-container">
+					<img class="" src="../static/images/test-icon1.png">
+					<img class="" src="../static/images/test-icon2.png">
+					<img class="" src="../static/images/test-icon3.png">
+				</div>
 				<button class='start-btn' onclick="startTestPage()"><b>테스트 하러가기 →</b></button>
 			</div>
 		</div>
@@ -37,7 +42,9 @@
 			<div class="question-container">
 				<progress max="12" class="bar-progress"></progress>
 				<h1></h1>
-				<h1 id="question-text"></h1>
+				<div class="question-box">
+					<h1 id="question-text"></h1>
+				</div>
 				<form class="button-container" id="test-form">
 					<input class="answer-btn-yes" type="button" value="yes" onclick="submitAnswer('yes')">
 					<input class="answer-btn-no" type="button" value="no" onclick="submitAnswer('no')">

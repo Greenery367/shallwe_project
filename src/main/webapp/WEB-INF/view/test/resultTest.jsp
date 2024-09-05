@@ -25,27 +25,34 @@
 		</div>
 	</header>
 	<div class="result-container">
-		<div class="result-page">			
+		<div class="result-page">	
+		
+				<h1>게임 성향 테스트 결과</h1>		
 			<div class="my-result">
-				<h1>당신의 성향은...</h1>
+				<h1 class="title">당신의 성향은...</h1>
+				<img src="../static/images/icon.png">
 				<h2>${resultMbti.name} : ${resultMbti.nickname}</h2>
 				<h3>${resultMbti.content}</h3>
 			</div>
 			<div class="matching-container">
 				<div class="good-matched">
-					<h4>나와 잘 맞는 사람은...</h4>
+					<h4 class="title">나와 잘 맞는 사람은...</h4>
+					<img class="mini" src="../static/images/icon.png">
 					<h5>${goodMatchedMbti.name} : ${goodMatchedMbti.nickname}</h5>
 					<p>${goodMatchedMbti.content}</p>
 				</div>
 			
 				<div class="bad-matched">
-					<h4>나와 잘 맞지 않는 사람은...</h4>
+					<h4 class="title">나와 잘 맞지 않는 사람은...</h4>
+					<img class="mini" src="../static/images/icon.png">
 					<h5>${badMatchedMbti.name} : ${badMatchedMbti.nickname}</h5>
 					<p>${badMatchedMbti.content}</p>
 				</div>
 			</div>
 			<div class="button-list">
-				<button class='start-btn' onclick="startTestPage()"><b>나와 잘 맞는 친구 만나러 가기→</b></button>
+				<button class='start-btn' onclick="location.href='../user/sign-up'"><b>나와 잘 맞는 친구 만나러 가기→</b></button>
+				<button class='start-btn' onclick="location.href='/test/start-test'"><b>테스트 다시 하기→</b></button>
+				<button class='share-btn' onclick="location.href='#''"><b>SNS 공유하기→</b></button>
 			</div>
 		</div>
 	</div>
@@ -60,5 +67,10 @@
 			</div>
 		<p>copyrightⓒ 2024-2024 shallwe. All right reserved.</p>
 	</footer>
+<script>
+	const mbti = document.getElementById('question-text');
+	
+	
+</script>
 </body>
 </html>
