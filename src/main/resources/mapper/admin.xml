@@ -10,33 +10,65 @@
 
 	<!-- 전체유저 충전 금액 -->
 	<select id="countChargeAmount"> 
-		select sum(charge_amount) from user_cash_history_tb where spend_amount is null
+		select sum(charge) from user_cash_history_tb where spend is null
 	</select>
 
 	<!-- 전체유저 사용 금액  -->
 	<select id="countSpendAmount"> 
-		select sum(spend_amount) from user_cash_history_tb where charge_amount is null
+		select sum(spend) from user_cash_history_tb where charge is null
 	</select>
 	
 	<!-- 캐쉬 사용률 -->
 	<select id="countSpendAmountRate">
-		select round(sum(spend_amount) / sum(charge_amount) * 100, 1) from user_cash_history_tb
+		select round(sum(spend) / sum(charge) * 100, 1) from user_cash_history_tb
 	</select>
 	
 	<!-- 전체 광고 조회 -->
 	<select id="selectAllAdvertise">
-		select * from advertise_tb;
+		select * from advertise_tb
+	</select>
+	
+	<!-- id로 광고 조회 -->
+	<select id="selectAdvertiseById">
+		select * from advertise_tb where id = #{id}
 	</select>
 	
 	<!-- 광고 추가 -->
 	<insert id="insertAdvertise">
-		insert into advertise_tb(place_id, title, customer, link, origin_file_name, upload_file_name, start_date, end_date)
-		values(#{placeId}, #{title}, #{customer}, #{link}, #{originFileName}, #{uploadFileName}, #{startDate}, #{endDate})
+		insert into advertise_tb(place_id, title, customer, link, start_date, end_date, status)
+		values(#{placeId}, #{title}, #{customer}, #{link}, #{startDate}, #{endDate}, #{status})
 	</insert>
 	
-	<!-- 광고 상태 변경 -->
+	<!-- 광고 수정 -->
+	<update id="updateAdvertise">
+			update advertise_tb set place_id = #{placeId},
+							title = #{title},
+	                        customer = #{customer},
+	                        link = #{link},
+	                        start_date = #{startDate},
+	                        end_date = #{endDate} 
+	                        where id=#{id}
+	</update>
+	
+	<!-- 광고 삭제 -->
+	<delete id="deleteAdvertiseById">
+		delete from advertise_tb where id=#{id}
+	</delete>
+	
+	
+	<!-- 현재 게시중인 광고 조회 -->
+	<select id="selectAdvertiseNow">
+		select * from advertise_tb where status = 1
+	</select>
+	
+	<!-- 만료된 광고 중 상태가 1인 광고 조회 -->
+	<select id="selectExpiredAdvertise" resultType="long">
+		select id from advertise_tb where end_date &lt; #{now} AND status = 1
+	</select>
+	
+	<!-- 광고 상태 업데이트 -->
 	<update id="updateAdvertiseStatus">
-		update advertise_tb set status = #{status} where id=#{id}
+		update advertise_tb set status = #{status} where id = #{id}
 	</update>
 
 

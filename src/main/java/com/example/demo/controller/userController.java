@@ -1,3 +1,4 @@
+
 package com.example.demo.controller;
 
 import java.text.ParseException;
@@ -12,17 +13,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -37,12 +35,11 @@ import com.example.demo.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 
-@RequiredArgsConstructor
 @Controller
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class userController {
 	
 	@Autowired
@@ -168,7 +165,6 @@ public class userController {
 
         authNumber = Integer.parseInt(randomNumber);
     }
-	
 	@GetMapping("/kakao")
 	public String getCode(@RequestParam(name ="code") String code, Model model) throws ParseException {
 		
@@ -247,7 +243,7 @@ public class userController {
 			request.setAttribute("msg", "존재하지 않는 ID입니다.");
 	        request.setAttribute("url", "sign-in");
 	        return "alert";
-	    }else {
+	    }else{
 	    	if(passwordEncoder.matches(password, user.getPassword())) {
 	    		session.setAttribute("principal", user);
 	    		return "redirect:/user/main";
@@ -304,6 +300,7 @@ public class userController {
 	       response.put("result", isAvailable ? "available" : "unavailable");
 	       return ResponseEntity.ok(response);
 	}
+
 	@PostMapping("/check-email")
  	public ResponseEntity<Map<String, String>> checkEmail(@RequestParam("email") String email) {
 	       boolean isAvailable = userService.isEmailAvailable(email);
@@ -313,4 +310,10 @@ public class userController {
 	}
 	
 	
+	@GetMapping("/idCheck")
+	public String abc(@RequestParam(name = "id") String id, HttpServletRequest request) {
+		request.setAttribute("id", id);
+		return "sign/idCheck";
+	}
+
 }
