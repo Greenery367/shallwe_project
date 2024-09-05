@@ -3,7 +3,11 @@ package com.example.demo.service;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,7 @@ public class AdminService {
     
 	@Value("${file.upload-dir}")
 	private String uploadDir;
+	
 
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
@@ -94,37 +99,9 @@ public class AdminService {
         return adminRepository.selectAllAdvertise();
     }
     
-    // 현재 게시중인 광고 조회
+    // 현재 게시중인 광고 조회 status = 1
     public List<Advertise> selectAdvertiseNow(){
     	return adminRepository.selectAdvertiseNow();
-    }
-    
- // 5초마다 실행되는 광고 상태 업데이트
-    @Scheduled(fixedRate = 5000)
-    public void updateAdvertiseStatus() {
-    	// 현재 게시중인 광고 조회
-        List<Advertise> currentAds = adminRepository.selectAdvertiseNow();
-        
-        if (currentAds.size() > 0) {
-            // 다음 광고를 선택
-            Advertise nextAd = getNextAd(currentAds);
-            
-            // 현재 게시중인 광고를 비활성화
-            for (Advertise ad : currentAds) {
-                adminRepository.updateAdvertiseStatus(0, ad.getId());
-            }
-            
-            // 선택된 광고를 게시중으로 활성화
-            adminRepository.updateAdvertiseStatus(1, nextAd.getId());
-        }
-    }
-    
-    // 광고 순환 로직
-    private Advertise getNextAd(List<Advertise> currentAds) {
-        // 예를 들어, 현재 광고 리스트의 첫 번째 광고를 마지막으로 이동시키고, 두 번째 광고를 선택하는 방법
-        Advertise nextAd = currentAds.remove(0); // 첫 번째 광고를 제거
-        currentAds.add(nextAd); // 리스트의 끝에 추가
-        return currentAds.get(0); // 새로운 첫 번째 광고를 선택
     }
     
 

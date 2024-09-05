@@ -16,7 +16,7 @@
         		<h2>Login</h2>
     	    </div>
 	        <div>
-        		<a href="main"><img class="img-concert" src="/images/logo.png"></a>
+        		<a href="main"><img class="img-concert" src="../static/images/logo.png"></a>
         	</div>
         </div>
         <form method="post" action="sign-in" id="login-form">

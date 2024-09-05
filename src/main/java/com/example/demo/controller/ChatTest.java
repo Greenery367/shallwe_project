@@ -30,6 +30,10 @@ public class ChatTest {
 	private HttpSession session;
 	@Autowired
 	private MatchService matchService;
+	public ChatTest(HttpSession session,MatchService matchService ) {
+		this.session = session;
+		this.matchService = matchService ; 
+	}
 	
 	@GetMapping("/room")
 	public String roomPage(@RequestParam("roomId")String roomId) {

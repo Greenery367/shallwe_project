@@ -21,7 +21,7 @@
 			<!-- 왼쪽: 내 정보 -->
 			<div class="left">
 				<div class="profile-pic" id="my-profile">
-					<img src="/images/uploads/${principal.uploadFileName}" alt="내 프로필 사진">
+					<img src="/images/${principal.uploadFileName}" alt="내 프로필 사진">
 				</div>
 				<h3>${principal.nickname}</h3>
 				<p>MBTI: ${mbti.name}</p>
