@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<meta charset="UTF-8">
+
+
 <title>관리자 페이지</title>
 <style>
 
@@ -239,7 +242,7 @@ h1{
 					<li><a href="user">이용자 관리</a></li>
 					<li><a href="cash">캐쉬</a></li>
 					<li><a href="support">고객 지원</a></li>
-					<li><a href="advertisement">광고 / 배너</a></li>
+					<li><a href="advertise">광고 / 배너</a></li>
 					<li><a href="category">카테고리 / 게시판</a></li>
 					<li><a href="notice">뉴스 / 공지</a></li>
 				</ul>
@@ -372,7 +375,7 @@ h1{
 
 
 
-
+				<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 				<script>
 					const ctx1 = document.getElementById('myChart').getContext('2d');
 					const ctx2 = document.getElementById('myChart2').getContext('2d');
@@ -463,87 +466,87 @@ h1{
 					
 				</script>
 				
-				<div class="modal-alarm">
-					<div class="modal-body">
-						<div class="modal_body-content">
-							<h2>알림</h2>
-							<p>알림내용</p>
-							<button class="close-btn-alarm">닫기</button>
+					<div class="modal-alarm">
+						<div class="modal-body">
+							<div class="modal_body-content">
+								<h2>알림</h2>
+								<p>알림내용</p>
+								<button class="close-btn-alarm">닫기</button>
+							</div>
+						</div>
+					</div>
+	
+					<div class="modal-qna">
+						<div class="modal-body">
+							<h2>Q&A</h2>
+							<p>Q&A내용</p>
+							<button class="close-btn-qna">닫기</button>
+						</div>
+					</div>
+	
+					<div class="modal-report">
+						<div class="modal-body">
+							<h2>신고</h2>
+							<p>신고내용</p>
+							<button class="close-btn-report">닫기</button>
 						</div>
 					</div>
 				</div>
-
-				<div class="modal-qna">
-					<div class="modal-body">
-						<h2>Q&A</h2>
-						<p>Q&A내용</p>
-						<button class="close-btn-qna">닫기</button>
-					</div>
-				</div>
-
-				<div class="modal-report">
-					<div class="modal-body">
-						<h2>신고</h2>
-						<p>신고내용</p>
-						<button class="close-btn-report">닫기</button>
-					</div>
-				</div>
-			</div>
 			<script>
-				        const modalAlarm = document.querySelector('.modal-alarm');
-				        const modalQnA = document.querySelector('.modal-qna');
-				        const modalReport = document.querySelector('.modal-report');
-				        
-				        const btnOpenModalAlarm=document.querySelector('.btn-open-modal-alarm');
-				        const btnOpenModalQnA=document.querySelector('.btn-open-modal-qna');
-				        const btnOpenModalReport=document.querySelector('.btn-open-modal-report');
-				        
-				        const btnCloseModalAlarm = document.querySelector('.close-btn-alarm');
-				        const btnCloseModalQnA = document.querySelector('.close-btn-qna');
-				        const btnCloseModalReport = document.querySelector('.close-btn-report');
-				        
-				        
-				        btnOpenModalAlarm.addEventListener("click", ()=>{
-				        	modalAlarm.style.display="flex";
-				        });
-				        
-				        btnOpenModalQnA.addEventListener("click", ()=>{
-				        	modalQnA.style.display="flex";
-				        });
-				        
-				        btnOpenModalReport.addEventListener("click", ()=>{
-				        	modalReport.style.display="flex";
-				        });
-				        
-				        
-				        btnCloseModalAlarm.addEventListener("click", () => {
-				        	modalAlarm.style.display = "none";
-				        });
-				        
-				        btnCloseModalQnA.addEventListener("click", () => {
-				        	modalQnA.style.display = "none";
-				        });
-				        
-				        btnCloseModalReport.addEventListener("click", () => {
-				        	modalReport.style.display = "none";
-				        });
+			    const modalAlarm = document.querySelector('.modal-alarm');
+			    const modalQnA = document.querySelector('.modal-qna');
+			    const modalReport = document.querySelector('.modal-report');
+			
+			    const btnOpenModalAlarm = document.querySelector('.btn-open-modal-alarm');
+			    const btnOpenModalQnA = document.querySelector('.btn-open-modal-qna');
+			    const btnOpenModalReport = document.querySelector('.btn-open-modal-report');
+			
+			    const btnCloseModalAlarm = document.querySelector('.close-btn-alarm');
+			    const btnCloseModalQnA = document.querySelector('.close-btn-qna');
+			    const btnCloseModalReport = document.querySelector('.close-btn-report');
+			
+			    // 모달 열기
+			    btnOpenModalAlarm.addEventListener("click", () => {
+			        modalAlarm.style.display = "flex";
+			    });
+			
+			    btnOpenModalQnA.addEventListener("click", () => {
+			        modalQnA.style.display = "flex";
+			    });
+			
+			    btnOpenModalReport.addEventListener("click", () => {
+			        modalReport.style.display = "flex";
+			    });
+			
+			    // 모달 닫기
+			    const closeModal = (modal) => {
+			        modal.style.display = "none";
+			    };
+			
+			    btnCloseModalAlarm.addEventListener("click", () => {
+			        closeModal(modalAlarm);
+			    });
+			
+			    btnCloseModalQnA.addEventListener("click", () => {
+			        closeModal(modalQnA);
+			    });
+			
+			    btnCloseModalReport.addEventListener("click", () => {
+			        closeModal(modalReport);
+			    });
+			
+			    // 다른곳 클릭시 닫기
+			    window.addEventListener("click", (event) => {
+			        if (event.target === modalAlarm) {
+			            closeModal(modalAlarm);
+			        } else if (event.target === modalQnA) {
+			            closeModal(modalQnA);
+			        } else if (event.target === modalReport) {
+			            closeModal(modalReport);
+			        }
+			    });
+			</script>
 
-				        window.addEventListener("click", (event) => {
-				            if (event.target === modalAlarm) {
-				            	modalAlarm.style.display = "none";
-				            }
-				        });
-				        window.addEventListener("click", (event) => {
-				            if (event.target === modalQnA) {
-				            	modalQnA.style.display = "none";
-				            }
-				        });
-				        window.addEventListener("click", (event) => {
-				            if (event.target === modalReport) {
-				            	modalReport.style.display = "none";
-				            }
-				        });
-			    </script>
 				
 		</div>
 		

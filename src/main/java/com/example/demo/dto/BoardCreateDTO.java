@@ -19,7 +19,7 @@ public class BoardCreateDTO {
 	private int categoryId;
 	private String title;
 	private String content;
-	private int author;
+	private int authorId;
 	private Timestamp createdAt;
 	
 }
