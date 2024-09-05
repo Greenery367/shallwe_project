@@ -165,7 +165,6 @@ public class userController {
 
         authNumber = Integer.parseInt(randomNumber);
     }
-	
 	@GetMapping("/kakao")
 	public String getCode(@RequestParam(name ="code") String code, Model model) throws ParseException {
 		
@@ -244,7 +243,7 @@ public class userController {
 			request.setAttribute("msg", "존재하지 않는 ID입니다.");
 	        request.setAttribute("url", "sign-in");
 	        return "alert";
-	    }else {
+	    }else{
 	    	if(passwordEncoder.matches(password, user.getPassword())) {
 	    		session.setAttribute("principal", user);
 	    		return "redirect:/user/main";
@@ -310,5 +309,11 @@ public class userController {
 	       return ResponseEntity.ok(response);
 	}
 	
+	
+	@GetMapping("/idCheck")
+	public String abc(@RequestParam(name = "id") String id, HttpServletRequest request) {
+		request.setAttribute("id", id);
+		return "sign/idCheck";
+	}
 
 }

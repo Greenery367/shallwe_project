@@ -34,7 +34,6 @@ public class MatchService {
 	public List<CompatibilityListDTO> getCompatibilityList(int id) {
 		List<CompatibilityListDTO> compatibilityList = null;
 		compatibilityList = matchRepository.getCompatibilityListByMbti(id);
-
 		return compatibilityList;
 	}
 
