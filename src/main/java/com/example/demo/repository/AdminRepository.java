@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.demo.dto.Advertise;
 import com.example.demo.dto.CreateAdvertiseDTO;
+import com.example.demo.repository.model.Advertise;
 
 @Mapper
 public interface AdminRepository{

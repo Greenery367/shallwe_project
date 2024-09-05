@@ -83,3 +83,63 @@ button:hover {
     margin-left: 10px;
     object-fit: cover;
 }
+
+.profile-box {
+    position: absolute;
+    display: none; /* 기본적으로 숨김 */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000; /* 다른 요소보다 위에 표시되도록 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.profile-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-box ul li {
+    margin: 5px 0;
+}
+
+.profile-box ul li a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.profile-box ul li.close a {
+    color: red;
+}
+
+#opponent-info {
+    display: flex;
+    flex-direction: column; /* 세로로 정렬 */
+    justify-content: center; /* 중앙에 배치 */
+    align-items: center; /* 중앙에 배치 */
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#opponent-pic {
+    margin-bottom: 10px; /* 사진과 이름 사이 간격 */
+}
+
+#opponent-profile {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid #00acc1;
+}
+
+#opponent-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00796b;
+    text-align: center; /* 텍스트 중앙 정렬 */
+}

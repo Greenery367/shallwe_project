@@ -11,6 +11,7 @@
 <body>
 	<div class="page-wrapper">
 		<div class="container">
+			<!-- 프로필 박스 -->
 			<div class="profile-box">
 				<ul>
 					<li class="profile-info"><a>프로필 보기</a></li>
@@ -32,7 +33,8 @@
 			<div class="middle">
 				<button onclick="startMatching()" id="startMatch-btn">매칭 시작</button>
 				<div id="matchingTime"></div>
-				<button onclick ="chatStrat()" id="startChat">채팅 하기</button>
+				<button onclick ="accept()" id="accept-btn">수락하기</button>
+				<button onclick ="refuse()" id="refuse-btn">거절하기</button>
 			</div>
 
 			<!-- 오른쪽: 나와 잘 맞는 상대방 정보 -->
@@ -57,19 +59,20 @@
 	<script>
 	 var socket = new WebSocket("ws://192.168.0.131:8080/match");
 	 var matching = false;
+	 var count = 0;
 	 const compatibilityList = JSON.parse(`${compatibilityJson}`);
+	 const name = document.getElementById("opponent");
 	 document.addEventListener("DOMContentLoaded", function() {
 		 
 		 const profileBox = document.querySelector('.profile-box');
 		 const myProfilePic = document.querySelector("#my-profile");
-		    
+		 document.querySelector("#accept-btn").disabled = true; // 수락 버튼 비활성화 
+		 document.querySelector("#refuse-btn").disabled = true; // 거절 버튼 비활성화 
 		    profileBox.style.display = 'none'; // 처음에는 profile-box를 숨깁니다.
 			
 		    myProfilePic.addEventListener('click', function(event) {
-		        const x = event.pageX;
-		        const y = event.offsetY;
-		        console.log(x);
-		        console.log(y);
+		        const x = event.clientX - 160;
+		        const y = event.offsetY + 30;
 		        profileBox.style.left = x + "px";
 		        profileBox.style.top = y + "px";
 		        document.querySelector(".profile-info").firstChild.
@@ -89,12 +92,12 @@
 		    });
 		    
      const profile = document.getElementById("opponent-profile"); 
-     const name = document.getElementById("opponent");
      const mbti = document.getElementById("opponent-mbti");
      const job = document.getElementById("opponent-job");
      const compatibility = document.getElementById("opponent-compatibility");
      const detail = document.getElementById("mbti-detail");
      const buttons = document.querySelectorAll(".compatibility-button");
+     const id = document.getElementById("opponent-id");
      // 첫 번째 버튼을 기본으로 선택
      buttons[0].classList.add("current-button");
 
@@ -110,6 +113,7 @@
              job.textContent = "직업: " + selected.nickname;
              compatibility.textContent = "잘 맞는 정도: " + selected.compatibility + "%";
              detail.textContent = selected.content;
+             id.textContent = selected.wellMatchedMbtiId;
          });
      });
  });
@@ -118,9 +122,8 @@
         	const id = document.getElementById("opponent-id");
             const startTime = new Date().getTime();
             const profile = document.getElementById("opponent-profile"); 
-            const name = document.getElementById("opponent");
             const button = document.getElementById("startMatch-btn");
-            matching = true;
+            matching = true; // 매칭 시작 버튼을 매칭중으로 변경
             let interval = setInterval(function() {
                 const now = new Date().getTime();
                 const elapsed = Math.floor((now - startTime) / 1000);
@@ -139,29 +142,62 @@
 			socket.send(id.textContent);
             
             socket.onmessage = function(event) {
-            	const principal = JSON.parse(event.data);
-            	const profileImage = document.createElement("img");
-                profileImage.src = "/images/uploads/" + principal.uploadFileName;
-                profileImage.alt = "Profile Image";
-                profileImage.classList.add("profile-image");
-                profile.appendChild(profileImage);
-            	name.innerText = principal.nickname;
-            	clearInterval(interval);
-            	matching = false;
-            	document.getElementById('matchingTime').textContent = '매칭 성공!!';
-            	const opponentProfilePic = document.querySelector("#opponent-profile");
-            	opponentProfilePic.addEventListener('click', function(event) {
-    		        const x = event.pageX;
-    		        const y = event.offsetY;
-    		        console.log(x);
-    		        console.log(y);
-    		        profileBox.style.left = x+"px";
-    		        profileBox.style.top = y+"px";
-    		        document.querySelector(".profile-info").firstChild.
-    				setAttribute("onclick",`window.open("http:192.168.0.131:8080/chat/profileInfo?name=${principal.nickname}")`);
-    		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
-    		        event.stopPropagation(); // 클릭 이벤트 전파 방지
-    		    });
+            	const accept = document.querySelector("#accept-btn");
+            	const refuse = document.querySelector("#refuse-btn");
+            	const chat = document.querySelector("#refuse-btn");
+            	const profileBox = document.querySelector('.profile-box');
+            	
+            	if(event.data.startsWith("roomId")) {
+            		var roomId = event.data.split(":");
+            		alert("매칭 성사 완료!!!");
+        			location.href = "/chat/room?roomId=" + roomId[1];
+            	} else if(event.data === "quit") {
+            		alert("상대가 나갔습니다!");
+            		location.reload(true);
+            	} else if(event.data === "refuse") { // 상대가 거절버튼을 눌렀을때
+            		alert("상대가 거절을 눌렀습니다!");
+            		location.reload(true);
+            	} else if(event.data.startsWith("accept")) { // 상대가 수락버튼을 눌렀을때
+            		document.querySelector(".right").style.backgroundColor = "green";
+            		count++;
+            		console.log(count);
+            		if(count === 2) {
+            			socket.send("success");
+            		}
+            	} else {
+            		button.disabled = true;
+            		const opponent = JSON.parse(event.data);
+            		const profileImage = document.createElement("img");
+                    profileImage.src = "/images/uploads/" + opponent.uploadFileName;
+                    profileImage.alt = "Profile Image";
+                    profileImage.classList.add("profile-image");
+                    profile.appendChild(profileImage);
+                	name.innerText = opponent.nickname;
+                	clearInterval(interval);
+                	matching = false;
+                	document.getElementById('matchingTime').textContent = '매칭 성공!!';
+                	const opponentProfilePic = document.querySelector("#opponent-profile");
+                	opponentProfilePic.addEventListener('click', function(event) {
+                		const x = event.clientX - 160;
+        		        const y = event.offsetY + 30;
+        		        profileBox.style.left = x +"px";
+        		        profileBox.style.top = y +"px";
+        		        document.querySelector(".profile-info").firstChild.
+        		        setAttribute("onclick", "window.open('/chat/profileInfo?name=" + opponent.nickname + "')");
+        		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
+        		        event.stopPropagation(); // 클릭 이벤트 전파 방지
+        		        document.querySelector(".close").addEventListener("click", function() {
+        			        profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
+        			    });
+        			    document.addEventListener('click', function(event) {
+        			        if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && event.target !== myProfilePic) {
+        			            profileBox.style.display = 'none'; // profile-box 외부를 클릭하면 숨깁니다.
+        			        }
+        			    });
+        		    });
+                	accept.disabled = false; // 수락버튼을 활성화
+                	refuse.disabled = false; // 거절버튼을 활성화
+            	}
             }
         }
         
@@ -174,6 +210,23 @@
                 button.disabled = false;
             });
             socket.send("stop");
+        }
+        
+        // 수락 버튼 이벤트
+        function accept() {
+        	socket.send("accept");
+        	accept.disabled = true; // 수락버튼을 비활성화
+        	refuse.disabled = true; // 거절버튼을 비활성화
+        	document.querySelector(".left").style.backgroundColor = "green";
+        	count++;
+        }
+        
+        // 거절 버튼 이벤트
+        function refuse() {
+        	const button = document.getElementById("startMatch-btn");
+        	socket.send("refuse");
+        	alert("거절 하셨습니다");
+        	location.reload(true);
         }
         
     </script>

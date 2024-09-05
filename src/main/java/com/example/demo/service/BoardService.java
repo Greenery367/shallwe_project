@@ -62,6 +62,7 @@ public class BoardService {
 	 * 게시글 삭제
 	 * @param id
 	 */
+	@Transactional
 	public void deleteBoard(Integer id, Integer authorId) {
 		try {
 			boardRepository.deleteBoard(id, authorId);
