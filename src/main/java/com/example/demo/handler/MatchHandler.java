@@ -20,9 +20,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class MatchHandler extends TextWebSocketHandler{
 	
-	private final Map<String, TestMatch> MBTIS = new ConcurrentHashMap<>();
-	private final Map<String, WebSocketSession> CLIENTS = new ConcurrentHashMap<>();
-	private final Map<TestMatch, WebSocketSession> MATCHED = new ConcurrentHashMap<>();
+	private final Map<String, TestMatch> MBTIS = new ConcurrentHashMap<>(); // 매칭중인 사람들의 MBTI
+	private final Map<String, WebSocketSession> CLIENTS = new ConcurrentHashMap<>(); // 매칭중인 사람들의 세션
+	private final Map<String, String> WANTED = new ConcurrentHashMap<>(); // 매칭 원하는 MBTI 정보
+	private final Map<TestMatch, WebSocketSession> MATCHED = new ConcurrentHashMap<>(); // 매치된 사람끼리의 정보
 	
 	@Autowired
 	private ChatService chatService;
@@ -49,6 +50,7 @@ public class MatchHandler extends TextWebSocketHandler{
 				.nickname(user.getNickname()).id(user.getId()).build();
 		MBTIS.put(session.getId(), test);
 		CLIENTS.put(session.getId(), session);
+		WANTED.put(session.getId(), message.getPayload());
 		if(message.getPayload().equals("success")) {
 			// 매칭된 두사람 모두 수락을 눌렀을경우 방을 생성해주고 방ID를 배포
 			String opponentName = null;
@@ -80,10 +82,15 @@ public class MatchHandler extends TextWebSocketHandler{
 		} else if(message.getPayload().equals("stop")) {
 			CLIENTS.remove(session.getId());
 			MBTIS.remove(session.getId());
+			WANTED.remove(session.getId());
 		} else {
 		ObjectMapper objectMapper = new ObjectMapper();
 		for(String key : MBTIS.keySet()) {
-			if(Integer.parseInt(message.getPayload()) == MBTIS.get(key).getMbti()) {
+			if(Integer.parseInt(message.getPayload()) == MBTIS.get(key).getMbti() && Integer.parseInt(WANTED.get(key)) == user.getMbti()) {
+				System.out.println("상대가 원하는 MBTI : " + Integer.parseInt(WANTED.get(key)));
+				System.out.println("내 MBTI : " + user.getMbti());
+				System.out.println("내가 원하는 MBTI : " + Integer.parseInt(message.getPayload()));
+				System.out.println("상대 MBTI : " + MBTIS.get(key).getMbti());
 				String MyDTO = objectMapper.writeValueAsString(test);
 				String userDTO = objectMapper.writeValueAsString(MBTIS.get(key));
 				CLIENTS.get(key).sendMessage(new TextMessage(MyDTO)); // 내 userDTO를 상대에게 전송
