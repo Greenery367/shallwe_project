@@ -107,7 +107,19 @@ public class BoardController {
 	    model.addAttribute("authorId", authorId);
 		return "/community/boardDetail";
 	}
-
+	
+	// 댓글 작성 기능
+    @PostMapping("/createComment")
+    public String createComment(Comment comment,
+    		Model model) {
+        // 세션에서 작성자 ID 가져오기
+//        Integer authorId = (Integer) httpSession.getAttribute("userId");
+    	Integer authorId = 1; // 임시 작성자 ID (예: 1)
+    	comment.setAuthorId(authorId); // 작성자 ID 설정
+        commentService.createComment(comment);
+        return "redirect:/community/boardDetail/" + comment.getPostId();   // 게시글 목록으로 리다이렉트
+    }
+	
 	
 	// 게시글 작성 페이지 이동
 	// hint : 주소에서 카테고리 id를 동적으로 받아 넘겨야함 <-- 해라 꼭.. 
