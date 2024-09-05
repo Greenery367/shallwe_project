@@ -30,8 +30,6 @@
                 </div>
 			
 			
-			
-			
 				<div>
 					<p>광고 리스트</p>
 					<table class="table">
@@ -144,32 +142,6 @@
 				</form>
 
 
-				<!-- 푸터시작 -->
-				<div class="modal-alarm">
-					<div class="modal-body">
-						<div class="modal_body-content">
-							<h2>알림</h2>
-							<p>알림내용</p>
-							<button class="close-btn-alarm">닫기</button>
-						</div>
-					</div>
-				</div>
-				<div class="modal-qna">
-					<div class="modal-body">
-						<h2>Q&A</h2>
-						<p>Q&A내용</p>
-						<button class="close-btn-qna">닫기</button>
-					</div>
-				</div>
-
-				<div class="modal-report">
-					<div class="modal-body">
-						<h2>신고</h2>
-						<p>신고내용</p>
-						<button class="close-btn-report">닫기</button>
-					</div>
-				</div>
-			</div>
 			
                 <script>
 					 // 파일 선택 시 파일 이름을 표시하도록 하는 코드
@@ -214,7 +186,6 @@
 				    });
 				</script>
 
-		</div>
 
 
 <%@ include file="/WEB-INF/view/layout/adminFooter.jsp"%>
