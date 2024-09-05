@@ -24,13 +24,13 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/chat")
-public class chatTest {
+public class ChatTest {
 	
 	@Autowired
 	private HttpSession session;
 	@Autowired
 	private MatchService matchService;
-	public chatTest(HttpSession session,MatchService matchService ) {
+	public ChatTest(HttpSession session,MatchService matchService ) {
 		this.session = session;
 		this.matchService = matchService ; 
 	}

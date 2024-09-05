@@ -40,7 +40,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class userController {
+public class UserController {
 	
 	@Autowired
 	private final UserService userService;
