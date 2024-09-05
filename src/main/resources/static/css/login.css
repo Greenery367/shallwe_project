@@ -20,15 +20,23 @@ form > p{
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
 body{
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */ 
+    height: 100vh; /* 뷰포트 높이 전체 사용 */
+    margin: 0;
 }
+
 .login-wrapper{
     width: 400px;
-    height: 350px;
     padding: 40px;
     box-sizing: border-box;
+    margin: auto; /* 가운데 정렬 */
+    background-color: #fff; /* 배경색 추가, 필요시 */
 }
 
 .login-wrapper > h2{
