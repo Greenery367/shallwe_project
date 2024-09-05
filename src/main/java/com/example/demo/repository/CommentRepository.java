@@ -11,7 +11,9 @@ import com.example.demo.repository.model.Comment;
 public interface CommentRepository {
 	
 	// 댓글 입력
-//	public int commentInsert();
+	public int InsertComment(@Param("postId") Integer postId,
+							@Param("content") String content,
+							@Param("authorId") Integer authorId);
 	// 댓글 수정
 //	public int commentUpdate();
 	// 댓글 삭제

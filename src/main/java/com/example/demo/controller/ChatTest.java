@@ -32,8 +32,9 @@ public class ChatTest {
 	private MatchService matchService;
 	
 	@GetMapping("/room")
-	public String roomPage(HttpServletRequest request) {
-		TestUser user = (TestUser)session.getAttribute("principal");
+	public String roomPage(@RequestParam("roomId")String roomId) {
+		int id = Integer.parseInt(roomId);
+		session.setAttribute("chat", id);
 		return "chat/chatRoom";
 	}
 	
@@ -75,7 +76,6 @@ public class ChatTest {
 	
 	@GetMapping("/profileInfo")
 	public String getMethodName(@RequestParam("name") String name,Model model) {
-		
 		model.addAttribute("name",name);
 		return "match/userInfo";
 	}

@@ -29,6 +29,9 @@ input {
 <body>
 	<div class="title">
 	<form action = "sign-in" method="POST" enctype="multipart/form-data">
+	<br>
+	아이디를 입력해주세요
+	<input type="number" name="id">
 	닉네임을 입력해주세요
 	<br>
 	<input type="text" name="nickname">
