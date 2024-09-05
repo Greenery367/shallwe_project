@@ -97,6 +97,7 @@
      const compatibility = document.getElementById("opponent-compatibility");
      const detail = document.getElementById("mbti-detail");
      const buttons = document.querySelectorAll(".compatibility-button");
+     const id = document.getElementById("opponent-id");
      // 첫 번째 버튼을 기본으로 선택
      buttons[0].classList.add("current-button");
 
@@ -112,6 +113,7 @@
              job.textContent = "직업: " + selected.nickname;
              compatibility.textContent = "잘 맞는 정도: " + selected.compatibility + "%";
              detail.textContent = selected.content;
+             id.textContent = selected.wellMatchedMbtiId;
          });
      });
  });
@@ -196,7 +198,6 @@
                 	accept.disabled = false; // 수락버튼을 활성화
                 	refuse.disabled = false; // 거절버튼을 활성화
             	}
-            	
             }
         }
         
@@ -227,6 +228,7 @@
         	alert("거절 하셨습니다");
         	location.reload(true);
         }
+        
     </script>
 </body>
 </html>
