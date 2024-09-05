@@ -165,7 +165,6 @@ public class userController {
 
         authNumber = Integer.parseInt(randomNumber);
     }
-	
 	@GetMapping("/kakao")
 	public String getCode(@RequestParam(name ="code") String code, Model model) throws ParseException {
 		
@@ -301,6 +300,7 @@ public class userController {
 	       response.put("result", isAvailable ? "available" : "unavailable");
 	       return ResponseEntity.ok(response);
 	}
+
 	@PostMapping("/check-email")
  	public ResponseEntity<Map<String, String>> checkEmail(@RequestParam("email") String email) {
 	       boolean isAvailable = userService.isEmailAvailable(email);
@@ -310,9 +310,10 @@ public class userController {
 	}
 	
 	
-	// http://localhost:8080/user/start-test
-		@GetMapping("/start-test")
-		public String testPage() {
-			return "startTestPage";
-		}
+	@GetMapping("/idCheck")
+	public String abc(@RequestParam(name = "id") String id, HttpServletRequest request) {
+		request.setAttribute("id", id);
+		return "sign/idCheck";
+	}
+
 }
