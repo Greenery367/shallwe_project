@@ -24,12 +24,16 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/chat")
-public class ChatTest {
+public class chatTest {
 	
 	@Autowired
 	private HttpSession session;
 	@Autowired
 	private MatchService matchService;
+	public chatTest(HttpSession session,MatchService matchService ) {
+		this.session = session;
+		this.matchService = matchService ; 
+	}
 	
 	@GetMapping("/room")
 	public String roomPage(@RequestParam("roomId")String roomId) {

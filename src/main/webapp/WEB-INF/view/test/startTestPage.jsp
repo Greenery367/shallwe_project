@@ -5,37 +5,75 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-</style>
+<title>테스트 화면</title>
+<link rel="stylesheet" href="../css/test.css">
 </head>
 <body>
+	<header>
+		<div class="account-menus">
+			<div class="menu-container">
+				<div class="to-home">
+					<img class="logo" alt="로고" src="../static/images/shallwe-icon.png">
+					<a href="/test/main"><b>홈</b></a>
+				</div>
+				<p>|</p>
+				<a href="/user/sign-in"><b>로그인</b></a>
+				<p>|</p>
+				<a href="/user/sign-up"><b>회원가입</b></a>
+				</div>
+			</div>
+			</div>
+		</div>
+	</header>
+	<div class="test-container">
+		<div class="personal-test">
+			<div class="intro-container">
+				<h1>나의 게임 성향을 알아보는 MBTI 테스트</h1>
+				<div class="icon-container">
+					<img class="" src="../static/images/test-icon1.png">
+					<img class="" src="../static/images/test-icon2.png">
+					<img class="" src="../static/images/test-icon3.png">
+				</div>
+				<button class='start-btn' onclick="startTestPage()"><b>테스트 하러가기 →</b></button>
+			</div>
+		</div>
+		
+		<div class="start-test">
+			<div class="question-container">
+				<progress max="12" class="bar-progress"></progress>
+				<h1></h1>
+				<div class="question-box">
+					<h1 id="question-text"></h1>
+				</div>
+				<form class="button-container" id="test-form">
+					<input class="answer-btn-yes" type="button" value="yes" onclick="submitAnswer('yes')">
+					<input class="answer-btn-no" type="button" value="no" onclick="submitAnswer('no')">
+				</form>
+			</div>
+		</div>
 
-	<div class="personal-test">
-		<div class="intro-container">
-			<h1>나의 게임 성향을 알아보는 MBTI 테스트</h1>
-			<button class='start-btn' onclick="startTestPage()">테스트 시작</button>
+		<div class="finish-test">
+			<div class="question-container">
+				<h1>모든 질문이 끝났습니다!</h1>
+				<h1 id="question-text"></h1>
+				<form id="test-form">
+					<input class="start-btn" type="button" onclick="showResult()" value="제출하기">
+				</form>
+			</div>
 		</div>
 	</div>
-		
-	<div class="start-test">
-		<progress max="12" class="bar-progress"></progress>
-		<h1></h1>
-		<h1 id="question-text"></h1>
-		<form id="test-form">
-			<input class="answerBtn" type="button" value="yes" onclick="submitAnswer('yes')">
-			<input class="answerBtn" type="button" value="no" onclick="submitAnswer('no')">
-		</form>
-	</div>
-
-	<div class="finish-test">
-		<h1>모든 질문이 끝났습니다!</h1>
-		<h1 id="question-text"></h1>
-		<form id="test-form">
-			<input class="answerBtn" type="button" onclick="showResult()" value="제출하기">
-		</form>
-	</div>
-
+	<footer>
+			<div>
+				<a class="footer-menu" href="">회사소개</a>
+				<a class="footer-menu" href="">제휴안내</a>
+				<a class="footer-menu" href="">광고안내</a>
+				<a class="footer-menu" href="">이용약관</a>
+				<a class="footer-menu" href="">개인정보처리방침</a>
+				<a class="footer-menu" href="">청소년보호정책</a>
+			</div>
+		<p>copyrightⓒ 2024-2024 shallwe. All right reserved.</p>
+	</footer>
+	
 	<script type="text/javascript">
 		// 질문 리스트 정의
 		const questionList = [
@@ -57,7 +95,7 @@
 		const storedQuestionList = JSON.parse(localStorage.getItem('questionList')) || questionList;
 		
 		const progress = document.querySelector('.bar-progress'); 
-		const beforeTest = document.querySelector('.intro-container'); // 테스트 시작 div
+		const beforeTest = document.querySelector('.personal-test'); // 테스트 시작 div
 		const startTest = document.querySelector('.start-test'); // 테스트 div
 		const finishTest = document.querySelector('.finish-test'); // 테스트 종료 div
 		const testText = document.getElementById('question-text');
@@ -75,7 +113,7 @@
 		
 		// 테스트 시작
 		function startTestPage() {
-			beforeTest.style.display = 'none';
+			beforeTest.style.display = 'none'
 			finishTest.style.display = 'none';
 			startTest.style.display = 'block';
 			progress.value = 1;
@@ -117,7 +155,7 @@
 			data.setAttribute('value', JSON.stringify(answerArray));
 			form.appendChild(data);
 			console.log('');
-			cole.log(JSON.stringify(answerArray));
+			console.log(JSON.stringify(answerArray));
 			
 			document.body.appendChild(form);
 			form.submit();
