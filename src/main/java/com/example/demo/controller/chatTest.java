@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/chat")
-public class ChatTest {
+public class chatTest {
 	
 	@Autowired
 	private HttpSession session;
