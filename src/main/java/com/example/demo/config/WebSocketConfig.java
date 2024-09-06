@@ -5,6 +5,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+import com.example.demo.handler.AlarmHandler;
 import com.example.demo.handler.HttpSessionHandshakeInterceptor;
 import com.example.demo.handler.MatchHandler;
 import com.example.demo.handler.WebSocketHandler;
@@ -18,6 +19,7 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	
 	private final WebSocketHandler webSocketHandler;
 	private final MatchHandler matchHandler;
+	private final AlarmHandler alarmHandler;
 	
 	// 채팅서버 url설정 and 허용 도메인 지정
 	@Override
@@ -28,6 +30,8 @@ public class WebSocketConfig implements WebSocketConfigurer{
 		registry.addHandler(matchHandler, "/match")
 		.addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
 		
+		registry.addHandler(alarmHandler, "/alarm")
+		.addInterceptors(new HttpSessionHandshakeInterceptor()).setAllowedOrigins("*");
 		
 	}
 }

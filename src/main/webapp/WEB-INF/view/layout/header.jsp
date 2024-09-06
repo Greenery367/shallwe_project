@@ -10,6 +10,18 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <body>
+<!-- 알람 받는 소켓 ON -->
+<script>
+	var socket = new WebSocket("ws://192.168.0.131:8080/alarm");
+	socket.onmessage = function(event) {
+		const message = JSON.parse(event.data); // json 형식인 alarmDTO를 다시 객체로 만듬
+		const profile = message.uploadFileName; // 상대 프로필 사진
+		const name = message.nickname; // 상대 이름
+		const id = message.sendUserId; // 상대 userId
+		const content = message.content; // 알람 내용 예) ** 님의 댓글 : 이건좀 아닌데
+	}
+	
+</script>
 <div class="main">
 	<header>
 		<div class="header">
