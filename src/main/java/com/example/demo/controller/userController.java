@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class UserController {
+public class userController {
 	
 	@Autowired
 	private final UserService userService;
