@@ -72,7 +72,7 @@ public class CsController {
     	httpServletRequest.setAttribute("totalPages", totalPages);
     	httpServletRequest.setAttribute("curruntPage", page);
     	System.out.println("12312312132" + postList.toString());
-		return "cs/csMain";
+		return "cs/csFAQ";
 	}
 	
 	
@@ -101,6 +101,49 @@ public class CsController {
 		request.setAttribute("msg", "문의글 작성 완료");
         request.setAttribute("url", "FAQ");
         return "alert";
+	}
+	
+	/*
+	 * 문의글 목록에서 문의글 선택시 -> 상세보기 창 이동
+	 */
+	@GetMapping("detail")
+	public String getFAQDetail(@RequestParam("writer") String writer, 
+            @RequestParam("id") int id,
+            Model model, HttpServletRequest request) {
+		User user = (User) session.getAttribute("principal");
+		if(user.getNickname().equals(writer)) {
+			FAQDTO dto = csService.readFAQById(id);
+			model.addAttribute("FAQ",dto);
+			return "cs/detailFAQ";
+		}else {
+			request.setAttribute("msg", "열람 권한이 없습니다.");
+	        request.setAttribute("url", "FAQ");
+	        return "alert";
+		}
+	}
+	
+	// TODO 관리자 테이블 생성후 컬럼 확정시 CRUD 구현
+	/*
+	 * 자주 묻는 질문 목록에서 클릭시 -> 상세보기 이동
+	 */
+	@GetMapping("detailFreq")
+	public String getFreqDetail(@RequestParam("writer") String writer, 
+            @RequestParam("id") int id,
+            Model model, HttpServletRequest request) {
+			FrequeDTO dto = csService.readFreqById(id);
+			model.addAttribute("FAQ",dto);
+			return "cs/detailFreq";
+	}
+	
+	
+	@GetMapping("update")
+	public String getUpdateRequest(@RequestParam("id") String id,
+									Model model, HttpServletRequest request) {
+		
+		
+		
+		
+		return new String();
 	}
 	
 	

@@ -16,7 +16,6 @@
                 <tr>
                     <th>제목</th>
                     <td>
-		            	<input type="hidden" id="id" value="${FAQ.id}">
                         <input type="text" readonly id="title" value="${FAQ.title}">
                     </td>
                 </tr>
@@ -35,30 +34,16 @@
                 <tr>
                     <th>작성시간</th>
                     <td>
-                        <input type="text" readonly id="createdAt" value="${FAQ.createdAt}">
+                        <input type="text" readonly id="writer" value="${FAQ.createdAt}">
                     </td>
                 </tr>
             </table>
-			
+
             <div class="btn-area">
-                <button type="button" class="btn update-button" >수정</button>
+                <button type="button" class="btn update-button" style=display:none;>수정</button>
                 &nbsp;
-                <button type="button" class="btn delete-button" >삭제</button>
+                <button type="button" class="btn delete-button" style=display:none;>삭제</button>
             </div>
         </section>
       </main>
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        // 수정 버튼 클릭 이벤트
-        const updateButton = document.querySelector('.update-button');
-        
-        updateButton.addEventListener('click', function() {
-            // 입력 필드의 값을 가져옴
-            const id = document.getElementById('id').value;
-
-            // 컨트롤러로 GET 요청을 보냄
-            window.location.href = `/cs/update?id=${encodeURIComponent(id)}`;
-        });
-    });
-</script>

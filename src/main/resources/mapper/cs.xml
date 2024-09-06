@@ -22,6 +22,15 @@
 		limit #{limit} offset #{offset}
 	</select>
 	
+	<select id = "readFAQById" resultType="com.example.demo.dto.FAQDTO">
+		select * from qna_question_tb
+		where id = #{id}
+	</select>
+	<select id = "readFreqById" resultType="com.example.demo.dto.FrequeDTO">
+		select * from frequently_questions_tb
+		where id = #{id}
+	</select>
+	
 	<insert id="insert">
 		insert into qna_question_tb(title, content, writer, user_id)
 			values(#{title}, #{content}, #{writer}, #{userId})

@@ -5,8 +5,8 @@
 <div class="qna-container">
 	<nav class="qna-nav">
 		<ul>
-			<li><a href="main">자주 묻는 질문</a></li>
-			<li><a href="FAQ">FAQ</a></li>  <!-- active 적용 -->
+			<li><a href="main">자주 묻는 질문</a></li> <!-- active 적용 -->
+			<li><a href="FAQ">FAQ</a></li>
 			<li><a href="#">1:1 문의</a></li>
 			<li><a href="#">공지사항</a></li>
 		</ul>
@@ -67,7 +67,6 @@
 		<button class="qna-write-btn" type="submit">문의글 작성</button>
 	</form>
 </div>
-
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -80,9 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const id = this.querySelector('input[name="id"]').value; // 히든 필드의 id 값 가져오기
 
             // detail 컨트롤러로 이동 (GET 요청)
-            window.location.href = `/cs/detailFreq?writer=${encodeURIComponent(writer)}&id=${encodeURIComponent(id)}`;
+            window.location.href = `/cs/detail?writer=${encodeURIComponent(writer)}&id=${encodeURIComponent(id)}`;
         });
     });
 });
-
 </script>
+
