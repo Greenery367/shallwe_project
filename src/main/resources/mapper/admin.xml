@@ -10,7 +10,7 @@
 
 	<!-- 전체유저 충전 금액 -->
 	<select id="countChargeAmount"> 
-		select sum(charge) from user_cash_history_tb where spend is null
+		select sum(charge) from user_cash_history_tb where spend is null and refund is null and exchange is null
 	</select>
 
 	<!-- 전체유저 사용 금액  -->
@@ -70,6 +70,22 @@
 	<update id="updateAdvertiseStatus">
 		update advertise_tb set status = #{status} where id = #{id}
 	</update>
-
+	
+	<!-- 게시중인 광고 위치별조회 -->
+	<!-- 위치별로 place_id 지정됨 -->
+	<!-- place_id = 1 -->
+	<select id="selectAdvertisePlaceOne">
+		select * from advertise_tb where place_id = 1 and status = 1
+	</select>
+	
+	<!-- place_id = 2 -->
+	<select id="selectAdvertisePlaceTwo">
+		select * from advertise_tb where place_id = 2 and status = 1
+	</select>
+	
+	<!-- place_id = 3 -->
+	<select id="selectAdvertisePlaceThree">
+		select * from advertise_tb where place_id = 3 and status = 1
+	</select>
 
 </mapper>

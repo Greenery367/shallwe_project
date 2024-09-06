@@ -215,7 +215,7 @@
  }
  
  function prevBanner(){
-	currentBanner = (currentBanner - 1 + bannerCount) % bannerCount;
+	currentBanner = (currentBanner - 1 + bannerCount) %	 bannerCount;
 	showBanner(currentBanner);
  }
  

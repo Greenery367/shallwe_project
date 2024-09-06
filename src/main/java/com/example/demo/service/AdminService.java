@@ -104,5 +104,18 @@ public class AdminService {
     	return adminRepository.selectAdvertiseNow();
     }
     
-
+    // 현재 게시중인 광고 중에 위치 1번 (place_id = 1, status = 1)
+    public List<Advertise> selectAdvertisePlaceOne(){
+    	return adminRepository.selectAdvertisePlaceOne();
+    }
+    
+    // 현재 게시중인 광고 중에 위치 1번 (place_id = 2, status = 1)
+    public List<Advertise> selectAdvertisePlaceTwo(){
+    	return adminRepository.selectAdvertisePlaceTwo();
+    }
+    
+    // 현재 게시중인 광고 중에 위치 1번 (place_id = 3, status = 1)
+    public List<Advertise> selectAdvertisePlaceThree(){
+    	return adminRepository.selectAdvertisePlaceThree();
+    }
 }

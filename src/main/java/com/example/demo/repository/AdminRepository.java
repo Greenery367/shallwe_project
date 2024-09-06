@@ -25,9 +25,14 @@ public interface AdminRepository{
 	public List<Advertise> selectAllAdvertise();
 	// id로 광고 조회
 	public Advertise selectAdvertiseById(@Param("id") Integer id);
-	// 현재 게시중인 광고 조회 (status = 1)
+	// 현재 게시중인 광고 전체 조회 (status = 1)
 	public List<Advertise> selectAdvertiseNow();
-	
+	// 현재 게시중인 광고 중 위치1 (place_id = 1, status = 1) 조회
+	public List<Advertise> selectAdvertisePlaceOne();
+	// 현재 게시중인 광고 중 위치2 (place_id = 2, status = 1) 조회
+	public List<Advertise> selectAdvertisePlaceTwo();
+	// 현재 게시중인 광고 중 위치1 (place_id = 3, status = 1) 조회
+	public List<Advertise> selectAdvertisePlaceThree();
 	
 	// 광고추가 
 	public int insertAdvertise(CreateAdvertiseDTO dto);
@@ -40,6 +45,5 @@ public interface AdminRepository{
 	public List<Integer> selectExpiredAdvertise(@Param("now") LocalDateTime now);
 	// 광고 상태 업데이트
 	public void updateAdvertiseStatus(@Param("status") int status, @Param("id") Integer id);
-	
 	
 }

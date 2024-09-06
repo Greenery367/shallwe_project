@@ -35,9 +35,14 @@ public class AdminAdvertiseController {
 		
 		List<Advertise> advertiseList = adminService.selectAllAdvertise();
 		List<Advertise> advertiseListNow = adminService.selectAdvertiseNow();
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		model.addAttribute("advertiseList", advertiseList);		
 		model.addAttribute("advertiseListNow",advertiseListNow);
-		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
 		return "admin/adminAdvertisement"; 
 	}
 	
@@ -47,6 +52,8 @@ public class AdminAdvertiseController {
 										@RequestParam("title") String title,
 										@RequestParam("customer") String customer,
 										@RequestParam("link") MultipartFile link,
+										@RequestParam("originFileName") MultipartFile originFileName,
+										@RequestParam("uploadFileName") String uploadFileName,
 										@RequestParam("startDate") String startDate,
 										@RequestParam("endDate") String endDate,
 										@RequestParam("status") Integer status

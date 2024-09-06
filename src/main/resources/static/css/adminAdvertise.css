@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 body {
 	margin: 0;
 	font-family: "Jua", sans-serif;
@@ -194,37 +195,52 @@ h1 {
 	border: 1px solid;
 }
 
-.advertise{
+.advertise {
 	border: 1px solid;
 }
 
-.m--profile{
-width: 10px;
-height: 10px;
+.m--profile {
+	width: 10px;
+	height: 10px;
 }
 
-.advertise-one-line-box{
+.advertise-one-line-box {
 	display: flex;
-	justify-content:space-around;
+	justify-content: space-around;
 	flex-wrap: nowrap;
 }
 
-.advertise-box{
+.advertise-box {
+	display: flex;
 	margin: 20px;
 	padding: 20px;
-	width: 30vh;
-	height: 45vh;
+	width: 300px;
+	height: 450px;
 	background-color: yellow;
+	flex-direction: column;
 }
 
-.advertise-img{
+.advertise-img {
 	background-color: orange;
 	width: 100%;
 	height: 70%;
 }
 
-.advertise-content{
+.advertise-img img{
+	width: 100%;
+	height: 100%;
+}
+
+.advertise-content {
 	background-color: green;
 	width: 100%;
 	height: 30%;
 }
+
+.advertise-list-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+
