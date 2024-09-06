@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.CompatibilityListDTO;
 import com.example.demo.dto.MbtiDTO;
 import com.example.demo.dto.TestUser;
+import com.example.demo.repository.model.User;
 import com.example.demo.service.MatchService;
+import com.example.demo.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,6 +32,8 @@ public class chatTest {
 	private HttpSession session;
 	@Autowired
 	private MatchService matchService;
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("/room")
 	public String roomPage(@RequestParam("roomId")String roomId) {
@@ -75,8 +79,9 @@ public class chatTest {
 	}
 	
 	@GetMapping("/profileInfo")
-	public String getMethodName(@RequestParam("name") String name,Model model) {
-		model.addAttribute("name",name);
+	public String getMethodName(@RequestParam("id") int id,Model model) {
+		User user = userService.findByUserID(id);
+		model.addAttribute("user",user);
 		return "match/userInfo";
 	}
 	

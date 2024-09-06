@@ -76,7 +76,7 @@
 		        profileBox.style.left = x + "px";
 		        profileBox.style.top = y + "px";
 		        document.querySelector(".profile-info").firstChild.
-				setAttribute("onclick",`window.open("/chat/profileInfo?name=${principal.nickname}")`);
+				setAttribute("onclick",`window.open("/chat/profileInfo?id=${principal.id}")`);
 		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
 		        event.stopPropagation(); // 클릭 이벤트 전파 방지
 		    });
@@ -180,10 +180,10 @@
                 	opponentProfilePic.addEventListener('click', function(event) {
                 		const x = event.clientX - 160;
         		        const y = event.offsetY + 30;
-        		        profileBox.style.left = x +"px";
-        		        profileBox.style.top = y +"px";
+        		        profileBox.style.left = x + "px";
+        		        profileBox.style.top = y + "px";
         		        document.querySelector(".profile-info").firstChild.
-        		        setAttribute("onclick", "window.open('/chat/profileInfo?name=" + opponent.nickname + "')");
+        		        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + opponent.id + "')");
         		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
         		        event.stopPropagation(); // 클릭 이벤트 전파 방지
         		        document.querySelector(".close").addEventListener("click", function() {

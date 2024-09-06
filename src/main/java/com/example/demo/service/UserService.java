@@ -97,9 +97,25 @@ public class UserService {
 	}
 	
 	// 친구 검색기능
-	public List<User> findLikeUser(String nickname) { 
+	public List<User> findLikeUser(String nickname,int limit,int offset) { 
 		List<User>userList = null;
-		 userList = userRepository.findLikeNickname(nickname);
+		 userList = userRepository.findLikeNickname(nickname,limit,offset);
 		 return userList;
+	}
+	
+	public int findLikeUserSize(String nickname) {
+		int count = 0;
+		count = userRepository.findLikeNicknameSize(nickname);
+		return count;
+	}
+	
+	public User findByUserID(int id) {
+		User user = userRepository.findByUserId(id);
+		return user;
+	}
+	
+	public int insertWaitingFriend(int userId,int friendId) {
+		int result = userRepository.insertWatingFriend(userId, friendId);
+		return result;
 	}
 }
