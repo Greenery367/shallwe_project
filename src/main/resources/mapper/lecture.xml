@@ -23,5 +23,27 @@
             c.category_id = #{categoryId}
 </select>
 
+<select id="LectureFindById" resultType="com.example.demo.repository.model.Lecture">
+	 select 
+        c.id, 
+        c.category_id, 
+        u.nickname AS nickName, 
+        c.title, 
+        c.subtitle, 
+        c.content, 
+        c.limit_num AS limitNum, 
+        c.current_num AS currentNum, 
+        c.price, 
+        c.total_num AS totalNum, 
+        c.created_at AS createdAt
+    from 
+        class_tb c
+    join 
+        user_tb u on c.author_id = u.user_id
+    where 
+        c.id = #{id};
+</select>
+
+
 
 </mapper>

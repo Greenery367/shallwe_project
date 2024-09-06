@@ -12,6 +12,7 @@ public interface LectureRepository {
 	// 카테고리별 강의 조회
 	public List<Lecture> findCategoryByLecture(Integer categoryId);
 	
-	
+	// 아이디 기준 상세보기
+	public Lecture LectureFindById(Integer id);
 	
 }

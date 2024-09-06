@@ -30,7 +30,7 @@ public class BoardService {
 	public void createBoard(BoardCreateDTO boardCreateDTO) {
 	    try {
 	        // 실제 로그인된 사용자 ID를 가져와야 함
-	        Integer userId = 1; // 현재 하드코딩된 부분을 수정해야 함
+	        Integer userId = boardCreateDTO.getAuthorId(); // 현재 하드코딩된 부분을 수정해야 함
 	        boardCreateDTO.setAuthorId(userId);
 
 	        // 게시글 작성
