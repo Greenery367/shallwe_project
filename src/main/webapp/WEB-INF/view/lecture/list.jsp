@@ -14,6 +14,8 @@
                         <p>${lecture.currentNum} / ${lecture.limitNum} 수강생</p>
                         <p>${lecture.nickName}</p>
                         <p class="price">${lecture.price}원</p>
+                        
+                        <a href="${pageContext.request.contextPath}/lecture/lectureDetail/${lecture.id}">
                         <button class="btn">상세보기</button>
                     </div>
                 </div>
