@@ -19,8 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.CreateAdvertiseDTO;
+import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Category;
 
 @Service
 public class AdminService {
@@ -31,7 +33,9 @@ public class AdminService {
 	@Value("${file.upload-dir}")
 	private String uploadDir;
 	
-
+	@Value("${file.advertise-dir}")
+	private String advertiseDir;
+	
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
@@ -53,33 +57,10 @@ public class AdminService {
 
     // 광고 추가
     @Transactional
-    public void insertAdvertise(CreateAdvertiseDTO dto, MultipartFile file) throws IOException {
+    public void insertAdvertise(CreateAdvertiseDTO dto) throws IOException {
     	// 광고 정보를 데이터베이스에 추가
         adminRepository.insertAdvertise(dto);
         
-        // 파일 업로드 처리
-        if(file != null && !file.isEmpty()) {
-        	 // 원본 파일 이름
-            String originFilename = file.getOriginalFilename();
-            
-            // 파일 확장자 추출
-            String fileExtension = originFilename != null ? originFilename.substring(originFilename.lastIndexOf('.')) : "";
-            
-            // UUID를 사용하여 고유한 파일 이름 생성
-            String uuid = UUID.randomUUID().toString();
-            
-            // UUID와 원본 파일 이름을 결합하여 파일 이름 생성
-            String uploadFileName = uuid + "_" + originFilename;
-            
-            // 파일을 저장할 경로
-            File targetFile = new File(uploadDir + File.separator + uploadFileName);
-            
-            // 디렉토리 존재 여부 확인 및 생성
-            targetFile.getParentFile().mkdirs();
-            
-            // 파일 저장
-            file.transferTo(targetFile);
-        }
     }
 
     // 광고 수정
@@ -87,12 +68,13 @@ public class AdminService {
     public void updateAdvertise(Advertise advertise) {
         adminRepository.updateAdvertise(advertise);
     }
-
+    
     // 광고 삭제
     @Transactional
     public void deleteAdvertise(Advertise advertise) {
         adminRepository.deleteAdvertiseById(advertise.getId());
     }
+    
 
     // 전체 광고 조회
     public List<Advertise> selectAllAdvertise() {
@@ -118,4 +100,30 @@ public class AdminService {
     public List<Advertise> selectAdvertisePlaceThree(){
     	return adminRepository.selectAdvertisePlaceThree();
     }
+    
+    // 전체 카테고리 조회
+    public List<Category> selectAllCategory(){
+    	return adminRepository.selectAllCategory();
+    }
+    
+    // 카테고리 추가
+    @Transactional
+    public void insertCategory(CreateCategoryDTO dto){
+    	adminRepository.insertCategory(dto);
+    }
+    
+    // 카테고리 수정
+    @Transactional
+    public void updateCategory(Category category) {
+    	adminRepository.updateCategory(category);
+    }
+
+    // 카테고리 삭제
+    @Transactional
+    public void deleteCategoryById(Category category) {
+    	adminRepository.deleteCategoryById(category.getId());
+    }
+    
+    
+    
 }

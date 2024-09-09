@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.dto.CreateAdvertiseDTO;
+import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Category;
 
 @Mapper
 public interface AdminRepository{
@@ -45,5 +47,14 @@ public interface AdminRepository{
 	public List<Integer> selectExpiredAdvertise(@Param("now") LocalDateTime now);
 	// 광고 상태 업데이트
 	public void updateAdvertiseStatus(@Param("status") int status, @Param("id") Integer id);
+	
+	// 전체 게시판 카테고리 조회
+	public List<Category> selectAllCategory();
+	// 게시판 카테고리 추가
+	public int insertCategory(CreateCategoryDTO dto);
+	// 게시판 카테고리 수정
+	public int updateCategory(Category category);
+	// 게시판 카테고리 삭제
+	public int deleteCategoryById(Integer id);
 	
 }

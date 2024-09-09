@@ -35,8 +35,8 @@
 	
 	<!-- 광고 추가 -->
 	<insert id="insertAdvertise">
-		insert into advertise_tb(place_id, title, customer, link, start_date, end_date, status)
-		values(#{placeId}, #{title}, #{customer}, #{link}, #{startDate}, #{endDate}, #{status})
+		insert into advertise_tb(place_id, title, customer, link, origin_file_name, upload_file_name, start_date, end_date, status)
+		values(#{placeId}, #{title}, #{customer}, #{link}, #{originFileName}, #{uploadFileName}, #{startDate}, #{endDate}, #{status})
 	</insert>
 	
 	<!-- 광고 수정 -->
@@ -87,5 +87,7 @@
 	<select id="selectAdvertisePlaceThree">
 		select * from advertise_tb where place_id = 3 and status = 1
 	</select>
+	
+	
 
 </mapper>

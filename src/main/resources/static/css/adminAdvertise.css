@@ -208,7 +208,14 @@ h1 {
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: nowrap;
+	flex-direction: column;
 }
+
+.advertise-one-line-box p{
+	display: flex;
+	justify-content: center;
+}
+
 
 .advertise-box {
 	display: flex;

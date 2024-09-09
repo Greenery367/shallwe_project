@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.AdminRepository">
+	
+	<!-- 전체 카테고리 조회 -->
+	<select id="selectAllCategory">
+		select * from community_category_tb
+	</select>
+	
+	<!-- 카테고리 생성 -->
+	<insert id="insertCategory">
+		insert into community_category_tb(title)
+		values(#{title})
+	</insert>
+	
+	<!-- 카테고리 수정 -->
+	<update id="updateCategory">
+		update community_category_tb set  title = #{title} where id = #{id}
+	</update>
+	
+	<!-- 카테고리 삭제 -->
+	<delete id="deleteCategoryById">
+		delete from community_category_tb where id = #{id}
+	</delete>
+
+
+
+</mapper>
