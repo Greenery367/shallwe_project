@@ -11,5 +11,11 @@
     WHERE c.post_id = #{postId}
     ORDER BY c.created_at ASC;
 </select>
+
+<insert id="InsertComment">
+	insert into comment_tb (post_id, content, author_id, created_at) 
+	values 
+	(#{postId}, #{content}, #{authorId}, now())
+</insert>
 	 
 </mapper>

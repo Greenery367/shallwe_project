@@ -3,4 +3,28 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.CsRepository">
 	
+	<select id="countFreq" resultType="int">
+		select count(*) from frequently_questions_tb
+	</select>
+	<select id="countFAQ" resultType="int">
+		select count(*) from qna_question_tb
+	</select>
+	
+	<select id ="findAllFreq" resultType="com.example.demo.dto.FrequeDTO">
+		select * from frequently_questions_tb
+		order by id desc
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<select id ="findAllFAQ" resultType="com.example.demo.dto.FAQDTO">
+		select * from qna_question_tb
+		order by id desc
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<insert id="insert">
+		insert into qna_question_tb(title, content, writer, user_id)
+			values(#{title}, #{content}, #{writer}, #{userId})
+	</insert>
+	
 </mapper>

@@ -246,7 +246,7 @@ public class UserController {
 			request.setAttribute("msg", "존재하지 않는 ID입니다.");
 	        request.setAttribute("url", "sign-in");
 	        return "alert";
-	    }else {
+	    }else{
 	    	if(passwordEncoder.matches(password, user.getPassword())) {
 	    		session.setAttribute("principal", user);
 	    		return "redirect:/user/main";

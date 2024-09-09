@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.ReviewRepository">
+
+<select id="findReviewsByClassId" resultType="com.example.demo.repository.model.Review">
+    select 
+        r.id,
+        r.class_id,
+        u.nickname as NickName,
+        r.comment,
+        r.grade,
+        r.created_at as createdAt
+    from 
+        class_review_tb r
+    join 
+        user_tb u on r.author_id = u.user_id
+    where 
+        r.class_id = #{classId};
+</select>
+
+<insert id="insertReview">
+	insert into class_review_tb (class_id, author_id, comment, grade, created_at) 
+	values (#{classId}, #{authorId}, #{content}, #{grade}, now())
+</insert>
+
+</mapper>
