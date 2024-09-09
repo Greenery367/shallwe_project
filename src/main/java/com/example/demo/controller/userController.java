@@ -317,33 +317,5 @@ public class userController {
 		request.setAttribute("id", id);
 		return "sign/idCheck";
 	}
-
-	@GetMapping("/findUser")
-	public String getMethodName() {
-		return "friend/findFriend";
-	}
-	
-	@PostMapping("/findUser")
-	public String postMethodName(@RequestParam(name="name") String name,
-			@RequestParam(name="pageNum")int page , HttpServletRequest request) {
-		// 한 페이지에 유저가 10명씩 보이도록 설정
-		int limit = 10;
-		// 오프셋은 limit * (page - 1)
-		int offset = limit * (page - 1);
-		List<User>userList = userService.findLikeUser(name,limit,offset);
-		int size = userService.findLikeUserSize(name);
-		int pageNum = (int)Math.ceil(size / limit);
-		request.setAttribute("userList", userList); // 검색된 유저리스트
-		request.setAttribute("name", name); // 검색어 
-		request.setAttribute("current",page); // 현재 페이지
-		request.setAttribute("pageSize", pageNum); // 총 페이지 수
-		return "friend/findFriend";
-	}
-	
-	@PostMapping("/sendFriend")
-	public void postMethodName(@RequestParam(name="userId")int user,
-			@RequestParam(name="friendId")int friend) {
-		userService.insertWaitingFriend(user, friend);
-	}
 	
 }

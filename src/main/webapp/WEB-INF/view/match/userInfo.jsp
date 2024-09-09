@@ -10,7 +10,7 @@
 	<img src="/static/images/${user.uploadFileName}">
 	<h1>${user.nickname}</h1>
 	<p>${user.mbti}</p>
-	<button onclick="" class="add-friend">친구 추가</button>
+	<button onclick="addFriend()" class="add-friend">친구 추가</button>
 	<script>
 	var socket = new WebSocket("ws://192.168.0.131:8080/alarm");
 	const button = document.querySelector(".add-friend");

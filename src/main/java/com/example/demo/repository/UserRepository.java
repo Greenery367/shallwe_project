@@ -20,4 +20,10 @@ public interface UserRepository {
 	public int updatePasswordByEmail(@Param("password")String password, @Param("email")String email);
 	public User findByUserId(@Param("id")int id);
 	public int insertWatingFriend(@Param("userId")int userId,@Param("friendId")int friendId);
+	public int addFriendById(@Param("userId")int userId,@Param("friendId")int friendId);
+	public int removeFriendById(@Param("userId")int userId,@Param("friendId")int friendId);
+	public int removeWaitFriendById(@Param("userId")int userId,@Param("friendId")int friendId);
+	public int checkWaitFriend(@Param("userId")int userId,@Param("friendId")int friendId);
+	
 }
+
