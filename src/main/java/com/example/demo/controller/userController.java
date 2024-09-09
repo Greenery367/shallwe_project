@@ -58,10 +58,8 @@ public class userController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	Random random = new Random();
 
-	
 	@Value("${tenco.key}")
 	private String tencoKey;
-	
 	
 	/**
 	 * 메인 페이지 이동
@@ -111,8 +109,6 @@ public class userController {
 	        return "alert";
 		}
 	}
-	
-	
 	
 	@GetMapping("find-pw")
 	public String findPw() {

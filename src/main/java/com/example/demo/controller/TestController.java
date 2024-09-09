@@ -42,7 +42,6 @@ public class TestController {
 		this.questionService = questionService;
 		progressNumber=1;
 	}
-	
 
 	/**
 	 * 메인 페이지 이동

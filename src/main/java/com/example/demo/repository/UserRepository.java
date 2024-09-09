@@ -24,6 +24,9 @@ public interface UserRepository {
 	public int removeFriendById(@Param("userId")int userId,@Param("friendId")int friendId);
 	public int removeWaitFriendById(@Param("userId")int userId,@Param("friendId")int friendId);
 	public int checkWaitFriend(@Param("userId")int userId,@Param("friendId")int friendId);
+	public List<User> checkStatusFriend(@Param("id")int id,@Param("status")int status);
+	public List<User> checkWaitFriend(@Param("id")int id);
+	public List<User> checkSendFriend(@Param("id")int id);
 	
 }
 
