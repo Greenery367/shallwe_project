@@ -9,8 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="content">
 	<div class="search-box">
-	<form action="/user/findUser" method="POST">
+	<form action="/friends/findUser" method="POST">
 		<input type="text" placeholder="Search for friends" name="name">
 		<input type="hidden" value="0" name="pageNum">
 	</form>
@@ -31,7 +32,7 @@
 	</div>
 	<div class="page">
 		<c:if test="${current} != 1">
-		<form action="/user/findUser?name=${name}&page=${current - 1}" method="post">
+		<form action="/friends/findUser?name=${name}&page=${current - 1}" method="post">
 			<button class="previous">
 				이전
 			</button>
@@ -45,13 +46,14 @@
 				</li>
 			</ul>
 		<c:if test="${current} != ${pageSize}">
-		<form action="/user/findUser?name=${name}&page=${current + 1}" method="post">
+		<form action="/friends/findUser?name=${name}&page=${current + 1}" method="post">
 			<button class="next">
 				다음
 			</button>
 		</form>
 		</c:if>
 		</c:forEach>
+	</div>
 	</div>
 	<script>
 		

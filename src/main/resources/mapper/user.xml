@@ -39,6 +39,30 @@
 		values(#{userId}, #{friendId})
 	</insert>
 	
+	<insert id="addFriendById">
+		insert into friend_tb(user_id,friend_id)
+		values(#{userId}, #{friendId}),
+			  (#{friendId}, #{userId})
+	</insert>
+	
+	<delete id="removeFriendById">
+		delete from friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</delete>
+	
+	<delete id="removeWaitFriendById">
+		delete from waiting_friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</delete>
+	
+	<select id="checkWaitFriend" resultType="Integer">
+		select user_id from waiting_friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</select>
+	
 	<insert id="insert">
 		insert into user_tb(id, password, username, nickname, birth_date, email, phone_number)
 		values(#{id}, #{password}, #{username}, #{nickname}, #{birthDate}, #{email}, #{phoneNumber})
