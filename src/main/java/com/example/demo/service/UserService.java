@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -96,26 +93,4 @@ public class UserService {
 		}
 	}
 	
-	// 친구 검색기능
-	public List<User> findLikeUser(String nickname,int limit,int offset) { 
-		List<User>userList = null;
-		 userList = userRepository.findLikeNickname(nickname,limit,offset);
-		 return userList;
-	}
-	
-	public int findLikeUserSize(String nickname) {
-		int count = 0;
-		count = userRepository.findLikeNicknameSize(nickname);
-		return count;
-	}
-	
-	public User findByUserID(int id) {
-		User user = userRepository.findByUserId(id);
-		return user;
-	}
-	
-	public int insertWaitingFriend(int userId,int friendId) {
-		int result = userRepository.insertWatingFriend(userId, friendId);
-		return result;
-	}
 }

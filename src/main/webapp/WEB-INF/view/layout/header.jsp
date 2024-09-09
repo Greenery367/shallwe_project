@@ -20,7 +20,6 @@
 		const id = message.sendUserId; // 상대 userId
 		const content = message.content; // 알람 내용 예) ** 님의 댓글 : 이건좀 아닌데
 	}
-	
 </script>
 <div class="main">
 	<header>
@@ -36,7 +35,6 @@
 				<div class="banner">
 					<img class="logo" alt="로고" src="../images/logo.png">
 				</div>
-	
 	<div class="nav-bar">
 		<div class="menus">
 			<a href="" class="menu">친구 찾기</a>
