@@ -111,7 +111,7 @@
 				</ul>
 			</div>	
 			<div class="menu-container">
-				<a href="" class="menu">회원 정보</a>
+				<a href="/my-page/6" class="menu">회원 정보</a>
 			</div>	
 		</div>
 		

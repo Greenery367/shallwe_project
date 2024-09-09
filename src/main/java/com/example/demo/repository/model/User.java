@@ -28,6 +28,7 @@ public class User {
 	private int currentCash;
 	private int challengePoint;
 	private Timestamp createdAt;
+	private String userAccount;
 	private int status;
 
 	public String setUpUserImage() {

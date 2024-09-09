@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.MyPageRepository">
+	<select id="selectMyPageUser">
+		select * from user_tb
+		where user_id = #{userId}
+	</select>
+
+	<!-- 사용자 이름 업데이트 -->
+	<update id="updateUsername">
+		UPDATE user_tb
+		SET
+		username = #{username}
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- 사용자 닉네임 업데이트 -->
+	<update id="updateNickname">
+		UPDATE user
+		SET
+		nickname = #{nickname}
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- 사용자 핸드폰 번호 업데이트 -->
+	<update id="updatePhoneNumber">
+		UPDATE user
+		SET
+		phone_number = #{phoneNumber}
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- 사용자 이메일 업데이트 -->
+	<update id="updateEmail">
+		UPDATE user
+		SET email =
+		#{email}
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- 사용자 계좌 생성 -->
+	<update id="createAccount">
+		UPDATE user
+		SET
+		user_account = #{userAccount}
+		WHERE user_id = #{userId}
+		AND user_account IS
+		NULL
+	</update>
+
+	<!-- 사용자 계좌 업데이트 -->
+	<update id="updateAccount">
+		UPDATE user
+		SET
+		user_account = #{userAccount}
+		WHERE user_id = #{userId}
+	</update>
+
+	<!-- 프로필 사진 업데이트 -->
+	<update id="updateUserProfilePicture">
+		UPDATE user_tb
+		SET upload_file_name = #{uploadFileName}
+		WHERE user_id = #{userId}
+	</update>
+
+
+
+
+</mapper>
