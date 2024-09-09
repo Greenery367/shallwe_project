@@ -14,6 +14,7 @@ import com.example.demo.dto.CompatibilityListDTO;
 import com.example.demo.dto.MbtiDTO;
 import com.example.demo.dto.TestUser;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.FriendService;
 import com.example.demo.service.MatchService;
 import com.example.demo.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,6 +35,8 @@ public class chatTest {
 	private MatchService matchService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private FriendService friendService;
 	
 	@GetMapping("/room")
 	public String roomPage(@RequestParam("roomId")String roomId) {
@@ -80,7 +83,7 @@ public class chatTest {
 	
 	@GetMapping("/profileInfo")
 	public String getMethodName(@RequestParam("id") int id,Model model) {
-		User user = userService.findByUserID(id);
+		User user = friendService.findByUserID(id);
 		model.addAttribute("user",user);
 		return "match/userInfo";
 	}
