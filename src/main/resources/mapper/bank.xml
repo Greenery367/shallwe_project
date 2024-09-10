@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.BankRepository">
+
+
+	<!-- 사용자 계좌 존재 여부 확인 -->
+	<select id="checkAccountExists" resultType="boolean">
+		SELECT COUNT(*)
+		FROM
+		bank_tb
+		WHERE user_id = #{userId}
+		AND bank_id = #{bankId};
+	</select>
+
+	<!-- 사용자 계좌 생성 -->
+	<insert id="createAccount">
+		INSERT INTO bank_tb (user_id, bank_id,
+		account_number)
+		VALUES (#{userId}, #{bankId}, #{accountNumber});
+	</insert>
+
+	<!-- 사용자 계좌 업데이트 -->
+	<update id="updateAccount">
+		UPDATE bank_tb
+		SET account_number = #{accountNumber},
+		bank_id = #{bankId}  <!-- bank_id도 업데이트 -->
+		WHERE user_id = #{userId};
+	</update>
+
+	<!-- 은행 목록 조회 -->
+	<select id="selectAllBanks"
+		resultType="com.example.demo.dto.BankInfoDTO">
+		SELECT bank_id, bank_name
+		FROM bank_info_tb;
+	</select>
+
+	<select id="bankAccountFindByUser">
+		SELECT b.bank_id, b.account_number, bi.bank_name
+		FROM
+		user_tb u
+		JOIN bank_tb b ON u.user_id = b.user_id
+		JOIN bank_info_tb bi
+		ON b.bank_id = bi.bank_id
+		WHERE u.user_id = #{userId};
+	</select>
+
+</mapper>

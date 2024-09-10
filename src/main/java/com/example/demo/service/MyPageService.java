@@ -58,4 +58,17 @@ public class MyPageService {
 	    public boolean updateUsername(Integer userId, String username) {
 	    	return myPageRepository.updateUsername(userId, username);
 	    }
+	    
+	    public boolean updateNickname(Integer userId, String nickname) {
+	    	return myPageRepository.updateNickname(userId, nickname);
+	    }
+	    
+	    public boolean updatePhoneNumber(Integer userId, String phoneNumber) {
+	    	return myPageRepository.updatePhoneNumber(userId, phoneNumber);
+	    }
+	    
+	    public boolean updateEmail(Integer userId, String email) {
+	    	return myPageRepository.updateEmail(userId, email);
+	    }
+
 	}
