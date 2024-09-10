@@ -29,9 +29,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.dto.ApproveResponseDTO;
 import com.example.demo.dto.ReadyResponseDTO;
+import com.example.demo.repository.model.Order;
 import com.example.demo.repository.model.ReadyTossDTO;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.KakaoPayService;
+import com.example.demo.service.OrderService;
 import com.example.demo.utils.SessionUtils;
 import com.fasterxml.jackson.core.JsonParser;
 
@@ -46,6 +48,7 @@ public class CashController {
 	
 	private HttpSession httpSession;
 	private final KakaoPayService kakaoPayService;
+	private final OrderService orderService;
 	
 	/**
 	 *  캐쉬 충전 페이지
@@ -58,7 +61,7 @@ public class CashController {
 	}
 	
 	/**
-	 * 캐쉬 충전 조회 페이지
+	 * 카카오 캐쉬 충전 조회 페이지
 	 * @param txId
 	 * @param paymentId
 	 * @return
@@ -68,12 +71,11 @@ public class CashController {
 	@ResponseBody
 	public ReadyResponseDTO payCash(@PathVariable("totalAmount") String totalAmount) {
 		
-		String name = totalAmount+"원 캐쉬 충전";
-		int totalPrice = Integer.valueOf(totalAmount);
-		
-		ReadyResponseDTO readyResponseDTO = kakaoPayService.payReady(name, totalPrice);
-		
+		int totalPrice = Integer.valueOf(totalAmount); // 결제 가격
+		String orderId = orderService.makeNewOrder(1,totalPrice,1); // 가주문 생성
+		ReadyResponseDTO readyResponseDTO = kakaoPayService.payReady(totalPrice,orderId); //  결제 요청
 		SessionUtils.addAtribute("tid", readyResponseDTO.getTid());
+		
 		return readyResponseDTO;
 	}
 	
@@ -115,19 +117,25 @@ public class CashController {
         return headers;
 	}
 	
-	@GetMapping("/success")
-	private String resultPayByToss1(Model model) {
-		String status = "success";
-		model.addAttribute("status", status);
-		return "/cash/chargeResultToss";
+	/**
+	 * 결제 성공 페이지
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/result")
+	public String resultPayByToss1(@RequestParam("pg_token") String pgToken) {
+//	    Order checkOrder = orderService.checkOrder(orderId,totalAmount); // 가주문 - 주문 확인
+//	    if(checkOrder==null) {
+//	    	return "/mainPage";
+//	    }
+//        orderService.changeOrderStatus(orderId); // 가주문 - status 변경
+	    
+	    String tid = SessionUtils.getStringAttributeValue("tid");
+	    ApproveResponseDTO approveResponseDTO = kakaoPayService.payApprove(tid, pgToken);
+	    // 유저 캐쉬+
+	    return "/cash/chargeResultToss";
 	}
-	
-	@GetMapping("/fail")
-	private String resultPayByToss2(Model model) {
-		String status = "success";
-		model.addAttribute("status", status);
-		return "/cash/chargeResultToss";
-	}
+
 	
 
 }

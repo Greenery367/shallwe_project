@@ -10,14 +10,8 @@
 			<h1> 캐쉬 충전하기 </h1>
 			<img src="../static/images/cash.png"> 
 		</div>
-			<c:choose>
-				<c:if test="${status.equals('true')}">
-					<h1>결제에 성공했습니다.</h1>
-				</c:if>	
-				<c:otherwise>
-					<h1>결제에 실패했습니다.</h1>
-				</c:otherwise>
-			</c:choose>
+			<h1>결제에 성공했습니다.</h1>
+			
 		</div>
 		
 	</div>

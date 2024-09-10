@@ -77,17 +77,17 @@
     	}
     	else{
     		
-    		var cash = cashAmount.value;
+    		
     		// 카카오 결제 진행
     		if(btnValue == "kakao"){
     			// 카카오 결제 처리
     			console.log("카카오 결제 요청"+cashAmount.value);
-    			requestPaymentToKakao(cash);
+    			requestPaymentToKakao(cashAmount.value);
     			
     		// 토스 결제 진행
     		} else if (btnValue == "toss"){
     			console.log("토스 결제 요청"+cashAmount.value);
-    			requestPaymentToToss(cash);
+    			requestPaymentToToss(cashAmount.value);
     		}
     	}
     	
@@ -128,7 +128,7 @@
 		    const tossPayments = TossPayments(clientKey);
 		    const payment = tossPayments.payment({ customerKey });
 		    console.log("로깅2");
-		    async function requestPaymentByToss() {
+		    async function requestPaymentByToss(totalAmount) {
 		        console.log("로깅3");
 		        await payment.requestPayment({
 		          method: "CARD", // 카드 결제
@@ -152,6 +152,25 @@
 		          },
 		        });
 		      }
+    	}
+    	
+    	function makeTemporaryOrder(name, data){
+    		var form = document.createElement('form');
+			form.setAttribute('method', 'post');
+	         form.setAttribute("charset", "UTF-8");
+			form.setAttribute('action', '/test/make-temporary-order');
+			
+			var data = document.createElement('input');
+			data.setAttribute('type', 'hidden');
+			data.setAttribute('name', 'name');
+			data.setAttribute('amount', 'data');
+			data.setAttribute('value', JSON.stringify(answerArray));
+			form.appendChild(data);
+			console.log('');
+			console.log(JSON.stringify(answerArray));
+			
+			document.body.appendChild(form);
+			form.submit();
     	}
     	
     }
