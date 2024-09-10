@@ -318,4 +318,14 @@ create table fame_tb(
     sender_id int,
     reciever_id int
 );
+-- 뉴스,공지사항 테이블
+create table admin_content_tb(
+	id int primary key auto_increment not null,
+    title varchar(50),
+    sub_title varchar(200),
+    content text,
+    status int, -- 0: 공지사항, 1: 이벤트
+    image text,
+    created_at timestamp default now()
+);
 

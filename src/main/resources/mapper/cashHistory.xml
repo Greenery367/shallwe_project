@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.CashHistroyRepository">
+
+	<!-- 모든 캐쉬 히스토리 조회 -->
+	<select id="selectAllCashHistory" resultType="com.example.demo.repository.model.CashHistory">
+		select * from user_cash_history_tb
+	</select>
+	
+	<!-- id로 캐쉬 히스토리 조회 -->
+	<select id="selectCashHistoryById" resultType="com.example.demo.repository.model.CashHistory">
+		select * from user_cash_history_tb where user_id = #{userId}
+	</select>
+	
+	<!-- 환불 신청 내역만 조회 (미환불, 환불완료 모두 포함) -->
+	<select id="selectCashHistoryAllRefund" resultType="com.example.demo.repository.model.CashHistory">
+		select * from user_cash_history_tb where refund > 0
+	</select>
+	
+
+</mapper>

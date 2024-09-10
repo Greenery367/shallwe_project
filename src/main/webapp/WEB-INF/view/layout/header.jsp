@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>게임 친구 매칭 사이트: 셸위?</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-
-<link rel="stylesheet" href="/static/css/header.css">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="/static/css/header.css">
 </head>
 <body>
 <div class="main">
@@ -37,7 +37,7 @@
 	<div class="nav-bar">
 		<div class="menus">
 			<div class="menu-container">
-				<a href="#" class="menu">친구 찾기</a>
+				<span href="#" class="menu">친구 찾기</span>
 				<ul class="drop-down-menus-game">
 					<li>
 						<div class="recommended-user">
@@ -79,21 +79,15 @@
 							<div>롤</div>
 						</div>
 					</li>
-					<li>
-						<div class="recommended-user">
-							<button class="btn-circle"><img src="/static/images/anonymus.png"></button>
-							<div>배그</div>
-						</div>
-					</li>
 				</ul>
 			</div>
 			<p>|</p>
 
 			<div class="menu-container">
-				<a href="" class="menu">뉴스</a>
+				<a href="/notice/news-list" class="menu">뉴스</a>
 				<ul class="drop-down-menus">
 					<li><h4>공지사항</h4></li>
-					<li><h4>이벤트</h4></li>
+					<li OnClick="location.href ='/notice/news-list'" style="cursor:pointer;"><h4>뉴스</h4></li>
 				</ul>
 			</div>
 			<div class="menu-container">
