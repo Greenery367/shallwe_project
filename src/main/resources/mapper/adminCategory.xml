@@ -6,25 +6,41 @@
 	
 	<!-- 전체 카테고리 조회 -->
 	<select id="selectAllCategory">
-		select * from community_category_tb
+		select * from game_tb
 	</select>
 	
 	<!-- 카테고리 생성 -->
 	<insert id="insertCategory">
-		insert into community_category_tb(title)
-		values(#{title})
+		insert into game_tb(game_name)
+		values(#{gameName})
 	</insert>
 	
 	<!-- 카테고리 수정 -->
 	<update id="updateCategory">
-		update community_category_tb set  title = #{title} where id = #{id}
+		update game_tb set  game_name = #{gameName} where id = #{id}
 	</update>
 	
 	<!-- 카테고리 삭제 -->
 	<delete id="deleteCategoryById">
-		delete from community_category_tb where id = #{id}
+		delete from game_tb where id = #{id}
 	</delete>
-
-
+	
+	<!-- 게시글 조회 -->
+	<select id="selectAllBoard">
+		select * from board_tb
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard">
+		update board_tb set category_id = #{categoryId},
+							 title = #{title},
+							 content = #{content}, 
+							 author_id = #{authorId} where id= #{id}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoardById">
+		delete from board_tb where id = #{id}
+	</delete>
 
 </mapper>

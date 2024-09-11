@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -28,7 +29,10 @@ import org.springframework.web.client.RestTemplate;
 import com.example.demo.dto.KakaoProfile;
 import com.example.demo.dto.OAuthToken;
 import com.example.demo.dto.SignUpDTO;
+import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.EmailSendService;
 import com.example.demo.service.UserService;
 
@@ -44,6 +48,9 @@ public class UserController {
 	
 	@Autowired
 	private final UserService userService;
+	@Autowired
+	private final AdminService adminService;
+	
 	@Autowired
 	private final HttpSession session;
 	@Autowired
@@ -66,7 +73,15 @@ public class UserController {
 	 */
 	// http://localhost:8080/user/main
 	@GetMapping("/main")
-	public String mainPage() {
+	public String mainPage(Model model) {
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		return "mainPage";
 	}
 	

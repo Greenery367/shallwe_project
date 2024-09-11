@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,52 +40,49 @@
 			<div class="menu-container">
 				<a href="#" class="menu">친구 찾기</a>
 				<ul class="drop-down-menus-game">
-					<li>
-						<div class="recommended-user">
-							<button class="btn-circle"><img src="/static/images/anonymus.png"></button>
-							<div>롤</div>
-						</div>
-					</li>
-					<li>
-						<div class="recommended-user">
-							<button class="btn-circle"><img src="/static/images/anonymus.png"></button>
-							<div>배그</div>
-						</div>
-					</li>
+					<div class="game-menu-box">
+						 <c:forEach var="category" items="${categoryList}">
+							<li>
+								<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">${category.gameName}</div>
+							</li>
+						</c:forEach>
+						<li>
+							<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">기타게임</div>
+						</li>
+					</div>
 				</ul>
 			</div>
 			<div class="menu-container">
 				<a href="" class="menu">게임 강의</a>
 				<ul class="drop-down-menus-game">
-					<li>
-						<div class="recommended-user">
-							<button class="btn-circle"><img src="/static/images/anonymus.png"></button>
-							<div>롤</div>
-						</div>
-					</li>
-					<li>
-						<div class="recommended-user">
-							<button class="btn-circle"><img src="/static/images/anonymus.png"></button>
-							<div>배그</div>
-						</div>
-					</li>
+					<div class="game-menu-box">
+						 <c:forEach var="category" items="${categoryList}">
+							<li>
+								<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">${category.gameName}</div>
+							</li>
+						</c:forEach>
+						<li>
+							<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">기타게임</div>
+						</li>
+					</div>
 				</ul>
 			</div>
 			<div class="menu-container">
 				<a href="" class="menu">커뮤니티</a>
 				<ul class="drop-down-menus-game">
-					<li>
-						<div class="recommended-user">
-							<button class="btn-circle"><img src="/static/images/anonymus.png"></button>
-							<div>롤</div>
-						</div>
-					</li>
-					<li>
-						<div class="recommended-user">
-							<button class="btn-circle"><img src="/static/images/anonymus.png"></button>
-							<div>배그</div>
-						</div>
-					</li>
+					<div class="game-menu-box">
+						<li>
+							<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">자유게시판</div>
+						</li>
+						 <c:forEach var="category" items="${categoryList}">
+							<li>
+								<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">${category.gameName}</div>
+							</li>
+						</c:forEach>
+						<li>
+							<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">기타게임</div>
+						</li>
+					</div>
 				</ul>
 			</div>
 			<p>|</p>

@@ -14,7 +14,6 @@ import lombok.ToString;
 public class Category {
 	
 	private Integer id;
-	private String title;
-	private Integer numberOfBoard;
+	private String gameName;
 
 }

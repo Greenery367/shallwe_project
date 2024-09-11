@@ -22,6 +22,7 @@ import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
 
 @Service
@@ -124,6 +125,22 @@ public class AdminService {
     	adminRepository.deleteCategoryById(category.getId());
     }
     
+    // 전체 게시글 조회
+    @Transactional
+    public List<Board> selectAllBoard(){
+    	return adminRepository.selectAllBoard();
+    }
     
+    // 게시글 수정
+    @Transactional
+    public void updateBoard(Board board) {
+    	adminRepository.updateBoard(board);
+    }
+    
+    // 게시글 삭제
+    @Transactional
+    public void deleteBoardById(Board board) {
+    	adminRepository.deleteBoardById(board.getId());
+    }
     
 }

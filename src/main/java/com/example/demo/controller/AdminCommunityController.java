@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.CreateCategoryDTO;
+import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
 import com.example.demo.service.AdminService;
 
@@ -27,8 +28,9 @@ public class AdminCommunityController {
 	@GetMapping("")
 	public String adminCommunityPage(Model model){
 		List<Category> categoryList = adminService.selectAllCategory();
+		List<Board> boardList = adminService.selectAllBoard();
 		model.addAttribute("categoryList",categoryList);
-		
+		model.addAttribute("boardList", boardList);		
 		
 		return "admin/adminCommunity"; 
 	}
@@ -57,6 +59,21 @@ public class AdminCommunityController {
 	public String deleteCategoryProc(Category category) {
 		adminService.deleteCategoryById(category);
 		
+		return "redirect:/admin/community";
+	}
+	
+	// 게시글 수정 요청
+	@PostMapping("/update-board")
+	public String updateBoardProc(Board board) {
+		adminService.updateBoard(board);
+
+		return "redirect:/admin/community";
+	}
+	
+	// 게시글 삭제 요청
+	@PostMapping("/delete-board")
+	public String deleteBoardProc(Board board) {
+		adminService.deleteBoardById(board);
 		return "redirect:/admin/community";
 	}
 	

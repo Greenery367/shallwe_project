@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
 
 @Mapper
@@ -56,5 +57,12 @@ public interface AdminRepository{
 	public int updateCategory(Category category);
 	// 게시판 카테고리 삭제
 	public int deleteCategoryById(Integer id);
+	
+	// 전체 게시글 조회
+	public List<Board> selectAllBoard();
+	// 게시글 수정
+	public int updateBoard(Board board);
+	// 게시글 삭제
+	public int deleteBoardById(Integer id);
 	
 }
