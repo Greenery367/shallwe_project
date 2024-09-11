@@ -208,7 +208,7 @@
 
     // 토스 결제 요청
     function requestPaymentToToss(method, requestJson) {
-        let tossPayments = TossPayments("test_ck_Wd46qopOB89vWdgjoR73ZmM75y0v");
+        let tossPayments = TossPayments("test_ck_ALnQvDd2VJzdqzNAkgNYVMj7X41m");
         tossPayments.requestPayment(method, requestJson)
             .catch(function (error) {
                 if (error.code === "USER_CANCEL") {
