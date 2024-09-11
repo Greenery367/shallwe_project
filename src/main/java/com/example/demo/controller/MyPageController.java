@@ -14,9 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.BankDTO;
 import com.example.demo.dto.BankInfoDTO;
+import com.example.demo.dto.RecordDTO;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.BankService;
 import com.example.demo.service.MyPageService;
+import com.example.demo.service.RecordService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,12 +28,14 @@ public class MyPageController {
 
 	private final MyPageService myPageService;
 	private final BankService bankService;
+	private final RecordService recordService;
 	private final HttpSession httpSession;
 
 	@Autowired
-	public MyPageController(MyPageService myPageService, BankService bankService, HttpSession httpSession) {
+	public MyPageController(MyPageService myPageService, BankService bankService, RecordService recordService, HttpSession httpSession) {
 		this.myPageService = myPageService;
 		this.bankService = bankService;
+		this.recordService = recordService;
 		this.httpSession = httpSession;
 	}
 
@@ -149,7 +153,13 @@ public class MyPageController {
 	}
 	
 	
-	
+	/**
+	 * 계좌 수정
+	 * @param bankId
+	 * @param accountNumber
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/saveOrUpdateAccount")
     public String saveOrUpdateAccount(
     						@RequestParam("bankId") String bankId, 
@@ -167,5 +177,62 @@ public class MyPageController {
         }
         return "redirect:/my-page/" + userId;
     }
-
+	
+	@GetMapping("/charge-list")
+	public String chargeList(
+			@RequestParam("userId") Integer userId,
+			Model model
+			) {
+		User user = (User)httpSession.getAttribute("principal");
+		System.out.println("쁘아아악!!!!!!!!!!!!!!!!!!");
+		List<RecordDTO> charges = recordService.getChargeBoard(user.getUserId());
+		
+		model.addAttribute("user", user);
+		model.addAttribute("charges", charges);
+		
+		return "myPage/chargeRecord";
+	}
+	
+	@GetMapping("/exchange-list")
+	public String exchangeList(
+			@RequestParam("userId") Integer userId,
+			Model model
+			) {
+		User user = (User)httpSession.getAttribute("principal");
+		List<RecordDTO> exchanges = recordService.getExchangeBoard(user.getUserId());
+		
+		model.addAttribute("user", user);
+		model.addAttribute("exchanges", exchanges);
+		
+		return "myPage/exchangeRecord";
+	}
+	
+	@GetMapping("/spend-list")
+	public String spendList(
+			@RequestParam("userId") Integer userId,
+			Model model
+			) {
+		User user = (User)httpSession.getAttribute("principal");
+		List<RecordDTO> spends = recordService.getSpendBoard(user.getUserId());
+		
+		model.addAttribute("user", user);
+		model.addAttribute("spends", spends);
+		
+		return "myPage/spendRecord";
+	}
+	
+	@GetMapping("/refund-list")
+	public String refundList(
+			@RequestParam("userId") Integer userId,
+			Model model
+			) {
+		User user = (User)httpSession.getAttribute("principal");
+		List<RecordDTO> refunds = recordService.getRefundBoard(user.getUserId());
+		
+		model.addAttribute("user", user);
+		model.addAttribute("refunds", refunds);
+		
+		return "myPage/refundRecord";
+	}
+	
 }

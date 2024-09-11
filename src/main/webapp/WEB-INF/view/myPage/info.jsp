@@ -17,9 +17,10 @@
 
 		<h3>캐시 이력</h3>
 		<ul style="list-style-type: none; padding-left: 0;">
-			<li><a href="#">충전 이력</a></li>
-			<li><a href="#">환전 이력</a></li>
-			<li><a href="#">사용 이력</a></li>
+			<li><a href="${pageContext.request.contextPath}/my-page/charge-list?userId=${user.userId}">충전 이력</a></li>
+			<li><a href="${pageContext.request.contextPath}/my-page/exchange-list?userId=${user.userId}">환전 이력</a></li>
+			<li><a href="${pageContext.request.contextPath}/my-page/spend-list?userId=${user.userId}">사용 이력</a></li>
+			<li><a href="${pageContext.request.contextPath}/my-page/refund-list?userId=${user.userId}">환불 이력</a></li>
 		</ul>
 	</div>
 
@@ -56,19 +57,19 @@
 		<!-- 이름 수정 폼 -->
 		<form action="/my-page/update-username" method="post" onsubmit="return confirmUpdate()">
 			<div style="margin-bottom: 10px;">
-				<label>이름:</label> <input type="text" name="username" placeholder="${user.username}" />
+				<label>이름:</label> <input type="text" name="username" placeholder="${user.username}" required />
 				<button type="submit" style="margin-left: 10px;">개명</button>
 			</div>
 		</form>
 		<form action="/my-page/update-nickname" method="post" onsubmit="return confirmUpdate()">
 			<div style="margin-bottom: 10px;">
-				<label>닉네임:</label> <input type="text" name="nickname" placeholder="${user.nickname}" />
+				<label>닉네임:</label> <input type="text" name="nickname" placeholder="${user.nickname}" required />
 				<button type="submit" name="action" value="updateNickname" style="margin-left: 10px;">변경</button>
 			</div>
 		</form>
 		<form action="/my-page/update-phone-number" method="post" onsubmit="return confirmUpdate()">
 			<div style="margin-bottom: 10px;">
-				<label>핸드폰:</label> <input type="text" name="phoneNumber" placeholder="${user.phoneNumber}"  maxlength="12" oninput="formatPhoneNumber(this)" />
+				<label>핸드폰:</label> <input type="text" name="phoneNumber" placeholder="${user.phoneNumber}"  maxlength="12" oninput="formatPhoneNumber(this)" required />
 				<button type="submit" name="action" value="updatePhoneNumber" style="margin-left: 10px;">변경</button>
 			</div>
 		</form>
@@ -86,7 +87,7 @@
 						<c:forEach items="${banks}" var="bank">
 							<option value="${bank.bankId}" <c:if test="${bank.bankId == bankAccount.bankId}">selected</c:if>>${bank.bankName}</option>
 						</c:forEach>
-					</select> <label for="accountNumber">계좌 번호:</label> <input type="text" id="accountNumber" name="accountNumber" placeholder="${bankAccount.accountNumber}" maxlength="16" oninput="formatAccountNumber(this)" onkeypress="return restrictInputToNumbers(event)" />
+					</select> <label for="accountNumber">계좌 번호:</label> <input type="text" id="accountNumber" name="accountNumber" placeholder="${bankAccount.accountNumber}" maxlength="16" oninput="formatAccountNumber(this)" onkeypress="return restrictInputToNumbers(event)" required />
 					<button type="submit">수정</button>
 				</form>
 			</c:when>
@@ -98,7 +99,7 @@
 						<c:forEach items="${banks}" var="bank">
 							<option value="${bank.bankId}">${bank.bankName}</option>
 						</c:forEach>
-					</select> <label for="accountNumber">계좌 번호:</label> <input type="text" id="accountNumber" name="accountNumber" placeholder="최대 숫자 16자리 입력" maxlength="16" oninput="formatAccountNumber(this)" onkeypress="return restrictInputToNumbers(event)" />
+					</select> <label for="accountNumber">계좌 번호:</label> <input type="text" id="accountNumber" name="accountNumber" placeholder="최대 숫자 16자리 입력" maxlength="16" oninput="formatAccountNumber(this)" onkeypress="return restrictInputToNumbers(event)" required />
 					<button type="submit">생성</button>
 				</form>
 			</c:otherwise>
