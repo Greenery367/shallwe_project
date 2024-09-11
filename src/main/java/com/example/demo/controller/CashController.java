@@ -105,13 +105,24 @@ public class CashController {
 	    // 주문 세부사항을 통해 가주문 - 진주문 확인 (인증)
 	    Order checkOrderRecord = orderService.checkOrderRecord(userId,orderDetail);
 	    
-	    // 인증된 유저는 카카오 결제 요청
-	    ApproveResponseDTO approveResponseDTO = kakaoPayService.payApprove(tid, pgToken);
+	    if(checkOrderRecord != null) {
+	    	// 인증된 유저는 카카오 결제 요청
+		    ApproveResponseDTO approveResponseDTO = kakaoPayService.payApprove(tid, pgToken);
+		    
+		    // 결제 후 -> 유저 캐쉬 변경
+		    userService.updateUserCash(userId,checkOrderRecord.amount);
+		    
+		    // 주문 상태 변경
+		    orderService.changeOrderStatus(checkOrderRecord.orderId);
+		    
+		    // TODO - 캐쉬 히스토리 생성
+	    }
 	    
-	    // 결제 후 -> 유저 캐쉬 변경
-	    userService.updateUserCash(userId,checkOrderRecord.amount);
+	    else {
+	    	return "/cash/chargeFailedKakao";
+	    }
 	    
-	    // TODO - 캐쉬 히스토리 생성
+	    
 	    
 	    // 유저 캐쉬+
 	    return "/cash/chargeResultKakao";

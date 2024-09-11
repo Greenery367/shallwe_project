@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>	
 <link rel="stylesheet" href="../css/cash.css">
 
-	<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+	<script src="https://js.tosspayments.com/v1"></script>
 	<div class="main-board">
 		<div class="charge-cash-container">
 		<div class="charge-title">
@@ -50,101 +50,173 @@
 		</div>
 		
 	</div>
-	<script src="https://js.tosspayments.com/v2/standard"></script>
-  	<script>	
-  	
-  	// 약관 동의 체크박스
+  
+<script>
+    // 약관 동의 체크박스
     var chk1 = document.querySelector(".check1");
     var chk2 = document.querySelector(".check2");
-    const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
-    const secretKey = "test_sk_zXLkKEypNArWmo50nX3lmeaxYG5R";
-    
-    // 결제 진행
-    function startPayment(button){
-    	let btnValue = button.value;
-    	let cashAmount= document.querySelector('input[name="cash-btn"]:checked');
-    	
-    	// 유효성 검사 - 약관 동의
-    	if((chk1.checked==false) || (chk2.checked==false)){
-    		alert('결제 전 주의사항과 동의 내역을 확인해주세요.');
-    		return;
-    	}
-    	
-    	// 유효성 검사 - 결제 금액 선택
-    	else if(cashAmount == null){
-    		alert('결제할 금액을 선택해주세요.');
-    		return;
-    	}
-    	else{
-    		
-    		
-    		// 카카오 결제 진행
-    		if(btnValue == "kakao"){
-    			// 카카오 결제 처리
-    			console.log("카카오 결제 요청"+cashAmount.value);
-    			requestPaymentToKakao(cashAmount.value);
-    			
-    		// 토스 결제 진행
-    		} else if (btnValue == "toss"){
-    			console.log("토스 결제 요청"+cashAmount.value);
-    			requestPaymentToToss(cashAmount.value);
-    		}
-    	}
-    	
-    	
-    	
-    	// 카카오 결제 요청 
-    	function requestPaymentToKakao(totalAmount) {
-	        fetch(`http://localhost:8080/cash/send-request/kakao/`+totalAmount, {
-	            method: "POST",
-	            headers: {
-	                "Content-Type": "application/json",
-	                // "charset"은 필요하지 않음. 브라우저가 자동으로 처리
-	            },
-	            body: JSON.stringify({ "totalAmount": totalAmount }) // 요청 본문에 데이터를 포함
-	        })
-	        .then(response => response.json()) // 응답을 JSON 형식으로 변환
-	        .then(data => {
-	            // 응답에서 next_redirect_pc_url을 가져와서 리디렉션
-	            if (data.next_redirect_pc_url) {
-	                location.href = data.next_redirect_pc_url;
-	            } else {
-	                console.error('Redirect URL이 응답에 포함되어 있지 않습니다.');
-	            }
-	        })
-	        .catch(error => {
-	            // 오류를 콘솔에 출력
-	            console.error('요청 처리 중 오류 발생:', error);
-	        });
-	    }
-    	
-    	
-    	
-    	// 토스 결제 요청
-    	function requestPaymentToToss(totalAmount){
-    		
-    	}
-    	
-    	function makeTemporaryOrder(name, data){
-    		var form = document.createElement('form');
-			form.setAttribute('method', 'post');
-	         form.setAttribute("charset", "UTF-8");
-			form.setAttribute('action', '/test/make-temporary-order');
-			
-			var data = document.createElement('input');
-			data.setAttribute('type', 'hidden');
-			data.setAttribute('name', 'name');
-			data.setAttribute('amount', 'data');
-			data.setAttribute('value', JSON.stringify(answerArray));
-			form.appendChild(data);
-			console.log('');
-			console.log(JSON.stringify(answerArray));
-			
-			document.body.appendChild(form);
-			form.submit();
-    	}
-    	
+
+    // 결제 요청에 필요한 변수 선언
+    let amount = 50000;
+    let path = "/";
+    let successUrl = window.location.origin + path + "success";
+    let failUrl = window.location.origin + path + "fail";
+    let callbackUrl = window.location.origin + path + "va_callback";
+    let orderId = new Date().getTime();
+
+    let jsons = {
+        "card": {
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": "토스 티셔츠 외 2건",
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": "박토스",
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "useInternationalCardOnly": false,
+            "flowMode": "DEFAULT",
+            "discountCode": null,
+            "appScheme": null
+        },
+        "vaccount": { //가상계좌 결제창
+
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": "토스 티셔츠 외 2건",
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "validHours": 72,
+            "virtualAccountCallbackUrl": callbackUrl,
+            "customerName": "박토스",
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "cashReceipt": {
+                "type": "소득공제"
+            },
+            "useEscrow": false
+
+        },
+        "transfer": { //계좌이체 결제창
+
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": "토스 티셔츠 외 2건",
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "customerName": "박토스",
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "cashReceipt": {
+                "type": "소득공제"
+            },
+            "useEscrow": false
+
+        },
+        "phone": { // 휴대폰 결제창
+
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": "토스 티셔츠 외 2건",
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "mobileCarrier": null
+
+        },
+
+        "certificate": { //상품권 결제창
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": "토스 티셔츠 외 2건",
+            "successUrl": successUrl,
+            "failUrl": failUrl
+        },
+
+        "bookcert": { //도서문화상품권 결제창
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": "토스 티셔츠 외 2건",
+            "successUrl": successUrl,
+            "failUrl": failUrl
+        },
+        "gamecert": { // 게임문화상품권 결제창
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": "토스 티셔츠 외 2건",
+            "successUrl": successUrl,
+            "failUrl": failUrl
+        }
+
+        // 다른 결제 방법 정의는 생략
+    };
+
+    // 결제 진행 함수
+    function startPayment(button) {
+        let btnValue = button.value;
+        let cashAmount = document.querySelector('input[name="cash-btn"]:checked');
+
+        // 유효성 검사 - 약관 동의
+        if (!chk1.checked || !chk2.checked) {
+            alert('결제 전 주의사항과 동의 내역을 확인해주세요.');
+            return;
+        }
+
+        // 유효성 검사 - 결제 금액 선택
+        if (!cashAmount) {
+            alert('결제할 금액을 선택해주세요.');
+            return;
+        }
+
+        // 결제 진행
+        if (btnValue == "kakao") {
+            console.log("카카오 결제 요청" + cashAmount.value);
+            requestPaymentToKakao(cashAmount.value);
+        } else if (btnValue == "toss") {
+            console.log("토스 결제 요청" + cashAmount.value);
+            requestPaymentToToss('gamecert', jsons.card);
+        }
     }
-    
-    </script>
+
+    // 카카오 결제 요청
+    function requestPaymentToKakao(totalAmount) {
+        fetch(`http://localhost:8080/cash/send-request/kakao/` + totalAmount, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ "totalAmount": totalAmount })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.next_redirect_pc_url) {
+                location.href = data.next_redirect_pc_url;
+            } else {
+                console.error('Redirect URL이 응답에 포함되어 있지 않습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('요청 처리 중 오류 발생:', error);
+        });
+    }
+
+    // 토스 결제 요청
+    function requestPaymentToToss(method, requestJson) {
+        let tossPayments = TossPayments("test_ck_Wd46qopOB89vWdgjoR73ZmM75y0v");
+        tossPayments.requestPayment(method, requestJson)
+            .catch(function (error) {
+                if (error.code === "USER_CANCEL") {
+                    alert('유저가 취소했습니다.');
+                } else {
+                    alert(error.message);
+                }
+            });
+    }
+</script>
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>	
