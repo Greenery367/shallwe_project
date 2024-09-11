@@ -95,7 +95,7 @@
     	
     	// 카카오 결제 요청 
     	function requestPaymentToKakao(totalAmount) {
-	        fetch(`http://localhost:8080/cash/send-request-kakao/`+totalAmount, {
+	        fetch(`http://localhost:8080/cash/send-request/kakao/`+totalAmount, {
 	            method: "POST",
 	            headers: {
 	                "Content-Type": "application/json",
@@ -122,36 +122,7 @@
     	
     	// 토스 결제 요청
     	function requestPaymentToToss(totalAmount){
-    		console.log("로깅1");
-    		const clientKey = "test_ck_ALnQvDd2VJzdqzNAkgNYVMj7X41m";
-		    const customerKey = "zS_QRvhJpHd1yF22lCg8f";
-		    const tossPayments = TossPayments(clientKey);
-		    const payment = tossPayments.payment({ customerKey });
-		    console.log("로깅2");
-		    async function requestPaymentByToss(totalAmount) {
-		        console.log("로깅3");
-		        await payment.requestPayment({
-		          method: "CARD", // 카드 결제
-		          amount: {
-		            currency: "KRW",
-		            value: totalAmount,
-		          },
-		          orderId: "0chFSksC-2fuxtUOhm7b6", // 고유 주분번호
-		          orderName: "토스 티셔츠 외 2건",
-		          successUrl: window.location.origin + "/success", // 결제 요청이 성공하면 리다이렉트되는 URL
-		          failUrl: window.location.origin + "/fail", // 결제 요청이 실패하면 리다이렉트되는 URL
-		          customerEmail: "customer123@gmail.com",
-		          customerName: "김토스",
-		          customerMobilePhone: "01012341234",
-		          // 카드 결제에 필요한 정보
-		          card: {
-		            useEscrow: false,
-		            flowMode: "DEFAULT", // 통합결제창 여는 옵션
-		            useCardPoint: false,
-		            useAppCardOnly: false,
-		          },
-		        });
-		      }
+    		
     	}
     	
     	function makeTemporaryOrder(name, data){

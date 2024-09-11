@@ -14,4 +14,7 @@ public interface UserRepository {
 	public User findById(@Param("id")String id);
 	public User findByEmail(@Param("email")String email);
 	public int updatePasswordByEmail(@Param("password")String password, @Param("email")String email);
+	
+	// 유저 캐쉬 변경
+	public void updateCurrentCash(@Param("userId")int userId, @Param("amount")Long amount);
 }

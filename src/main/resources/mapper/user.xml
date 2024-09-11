@@ -21,7 +21,10 @@
 		where email = #{email}
 	</update>
 	
-	
+	<update id="updateCurrentCash">
+		update user_tb set current_cash = #{amount}
+		where user_id = #{userId}
+	</update>
 	
 	<insert id="insert">
 		insert into user_tb(id, password, username, nickname, birth_date, email, phone_number)

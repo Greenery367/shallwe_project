@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,8 +36,12 @@ public class AdminRefundController {
 	private final RefundService refundService;
 	
 	
+	/**
+	 * 환불 페이지 접속
+	 * @param model
+	 * @return
+	 */
 	// http://localhost:8080/admin/refund/
-	// 환불 페이지 접속
 	@GetMapping("/")
 	public String refundBoardPage(Model model) {
 		List<Refund> refundList = refundService.getAllRefund(4, 0);
@@ -44,13 +49,19 @@ public class AdminRefundController {
 		return "/admin/adminRefund";
 	}
 	
-	// 환불 페이지 처리
+	/**
+	 * 환불 처리
+	 * @param refundData
+	 * @return
+	 */
 	@PostMapping("/send-request")
 	@ResponseBody
-	public ResponseEntity<RefundResponseDTO> postMethodName(@RequestParam("refundInfo") Refund refundData) {
-		System.out.println("콘트롤러1");
+	public ResponseEntity<RefundResponseDTO> postMethodName(@RequestBody Refund refundData) {
 		RefundResponseDTO refundResponseDTO = refundService.readyRefund(refundData);
-		return new ResponseEntity<>(refundResponseDTO,HttpStatus.ok);
+		
+		System.out.println(refundResponseDTO);
+		
+		return new ResponseEntity<>(refundResponseDTO,HttpStatus.OK);
 	}
 	
 	

@@ -45,6 +45,10 @@ public class UserService {
 	}
 	
 	
+	public void updateUserCash(int userId, Long amount) {
+		userRepository.updateCurrentCash(userId,amount);
+		return;
+	}
 	
 	
 	public boolean isIdAvailable(String id) {

@@ -23,23 +23,30 @@ public class RefundService {
 	@Autowired
 	public RefundRepository refundRepository;
 	
-	// 모든 환불 신청 내역 조회
+	/**
+	 * 카카오페이 - 환불 요청
+	 * @param limit
+	 * @param offset
+	 * @return
+	 */
 	public List<Refund> getAllRefund(Integer limit, Integer offset) {
 		List<Refund> refundList = refundRepository.selectAllRefund(limit, offset);
 		return refundList;
 	}
 
-	// 카카오 서버 요청
+	/**
+	 * 카카오 페이 - 환불 처리
+	 * @param refund
+	 * @return
+	 */
 	public com.example.demo.dto.RefundResponseDTO readyRefund(Refund refund) {
 		Map<String,String> parameters = new HashMap<>();
-		System.out.println("로깅1");
 		parameters.put("cid", "TC0ONETIME");
-		parameters.put("tid", "T1234567890123456789");
-		parameters.put("cancel_amount", "2200");
-		parameters.put("cancel_tax_free_amount", "2200");
-		parameters.put("cancel_vat_amount", "2200");
-		parameters.put("cancel_available_amount","2200");
-		System.out.println("로깅2");
+		parameters.put("tid", "T6e0e5aa69e83c956d12");
+		parameters.put("cancel_amount", "3000");
+		parameters.put("cancel_tax_free_amount", "0");
+		parameters.put("cancel_vat_amount", "0");
+		parameters.put("cancel_available_amount","3000");
 		
 		HttpEntity<Map<String,String>> requestEntity = new HttpEntity(parameters,this.getHeaders());
 		
@@ -52,6 +59,10 @@ public class RefundService {
         return refundResponse;
 	}
 	
+	/**
+	 * 헤더 생성
+	 * @return
+	 */
 	private org.springframework.http.HttpHeaders getHeaders(){
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
 		headers.set("Authorization", "SECRET_KEY DEVA5A12588C57F001FADBB1F09F61A652DBADF2");

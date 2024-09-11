@@ -34,6 +34,7 @@
 	</div>
 	<script>
 		function decideRefund(button){
+			console.log(button.value);
 			var refundData = button.value;
 			 fetch(`http://localhost:8080/admin/refund/send-request`, {
 		            method: "POST",
@@ -41,18 +42,24 @@
 		                "Content-Type": "application/json",
 		                // "charset"은 필요하지 않음. 브라우저가 자동으로 처리
 		            },
-		            body: JSON.stringify({ id : button.getAttribute('id'),
-		            						orderId : button.getAttribute('orderId'),
-		            						userId : button.getAttribute('userId'),
-		            						reason : button.getAttribute('reason'),
-		            						createdAt : button.getAttribute('createdAt'),
-		            						status : button.getAttribute('status')
-		            }) // 요청 본문에 데이터를 포함
+		            body: JSON.stringify({refundInfo : button.value}) // 요청 본문에 데이터를 포함
 		        })
-		        .then(response => response.json()) // 응답을 JSON 형식으로 변환
+		        .then(response => {
+		            if (!response.ok) {
+		                return response.json().then(err => {
+		                    console.error('Error response from server:', err);
+		                    throw new Error(err.message || 'Network response was not ok');
+		                });
+		            }
+		            return response.json(); // Parse the response JSON
+		        })
+		        .then(data => {
+		            console.log('Refund request successful:', data); // Handle the success response
+		            alert('Refund request sent successfully!');
+		        })
 		        .catch(error => {
-		            // 오류를 콘솔에 출력
-		            console.error('요청 처리 중 오류 발생:', error);
+		            console.error('Error processing request:', error); // Log the error to the console
+		            alert('An error occurred while sending the refund request.');
 		        });
 		}
 	</script>

@@ -10,7 +10,7 @@
 	
 	<select id="checkOrder"  resultType="com.example.demo.repository.model.Order">
 		select * from order_tb
-		where order_id = #{orderId} and amount = #{totalAmount}
+		where user_id = #{userId} and order_id = #{orderId} and amount = #{totalAmount} 
 	</select>
 	
 	<update id="updateOrderStatus">
@@ -18,5 +18,4 @@
 		set status = '1'
 		where order_id = #{orderId}
 	</update>
-
 </mapper>
