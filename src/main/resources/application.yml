@@ -5,11 +5,6 @@ server:
       charset: utf-8
       force: true
 
-naver:
-  request-token-uri: https://nid.naver.com/oauth2.0/token
-  client-id: L2nqlUqxr9srIFoflYqq
-  client-secret: 44d4mAxRwE
-
 spring:
 
   data:
@@ -48,8 +43,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: secondclover714@gmail.com
-    password: pawf rjzd mnwd ptsq
+    username: # 이메일 인증 용 gmail 정보 
+    password: # 이메일 인증 용 mail api pw 정보 
     properties:
       mail:
         transport:
@@ -78,3 +73,22 @@ file:
 
 tenco:
   key: 07f5efbd3004db57fcd53846050461b203e984faa9d957285aa26f8b
+
+# 소셜 로그인 관련 정보  
+googleClientId:
+  key: # 구글 클라이언트 아이디
+    
+googleClientSecret:
+  key: # 구글 클라이언트 시크릿
+
+kakaoClientId:
+  key: # 카카오 클라이언트 아이디
+
+naverClientId:
+  key: # 네이버 클라이언트 아이디
+    
+naverClientSecret:
+  key: # 네이버 클라이언트 시크릿 
+
+  
+  

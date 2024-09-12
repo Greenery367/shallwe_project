@@ -50,13 +50,8 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-<<<<<<< HEAD:src/main/java/com/example/demo/controller/userController.java
 public class userController {
 	
-=======
-public class UserController {
-
->>>>>>> JY-5:src/main/java/com/example/demo/controller/UserController.java
 	@Autowired
 	private final UserService userService;
 	@Autowired
@@ -65,15 +60,30 @@ public class UserController {
 	private final PasswordEncoder passwordEncoder;
 	@Autowired
 	private final EmailSendService emailSendService;
+	
 	private Integer authNumber;
-
+	
+	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	Random random = new Random();
 
 	@Value("${tenco.key}")
 	private String tencoKey;
 
+	@Value("${googleClientId.key}")
+	private String googleClientId;
+	
+	@Value("${googleClientSecret.key}")
+	private String googleClientSecret;
 
+	@Value("${kakaoClientId.key}")
+	private String kakaoClientId;
+	
+	@Value("${naverClientId.key}")
+	private String naverClientId;
+	
+	@Value("${naverClientSecret.key}")
+	private String naverClientSecret;
 	
 	
 	/**
@@ -304,7 +314,7 @@ public class UserController {
 
 		MultiValueMap<String, String> params1 = new LinkedMultiValueMap<>();
 		params1.add("grant_type", "authorization_code");
-		params1.add("client_id", "61e5a7465f3248de0332e984c98de103");
+		params1.add("client_id", kakaoClientId);
 		params1.add("redirect_uri", "http://localhost:8080/user/kakao");
 		params1.add("code", code);
 		HttpEntity<MultiValueMap<String, String>> reqKakaoMessage = new HttpEntity<>(params1, header1);
@@ -366,8 +376,6 @@ public class UserController {
 	public String getNaverLogin(@RequestParam(name = "code") String code, @RequestParam(name = "state") String state,
 	                            Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 
-	    String clientId = "L2nqlUqxr9srIFoflYqq";
-	    String clientSecret = "44d4mAxRwE";
 	    String redirectURI = URLEncoder.encode("http://localhost:8080/user/naver", "UTF-8");
 	    String apiURL = "https://nid.naver.com/oauth2.0/token";
 
@@ -378,8 +386,8 @@ public class UserController {
 
 	    MultiValueMap<String, String> params1 = new LinkedMultiValueMap<>();
 	    params1.add("grant_type", "authorization_code");
-	    params1.add("client_id", clientId);
-	    params1.add("client_secret", clientSecret);
+	    params1.add("client_id", naverClientId);
+	    params1.add("client_secret", naverClientSecret);
 	    params1.add("redirect_uri", redirectURI);
 	    params1.add("code", code);
 	    params1.add("state", state);
@@ -421,8 +429,8 @@ public class UserController {
 
 		MultiValueMap<String, String> params1 = new LinkedMultiValueMap<>();
 		params1.add("grant_type", "authorization_code");
-		params1.add("client_id", "310509781431-ianh0bki0s8pg729fnhtmqqujthsjcqt.apps.googleusercontent.com");
-		params1.add("client_secret", "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");
+		params1.add("client_id", googleClientId);
+		params1.add("client_secret", googleClientSecret);
 		params1.add("redirect_uri", "http://localhost:8080/user/google");
 		params1.add("code", code);
 		HttpEntity<MultiValueMap<String, String>> reqGoogleMessage = new HttpEntity<>(params1, header1);
