@@ -161,5 +161,11 @@ public class AdminService {
     	return adminRepository.selectCommentByPostId(postId);
     }
     
+    // 댓글 삭제 기능
+    @Transactional
+    public void deleteCommentById(AdminSelectCommentDTO dto) {
+    	adminRepository.deleteCommentById(dto.getId());
+    }
+    
     
 }

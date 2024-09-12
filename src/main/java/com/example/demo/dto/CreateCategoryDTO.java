@@ -14,7 +14,7 @@ import lombok.ToString;
 public class CreateCategoryDTO {
 	
 	private Integer id;
-	private String title;
+	private String gameName;
 	private Integer numberOfBoard;
 
 }

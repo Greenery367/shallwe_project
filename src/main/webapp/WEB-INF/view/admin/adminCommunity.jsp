@@ -37,8 +37,8 @@
 	<p>카테고리 생성</p>
 	<form action="/admin/community/insert-category" method="post" class="advertise">
 		<div class="form-group">
-			<label for="gameName">카테고리명</label> 
-			<input type="text" id="gameName" name="gameName" value="사이퍼즈">
+			<label for="gameName">카테고리명</label>
+			<input type="text" id="gameName" name="gameName" value="사이퍼즈" placeholder="게임이름을 입력해주세요">
 		</div>
 		<button type="submit">카테고리추가</button>
 	</form>
@@ -90,7 +90,7 @@
 						<td>${board.good}</td>
 						<td>${board.createdAt}</td>
 						<td><button onclick="openWindow(${board.id})">게시글 보기 (댓글 관리)</button> / 
-						<form action="/admin/community/delete-board" method="post">
+						<form action="/admin/community/detail/delete-board" method="post">
 								<input type="hidden" id="id" name="id" value="${board.id}">
 							<button type="submit">삭제</button>
 							</form></td>

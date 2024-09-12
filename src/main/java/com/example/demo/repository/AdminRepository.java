@@ -71,4 +71,7 @@ public interface AdminRepository{
 	public Board selectBoardById(@Param("id") Integer id);
 	// 게시글 하나의 댓글 전체 조회
 	public List<AdminSelectCommentDTO> selectCommentByPostId(@Param("postId") Integer postId);
+
+	// 댓글 삭제 기능
+	public int deleteCommentById(Integer id);
 }

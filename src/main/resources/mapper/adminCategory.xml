@@ -57,4 +57,8 @@
 	<select id="selectCommentByPostId" resultType="com.example.demo.dto.AdminSelectCommentDTO">
 		select * from comment_tb where post_id =#{postId}
 	</select>
+	
+	<delete id="deleteCommentById">
+		delete from comment_tb where id = #{id}
+	</delete>
 </mapper>

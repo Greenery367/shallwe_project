@@ -63,10 +63,10 @@ public class AdminCommunityController {
 	
 	// 카테고리 추가 요청
 	@PostMapping("/insert-category")
-	public String insertCategoryProc(@RequestParam("title") String title) {
+	public String insertCategoryProc(@RequestParam("gameName") String gameName) {
 		CreateCategoryDTO dto = new CreateCategoryDTO();
 		
-		dto.setTitle(title);
+		dto.setGameName(gameName);
 		adminService.insertCategory(dto);
 		
 		return "redirect:/admin/community";
@@ -101,6 +101,14 @@ public class AdminCommunityController {
 	public String deleteBoardProc(Board board) {
 		adminService.deleteBoardById(board);
 		return "redirect:/admin/community";
+	}
+	
+	// 댓글 삭제 요청
+	@PostMapping("/detail/delete-comment")
+	public String deleteCommentById(AdminSelectCommentDTO dto) {
+		adminService.deleteCommentById(dto);
+		
+		return "redirect:/admin/community/detail";
 	}
 	
 	

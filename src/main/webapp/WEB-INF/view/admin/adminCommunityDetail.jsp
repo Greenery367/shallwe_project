@@ -132,7 +132,11 @@
 								<td>${comment.author}</td>
 								<td>${comment.content}</td>
 								<td>${comment.createdAt}</td>
-								<td>블라인드 / 삭제</td>
+								<td>블라인드 /
+								<form action="/admin/community/detail/delete-comment" method="post">
+								<input type="hidden" id="id" name="id" value="${comment.id}">
+								<button type="submit">삭제</button>
+								</form></td>
 							</tr>
 						</c:forEach>
 						</tbody>
