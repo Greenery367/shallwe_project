@@ -42,7 +42,7 @@
 	        const messageContent = document.createElement("div");
 			myMessage.classList.add("chat-message");
 			messageContent.classList.add("my-message");
-	        profileImage.src = "/images/uploads/" + `${principal.uploadFileName}`;
+	        profileImage.src = "/images/" + `${principal.uploadFileName}`;
 	        profileImage.alt = "/images/fukuoka4.gif";
 	        profileImage.classList.add("myProfile-image");
 	        textContent.innerText = input.value;
@@ -60,7 +60,7 @@
 			        profileBox.style.left = x +"px";
 			        profileBox.style.top = y +"px";
 			        document.querySelector(".profile-info").firstChild.
-			        setAttribute("onclick", "window.open('/chat/profileInfo?name=" + `${principal.nickname}` + "')");
+			        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
 			        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
 			        event.stopPropagation(); // 클릭 이벤트 전파 방지
 			        document.querySelector(".close").addEventListener("click", function() {
@@ -86,7 +86,8 @@
 		
     	// 프로필 이미지를 생성
         const profileImage = document.createElement("img");
-        profileImage.src = "/images/uploads/" + message.uploadFileName;
+    	console.log(message.uploadFileName);
+        profileImage.src = "/images/" + message.uploadFileName;
         profileImage.alt = "Profile Image";
         profileImage.classList.add("profile-image");
 
@@ -99,7 +100,7 @@
 	        profileBox.style.top = y +"px";
 	        console.log(message.name);
 	        document.querySelector(".profile-info").firstChild.
-	        setAttribute("onclick", "window.open('/chat/profileInfo?name=" + message.name + "')");
+	        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + message.id + "')");
 	        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
 	        event.stopPropagation(); // 클릭 이벤트 전파 방지
 	        document.querySelector(".close").addEventListener("click", function() {

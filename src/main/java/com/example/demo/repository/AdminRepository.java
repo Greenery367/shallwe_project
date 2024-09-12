@@ -7,10 +7,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.dto.CreateAdvertiseDTO;
+import com.example.demo.repository.model.Admin;
 import com.example.demo.repository.model.Advertise;
 
 @Mapper
 public interface AdminRepository{
+	
+	// id로 어드민 테이블 조회
+	public Admin findbyId(String adminId);
 	
 	// 전체 유저수
 	public int countNumberOfUser();

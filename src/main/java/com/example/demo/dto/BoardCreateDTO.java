@@ -14,7 +14,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class BoardCreateDTO {
-	
+	private int userId;
 	private int id;
 	private int categoryId;
 	private String title;

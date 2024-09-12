@@ -138,6 +138,12 @@ function checkId() {
     xhr.send('id=' + encodeURIComponent(id));
 }
 
+form.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 엔터키로 폼 제출 막기
+        }
+    });
+
 // 닉네임 중복 체크 함수
 function checkNickname() {
     const nickname = document.getElementById('nickname').value;

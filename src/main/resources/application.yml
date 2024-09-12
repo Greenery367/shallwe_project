@@ -5,7 +5,13 @@ server:
       charset: utf-8
       force: true
 
+naver:
+  request-token-uri: https://nid.naver.com/oauth2.0/token
+  client-id: L2nqlUqxr9srIFoflYqq
+  client-secret: 44d4mAxRwE
+
 spring:
+
   data:
     redis:
       host: localhost
@@ -14,7 +20,6 @@ spring:
     resources:
       static-locations:
         - classpath:/static/ # 애플리케이션의 resources/static 디렉토리에서 정적 자원을 찾습니다.
-
   mvc:
     view:
       prefix: /WEB-INF/view/

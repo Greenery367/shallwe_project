@@ -10,6 +10,12 @@ function debounce(func, timeout = 300) {
         }, timeout);
     };
 }
+
+form.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 엔터키로 폼 제출 막기
+        }
+    });
 // 이메일 존재 체크 함수
 function checkEmail(callback) {
     var emailBody = document.querySelector('#emailBody').value;

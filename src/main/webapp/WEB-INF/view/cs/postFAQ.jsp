@@ -18,5 +18,6 @@
 		<button type="submit">작성 완료</button>
 	</form>
 </div>
-
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+ <script type="text/javascript" src="/lib/smarteditor2-2.9.2/workspace/js/service/HuskyEZCreator.js"></script>
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>

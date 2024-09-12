@@ -76,7 +76,7 @@
 		        profileBox.style.left = x + "px";
 		        profileBox.style.top = y + "px";
 		        document.querySelector(".profile-info").firstChild.
-				setAttribute("onclick",`window.open("/chat/profileInfo?name=${principal.nickname}")`);
+				setAttribute("onclick",`window.open("/chat/profileInfo?id=${principal.id}")`);
 		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
 		        event.stopPropagation(); // 클릭 이벤트 전파 방지
 		    });
@@ -168,7 +168,7 @@
             		button.disabled = true;
             		const opponent = JSON.parse(event.data);
             		const profileImage = document.createElement("img");
-                    profileImage.src = "/images/uploads/" + opponent.uploadFileName;
+                    profileImage.src = "/images/" + opponent.uploadFileName;
                     profileImage.alt = "Profile Image";
                     profileImage.classList.add("profile-image");
                     profile.appendChild(profileImage);
@@ -180,10 +180,10 @@
                 	opponentProfilePic.addEventListener('click', function(event) {
                 		const x = event.clientX - 160;
         		        const y = event.offsetY + 30;
-        		        profileBox.style.left = x +"px";
-        		        profileBox.style.top = y +"px";
+        		        profileBox.style.left = x + "px";
+        		        profileBox.style.top = y + "px";
         		        document.querySelector(".profile-info").firstChild.
-        		        setAttribute("onclick", "window.open('/chat/profileInfo?name=" + opponent.nickname + "')");
+        		        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + opponent.id + "')");
         		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
         		        event.stopPropagation(); // 클릭 이벤트 전파 방지
         		        document.querySelector(".close").addEventListener("click", function() {
