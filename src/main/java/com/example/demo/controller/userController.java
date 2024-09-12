@@ -463,5 +463,6 @@ public class userController {
 		session.setAttribute("principal", oldUser);
 		return "redirect:/user/main";
 	}
+	// git push protection error debug
 	
 }
