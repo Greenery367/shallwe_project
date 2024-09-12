@@ -88,6 +88,10 @@
 		select * from advertise_tb where place_id = 3 and status = 1
 	</select>
 	
-	
+	<!-- 관리자 로그인 - 입력받은 id로 관리자 테이블 조회하여 관리자 정보 반환 -->
+	<select id="findbyId" resultType="com.example.demo.repository.model.Admin">
+		select * from admin_tb where admin_id = #{adminId}
+	</select>
+
 
 </mapper>

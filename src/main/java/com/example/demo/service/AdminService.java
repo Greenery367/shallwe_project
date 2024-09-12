@@ -22,6 +22,7 @@ import com.example.demo.dto.AdminSelectCommentDTO;
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.AdminRepository;
+import com.example.demo.repository.model.Admin;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
@@ -39,6 +40,11 @@ public class AdminService {
 	@Value("${file.advertise-dir}")
 	private String advertiseDir;
 	
+	
+	public Admin searchId(String adminId) {
+		return adminRepository.findbyId(adminId);
+	}
+
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }

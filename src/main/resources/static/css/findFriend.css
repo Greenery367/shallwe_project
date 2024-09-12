@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/* 공통 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* 검색 박스 스타일 */
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.search-box form {
+    display: flex;
+    align-items: center;
+}
+
+.search-box input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-box input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-box input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 검색 결과 스타일 */
+.search-result {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user-profile {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.user-info {
+    margin-top: 10px;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 페이지네이션 스타일 */
+.page {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.page form {
+    margin: 0 5px;
+}
+
+.page button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.page button:hover {
+    background-color: #0056b3;
+}
+
+.pagination {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination .current-page {
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.previous, .next {
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 0 5px;
+}
+
+.previous:hover, .next:hover {
+    background-color: #0056b3;
+}

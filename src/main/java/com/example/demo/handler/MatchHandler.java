@@ -27,6 +27,7 @@ public class MatchHandler extends TextWebSocketHandler{
 	
 	@Autowired
 	private ChatService chatService;
+	
 	private int count = 0; // 채팅방을 만들기위한 카운트
 	
 	@Override
@@ -36,6 +37,7 @@ public class MatchHandler extends TextWebSocketHandler{
 				.nickname(user.getNickname()).id(user.getId()).build();
 		CLIENTS.remove(session.getId());
 		MBTIS.remove(session.getId());
+		WANTED.remove(session.getId());
 		// 만약 매치가 성사되고 나갔을 경우 상대에게 나갔음을 알림
 		if(MATCHED.get(test) != null) {
 			MATCHED.get(test).sendMessage(new TextMessage("quit"));
@@ -101,6 +103,8 @@ public class MatchHandler extends TextWebSocketHandler{
 				MBTIS.remove(session.getId()); // 위와 같음
 				CLIENTS.remove(key);
 				MBTIS.remove(key);
+				WANTED.remove(session.getId());
+				WANTED.remove(key);
 				break;
 			}
 		}

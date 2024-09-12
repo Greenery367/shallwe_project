@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,12 @@ public class ChatService {
 	
 	public void joinChatRoom(JoinRoomDTO joinRoomDTO) {
 		chatRepository.joinRoom(joinRoomDTO);
+	}
+	
+	public List<Integer>getUserList(int roomId) {
+		List<Integer>userList = null;
+		userList = chatRepository.getUserList(roomId);
+		return userList;
 	}
 	
 	public int selectRoomId() {
