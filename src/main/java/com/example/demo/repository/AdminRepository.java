@@ -6,11 +6,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.demo.dto.AdminSelectCommentDTO;
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
+import com.example.demo.repository.model.Comment;
 
 @Mapper
 public interface AdminRepository{
@@ -65,4 +67,8 @@ public interface AdminRepository{
 	// 게시글 삭제
 	public int deleteBoardById(Integer id);
 	
+	// 게시글 id로 게시글 하나 조회
+	public Board selectBoardById(@Param("id") Integer id);
+	// 게시글 하나의 댓글 전체 조회
+	public List<AdminSelectCommentDTO> selectCommentByPostId(@Param("postId") Integer postId);
 }

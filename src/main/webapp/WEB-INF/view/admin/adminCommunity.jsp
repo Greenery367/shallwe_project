@@ -89,7 +89,7 @@
 						<td>${board.viewNum}</td>
 						<td>${board.good}</td>
 						<td>${board.createdAt}</td>
-						<td>게시글보기(댓글관리) / 
+						<td><button onclick="openWindow(${board.id})">게시글 보기 (댓글 관리)</button> / 
 						<form action="/admin/community/delete-board" method="post">
 								<input type="hidden" id="id" name="id" value="${board.id}">
 							<button type="submit">삭제</button>
@@ -122,15 +122,14 @@
 		<button type="submit">카테고리수정</button>
 	</form>
 	 <script>
-        function openWindow() {
-            // 새 창을 열 때의 옵션 설정
-            // TODO - 주소수정 필요
-            var url = '${pageContext.request.contextPath}/admin/advertise';
-            var name = '관리자 - 게시글, 댓글 수정'; // 창의 이름
-            var specs = 'width=1000,height=900,left=100,top=100'; // 창의 크기와 위치 설정
+	 function openWindow(boardId) {
+		    // 데이터 전달을 위한 URL 생성
+		    var url = '${pageContext.request.contextPath}/admin/community/detail?id=' + encodeURIComponent(boardId);
+		    var name = '관리자 - 게시글, 댓글 수정';
+		    var specs = 'width=1000,height=900,left=100,top=100';
 
-            window.open(url, name, specs);
-        }
+		    window.open(url, name, specs);
+		}
     </script>
 
 

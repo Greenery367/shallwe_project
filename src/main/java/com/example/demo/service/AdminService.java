@@ -18,12 +18,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.dto.AdminSelectCommentDTO;
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
+import com.example.demo.repository.model.Comment;
 
 @Service
 public class AdminService {
@@ -131,6 +133,8 @@ public class AdminService {
     	return adminRepository.selectAllBoard();
     }
     
+    
+    
     // 게시글 수정
     @Transactional
     public void updateBoard(Board board) {
@@ -142,5 +146,20 @@ public class AdminService {
     public void deleteBoardById(Board board) {
     	adminRepository.deleteBoardById(board.getId());
     }
+    
+    // 게시글 하나 조회 
+    @Transactional
+    public Board selectBoardById(Integer id){
+    	Board board = adminRepository.selectBoardById(id);
+    	
+    	return board;
+    }
+    
+    // 게시글 id 로 댓글 조회
+    @Transactional
+    public List<AdminSelectCommentDTO> selectCommentByPostId(Integer postId){
+    	return adminRepository.selectCommentByPostId(postId);
+    }
+    
     
 }
