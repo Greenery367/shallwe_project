@@ -11,6 +11,15 @@
 		select * from user_tb
 		where nickname = #{nickname}
 	</select>
+	<select id="findLikeNicknameSize" resultType="Integer">
+		select count(*) from user_tb
+		where nickname like %#{nickname}%
+	</select>
+	<select id="findLikeNickname" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where nickname like %#{nickname}%
+		orders limit #{limit} offset #{offset}
+	</select>
 	<select id="findByEmail" resultType="com.example.demo.repository.model.User">
 		select * from user_tb
 		where email = #{email}
@@ -20,8 +29,39 @@
 		update user_tb set password = #{password}
 		where email = #{email}
 	</update>
+	<select id="findByUserId" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where user_id = #{id}
+	</select>
 	
+	<insert id="insertWatingFriend">
+		insert into waiting_friend_tb(user_id,friend_id)
+		values(#{userId}, #{friendId})
+	</insert>
 	
+	<insert id="addFriendById">
+		insert into friend_tb(user_id,friend_id)
+		values(#{userId}, #{friendId}),
+			  (#{friendId}, #{userId})
+	</insert>
+	
+	<delete id="removeFriendById">
+		delete from friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</delete>
+	
+	<delete id="removeWaitFriendById">
+		delete from waiting_friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</delete>
+	
+	<select id="checkWaitFriend" resultType="Integer">
+		select user_id from waiting_friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</select>
 	
 	<insert id="insert">
 		insert into user_tb(id, password, username, nickname, birth_date, email, phone_number)

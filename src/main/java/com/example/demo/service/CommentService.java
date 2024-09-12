@@ -28,7 +28,7 @@ public class CommentService {
     public void createComment(Comment comment) {
     	
     	try {
-    		Integer userId = 1; // 현재 하드코딩된 부분을 수정해야 함
+    		Integer userId = comment.getAuthorId(); // 현재 하드코딩된 부분을 수정해야 함
     		comment.setAuthorId(userId);
     		
     		commentRepository.InsertComment(comment.getPostId(), comment.getContent(), comment.getAuthorId());

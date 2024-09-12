@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,9 +43,6 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
-	
-	
-	
 	public boolean isIdAvailable(String id) {
         // 데이터베이스에서 아이디 존재 여부 확인
 		if(userRepository.findById(id) == null){
@@ -56,7 +52,11 @@ public class UserService {
 		}
     }
 	
-	
+	public User findUserByNickname(String nickname) {
+		User user = null;
+		user = userRepository.findByNickname(nickname);
+		return user;
+	}
 	
 	public boolean isNicknameAvailable(String nickname) {
         // 데이터베이스에서 아이디 존재 여부 확인
@@ -66,6 +66,7 @@ public class UserService {
 			return false;
 		}
     }
+	
 	public boolean isEmailAvailable(String email) {
 		// 데이터베이스에서 아이디 존재 여부 확인
 		if(userRepository.findByEmail(email) == null){
@@ -92,5 +93,8 @@ public class UserService {
 		}
 	}
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 }

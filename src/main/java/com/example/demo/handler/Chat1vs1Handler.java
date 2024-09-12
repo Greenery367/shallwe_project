@@ -20,11 +20,11 @@ import com.example.demo.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
-public class WebSocketHandler extends TextWebSocketHandler {
+public class Chat1vs1Handler extends TextWebSocketHandler{
 
 	private final Map<String, WebSocketSession> CLIENTS = new ConcurrentHashMap<>();
 	private final Map<WebSocketSession, Integer> KEYS = new ConcurrentHashMap<>();
-
+	
 	@Autowired
 	private ChatService chatService;
 	

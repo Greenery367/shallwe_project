@@ -30,4 +30,21 @@ public class LectureService {
 		return categoryLectureList;
 	} 
 	
+	/**
+	 * 강의 상세보기
+	 * @param id
+	 * @return
+	 */
+	public Lecture readLectureDetail(Integer id) {
+		try {
+			return lectureRepository.LectureFindById(id); 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("강의 상세 이상, e");
+		}
+	}
+	
+	
+	
 }
