@@ -41,7 +41,11 @@ public class EmailController {
             return "이메일 인증 성공!";
         }
         else {
+<<<<<<< HEAD
             throw new NullPointerException(" 이메일 인증 실패, 다시 시도해 주세요");
+=======
+            throw new NullPointerException("이메일 인증 실패!");
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
         }
     }
     

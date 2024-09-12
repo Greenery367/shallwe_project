@@ -22,6 +22,7 @@
 		limit #{limit} offset #{offset}
 	</select>
 	
+<<<<<<< HEAD
 	<select id = "readFAQById" resultType="com.example.demo.dto.FAQDTO">
 		select * from qna_question_tb
 		where id = #{id}
@@ -36,6 +37,11 @@
 		insert into qna_question_tb(title, content, writer, user_id)
 			values(#{title}, #{content}, #{writer}, #{userId})
 		SET SESSION auto_increment_increment = 1
+=======
+	<insert id="insert">
+		insert into qna_question_tb(title, content, writer, user_id)
+			values(#{title}, #{content}, #{writer}, #{userId})
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 	</insert>
 	
 </mapper>

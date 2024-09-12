@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 	    <main class="content-wrapper">
         <section class="form-title">
             <h1> 게시글 상세 보기 </h1>
@@ -78,3 +79,7 @@
     });
     
 </script>
+=======
+
+<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348

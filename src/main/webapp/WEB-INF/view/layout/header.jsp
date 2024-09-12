@@ -5,13 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>게임 친구 매칭 사이트: 셸위?</title>
+<<<<<<< HEAD
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+=======
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 
 <link rel="stylesheet" href="/static/css/header.css">
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
 	<div class="main">
 		<header>
@@ -21,6 +26,8 @@
 					<img class="mini-logo" alt="로고"
 						src="/static/images/shallwe-icon.png"> <a href="/test/main"><b>홈</b></a>
 =======
+=======
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 <!-- 알람 받는 소켓 ON -->
 <script>
 	var socket = new WebSocket("ws://192.168.0.131:8080/alarm");
@@ -39,6 +46,9 @@
 			
 					<img class="mini-logo" alt="로고" src="/static/images/shallwe-icon.png">
 					<a href="/test/main"><b>홈</b></a>
+<<<<<<< HEAD
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
+=======
 >>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 					<p>|</p>
 					<a href="/user/sign-in"><b>로그인</b></a>
@@ -46,6 +56,7 @@
 					<a href="/user/sign-up"><b>회원가입</b></a>
 					<p>|</p>
 					<div class="charge-cash">
+<<<<<<< HEAD
 						<a href="/cash/charge"><b>캐시충전</b></a> <img
 							src="/static/images/cash.png">
 					</div>
@@ -56,6 +67,17 @@
 		<div class="banner">
 			<img class="logo" alt="로고" src="/static/images/logo.png">
 =======
+=======
+						<a href="/cash/charge"><b>캐시충전</b></a>
+						 <img src="/static/images/cash.png"> 
+			</div>
+		</div>
+	</header>
+	<hr>
+				<div class="banner">
+					<img class="logo" alt="로고" src="/static/images/logo.png">
+				</div>
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 	<div class="nav-bar">
 		<div class="menus">
 			<div class="menu-container">
@@ -135,6 +157,7 @@
 			<div class="menu-container">
 				<a href="" class="menu">회원 정보</a>
 			</div>	
+<<<<<<< HEAD
 >>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 		</div>
 
@@ -233,5 +256,14 @@
 				</div>
 			</div>
 
+=======
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 		</div>
+		
 	</div>
+<<<<<<< HEAD
+=======
+	
+
+		
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348

@@ -13,7 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.CompatibilityListDTO;
 import com.example.demo.dto.MbtiDTO;
 import com.example.demo.dto.TestUser;
+<<<<<<< HEAD
 import com.example.demo.service.MatchService;
+=======
+import com.example.demo.repository.model.User;
+import com.example.demo.service.FriendService;
+import com.example.demo.service.MatchService;
+import com.example.demo.service.UserService;
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,10 +37,17 @@ public class chatTest {
 	private HttpSession session;
 	@Autowired
 	private MatchService matchService;
+<<<<<<< HEAD
 	public chatTest(HttpSession session,MatchService matchService ) {
 		this.session = session;
 		this.matchService = matchService ; 
 	}
+=======
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private FriendService friendService;
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 	
 	@GetMapping("/room")
 	public String roomPage(@RequestParam("roomId")String roomId) {
@@ -79,8 +93,14 @@ public class chatTest {
 	}
 	
 	@GetMapping("/profileInfo")
+<<<<<<< HEAD
 	public String getMethodName(@RequestParam("name") String name,Model model) {
 		model.addAttribute("name",name);
+=======
+	public String getMethodName(@RequestParam("id") int id,Model model) {
+		User user = friendService.findByUserID(id);
+		model.addAttribute("user",user);
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 		return "match/userInfo";
 	}
 	

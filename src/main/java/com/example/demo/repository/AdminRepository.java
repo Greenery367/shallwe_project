@@ -7,7 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.dto.CreateAdvertiseDTO;
+<<<<<<< HEAD
 import com.example.demo.repository.model.Admin;
+=======
+>>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 import com.example.demo.repository.model.Advertise;
 
 @Mapper
