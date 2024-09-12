@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>새 게시글 작성</title>
-</head>
-<body>
+<%@ include file="/WEB-INF/view/layout/header.jsp" %>
     <h1>새 게시글 작성</h1>
 
     <form action="${pageContext.request.contextPath}/community/createBoard" method="post">
@@ -34,5 +28,5 @@
         </table>
     </form>
     <a href="${pageContext.request.contextPath}/community/category/${board.categoryId}?currentPage=${currentPage}">목록으로 돌아가기</a>
-</body>
-</html>
+
+<%@ include file="/WEB-INF/view/layout/footer.jsp" %>

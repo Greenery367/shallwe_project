@@ -15,6 +15,7 @@ import com.example.demo.dto.BoardCreateDTO;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Comment;
+import com.example.demo.repository.model.User;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.CommentService;
 
@@ -99,7 +100,9 @@ public class BoardController {
 		boardService.increaseViewNum(id);
 		Board board = boardService.readBoardDetail(id);
 		List<Comment> comments = commentService.getCommentsByPostId(id); // 댓글 목록 조회
+		User user = (User)httpSession.getAttribute("principal");
 		
+		model.addAttribute("user", user);
 		model.addAttribute("board", board);
 		model.addAttribute("comments", comments); // 댓글 목록을 모델에 추가
 		model.addAttribute("currentPage", currentPage); // 현재 페이지 정보 추가
@@ -110,12 +113,14 @@ public class BoardController {
 	
 	// 댓글 작성 기능
     @PostMapping("/createComment")
-    public String createComment(Comment comment,
+    public String createComment(Comment comment, 
     		Model model) {
         // 세션에서 작성자 ID 가져오기
 //        Integer authorId = (Integer) httpSession.getAttribute("userId");
-    	Integer authorId = 1; // 임시 작성자 ID (예: 1)
-    	comment.setAuthorId(authorId); // 작성자 ID 설정
+    	User user = (User)httpSession.getAttribute("principal");
+    	int id = user.getUserId();
+    	System.out.println("유저 네임 : " + user.getNickname());
+    	comment.setAuthorId(id); // 작성자 ID 설정
         commentService.createComment(comment);
         return "redirect:/community/boardDetail/" + comment.getPostId();   // 게시글 목록으로 리다이렉트
     }
@@ -149,9 +154,9 @@ public class BoardController {
     		@RequestParam(name = "categoryId", required = false) Integer categoryId,
     		Model model) {
         // 세션에서 작성자 ID 가져오기
-//        Integer authorId = (Integer) httpSession.getAttribute("userId");
-    	Integer authorId = 1; // 임시 작성자 ID (예: 1)
-    	boardCreateDTO.setAuthorId(authorId); // 작성자 ID 설정
+    	User user = (User)httpSession.getAttribute("principal");
+    	int id = user.getUserId();
+    	boardCreateDTO.setAuthorId(id); // 작성자 ID 설정
         boardCreateDTO.setCategoryId(categoryId);
         boardService.createBoard(boardCreateDTO);
         model.addAttribute("categoryId", categoryId); // 카테고리 ID를 모델에 추가

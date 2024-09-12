@@ -71,5 +71,10 @@
 		update advertise_tb set status = #{status} where id = #{id}
 	</update>
 
+	<!-- 관리자 로그인 - 입력받은 id로 관리자 테이블 조회하여 관리자 정보 반환 -->
+	<select id="findbyId" resultType="com.example.demo.repository.model.Admin">
+		select * from admin_tb where admin_id = #{adminId}
+	</select>
+
 
 </mapper>
