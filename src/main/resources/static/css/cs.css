@@ -73,21 +73,25 @@ body {
 /* 열 비율 조정 */
 .qna-table th:nth-child(1), 
 .qna-table td:nth-child(1) {
-    width: 5%; /* No - 0.5 비율 */
+    width: 5%; /* 자물쇠 기호 - 0.5 비율 */
 }
 
 .qna-table th:nth-child(2), 
 .qna-table td:nth-child(2) {
-    width: 60%; /* 글 제목 - 6 비율 */
+    width: 5%; /* No - 0.5 비율 */
 }
 
 .qna-table th:nth-child(3), 
 .qna-table td:nth-child(3) {
-    width: 15%; /* 작성자 - 1.5 비율 */
+    width: 60%; /* 글 제목 - 6 비율 */
 }
 
 .qna-table th:nth-child(4), 
 .qna-table td:nth-child(4) {
+    width: 10%; /* 작성자 - 1 비율 */
+}
+.qna-table th:nth-child(5), 
+.qna-table td:nth-child(5) {
     width: 20%; /* 작성 시간 - 2 비율 */
 }
 

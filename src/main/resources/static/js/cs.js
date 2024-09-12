@@ -2,6 +2,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // 테이블의 각 행에 클릭 이벤트를 추가
     const rows = document.querySelectorAll('.qna-table tbody tr');
     
+    form.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // 엔터키로 폼 제출 막기
+        }
+    });
+    
     rows.forEach(function(row) {
         row.addEventListener('click', function() {
             const writer = this.querySelector('td:nth-child(3)').innerText; // 작성자

@@ -19,6 +19,7 @@ public class Admin {
 	private String adminId;
 	private String password;
 	private String email;
+	private String phoneNumber;
 	private String originFileName;
 	private String uploadFileName;
 	

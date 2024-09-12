@@ -12,11 +12,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class FAQDTO {
-	private int id;
+	private Integer id;
 	private String title;
 	private String userId;
 	private String writer;
 	private String content;
-	private int replyStatus;
+	private Integer replyStatus;
 	private String createdAt;
+	private Integer status;
 }

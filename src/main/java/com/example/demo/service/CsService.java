@@ -30,10 +30,10 @@ public class CsService {
 	public int countFAQ() {
 		return csRepository.countFAQ();
 	}
-	public FAQDTO readFAQById(int id) {
+	public FAQDTO readFAQById(Integer id) {
 		return csRepository.readFAQById(id);
 	}
-	public FrequeDTO readFreqById(int id) {
+	public FrequeDTO readFreqById(Integer id) {
 		return csRepository.readFreqById(id);
 	}
 	

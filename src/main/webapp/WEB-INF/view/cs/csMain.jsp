@@ -15,6 +15,7 @@
 	<table class="qna-table">
 		<thead>
 			<tr>
+				<th></th>
 				<th>No</th>
 				<th>글 제목</th>
 				<th>작성자</th>
@@ -24,6 +25,7 @@
 		<tbody>
 			<c:forEach var="post" varStatus="status" items="${postList}">
 				<tr>
+					<td>&#9742;</td>
 					<td>${status.count}</td>
 					<td>${post.title}</td>
 					<td>${post.writer}</td>
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const id = this.querySelector('input[name="id"]').value; // 히든 필드의 id 값 가져오기
 
             // detail 컨트롤러로 이동 (GET 요청)
-            window.location.href = `/cs/detailFreq?writer=${encodeURIComponent(writer)}&id=${encodeURIComponent(id)}`;
+            window.location.href = `/cs/detailFreq?writer=${writer}&id=${id}`;
         });
     });
 });

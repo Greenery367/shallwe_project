@@ -39,12 +39,14 @@
                     </td>
                 </tr>
             </table>
-			
+            <%int status = Integer.parseInt(request.getParameter("status")); %>
+            <c:if test="${status == 0}">
             <div class="btn-area">
-                <button type="button" class="btn update-button" >수정</button>
+                <button type="button" class="update-button" >수정</button>
                 &nbsp;
-                <button type="button" class="btn delete-button" >삭제</button>
+                <button type="button" class="delete-button" >삭제</button>
             </div>
+            </c:if>
         </section>
       </main>
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
@@ -58,7 +60,21 @@
             const id = document.getElementById('id').value;
 
             // 컨트롤러로 GET 요청을 보냄
-            window.location.href = `/cs/update?id=${encodeURIComponent(id)}`;
+            window.location.href = `/cs/update?id=${id}`;
         });
     });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // 삭제 버튼 클릭 이벤트
+        const deleteButton = document.querySelector('.delete-button');
+        
+        updateButton.addEventListener('click', function() {
+            // 입력 필드의 값을 가져옴
+            const id = document.getElementById('id').value;
+
+            // 컨트롤러로 GET 요청을 보냄
+            window.location.href = `/cs/delete?id=${id}`;
+        });
+    });
+    
 </script>
