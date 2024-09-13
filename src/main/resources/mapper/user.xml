@@ -98,13 +98,10 @@
 		values(#{id}, #{password}, #{username}, #{nickname}, #{birthDate}, #{email}, #{phoneNumber})
 	</insert>
 	
-<<<<<<< HEAD
 	<select id="getLectureCash">
     	SELECT lecture_cash FROM user_tb WHERE user_id = #{userId}
 	</select>
 	
 	
 	
-=======
->>>>>>> dd62e60201d87bf28a7634c93f35962186c3b576
 </mapper>
