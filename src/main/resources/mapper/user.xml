@@ -88,7 +88,7 @@
 	<!-- 내가 친구 요청을 보낸 유저들 -->
 	<select id="checkSendFriend" resultType="com.example.demo.repository.model.User">
 		select u.upload_file_name as upload_file_name, u.id as id, u.nickname as nickname
-		 from user_tb as u join waiting_friend_tb as w
+		from user_tb as u join waiting_friend_tb as w
 		on u.id = w.friend_id
 		where w.user_id = #{id}
 	</select>
