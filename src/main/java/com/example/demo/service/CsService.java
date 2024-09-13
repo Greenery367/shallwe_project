@@ -30,6 +30,13 @@ public class CsService {
 	public int countFAQ() {
 		return csRepository.countFAQ();
 	}
+	public FAQDTO readFAQById(Integer id) {
+		return csRepository.readFAQById(id);
+	}
+	public FrequeDTO readFreqById(Integer id) {
+		return csRepository.readFreqById(id);
+	}
+	
 	
 	@Transactional
 	public List<FrequeDTO> readAllFreq(int page, int size){

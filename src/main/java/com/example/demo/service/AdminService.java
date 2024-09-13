@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.repository.AdminRepository;
+import com.example.demo.repository.model.Admin;
 import com.example.demo.repository.model.Advertise;
 
 @Service
@@ -31,6 +32,10 @@ public class AdminService {
 	@Value("${file.upload-dir}")
 	private String uploadDir;
 	
+	
+	public Admin searchId(String adminId) {
+		return adminRepository.findbyId(adminId);
+	}
 
     public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;

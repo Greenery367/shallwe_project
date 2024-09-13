@@ -14,7 +14,10 @@
 	</insert>
 	
 	<select id="selectMatchRoom" resultType="Integer">
-		select LAST_INSERT_ID();
+		select LAST_INSERT_ID()
 	</select>
 	
+	<select id="getUserList" resultType="Integer">
+		select user_id from chat_room_join_tb where room_id = #{roomId}
+	</select>
 </mapper>

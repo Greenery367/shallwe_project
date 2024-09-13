@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.dto.JoinRoomDTO;
@@ -13,4 +15,6 @@ public interface ChatRepository {
 	public void joinRoom(JoinRoomDTO joinRoom);
 	
 	public int selectMatchRoom();
+	
+	public List<Integer>getUserList(int roomId);
 }
