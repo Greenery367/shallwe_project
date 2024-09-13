@@ -6,10 +6,6 @@ server:
       force: true
 
 spring:
-<<<<<<< HEAD
-
-=======
->>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
   data:
     redis:
       host: localhost
@@ -47,13 +43,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-<<<<<<< HEAD
-    username: # 이메일 인증 용 gmail 정보 
-    password: # 이메일 인증 용 mail api pw 정보 
-=======
     username: secondclover714@gmail.com
     password: pawf rjzd mnwd ptsq
->>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
     properties:
       mail:
         transport:
@@ -82,7 +73,6 @@ file:
   advertise-dir: C:\\Users\\KDP\git\\shallwe_project\\src\\main\\resources\\static\\images\\advertise/
 
 tenco:
-<<<<<<< HEAD
   key: 07f5efbd3004db57fcd53846050461b203e984faa9d957285aa26f8b
 
 # 소셜 로그인 관련 정보  
@@ -100,9 +90,3 @@ naverClientId:
     
 naverClientSecret:
   key: # 네이버 클라이언트 시크릿 
-
-  
-  
-=======
-  key: 07f5efbd3004db57fcd53846050461b203e984faa9d957285aa26f8b
->>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348

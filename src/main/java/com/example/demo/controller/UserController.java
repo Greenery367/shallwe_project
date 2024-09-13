@@ -199,51 +199,6 @@ public class UserController {
 
         authNumber = Integer.parseInt(randomNumber);
     }
-	@GetMapping("/kakao")
-	public String getCode(@RequestParam(name ="code") String code, Model model) throws ParseException {
-		
-
-		
-		RestTemplate rt1 = new RestTemplate();
-		
-		HttpHeaders header1 = new HttpHeaders();
-		header1.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-		
-		MultiValueMap<String, String> params1 = new LinkedMultiValueMap<>();
-		params1.add("grant_type", "authorization_code");
-		params1.add("client_id", "61e5a7465f3248de0332e984c98de103");
-		params1.add("redirect_uri","http://localhost:8080/user/kakao");
-		params1.add("code", code);
-		HttpEntity<MultiValueMap<String, String>> reqKakaoMessage = new HttpEntity<>(params1, header1);
-		ResponseEntity<OAuthToken> response1 = rt1.exchange
-				("https://kauth.kakao.com/oauth/token", HttpMethod.POST, reqKakaoMessage, OAuthToken.class);
-		
-		RestTemplate rt2 = new RestTemplate();
-		
-		HttpHeaders headers2 = new HttpHeaders();
-		
-		headers2.add("Authorization", "Bearer " + response1.getBody().getAccessToken());
-		headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-		
-		HttpEntity<MultiValueMap<String, String>> reqKakaoInfoMessage = new HttpEntity<>(headers2);
-		
-		ResponseEntity<KakaoProfile> response2 = rt2.exchange("https://kapi.kakao.com/v2/user/me",
-				HttpMethod.POST, reqKakaoInfoMessage, KakaoProfile.class);
-		
-		KakaoProfile kakaoProfile = response2.getBody();
-		User oldUser = userService.searchId("kakao_auth"+String.valueOf(kakaoProfile.getId()));
-		if(oldUser == null) {
-			// 사용자가 최초로 소셜 로그인을 하는 사람
-			SignUpDTO dto = new SignUpDTO();
-			dto.setId("kakao_auth"+String.valueOf(kakaoProfile.getId()));
-			dto.setNickname(kakaoProfile.getProperties().getNickname()+"#"+random.nextInt(9000)+1000);
-			model.addAttribute("dto", dto);
-			return "sign/kakaoSignUp";
-		}
-		
-		session.setAttribute("principal", oldUser);
-		return "redirect:/user/main";
-	}
 	
 	
 

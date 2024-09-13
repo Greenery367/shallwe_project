@@ -169,7 +169,7 @@ public class AdminService {
     
     // 댓글 삭제 기능
     @Transactional
-    public void deleteCommentById(AdminSelectCommentDTO dto) {
+    public void deleteCommentById(AdminSelectCommentDTO dto){
     	adminRepository.deleteCommentById(dto.getId());
     }
     

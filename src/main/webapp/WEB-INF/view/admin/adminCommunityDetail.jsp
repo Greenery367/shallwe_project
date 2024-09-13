@@ -133,10 +133,15 @@
 								<td>${comment.content}</td>
 								<td>${comment.createdAt}</td>
 								<td>블라인드 /
-								<form action="/admin/community/detail/delete-comment" method="post">
-								<input type="hidden" id="id" name="id" value="${comment.id}">
-								<button type="submit">삭제</button>
-								</form></td>
+									<form action="/admin/community/detail/delete-comment" method="post">
+									<input type="hidden" id="author" name="author" value="${comment.author}">
+									<input type="hidden" id="content" name="content" value="${comment.content}">
+									<input type="hidden" id="createdAt" name="createdAt" value="${comment.createdAt}">
+									<input type="hidden" id="id" name="id" value="${comment.id}">
+									<input type="hidden" id="postId" name="postId" value="${comment.postId}">
+									<button type="submit">삭제</button>
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 						</tbody>

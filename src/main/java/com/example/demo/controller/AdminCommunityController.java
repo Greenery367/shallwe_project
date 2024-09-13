@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,9 +40,10 @@ public class AdminCommunityController {
 	
 	
 	@GetMapping("/detail")
-	public String adminCommunityDetailPage(Model model, Board board) {
-		Board boardDetail = adminService.selectBoardById(board.getId());
-		List<AdminSelectCommentDTO> boardCommentList = adminService.selectCommentByPostId(board.getId()); 
+	public String adminCommunityDetailPage(Model model, @RequestParam("id") String id) {
+		System.out.println("*******************디테일 겟매핑******************");
+		Board boardDetail = adminService.selectBoardById(Integer.parseInt(id));
+		List<AdminSelectCommentDTO> boardCommentList = adminService.selectCommentByPostId(Integer.parseInt(id)); 
 		System.out.println(boardCommentList);
 		model.addAttribute("boardDetail",boardDetail);
 		model.addAttribute("boardCommentList", boardCommentList);
@@ -52,12 +54,13 @@ public class AdminCommunityController {
 	
 	@PostMapping("/detail")
 	public String adminCommunityDetailProc(Model model, Board board) {
+		System.out.println("*******************디테일 포스트매핑******************");
 		Board boardDetail = adminService.selectBoardById(board.getId());
 		List<AdminSelectCommentDTO> boardCommentList = adminService.selectCommentByPostId(board.getId());
 		model.addAttribute("boardDetail",boardDetail);
 		model.addAttribute("boardCommentList", boardCommentList);
 		
-		return "admin/adminCommunityDetail";
+		return "redirect:/admin/community/detail";
 	}
 	
 	
@@ -105,10 +108,11 @@ public class AdminCommunityController {
 	
 	// 댓글 삭제 요청
 	@PostMapping("/detail/delete-comment")
-	public String deleteCommentById(AdminSelectCommentDTO dto) {
+	public String deleteCommentById(Model model, AdminSelectCommentDTO dto) {
 		adminService.deleteCommentById(dto);
-		
-		return "redirect:/admin/community/detail";
+		System.out.println(dto);
+		System.out.println("*******************" + dto.getPostId());
+		return "redirect:/admin/community/detail?id=" + dto.getPostId();
 	}
 	
 	
