@@ -74,7 +74,7 @@
 		select u.upload_file_name as upload_file_name, u.id as id, u.nickname as nickname
 		 from user_tb as u join friend_tb as f
 		on u.id = f.friend_id
-		where f.user_id = #{id} and u.status = #{status}
+		where f.user_id = #{id} and u.online_status = #{status}
 	</select>
 	
 	<!-- 나에게 친구 요청을 보낸 유저들 -->

@@ -3,7 +3,15 @@
 	<%@ include file="/WEB-INF/view/layout/header.jsp" %>	
 	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
-
+<!-- 클릭시 프로필 보기 창 -->
+<div class="profile-box">
+				<ul>
+					<li class="profile-info"><a>프로필 보기</a></li>
+					<li class="chat"><a>1:1 채팅</a></li>
+					<li class="close"><a>닫기</a></li>
+				</ul>
+			</div>
+			
 		<div class="main-board">
 			<div class="banner-container-vertical">
 				<div class="advertise-example-left">
@@ -161,26 +169,13 @@
 			<div class="friend-list-container">
 				<h2><b>접속 중인 친구</b></h2>
 				<div class="friend-box-container">
+				<c:forEach var="friends" items="${onlineFriends}">
 					<div class="friend-container">
-						<img class="friend-icon" src="../static/images/아기춘식.jpg">
-						<h6 class="friend-name">친구 이름</h6>
+						<input type="hidden" value="${friends.userId}">
+						<img class="friend-icon" src="/images/${friends.uploadFilename}">
+						<h6 class="friend-name">${friends.nickname}</h6>
 					</div>
-					<div class="friend-container">
-						<img class="friend-icon" src="../static/images/아기춘식.jpg">
-						<h6 class="friend-name">친구 이름</h6>
-					</div>
-					<div class="friend-container">
-						<img class="friend-icon" src="../static/images/아기춘식.jpg">
-						<h6 class="friend-name">친구 이름</h6>
-					</div>
-					<div class="friend-container">
-						<img class="friend-icon" src="../static/images/아기춘식.jpg">
-						<h6 class="friend-name">친구 이름</h6>
-					</div>
-					<div class="friend-container">
-						<img class="friend-icon" src="../static/images/아기춘식.jpg">
-						<h6 class="friend-name">친구 이름</h6>
-					</div>
+				</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -224,6 +219,38 @@
  
 </script>
 		<script>
+		const friendsDiv = document.querySelectorAll('.friend-container');
+	    const profileBox = document.querySelector('.profile-box');
+
+	    friendsDiv.forEach((friendDiv) => {
+	        friendDiv.addEventListener('click', function(event) {
+	            const id = friendDiv.querySelector('input[type="hidden"]').value;
+	            const x = event.clientX + 3;
+	            const y = event.clientY + 115;
+
+	            profileBox.style.left = x + "px";
+	            profileBox.style.top = y + "px";
+
+	            document.querySelector(".profile-info").firstElementChild
+	                .setAttribute("onclick", "window.open('/chat/profileInfo?id=" + id + "')");
+	            document.querySelector(".chat").firstElementChild
+	                .setAttribute("onclick", "window.open('/chat/friendChat?id=" + id + "')");
+
+	            profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
+	            event.stopPropagation(); // 클릭 이벤트 전파 방지
+
+	            document.querySelector(".close").addEventListener("click", function() {
+	                profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
+	            });
+
+	            document.addEventListener('click', function(event) {
+	                if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && !friendDiv.contains(event.target)) {
+	                    profileBox.style.display = 'none'; // profile-box 외부를 클릭하면 숨깁니다.
+	                }
+	            }, { once: true }); // 이벤트가 한 번만 실행되도록 설정합니다.
+	        });
+	    });
+		
 			document.addEventListener('DOMContentLoaded', () => {
 			    // 모든 광고 박스 컨테이너를 선택
 			    const advertiseContainers = document.querySelectorAll('.advertise-container');
