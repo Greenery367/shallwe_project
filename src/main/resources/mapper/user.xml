@@ -28,6 +28,10 @@
 		values(#{id}, #{password}, #{username}, #{nickname}, #{birthDate}, #{email}, #{phoneNumber})
 	</insert>
 	
+	<select id="getLectureCash">
+    	SELECT lecture_cash FROM user_tb WHERE user_id = #{userId}
+	</select>
+	
 	
 	
 </mapper>

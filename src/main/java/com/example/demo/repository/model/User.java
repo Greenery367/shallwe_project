@@ -27,7 +27,8 @@ public class User {
 	private String phoneNumber;
 	private String originFileName;
 	private String uploadFileName;
-	private int currentCash;
+	private long lectureCash;
+	private long currentCash;
 	private int challengePoint;
 	private Timestamp createdAt;
 	private String userAccount;

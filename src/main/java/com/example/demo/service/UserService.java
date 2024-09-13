@@ -92,6 +92,10 @@ public class UserService {
 		}
 	}
 	
+	public long getLectureCash (Integer userId) {
+		return userRepository.getLectureCash(userId);
+	}
+	
 	
 	
 	

@@ -49,7 +49,7 @@
 		JOIN
 			user_tb u ON c.author_id = u.user_id
 		WHERE
-			s.user_id = 6
+			s.user_id = #{userId}
 		ORDER BY
 			s.created_at DESC;
 	</select>

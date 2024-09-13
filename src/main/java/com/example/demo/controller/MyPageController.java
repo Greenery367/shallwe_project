@@ -21,9 +21,11 @@ import com.example.demo.service.MyPageService;
 import com.example.demo.service.RecordService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/my-page")
+@RequiredArgsConstructor
 public class MyPageController {
 
 	private final MyPageService myPageService;
@@ -31,13 +33,6 @@ public class MyPageController {
 	private final RecordService recordService;
 	private final HttpSession httpSession;
 
-	@Autowired
-	public MyPageController(MyPageService myPageService, BankService bankService, RecordService recordService, HttpSession httpSession) {
-		this.myPageService = myPageService;
-		this.bankService = bankService;
-		this.recordService = recordService;
-		this.httpSession = httpSession;
-	}
 
 	@GetMapping("/{userId}")
 	public String myInfo(@PathVariable("userId") Integer userId, Model model) {
@@ -193,19 +188,6 @@ public class MyPageController {
 		return "myPage/chargeRecord";
 	}
 	
-	@GetMapping("/exchange-list")
-	public String exchangeList(
-			@RequestParam("userId") Integer userId,
-			Model model
-			) {
-		User user = (User)httpSession.getAttribute("principal");
-		List<RecordDTO> exchanges = recordService.getExchangeBoard(user.getUserId());
-		
-		model.addAttribute("user", user);
-		model.addAttribute("exchanges", exchanges);
-		
-		return "myPage/exchangeRecord";
-	}
 	
 	@GetMapping("/spend-list")
 	public String spendList(
