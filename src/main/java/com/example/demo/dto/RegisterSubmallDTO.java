@@ -2,16 +2,26 @@ package com.example.demo.dto;
 
 import java.sql.Timestamp;
 
+import com.example.demo.repository.model.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@ToString
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterSubmallDTO {
-	private int userId;
-	private int bankId;
+	
+	public int id;
+	public User user;
+	public String bankName;
+	public String bankAccount;
+	public Timestamp createdAt;
+	public int status;
+
 }

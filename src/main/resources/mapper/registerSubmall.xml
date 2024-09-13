@@ -12,9 +12,12 @@
     	SELECT COUNT(*) FROM register_submall_tb WHERE user_id = #{userId}
 	</select>
 	
+	<select id="selectAllRegisteredSubmall"  resultType="com.example.demo.repository.model.RegisterSubmall">
+		select * from register_submall_tb
+	</select>
 	
-	
-	
-	
+	<select id="getBankInfo"  resultType="com.example.demo.dto.BankDTO">
+		select * from bank_tb where user_id = #{userId}
+	</select>
 	
 </mapper>

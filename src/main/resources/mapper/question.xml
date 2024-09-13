@@ -4,6 +4,12 @@
 <mapper namespace="com.example.demo.repository.QuestionRepository">
 
 	<!-- id로 질문 가져오기 -->
+	<select id="selectQuestionById">
+		select * from mbti_question_tb where id=#{id}
+	</select>
+
+
+
 	<select id="selectQuestionbyId">
 		select * from mbti_question_tb where id = #{id}
 	</select>

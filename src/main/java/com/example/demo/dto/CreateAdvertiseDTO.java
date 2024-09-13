@@ -27,7 +27,8 @@ public class CreateAdvertiseDTO {
 		private String createdAt;
 		private String startDate;
 		private String endDate;
-		private Integer status; 
+		private Integer status;
+		private MultipartFile file;
 		
 		// Advertise object로 반환
 		public Advertise toAdvertise() {
