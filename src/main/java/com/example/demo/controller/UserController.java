@@ -103,6 +103,8 @@ public class UserController {
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
 		model.addAttribute("categoryList",categoryList);
+		User user = (User) session.getAttribute("principal");
+		System.out.println(user);
 		return "mainPage";
 	}
 	/*
