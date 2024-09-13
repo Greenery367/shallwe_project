@@ -28,6 +28,12 @@ public class RegisterSubmallService {
 		return registerSubmallRepositroy.selectRegisterSubmallById(id);
 	}
 	
+	// 서브몰 id 여부 확인 메서드
+    public RegisterSubmall isSubmallId(Integer userId) {
+        return registerSubmallRepositroy.submallFindById(userId);
+
+    }
+	
 	public void registerSubmall(RegisterSubmallForAdminDTO registerSubmallDTO) {
 		//registerSubmallRepositroy.registerSubmall(registerSubmallDTO.user.getUserId(), registerSubmallDTO.getBankInfo());
 	}

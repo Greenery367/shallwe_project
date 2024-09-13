@@ -22,5 +22,8 @@ public interface RegisterSubmallRepositroy {
     
     // id로 서브몰 신청 정보 찾기
     public RegisterSubmall selectRegisterSubmallById(int id);
+    
+ // 서브몰 id 유무 판단 메서드
+    public RegisterSubmall submallFindById(@Param("userId") Integer userId);
 		
 }

@@ -165,6 +165,7 @@ public class TestController {
     	httpSession.setAttribute("testResult", resultMbti);
     	model.addAttribute("goodMatchedMbti", goodMatchedMbti);
     	model.addAttribute("badMatchedMbti", badMatchedMbti);
+    	
         // 페이지 리디렉션
         return "/test/resultTest";
 	}
