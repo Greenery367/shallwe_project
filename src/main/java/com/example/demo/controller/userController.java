@@ -49,7 +49,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class UserController {
+public class userController {
 	
 	@Autowired
 	private final UserService userService;
