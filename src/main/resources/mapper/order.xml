@@ -13,6 +13,11 @@
 		where user_id = #{userId} and order_id = #{orderId} and amount = #{totalAmount} 
 	</select>
 	
+	<select id="selectOrderById"  resultType="com.example.demo.repository.model.Order">
+		select * from order_tb
+		where id = #{orderId}
+	</select>
+	
 	<update id="updateOrderStatus">
 		update order_tb 
 		set status = '1'

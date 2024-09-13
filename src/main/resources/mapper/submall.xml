@@ -7,10 +7,26 @@
 		select * from user_submall_tb
 	</select>
 	
+	<select id="selectAllRegisteredSubmall"  resultType="com.example.demo.repository.model.RegisterSubmall">
+		select * from register_submall_tb
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="getBankInfo"  resultType="com.example.demo.dto.BankDTO">
+		select * from bank_tb
+		where user_id = #{userId}
+	</select>
+	
 	<insert id ="addNewSubmall">
-		insert into user_submall_tb (submall_id, account_id, email, phone_number)
-		values (#{submallId}, #{accountId}, #{email}, #{phoneNumber})
+		insert into user_submall_tb (submall_id, user_id, account_id, email, phone_number)
+		values (#{submallId}, #{userId}, #{accountId}, #{email}, #{phoneNumber})
 	</insert>
+	
+	<update id ="updateRegisterSubmallStatus">
+		update register_submall_tb
+		set status = 1
+		where id = #{id}
+	</update>
 	
 	
 </mapper>

@@ -113,11 +113,9 @@
 				</ul>
 			</div>
 			<div class="menu-container">
-				<a href="" class="menu">콘텐츠</a>
+				<a href="/test/start-test" class="menu">콘텐츠</a>
 				<ul class="drop-down-menus">
-					<li><h4>게임 성향 테스트</h4></li>
-					<li><h4>게임 이상형 월드컵</h4></li>
-					<li><h4>게임 챌린지</h4></li>
+					<li><h4 href="/test/start-test">게임 성향 테스트</h4></li>
 				</ul>
 			</div>	
 			<div class="menu-container">

@@ -138,15 +138,8 @@ function checkId() {
     xhr.send('id=' + encodeURIComponent(id));
 }
 
-<<<<<<< HEAD
-form.addEventListener('keydown', function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault(); // 엔터키로 폼 제출 막기
-        }
-    });
 
-=======
->>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
+
 // 닉네임 중복 체크 함수
 function checkNickname() {
     const nickname = document.getElementById('nickname').value;

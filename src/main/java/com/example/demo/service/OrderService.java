@@ -40,7 +40,7 @@ public class OrderService {
 	@Transactional
 	public String makeNewOrder(Integer userId, Integer cashAmount, Integer platform, String orderId) {
 		String name = cashAmount+"원 캐쉬 충전"; // 주문명 생성
-		if(platform == 1 && orderId.equals(null)) {
+		if(platform == 1) {
 			UUID uuid = UUID.randomUUID(); // 랜덤값 생성
 			orderId = (String)(userId+"_"+uuid); // 주문 고유번호 생성
 		} 	

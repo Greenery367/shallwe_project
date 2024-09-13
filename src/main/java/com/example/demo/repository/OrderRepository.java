@@ -19,6 +19,9 @@ public interface OrderRepository {
 	// 결제 상태 수정 - 결제 완료
 	public void updateOrderStatus(String orderId);
 	
+	// orderid로 주문 내역 찾기
+	public Order selectOrderById(Integer id);
+	
 	// 결제 내역 확인 (인증)
 	public Order checkOrder(@Param("userId")int userId,
 							@Param("orderId")String orderId,

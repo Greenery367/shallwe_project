@@ -12,6 +12,15 @@
     	SELECT * FROM register_exchange_tb WHERE user_id = #{userId}
 	</select>
 	
+	<select id="selectAllExchange" resultType="com.example.demo.repository.model.RegisterExchange">
+		select * from register_exchange_tb
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="selectRegisterExchange" resultType="com.example.demo.repository.model.RegisterExchange">
+		select * from register_exchange_tb
+		where id = #{id}
+	</select>
 	
 	
 </mapper>

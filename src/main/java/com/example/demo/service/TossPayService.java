@@ -79,7 +79,7 @@ public class TossPayService {
      										.orderId(responseDto.getPaymentKey())
      										.cid("TC0ONETIME")
      										.tid(responseDto.getPaymentKey())
-     										.partnerOrderId("5EnNZRJGvaBX7zk2yd8ydw26XvwXkLrx9POLqKQjmAw4b0e1")
+     										.partnerOrderId(responseDto.getPaymentKey())
      										.partnerUserId("partner_user_id")
      										.totalAmount(responseDto.getTotalAmount())
      										.itemName(responseDto.getTotalAmount()+"원 캐쉬 충전")

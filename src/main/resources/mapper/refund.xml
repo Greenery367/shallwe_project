@@ -9,5 +9,16 @@
 		limit #{limit} offset #{offset}
 	</select>
 
-
+	<select id="selectAllRefundDto" resultType="com.example.demo.dto.RefundDTO">
+		select r.*, o.platform
+		from user_refund_tb as r
+		join order_tb as o
+		where r.order_id = o.id
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="selectRefundById" resultType="com.example.demo.repository.model.Refund">
+		select * from user_refund_tb
+		where id = #{refundId}
+	</select>
 </mapper>

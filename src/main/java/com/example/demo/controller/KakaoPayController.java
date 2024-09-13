@@ -23,6 +23,7 @@ import com.example.demo.dto.ApproveResponseDTO;
 import com.example.demo.dto.ReadyResponseDTO;
 import com.example.demo.repository.model.Order;
 import com.example.demo.repository.model.OrderDetail;
+import com.example.demo.repository.model.User;
 import com.example.demo.service.KakaoPayService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.UserService;
@@ -37,7 +38,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KakaoPayController {
 	
-	private HttpSession httpSession;
+	private final HttpSession httpSession;
 	private final KakaoPayService kakaoPayService;
 	private final OrderService orderService;
 	private final UserService userService;
@@ -49,7 +50,14 @@ public class KakaoPayController {
 	// http://localhost:8080/cash/charge
 	@GetMapping("/charge")
 	public String chargeCash(Model model) {
-		return "/cash/chargeCash";
+		User user = (User)httpSession.getAttribute("principal");
+		if(user == null) {
+			return "/user/signIn";
+		}
+		else {
+			return "/cash/chargCash";
+		}
+		
 	}
 	
 	/**
