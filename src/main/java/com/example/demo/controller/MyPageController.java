@@ -37,20 +37,25 @@ public class MyPageController {
 	@Autowired
 	private final RecordService recordService;
 	
+<<<<<<< HEAD
 	@Autowired
 	private final HttpSession httpSession;
+=======
+	private final HttpSession session;
+	
+ 
+>>>>>>> dev1
 
-
-	@GetMapping("/{userId}")
-	public String myInfo(@PathVariable("userId") Integer userId, Model model) {
-		myPageService.readUserDetail(userId);
-		User user = (User) httpSession.getAttribute("principal");
+	@GetMapping("/")
+	public String myInfo(Model model) {
+		User user = (User) session.getAttribute("principal");
+		//myPageService.readUserDetail(userId);
 		List<BankInfoDTO> banks = bankService.getAllBanks(); // 은행 목록 조회
-		System.out.println(user);
-		BankDTO bankAccount = bankService.getAccountByUserIdAndBankId(userId);
+		
+		BankDTO bankAccount = bankService.getAccountByUserIdAndBankId(user.getUserId());
 		
 		model.addAttribute("user", user);
-		model.addAttribute("userId", userId);
+		model.addAttribute("userId", user.getUserId());
 		model.addAttribute("banks", banks); // 모델에 은행 목록 추가
 		model.addAttribute("bankAccount", bankAccount);
 		return "myPage/info";
@@ -59,7 +64,7 @@ public class MyPageController {
 
 	@PostMapping("/update-profile")
 	public String updateUserProfile(@RequestParam("file") MultipartFile file) {
-		User user = (User) httpSession.getAttribute("principal");
+		User user = (User) session.getAttribute("principal");
 		Integer userId = user.getUserId();
 		String uploadDir = "C:\\work_spring\\upload/";
 		String[] fileNames = myPageService.uploadFile(file, uploadDir);
@@ -70,11 +75,11 @@ public class MyPageController {
 			if (updateSuccess) {
 				// 세션에 저장된 사용자 정보 업데이트
 				user.setUploadFileName(uploadFileName);
-				httpSession.setAttribute("principal", user);
-				return "redirect:/my-page/" + user.getUserId();
+				session.setAttribute("principal", user);
+				return "redirect:/my-page/";
 			}
 		}
-		return "redirect:/my-page/" + user.getUserId(); // 실패 시에도 마이페이지로 리다이렉트
+		return "redirect:/my-page/"; // 실패 시에도 마이페이지로 리다이렉트
 	}
 
 	/**
@@ -85,19 +90,19 @@ public class MyPageController {
 	 */
 	@PostMapping("/update-username")
 	public String updateUsername(@RequestParam("username") String username) {
-		User user = (User) httpSession.getAttribute("principal");
+		User user = (User) session.getAttribute("principal");
 		Integer userId = user.getUserId();
 
 		boolean updateSuccess = myPageService.updateUsername(userId, username);
 		if (updateSuccess) {
 			// 세션에 저장된 사용자 정보 업데이트
 			user.setUsername(username);
-			httpSession.setAttribute("principal", user);
+			session.setAttribute("principal", user);
 		} else {
 			System.out.println("이름 수정에 실패했따!");
 		}
 
-		return "redirect:/my-page/" + userId; // 수정 후 마이페이지로 리다이렉트
+		return "redirect:/my-page/"; // 수정 후 마이페이지로 리다이렉트
 	}
 
 	/**
@@ -108,50 +113,50 @@ public class MyPageController {
 	 */
 	@PostMapping("/update-nickname")
 	public String updateNickname(@RequestParam("nickname") String nickname) {
-		User user = (User) httpSession.getAttribute("principal");
+		User user = (User) session.getAttribute("principal");
 		Integer userId = user.getUserId();
 
 		boolean updateSuccess = myPageService.updateNickname(userId, nickname);
 		if (updateSuccess) {
 			user.setNickname(nickname);
-			httpSession.setAttribute("principal", user);
+			session.setAttribute("principal", user);
 		} else {
 			System.out.println("닉네임 수정에 실패했다.");
 		}
 
-		return "redirect:/my-page/" + userId;
+		return "redirect:/my-page/";
 	}
 
 	@PostMapping("/update-phone-number")
 	public String updatePoneNumber(@RequestParam("phoneNumber") String phoneNumber) {
-		User user = (User) httpSession.getAttribute("principal");
+		User user = (User) session.getAttribute("principal");
 		Integer userId = user.getUserId();
 
 		boolean updateSuccess = myPageService.updatePhoneNumber(userId, phoneNumber);
 		if (updateSuccess) {
 			user.setPhoneNumber(phoneNumber);
-			httpSession.setAttribute("principal", user);
+			session.setAttribute("principal", user);
 		} else {
 			System.out.println("핸드폰 번호 수정에 실패했다.");
 		}
 
-		return "redirect:/my-page/" + userId;
+		return "redirect:/my-page/";
 	}
 
 	@PostMapping("/update-email")
 	public String updateEmail(@RequestParam("email") String email) {
-		User user = (User) httpSession.getAttribute("principal");
+		User user = (User) session.getAttribute("principal");
 		Integer userId = user.getUserId();
 
 		boolean updateSuccess = myPageService.updateEmail(userId, email);
 		if (updateSuccess) {
 			user.setEmail(email);
-			httpSession.setAttribute("principal", user);
+			session.setAttribute("principal", user);
 		} else {
 			System.out.println("이메일 수정에 실패했다.");
 		}
 
-		return "redirect:/my-page/" + userId;
+		return "redirect:/my-page/";
 	}
 	
 	
@@ -167,7 +172,7 @@ public class MyPageController {
     						@RequestParam("bankId") String bankId, 
     						@RequestParam("accountNumber") String accountNumber, 
     						Model model) {
-        User user = (User) httpSession.getAttribute("principal");
+        User user = (User) session.getAttribute("principal");
         Integer userId = user.getUserId();
         
         if (bankService.doesAccountExist(userId)) {
@@ -177,7 +182,7 @@ public class MyPageController {
             // 계좌가 존재하지 않으면 생성
             bankService.createAccount(userId, bankId, accountNumber);
         }
-        return "redirect:/my-page/" + userId;
+        return "redirect:/my-page/";
     }
 	
 	@GetMapping("/charge-list")
@@ -185,7 +190,7 @@ public class MyPageController {
 			@RequestParam("userId") Integer userId,
 			Model model
 			) {
-		User user = (User)httpSession.getAttribute("principal");
+		User user = (User)session.getAttribute("principal");
 		System.out.println("쁘아아악!!!!!!!!!!!!!!!!!!");
 		List<RecordDTO> charges = recordService.getChargeBoard(user.getUserId());
 		
@@ -201,7 +206,7 @@ public class MyPageController {
 			@RequestParam("userId") Integer userId,
 			Model model
 			) {
-		User user = (User)httpSession.getAttribute("principal");
+		User user = (User)session.getAttribute("principal");
 		List<RecordDTO> spends = recordService.getSpendBoard(user.getUserId());
 		
 		model.addAttribute("user", user);
@@ -215,7 +220,7 @@ public class MyPageController {
 			@RequestParam("userId") Integer userId,
 			Model model
 			) {
-		User user = (User)httpSession.getAttribute("principal");
+		User user = (User)session.getAttribute("principal");
 		List<RecordDTO> refunds = recordService.getRefundBoard(user.getUserId());
 		
 		model.addAttribute("user", user);

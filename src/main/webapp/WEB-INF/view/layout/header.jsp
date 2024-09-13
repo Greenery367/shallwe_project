@@ -1,7 +1,7 @@
 <%@page import="com.example.demo.repository.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,8 +122,12 @@
 				</ul>
 			</div>	
 			<div class="menu-container">
+<<<<<<< HEAD
 				<%User user = (User)session.getAttribute("principal");%>
 				<a href="/my-page/" class="menu">회원 정보</a>
+=======
+				<a href="${pageContext.request.contextPath}/my-page/${user.userId}" class="menu">회원 정보</a>
+>>>>>>> dev1
 			</div>	
 		</div>
 
