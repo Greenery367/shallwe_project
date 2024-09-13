@@ -63,7 +63,7 @@
 	</delete>
 	
 	<!-- 아직 나에게 친구 요청을 보낸게 유효한지 -->
-	<select id="checkWaitFriend" resultType="Integer">
+	<select id="checkStillWait" resultType="Integer">
 		select user_id from waiting_friend_tb
 		where user_id = #{userId} and
 			friend_id = #{friendId}
