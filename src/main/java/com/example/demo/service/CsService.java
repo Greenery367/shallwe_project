@@ -37,6 +37,11 @@ public class CsService {
 		return csRepository.readFreqById(id);
 	}
 	
+	@Transactional
+	public int updateFAQ(Integer id, String title, String content) {
+		return csRepository.updateFAQ(id, title, content);
+	}
+	
 	
 	@Transactional
 	public List<FrequeDTO> readAllFreq(int page, int size){

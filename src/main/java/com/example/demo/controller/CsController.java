@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,8 @@ import com.example.demo.service.CsService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -106,7 +109,7 @@ public class CsController {
 
 		if (id == null || id.trim().isEmpty()) {
 			// id 값이 null이거나 빈 문자열인 경우 처리
-			request.setAttribute("msg", "유효하지 않은 ID 값입니다.!!!!!!!!!!!!");
+			request.setAttribute("msg", "유효하지 않은 ID 값입니다.");
 			request.setAttribute("url", "FAQ");
 			return "alert";
 		}
@@ -140,7 +143,7 @@ public class CsController {
 	 * 자주 묻는 질문 목록에서 클릭시 -> 상세보기 이동
 	 */
 	@GetMapping("detailFreq")
-	public String getFreqDetail(@RequestParam("writer") String writer, @RequestParam("id") int id, Model model,
+	public String getFreqDetail(@RequestParam("writer") String writer, @RequestParam("id") Integer id, Model model,
 			HttpServletRequest request) {
 		FrequeDTO dto = csService.readFreqById(id);
 		model.addAttribute("FAQ", dto);
@@ -148,13 +151,30 @@ public class CsController {
 	}
 
 	@GetMapping("update")
-	public String getUpdateRequest(@RequestParam("id") String id, Model model, HttpServletRequest request) {
-
-		return new String();
+	public String getUpdateRequest(@RequestParam("id") String idstr, Model model, HttpServletRequest request) {
+		try {
+			if (idstr == null) {
+				throw new DataDeleveryException("유효하지 않은 id 입니다.", HttpStatus.BAD_REQUEST);
+			}
+			Integer id = Integer.parseInt(idstr.trim());
+			FAQDTO dto = csService.readFAQById(id);
+			model.addAttribute("FAQ", dto);
+			return "cs/updateFAQ";
+		} catch (NumberFormatException e) {
+			throw new DataDeleveryException("유효하지 않은 id 입니다..", HttpStatus.BAD_REQUEST);
+		}
 	}
 
-	
-	
-	
+	@PostMapping("update/{id}")
+	public String postMethodName(@PathVariable(name = "id") Integer id, Model model, HttpServletRequest request) {
+		int result = csService.updateFAQ(id, request.getParameter("title"), request.getParameter("content"));
+		if(result == 1) {
+			request.setAttribute("msg", "문의글 수정 완료");
+			request.setAttribute("url", "/cs/FAQ");
+			return "alert";
+		}else {
+			throw new DataDeleveryException("문의글 수정에 실패하셨습니다. 잠시 후 다시 시도해 주세요", HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 }

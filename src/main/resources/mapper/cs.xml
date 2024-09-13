@@ -38,4 +38,11 @@
 		SET SESSION auto_increment_increment = 1
 	</insert>
 	
+	<update id="updateFAQ">
+		update qna_question_tb 
+		set title = #{title}, content = #{content}
+		where id = #{id}
+	</update>
+	
+	
 </mapper>
