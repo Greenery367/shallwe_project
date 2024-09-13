@@ -11,6 +11,15 @@
 		select * from user_tb
 		where nickname = #{nickname}
 	</select>
+	<select id="findLikeNicknameSize" resultType="Integer">
+		select count(*) from user_tb
+		where nickname like %#{nickname}%
+	</select>
+	<select id="findLikeNickname" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where nickname like %#{nickname}%
+		orders limit #{limit} offset #{offset}
+	</select>
 	<select id="findByEmail" resultType="com.example.demo.repository.model.User">
 		select * from user_tb
 		where email = #{email}
@@ -21,12 +30,82 @@
 		where email = #{email}
 	</update>
 	
+	<select id="findByUserId" resultType="com.example.demo.repository.model.User">
+		select * from user_tb
+		where user_id = #{id}
+	</select>
 	
+	<!-- 친구 요청 추가 -->
+	<insert id="insertWatingFriend">
+		insert into waiting_friend_tb(user_id,friend_id)
+		values(#{userId}, #{friendId})
+	</insert>
+	
+	<!-- 친구 추가 -->
+	<insert id="addFriendById">
+		insert into friend_tb(user_id,friend_id)
+		values(#{userId}, #{friendId}),
+			  (#{friendId}, #{userId})
+	</insert>
+	
+	<!-- 친구 삭제 -->
+	<delete id="removeFriendById">
+		delete from friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</delete>
+	
+	<!-- 친구 요청 삭제 -->
+	<delete id="removeWaitFriendById">
+		delete from waiting_friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</delete>
+	
+	<!-- 아직 나에게 친구 요청을 보낸게 유효한지 -->
+	<select id="checkWaitFriend" resultType="Integer">
+		select user_id from waiting_friend_tb
+		where user_id = #{userId} and
+			friend_id = #{friendId}
+	</select>
+	
+	<!-- 온라인친구 or 오프라인친구 목록 가져오기 -->
+	<select id="checkStatusFriend" resultType="com.example.demo.repository.model.User">
+		select u.upload_file_name as upload_file_name, u.id as id, u.nickname as nickname
+		 from user_tb as u join friend_tb as f
+		on u.id = f.friend_id
+		where f.user_id = #{id} and u.status = #{status}
+	</select>
+	
+	<!-- 나에게 친구 요청을 보낸 유저들 -->
+	<select id="checkWaitFriend" resultType="com.example.demo.repository.model.User">
+		select u.upload_file_name as upload_file_name, u.id as id, u.nickname as nickname
+		 from user_tb as u join waiting_friend_tb as w
+		on u.id = w.user_id
+		where w.friend_id = #{id}
+	</select>
+	
+	<!-- 내가 친구 요청을 보낸 유저들 -->
+	<select id="checkSendFriend" resultType="com.example.demo.repository.model.User">
+		select u.upload_file_name as upload_file_name, u.id as id, u.nickname as nickname
+		 from user_tb as u join waiting_friend_tb as w
+		on u.id = w.friend_id
+		where w.user_id = #{id}
+	</select>
+	
+	<update id="updateCurrentCash">
+		update user_tb set current_cash = #{amount}
+		where user_id = #{userId}
+	</update>
 	
 	<insert id="insert">
 		insert into user_tb(id, password, username, nickname, birth_date, email, phone_number)
 		values(#{id}, #{password}, #{username}, #{nickname}, #{birthDate}, #{email}, #{phoneNumber})
 	</insert>
+	
+	<select id="getLectureCash">
+    	SELECT lecture_cash FROM user_tb WHERE user_id = #{userId}
+	</select>
 	
 	
 	

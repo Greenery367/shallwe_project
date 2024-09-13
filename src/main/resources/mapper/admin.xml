@@ -10,7 +10,7 @@
 
 	<!-- 전체유저 충전 금액 -->
 	<select id="countChargeAmount"> 
-		select sum(charge) from user_cash_history_tb where spend is null
+		select sum(charge) from user_cash_history_tb where spend is null and refund is null and exchange is null
 	</select>
 
 	<!-- 전체유저 사용 금액  -->
@@ -35,8 +35,8 @@
 	
 	<!-- 광고 추가 -->
 	<insert id="insertAdvertise">
-		insert into advertise_tb(place_id, title, customer, link, start_date, end_date, status)
-		values(#{placeId}, #{title}, #{customer}, #{link}, #{startDate}, #{endDate}, #{status})
+		insert into advertise_tb(place_id, title, customer, link, origin_file_name, upload_file_name, start_date, end_date, status)
+		values(#{placeId}, #{title}, #{customer}, #{link}, #{originFileName}, #{uploadFileName}, #{startDate}, #{endDate}, #{status})
 	</insert>
 	
 	<!-- 광고 수정 -->
@@ -70,6 +70,28 @@
 	<update id="updateAdvertiseStatus">
 		update advertise_tb set status = #{status} where id = #{id}
 	</update>
+	
+	<!-- 게시중인 광고 위치별조회 -->
+	<!-- 위치별로 place_id 지정됨 -->
+	<!-- place_id = 1 -->
+	<select id="selectAdvertisePlaceOne">
+		select * from advertise_tb where place_id = 1 and status = 1
+	</select>
+	
+	<!-- place_id = 2 -->
+	<select id="selectAdvertisePlaceTwo">
+		select * from advertise_tb where place_id = 2 and status = 1
+	</select>
+	
+	<!-- place_id = 3 -->
+	<select id="selectAdvertisePlaceThree">
+		select * from advertise_tb where place_id = 3 and status = 1
+	</select>
+	
+	<!-- 관리자 로그인 - 입력받은 id로 관리자 테이블 조회하여 관리자 정보 반환 -->
+	<select id="findbyId" resultType="com.example.demo.repository.model.Admin">
+		select * from admin_tb where admin_id = #{adminId}
+	</select>
 
 
 </mapper>

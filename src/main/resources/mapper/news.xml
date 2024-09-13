@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.NewsRepository">
+
+	<!-- 모든 뉴스 조회 -->
+	<select id="selectAllNews" resultType="com.example.demo.repository.model.News">
+		select * from admin_content_tb where status = 1;
+	</select>
+	
+	<!-- id로 뉴스 조회 -->
+	<select id="selectNewsById" resultType="com.example.demo.repository.model.News">
+		select * from admin_content_tb where status = 1 and id = #{id}
+	</select>
+	
+
+</mapper>
