@@ -64,7 +64,7 @@ public class FriendService {
 	// 친구요청 수락시 여전히 친구요청중인지 확인하기
 	public int checkWaitFriend(int userId, int friendId) {
 		int result = 0;
-		result = userRepository.checkWaitFriend(userId, friendId);
+		result = userRepository.checkStillWait(userId, friendId);
 		return result;
 	}
 	

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.SubmallRepository">
+
+	<select id="selectAllSubmall"  resultType="com.example.demo.repository.model.Submall">
+		select * from user_submall_tb
+	</select>
+	
+	<insert id ="addNewSubmall">
+		insert into user_submall_tb (submall_id, account_id, email, phone_number)
+		values (#{submallId}, #{accountId}, #{email}, #{phoneNumber})
+	</insert>
+	
+	
+</mapper>

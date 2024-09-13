@@ -34,6 +34,10 @@ public class UserService {
 		return userRepository.updatePasswordByEmail(hashpwd, email);
 	}
 	
+	public User searchByUserId(Integer userId) {
+		return userRepository.findByUserId(userId);
+	}
+	
 	public User searchId(String id) {
 		return userRepository.findById(id);
 	}
@@ -42,6 +46,11 @@ public class UserService {
 		return userRepository.findByEmail(email);
 	}
 	
+	public void updateUserCash(int userId, Long amount) {
+		userRepository.updateCurrentCash(userId,amount);
+		return;
+	}
+
 	public boolean isIdAvailable(String id) {
         // 데이터베이스에서 아이디 존재 여부 확인
 		if(userRepository.findById(id) == null){
