@@ -27,10 +27,17 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/my-page")
 @RequiredArgsConstructor
 public class MyPageController {
-
+	
+	@Autowired
 	private final MyPageService myPageService;
+	
+	@Autowired
 	private final BankService bankService;
+	
+	@Autowired
 	private final RecordService recordService;
+	
+	@Autowired
 	private final HttpSession httpSession;
 
 
@@ -216,5 +223,17 @@ public class MyPageController {
 		
 		return "myPage/refundRecord";
 	}
+	
+	
+	@GetMapping("my-lecture")
+	public String getMyLecture(@RequestParam String param) {
+		User user = (User)httpSession.getAttribute("principal");
+		
+		
+		
+		return "";
+	}
+	
+	
 	
 }
