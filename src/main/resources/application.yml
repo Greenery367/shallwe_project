@@ -6,7 +6,6 @@ server:
       force: true
 
 spring:
-
   data:
     redis:
       host: localhost
@@ -68,8 +67,9 @@ logging:
   level:
     org.apache.ibatis: DEBUG
 
-file:
+file: 
   upload-dir: C:\\work_spring\\upload/
+  advertise-dir: C:\\Users\\KDP\git\\shallwe_project\\src\\main\\resources\\static\\images\\advertise/
 
 tenco:
   key: 07f5efbd3004db57fcd53846050461b203e984faa9d957285aa26f8b

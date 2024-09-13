@@ -5,6 +5,14 @@
 		padding:0;
 	 	margin:0;
 	}
+	
+	@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
 	a{
 		text-decoration: none;
 		padding: 5px;
@@ -91,7 +99,6 @@
   		cursor: pointer;
 	}
 	.menu:hover {
-  		box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.3);
 		background-color: white;
 		border-radius: 15px;
 		color: #FD6F22;
@@ -102,8 +109,7 @@
 		position: absolute;
 		display: none;
 		flex-direction: row;
- 		width: 30%;
- 		height: 30%;
+ 		height: 280px;
  		padding: 30px;
   		background-color: #212121;
   		border-radius:15px;
@@ -111,6 +117,13 @@
   		z-index: 98;
   		padding: 10px;
 	}
+	.game-menu-box{
+	 display: flex;
+	 flex-direction: column;
+	 flex-wrap: wrap;
+	 height: 300px;
+	}
+	
 	.drop-down-menus{
 		position: absolute;
 		display: none;
@@ -252,6 +265,23 @@
 		justify-content: center;
 		align-items: center;
 	}
+	
+	.game--category--menu{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 200px;
+		height: 50px;
+		background-color: orange;
+		text-align: center;
+		margin: 10px;
+		border-radius: 1em;
+		font-size: 21px;
+		font-family: 'SBAggroB';
+		cursor: pointer;
+	}
+	
 	.btn-circle{
 		width: 80px;
 		height: 80px;
@@ -428,4 +458,99 @@
   		z-index: 99;
 		box-shadow: 0px 8px 6px -6px #E6E6E6;
 	}
+	
+	.advertise-list-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+	align-items: center; /* 광고를 세로로 중앙에 배치 */
+	margin-top: 20px; /* 광고 섹션 위쪽 여백 */
+}
+
+.advertise-example-left,
+.advertise-example-center,
+.advertise-example-right {
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* 광고 박스를 세로로 중앙에 배치 */
+	width: 100%;
+}
+
+.advertise-example-left p,
+.advertise-example-center p,
+.advertise-example-right p {
+	text-align: center;
+	width: 100%;
+}
+
+.advertise-img-one img,
+.advertise-img-two img,
+.advertise-img-three img {
+	width: 100%;
+	height: 100%;
+}
+
+.advertise-container {
+	position: relative;
+	overflow: hidden;
+	width: 100%; /* 컨테이너의 너비를 부모에 맞춤 */
+	height: auto; /* 내용에 따라 높이 조정 */
+}
+
+.advertise-content {
+	background-color: green;
+	width: 100%;
+	height: 30%;
+}
+
+.advertise-img-one,
+.advertise-img-two,
+.advertise-img-three {
+	background-color: orange;
+	width: 100%;
+	height: 100%;
+}
+
+.advertise-box-one {
+	width: 150px;
+	height: 500px;
+}
+
+.advertise-box-two {
+	width: 750px;
+	height: 350px;
+}
+
+.advertise-box-three {
+	width: 150px;
+	height: 500px;
+}
+
+.advertise-box-one.active,
+.advertise-box-two.active,
+.advertise-box-three.active {
+	display: block; /* 'active' 클래스가 적용된 광고만 보이도록 합니다. */
+}
+
+.advertise-box-one,
+.advertise-box-two,
+.advertise-box-three {
+	display: none; /* 기본적으로 광고를 숨깁니다. */
+	position: relative;
+	overflow: hidden;
+	margin: 0 auto; /* 광고 박스를 수평으로 중앙에 배치 */
+}
+
+.advertise-one-line-box {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+}
+
+.advertise-one-line-box p {
+	display: flex;
+	justify-content: center;
+}
+	
 	

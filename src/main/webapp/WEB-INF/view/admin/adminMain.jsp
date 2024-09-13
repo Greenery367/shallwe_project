@@ -11,7 +11,7 @@
 							<p>회원수</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/user" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/user" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 
@@ -30,7 +30,7 @@
 							<p>회원가입/탈퇴수</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/userRegistrations" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/user" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 					<div class="number-of-user-box">
@@ -39,7 +39,7 @@
 							<p>방문수</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/visitor" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/user" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 							<p>캐쉬 사용률</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/cashUtilization" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/cash" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 
@@ -62,7 +62,7 @@
 							<p>캐쉬충전액</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/charge" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/cash" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 					<div class="number-of-user-box">
@@ -71,7 +71,7 @@
 							<p>캐쉬환전액</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/exchange" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/cash" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 					<div class="number-of-user-box">
@@ -80,7 +80,7 @@
 							<p>캐쉬 환불액</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/refund" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/cash" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 							<p>광고수익</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/cashUtilization" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/advertise" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 
@@ -103,7 +103,7 @@
 							<p>게시글 작성수</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/charge" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/community" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 					<div class="number-of-user-box">
@@ -112,7 +112,7 @@
 							<p>댓글 작성수</p>
 						</div>
 						<div class="number-of-user-info-box">
-							<a href="dashboard/exchange" class="btn-info">자세히 보기</a>
+							<a href="${pageContext.request.contextPath}/admin/community" class="btn-info">자세히 보기</a>
 						</div>
 					</div>
 				</div>

@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<%@ include file="/WEB-INF/view/layout/header.jsp" %>	
+	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 
 		<div class="main-board">
 			<div class="banner-container-vertical">
-				<div class="banners-vertical">
-					<img class="admin-main-1" alt="로고" src="../static/images/vertical-banner1.png">
-				</div>
+				<div class="advertise-example-left">
+		        <div class="advertise-one-line-box advertise-container">
+		            <c:forEach var="advertise" items="${advertiseListOne}">
+		                <div class="advertise-box-one" data-id="${advertise.id}">
+		                    <div class="advertise-img-one">
+		                        <img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
+		                    </div>
+		                </div>
+		           	</c:forEach>
+	        </div>
+	    </div>
 			</div>
 		<div class="main-page">
 			<div class="banner-conatiner-whole-box">
@@ -215,7 +224,7 @@
  }
  
  function prevBanner(){
-	currentBanner = (currentBanner - 1 + bannerCount) % bannerCount;
+	currentBanner = (currentBanner - 1 + bannerCount) %	 bannerCount;
 	showBanner(currentBanner);
  }
  
@@ -229,5 +238,35 @@
  }
  
 </script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+			    // 모든 광고 박스 컨테이너를 선택
+			    const advertiseContainers = document.querySelectorAll('.advertise-container');
+		
+			    advertiseContainers.forEach(container => {
+			        const ads = container.querySelectorAll('.advertise-box-one, .advertise-box-two, .advertise-box-three');
+			        let currentIndex = 0;
+		
+			        function showNextAd() {
+			            // 현재 활성 광고를 숨김
+			            ads.forEach(ad => ad.classList.remove('active'));
+		
+			            // 다음 광고로 이동
+			            currentIndex = (currentIndex + 1) % ads.length;
+		
+			            // 다음 광고를 표시
+			            ads[currentIndex].classList.add('active');
+			        }
+		
+			        // 첫 번째 광고를 표시
+			        if (ads.length > 0) {
+			            ads[0].classList.add('active');
+			        }
+		
+			        // 2초마다 광고를 변경
+			        setInterval(showNextAd, 2000);
+			    });
+			});
+		</script>
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>	
 	
