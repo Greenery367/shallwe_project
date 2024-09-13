@@ -46,5 +46,15 @@ public class LectureService {
 	}
 	
 	
+	/*
+	 * userId 로 lectureList 조회 (내 강의 조회)
+	 */
+	public List<Lecture> getLectureListByUserId(Integer userId){
+		List<Lecture> lectureList = new ArrayList<>();
+		lectureRepository.findLectureListByUserId(userId);
+		
+		return lectureList;
+	}
+	
 	
 }

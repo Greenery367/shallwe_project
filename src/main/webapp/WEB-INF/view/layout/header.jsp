@@ -122,12 +122,7 @@
 				</ul>
 			</div>	
 			<div class="menu-container">
-<<<<<<< HEAD
-				<%User user = (User)session.getAttribute("principal");%>
-				<a href="/my-page/" class="menu">회원 정보</a>
-=======
 				<a href="${pageContext.request.contextPath}/my-page/${user.userId}" class="menu">회원 정보</a>
->>>>>>> dev1
 			</div>	
 		</div>
 

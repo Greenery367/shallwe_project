@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import com.example.demo.service.LectureService;
 import com.example.demo.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -70,6 +73,15 @@ public class LectureController {
 		review.setAuthor_id(id);
 		reviewService.createReview(review);
 		return "redirect:/lecture/lectureDetail/" + review.getClassId();
+	}
+	
+	@GetMapping("/my-lecture")
+	public String getMethodName(@RequestParam(name = "userId")String userIdStr, Model model) {
+		List<Lecture> myLecture = new ArrayList<>();
+		Integer userId = Integer.parseInt(userIdStr);
+		myLecture = lectureService.getLectureListByUserId(userId);
+		model.addAttribute("lectureList", myLecture);
+		return "";
 	}
 	
 	

@@ -15,4 +15,7 @@ public interface LectureRepository {
 	// 아이디 기준 상세보기
 	public Lecture LectureFindById(Integer id);
 	
+	// userId로 내강의리스트 조회하기
+	public List<Lecture> findLectureListByUserId(Integer userId);
+	
 }

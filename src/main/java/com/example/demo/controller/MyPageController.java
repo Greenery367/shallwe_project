@@ -37,14 +37,10 @@ public class MyPageController {
 	@Autowired
 	private final RecordService recordService;
 	
-<<<<<<< HEAD
 	@Autowired
-	private final HttpSession httpSession;
-=======
 	private final HttpSession session;
 	
  
->>>>>>> dev1
 
 	@GetMapping("/")
 	public String myInfo(Model model) {
@@ -227,16 +223,6 @@ public class MyPageController {
 		model.addAttribute("refunds", refunds);
 		
 		return "myPage/refundRecord";
-	}
-	
-	
-	@GetMapping("my-lecture")
-	public String getMyLecture(@RequestParam String param) {
-		User user = (User)httpSession.getAttribute("principal");
-		
-		
-		
-		return "";
 	}
 	
 	

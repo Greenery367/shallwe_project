@@ -6,7 +6,7 @@
 		<ul style="list-style-type: none; padding-left: 0;">
 			<li><a href="/my-page/${userId}">개인정보</a></li>
 			<li><a href="#">비밀번호 변경</a></li>
-			<li><a href="#">강의관리</a></li>
+			<li><a href="${pageContext.request.contextPath}/lecture/my-lecture?userId=${user.userId}">내 강의 관리</a></li>
 			<li><a href="#">회원탈퇴</a></li>
 		</ul>
 
