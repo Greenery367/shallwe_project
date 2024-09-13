@@ -5,7 +5,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
 	    <main class="content-wrapper">
         <section class="form-title">
             <h1> 게시글 상세 보기 </h1>
@@ -53,15 +52,17 @@
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
+
+    	// 입력 필드의 값을 가져옴
+        const id = document.getElementById('id').value;
+    	
         // 수정 버튼 클릭 이벤트
         const updateButton = document.querySelector('.update-button');
         
         updateButton.addEventListener('click', function() {
-            // 입력 필드의 값을 가져옴
-            const id = document.getElementById('id').value;
-
+			
             // 컨트롤러로 GET 요청을 보냄
-            window.location.href = `/cs/update?id=${id}`;
+            window.location.href = "/cs/update?id="+id;
         });
     });
     
@@ -70,16 +71,12 @@
         const deleteButton = document.querySelector('.delete-button');
         
         updateButton.addEventListener('click', function() {
-            // 입력 필드의 값을 가져옴
-            const id = document.getElementById('id').value;
 
             // 컨트롤러로 GET 요청을 보냄
-            window.location.href = `/cs/delete?id=${id}`;
+        	window.location.href = "/cs/delete?id="+id;
         });
     });
     
 </script>
-=======
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
->>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348

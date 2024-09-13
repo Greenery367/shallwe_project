@@ -13,15 +13,34 @@
 			<input type="text" name="title" value="문의글 1">
 		</div>
 		<div>
-			<textarea rows="5" name="content"></textarea>
+			<textarea rows="5" name="content" id="editorTxt0"></textarea>
 		</div>
 		<button type="submit">작성 완료</button>
 	</form>
 </div>
-<<<<<<< HEAD
- <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
- <script type="text/javascript" src="/lib/smarteditor2-2.9.2/workspace/js/service/HuskyEZCreator.js"></script>
-=======
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/lib/smarteditor2-2.9.2/workspace/js/service/HuskyEZCreator.js"></script>
 
->>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
+<script>
+let oEditors = [];
+
+smartEditor = function() {
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors,
+        elPlaceHolder: "editorTxt0", // textarea의 아이디와 동일하게 설정
+        sSkinURI: "/lib/smarteditor2-2.9.2/dist/SmartEditor2Skin.html", // 프로젝트에 맞는 경로로 수정
+        fCreator: "createSEditor2"
+    });
+}
+
+$(document).ready(function() {
+    // 스마트에디터 적용
+    smartEditor();
+
+    // 폼 제출 시 에디터 내용을 textarea로 반영
+    $("form").submit(function(e) {
+        oEditors.getById["editorTxt0"].exec("UPDATE_CONTENTS_FIELD", []);  // 에디터 내용을 textarea로 반영
+    });
+});
+</script>
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>

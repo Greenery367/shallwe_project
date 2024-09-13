@@ -38,7 +38,6 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
-	
 	public User searchByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
@@ -92,4 +91,15 @@ public class UserService {
 			throw new DataDeleveryException("회원가입에 실패하였습니다", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	
+	public long getLectureCash (Integer userId) {
+		return userRepository.getLectureCash(userId);
+	}
+	
+	
+	
+	
+	
+	
 }

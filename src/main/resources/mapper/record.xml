@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.RecordRepository">
+	<select id="ChargeFindById">
+		SELECT
+		u.user_id,
+		uch.charge,
+		uch.created_at
+		FROM
+		user_cash_history_tb uch
+		JOIN
+		user_tb u ON uch.user_id = u.user_id
+		WHERE
+		u.user_id = #{userId}
+		AND uch.charge IS NOT NULL
+		ORDER BY
+		uch.created_at DESC;
+	</select>
+
+	<select id="ExchangeFindById">
+		SELECT
+		u.user_id,
+		uch.exchange,
+		uch.created_at
+		FROM
+		user_cash_history_tb uch
+		JOIN
+		user_tb u ON uch.user_id = u.user_id
+		WHERE
+		u.user_id = #{userId}
+		AND uch.exchange IS NOT NULL
+		ORDER BY
+		uch.created_at DESC;
+	</select>
+
+	<select id="SpendFindById">
+		SELECT
+			s.id,
+			c.title AS class_title,
+			u.nickname AS teacher_nickname,
+			c.price AS class_price,
+			s.spend AS spend,
+			s.created_at AS created_at
+		FROM
+			spend_tb s
+		JOIN
+			class_tb c ON s.class_id = c.id
+		JOIN
+			user_tb u ON c.author_id = u.user_id
+		WHERE
+			s.user_id = #{userId}
+		ORDER BY
+			s.created_at DESC;
+	</select>
+
+	<select id="RefundFindById">
+		SELECT
+		u.user_id,
+		uch.refund,
+		uch.created_at
+		FROM
+		user_cash_history_tb uch
+		JOIN
+		user_tb u ON uch.user_id = u.user_id
+		WHERE
+		u.user_id = #{userId}
+		AND uch.refund IS NOT NULL
+		ORDER BY
+		uch.created_at DESC;
+	</select>
+
+
+</mapper>

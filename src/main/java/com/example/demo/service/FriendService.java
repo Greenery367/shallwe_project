@@ -67,4 +67,35 @@ public class FriendService {
 		result = userRepository.checkWaitFriend(userId, friendId);
 		return result;
 	}
+	
+	// 온라인인 친구 찾기
+	public List<User> checkOnlineFriend(int id) {
+		List<User>onlineFriendList = null;
+		int online = 1;
+		onlineFriendList = userRepository.checkStatusFriend(id, online);
+		return onlineFriendList;
+	}
+	
+	// 오프라인인 친구 찾기
+	public List<User> checkOfflineFriend(int id) {
+		List<User>offlineFriendList = null;
+		int offline = 0;
+		offlineFriendList = userRepository.checkStatusFriend(id, offline);
+		return offlineFriendList;
+	}
+	
+	// 사용자에게 친구요청을 보낸 유저 리스트
+	public List<User> checkWaitFriendList(int id) {
+		List<User>waitFriendList = null;
+		waitFriendList = userRepository.checkWaitFriend(id);
+		return waitFriendList;
+	}
+	
+	// 사용자가 친구요청을 보낸 유저 리스트
+	public List<User> checkSendFriendList(int id) {
+		List<User>sendFriendList = null;
+		sendFriendList = userRepository.checkSendFriend(id);
+		return sendFriendList;
+	}
+	
 }
