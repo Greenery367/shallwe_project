@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.OrderDetailRepository">
+
+	<insert id="createNewOrderDetail">
+	insert into order_detail_tb (order_id,cid,partner_order_id,partner_user_id,item_name,total_amount,tax_free_amount)
+	values (#{orderId}, #{cid}, #{partnerOrderId}, #{partnerUserId}, #{itemName},#{totalAmount},#{taxFreeAmount})
+	</insert>
+	
+	<select id="selectOrderDetailByTid" resultType="com.example.demo.repository.model.OrderDetail">
+		select * from order_detail_tb
+		where tid = #{tid}
+	</select>
+	
+	<select id="selectOrderDetailByOrderId" resultType="com.example.demo.repository.model.OrderDetail">
+		select * from order_detail_tb
+		where order_id = #{orderId}
+	</select>
+	
+	
+	<update id="updateTid">
+		update order_detail_tb
+		set tid = #{tid}
+		where order_id = #{orderId} 
+	</update>
+	
+	
+
+</mapper>

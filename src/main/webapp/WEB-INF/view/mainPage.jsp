@@ -138,21 +138,6 @@
 						<h2>자유 게시판</h2>
 						<button class="detail-button"><b>더보기</b></button>
 					</div>
-					<hr/>
-						<div class="post-board-small">
-							<div>
-								<a href="">1번 공지------------</a>
-							</div>
-							<div>
-								<a href="">1번 공지------------</a>
-							</div>
-							<div>
-								<a href="">1번 공지------------</a>
-							</div>
-							<div>
-								<a href="">1번 공지------------</a>
-							</div>
-					</div>
 				</div>
 			</div>
 	</div>

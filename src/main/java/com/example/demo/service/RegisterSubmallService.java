@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.RegisterSubmallDTO;
+import com.example.demo.dto.RegisterSubmallForAdminDTO;
 import com.example.demo.repository.RegisterSubmallRepositroy;
 
 @Service
@@ -15,8 +16,8 @@ public class RegisterSubmallService {
 		this.registerSubmallRepositroy = registerSubmallRepositroy;
 	}
 	
-	public void registerSubmall(RegisterSubmallDTO registerSubmallDTO) {
-		registerSubmallRepositroy.registerSubmall(registerSubmallDTO.getUserId(), registerSubmallDTO.getBankId());
+	public void registerSubmall(RegisterSubmallForAdminDTO registerSubmallDTO) {
+		//registerSubmallRepositroy.registerSubmall(registerSubmallDTO.user.getUserId(), registerSubmallDTO.getBankInfo());
 	}
 	
 	 // 서브몰 신청 여부 확인 메서드

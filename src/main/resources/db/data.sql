@@ -1,301 +1,376 @@
-use shallwe_db;
+-- drop database shallwe_db;
+-- create database shallwe_db;
+-- use shallwe_db;
 
-insert into user_tb(username, user_id, password, nickname, birth_date)
-values('홍길동','asd123','1111','전우치','1992-01-01');
+-- 관리자 테이블
+create table admin_tb(
+    id int primary key auto_increment not null,
+    admin_name varchar(20) not null,
+    admin_id varchar(20) unique key not null,
+    password varchar(20) not null,
+    email varchar(50) ,
+    phone_number varchar(20) unique key,
+    status int not null default 0 -- 0 회원 가입 유지, 1 탈퇴
+);
+
+-- 사용자 테이블
+create table user_tb(
+user_id int primary key auto_increment not null,
+username varchar(20) not null,
+id varchar(20) unique key not null,
+password varchar(100) not null,
+nickname varchar(30) not null unique key,
+birth_date date not null,
+email varchar(50) unique key not null,
+phone_number varchar(20) unique key not null,
+origin_file_name varchar(200) default '1',
+upload_file_name varchar(200),
+lecture_cash bigint not null default 0,
+current_cash bigint not null default 0,
+created_at timestamp default now(),
+sign_up_status int not null default 0, -- 0 회원 가입 유지, 1 탈퇴
+sign_in_connection int not null default 0 -- on/off
+online_status int not null default 0 -- 0 오프라인 , 1 온라인
+);
+
+-- 탈퇴 테이블
+create table quit_user_tb(
+id int primary key,
+user_id int,
+reason int not null,
+reason_detail varchar(200),
+createdAt timestamp default now()
+);
 
 -- mbti 테이블
-insert into user_tb(username, user_id, password, nickname, birth_date, email, tel)
-                values('고길동', '1111', '1234', '검성', '1999-11-11', 'a@gmail.com', '01011111111'),
-                ('둘리', '2222', '1234', '깐따삐야', '1983-04-22', 'b@naver.com', '01022222222');
+create table mbti_tb(
+id int primary key auto_increment not null,
+name varchar(10) not null, -- mbti 명
+nickname varchar(20) not null, -- 직업
+content text not null, -- mbti 설명
+icon_url text
+);
 
-insert into notice_tb(title, content, author_id ) 
-values('공지1', '공지내용1', 1),
-        ('공지2', '공지내용2', 2),
-        ('공지3', '공지내용3', 3);
-        
-insert into qna_question_tb(title, content, author_id, answer_id) 
-values('Q&A1', 'Q&A내용1', 1, 1),
-('Q&A2', 'Q&A내용2', 1, 2),
-('Q&A3', 'Q&A내용3', 2, 1),
-('Q&A4', 'Q&A내용4', 2, 2);
+-- mbti-user 테이블
+create table mbti_user_tb(
+id int primary key auto_increment not null,
+user_id int not null,
+mbti_id int not null
+);
 
-insert into qna_answer_tb(content, author_id) 
-values('답변1', 1),
-    ('답변2', 1),
-    ('답변3', 1),
-    ('답변4', 2),
-    ('답변5', 2);
-    
-insert into admin_tb(username, id, password, email, phone_number, status) 
-values('가가가', 'aaa123', '123', 'aaa@naver.com', '010-1234-1234', 0),
-('나나나', 'bbb123', '123', 'bbb@naver.com', '010-5151-1515', 1),
-('다다다', 'ccc123', '123', 'ccc@naver.com', '010-2323-3232', 0),
-('라라라', 'ddd123', '123', 'ddd@naver.com', '010-6666-6666', 1),
-('마마마', 'eee123', '123', 'eee@naver.com', '010-7777-7777', 0);
-    
-insert into mbti_tb(name, nickname, content) 
-values('SQRT','용사','팀원들과의 소통을중시하고 길잡이가 되어 팀원들을 이끄는걸 좋아한다 하지만 승부의 결과에 연연하지 않고 결과보단 내용을 중시 재미가 있었다면 OK!!'),
-('SQRC','장군 ','팀원들을 조율하고 직접 오더를 내리는것을 좋아하며 남들과 똑같은 방식으로 이기는것보다 자신의 팀만의 색깔로 이기는것이 중요함!!'),
-('SQET','음유시인','게임의 승부에 크게 욕심이 없고 팀을 책임지고 이끄는것보단 게임 자체를 즐기는것에 목적을 의의를 두는 자유로운 영혼!!'),
-('SQEC','예술가','게임에서 비주류 픽들로 이기고싶은 욕망이있으며 누구나 다 사용하는 캐릭터,아이템으로 이기는것은 가치가 없음!!'),
-('SMRT','책략가','최대한 게임을 이기는데에 집중하지만 결과에는 연연하지않음 내용을 바탕으로 다음에는 이기기위한 연구를 다시 시작함!!'),
-('SMRC','마왕','이기기위해 모든 최선을 다하며 팀원들을 승리의 길로 이끈다!!'),
-('SMET','상인','계산적이며 게임의 정보를 공부하는것을 좋아함 하지만 승부에 연연하지는 않는 지식을 탐구하는자!!'),
-('SMEC','광전사','승리를 위해 수단과 방법을 가리지 않으며 필요하다면 단독행동도 서슴치않는 망나니!!'),
-('NQRT','탐험가','혼자서 게임 곳곳의 숨겨진 요소들을 즐기는 걸 좋아하는 사람. 승패에 연연하지 않고 게임 자체를 적극적으로 즐기길 좋아한다!!'),
-('NQRC','용병','혼자서 게임을 즐기지만, 이겨야 할 때는 사람들을 이끌기도 하는 적극적인 사람. 플레이 스타일이 확고하지만 경쟁 상대가 생기면 리더쉽을 보여준다!!'),
-('NQET','농부','다른 사람들이 어떤 걸 하든 무슨 상관? 내가 하고 싶은 대로 유유자적 플레이하는 낭만가 스타일!!'),
-('NQEC','고고학자','승부욕이 남다른 사람! 게임 속에 숨겨진 콘텐츠와 떡밥들을 찾아내길 좋아하는 탐구가! 남들이 모르고 있던 이스터에그를 발견하기도 한다!!'),
-('NMRT','도적','홀로 빠르게 게임 컨텐츠를 정복하는 사람! 효율을 추구하며, 누구보다 빠르게 공략법을 찾아낸다!'),
-('NMRC','길드장','누구보다 효율을 추구하는 조용한 리더! 효율적으로 업무를 분담하며 팀플레이를 해결해낸다!'),
-('NMET','메카닉','효율적인 방식으로 원하는 콘텐츠들을 정복해나가는 사람! 효율적인 모습들은 내가 좋아하는 컨텐츠들을 더욱 빠르고, 잘 즐기기 위해서이다!'),
-('NMEC','흑마법사','승리를 위해서라면 어떤 수단과 방법을 가리지 않는다! 혼자서 몇 인분의 일을 해내는 서포터! ');
+-- mbti 질문 테이블
+create table mbti_question_tb(
+id int primary key auto_increment not null,
+question varchar(50),
+section varchar(2)
+);
 
-insert into Compatibility_tb () values 
-( '1','2' ,'100'),
-( '1','9' ,'100'),
-( '1','3' ,'75'),
-( '1','8' ,'75'),
-( '1','6' ,'50'),
-( '1','12' ,'50'),
-( '1','14' ,'25'),
-( '1','15' ,'25'),
-( '1','5' ,'0'),
-( '1','7' ,'0'),
-( '2','1' ,'100'),
-( '2','7' ,'100'),
-( '2','4' ,'75'),
-( '2','6' ,'75'),
-( '2','11' ,'50'),
-( '2','10' ,'50'),
-( '2','5' ,'25'),
-( '2','16' ,'25'),
-( '2','12' ,'0'),
-( '2','3' ,'0'),
-( '3','10' ,'100'),
-( '3','16' ,'100'),
-( '3','4' ,'75'),
-( '3','1' ,'75'),
-( '3','5' ,'50'),
-( '3','11' ,'50'),
-( '3','7','25'),
-( '3','8','25'),
-( '3','2','0'),
-( '3','13','0'),
-( '4','5','100'),
-( '4','7' ,'100'),
-( '4','2' ,'75'),
-( '4','3' ,'75'),
-( '4','6' ,'50'),
-( '4','9' ,'50'),
-( '4','10' ,'25'),
-( '4','15' ,'25'),
-( '4','8' ,'0'),
-( '4','16' ,'0'),
-( '5','4' ,'100'),
-( '5','8' ,'100'),
-( '5','6' ,'75'),
-( '5','11' ,'75'),
-( '5','9' ,'50'),
-( '5','3' ,'50'),
-( '5','2' ,'25'),
-( '5','14' ,'25'),
-( '5','1' ,'0'),
-( '5','13' ,'0'),
-( '6','14' ,'100'),
-( '6','13' ,'100'),
-( '6','2' ,'75'),
-( '6','5' ,'75'),
-( '6','1' ,'50'),
-( '6','4' ,'50'),
-( '6','9' ,'25'),
-( '6','16' ,'25'),
-( '6','15' ,'0'),
-( '6','11' ,'0'),
-( '7','2' ,'100'),
-( '7','4' ,'100'),
-( '7','13' ,'75'),
-( '7','16' ,'75'),
-( '7','15' ,'50'),
-( '7','10' ,'50'),
-( '7','3' ,'25'),
-( '7','9' ,'25'),
-( '7','1' ,'0'),
-( '7','12','0'),
-( '8','5' ,'100'),
-( '8','16' ,'100'),
-( '8','1' ,'75'),
-( '8','12' ,'75'),
-( '8','13' ,'50'),
-( '8','12' ,'50'),
-( '8','3' ,'25'),
-( '8','15' ,'25'),
-( '8','4','0'),
-( '8','9' ,'0'),
-(9,'1','100'),
-(9,'10','100'),
-(9,'11','75'),
-(9,'13','75'),
-(9,'4','50'),
-(9,'5','50'),
-(9,'6','25'),
-(9,'7','25'),
-(9,'8','0'),
-(9,'10','0'),
-(10,'3','100'),
-(10,'9','100'),
-(10,'14','75'),
-(10,'15','75'),
-(10,'2','50'),
-(10,'7','50'),
-(10,'4','25'),
-(10,'11','25'),
-(10,'13','0'),
-(10,'16','0'),
-(11,'13','100'),
-(11,'','100'),
-(11,'5','75'),
-(11,'9','75'),
-(11,'2','50'),
-(11,'3','50'),
-(11,'10','25'),
-(11,'7','25'),
-(11,'6','0'),
-(11,'14','0'),
-(12,'6','100'),
-(12,'5','100'),
-(12,'8','75'),
-(12,'15','75'),
-(12,'1','50'),
-(12,'3','50'),
-(12,'4','25'),
-(12,'13','25'),
-(12,'2','0'),
-(12,'7','0'),
-(13,'6','100'),
-(13,'11','100'),
-(13,'7','75'),
-(13,'9','75'),
-(13,'8','50'),
-(13,'16','50'),
-(13,'12','25'),
-(13,'','25'),
-(13,'3','0'),
-(13,'5','0'),
-(14,'6','100'),
-(14,'15','100'),
-(14,'16','75'),
-(14,'8','75'),
-(14,'9','50'),
-(14,'6','50'),
-(14,'1','25'),
-(14,'5','25'),
-(14,'7','0'),
-(14,'11','0'),
-(15,'14','100'),
-(15,'10','100'),
-(15,'11','75'),
-(15,'12','75'),
-(15,'7','50'),
-(15,'16','50'),
-(15,'3','25'),
-(15,'4','25'),
-(15,'1','0'),
-(15,'6','0'),
-(16,'3','100'),
-(16,'8','100'),
-(16,'7','75'),
-(16,'14','75'),
-(16,'15','50'),
-(16,'13','50'),
-(16,'5','25'),
-(16,'6','25'),
-(16,'2','0'),
-(16,'4','0');
+-- mbti 유저 답변 테이블
+create table mbti_user_answer_tb(
+id int primary key auto_increment not null,
+user_id int,
+mbti_id int,
+created_at timestamp default now()
+);
 
-insert into frequently_questions_tb (title, user_id, writer, content)
-values('자주 묻는 문의글 제목1', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목2', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목3', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목4', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목5', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목6', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목7', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목8', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목9', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목10', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목11', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목12', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목13', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목14', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목15', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목16', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목17', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목18', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목19', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목20', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목21', 'green1', '홍길동', '문의글내용1'),
-('자주 묻는 문의글 제목22', 'green1', '홍길동', '문의글내용1');
+-- mbti-궁합 테이블
+create table compatibility_tb (
+id int primary key auto_increment, -- 주식별자
+my_mbti_id int, -- 나의 mbti
+well_matched_mbti_id int, -- 잘맞는 mbti
+compatibility int -- 궁합도
+);
 
-insert into qna_question_tb (title, user_id, writer, content)
-values('문의글제목1', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목2', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목3', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목4', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목5', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목6', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목7', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목8', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목9', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목10', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목11', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목12', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목13', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목14', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목15', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목16', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목17', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목18', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목19', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목20', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목21', 'qwer1234', '둘리', '문의글내용1'),
-('문의글제목22', 'qwer1234', '둘리', '문의글내용1');
+-- 신고 테이블
+create table report_tb(
+id int primary key not null auto_increment,
+type int not null, -- 어디서 신고했는지
+reason varchar(200) not null, -- 이유
+sender_id int not null, -- 신고한 사람
+reciever_id int not null, -- 신고당한 사람
+created_at timestamp default now() -- 신고 시간
+);
 
-insert into comment_tb (post_id, content, author_id, created_at) 
-values 
-(20,"내가 바로 엄송현이다", 1, now()),
-(20,"내가 바로 엄송현이다2", 1, now()),
-(20,"내가 바로 엄송현이다3", 1, now()),
-(20,"내가 바로 엄송현이아니다", 2, now())
-;
--- 리그 오브 레전드 관련 샘플 데이터 삽입 (카테고리 ID: 1로 통일)
-INSERT INTO class_tb (category_id, title, content, limit_num, current_num, price, total_num, status, created_at)
-VALUES 
-(1, '챔피언 기초 강의', '초보자를 위한 챔피언 선택 및 기본 운영 방법.', 50, 45, 10000, 50, 1, '2024-09-01 10:00:00'),
-(1, '라인전 마스터', '탑, 미드, 바텀 라인별 효율적인 라인전 운영법.', 30, 28, 15000, 30, 1, '2024-09-02 11:00:00'),
-(1, '정글 기초 가이드', '정글 챔피언 선택 및 갱킹 루트 소개.', 40, 35, 12000, 40, 1, '2024-09-03 12:00:00'),
-(1, '서포터 심화 강의', '맵 리딩과 팀 지원을 위한 서포터 심화 전략.', 25, 20, 20000, 25, 1, '2024-09-04 13:00:00'),
-(1, '아이템 빌드 분석', '상황별 아이템 선택 및 최적화 빌드 소개.', 35, 30, 17000, 35, 1, '2024-09-05 14:00:00'),
-(1, '팀워크 향상법', '효과적인 팀 플레이를 위한 커뮤니케이션과 전략.', 30, 27, 18000, 30, 1, '2024-09-06 15:00:00'),
-(1, '랭크 게임 분석', '상위 랭크로 가기 위한 필수 전략과 심리전.', 20, 18, 25000, 20, 1, '2024-09-07 16:00:00'),
-(1, '포지션별 메타 이해', '최신 메타에 맞춘 포지션별 운영법.', 25, 22, 22000, 25, 1, '2024-09-08 17:00:00'),
-(1, '챔피언 심리전', '상대 챔피언을 압도하는 심리전 스킬.', 20, 18, 30000, 20, 1, '2024-09-09 18:00:00');
+-- 게임 카테고리 테이블
+create table game_tb(
+id int primary key not null auto_increment,
+game_name varchar(20) not null
+);
 
-insert into advertise_tb(place_id, title, customer, link, origin_file_name, upload_file_name, start_date, end_date)
-values(1, "aaa", "가가가", "www.sssss", null, null, null, null),
-(2, "bbb", "나나나", "www.ggggg", null, null, null, null),
-(3, "ccc", "다다다", "www.ttttt", null, null, null, null),
-(4, "ddd", "라라라", "www.yyyyy", null, null, null, null),
-(4, "eee", "마마마", "www.nnnnn", null, null, null, null);
-insert into ad_place_tb(title, image_file_name, price)
-values("메인중앙", "aaa.png", 1500000),
-("메인우측상단", "bbb.png", 1000000),
-("메인우측하단", "ccc.png", 500000),
-("메인좌측상단", "ddd.png", 2000000),
-("메인좌측하단", "eee.png", 1400000);
-insert into user_tb(username, id, password, nickname, birth_date, email, phone_number, origin_file_name, upload_file_name,user_account)
-values('최예나', 'aaa', '123', '최강귀요미최예나', '1999-09-29', 'aaa@gmail.com', '010-9290-8899', 'asdasd', 'asdasd', '111-1111'),
-('김민정', 'bbb', '123', '최강미모김민정', '2000-02-01', 'bbb@gmail.com', '010-7566-4556', 'asdasd', 'asdasd', '222-2222'),
-('유지민', 'ccc', '123', '최강여신유지민', '2000-03-01', 'ccc@gmail.com', '010-3745-1526', 'asdasd', 'asdasd', '333-3333'),
-('박지원', 'ddd', '123', '우주미모박지원', '2000-04-01', 'ddd@gmail.com', '010-5462-7364', 'asdasd', 'asdasd', '444-4444'),
-('이루다', 'eee', '123', '우주귀요미이루다', '2000-05-01', 'eee@gmail.com', '010-1412-5243', 'asdasd', 'asdasd', '555-5555');
+-- 신고 타입 테이블
+create table report_type_tb(
+id int primary key not null auto_increment,
+type varchar(20) -- 어디서 신고했는지(유저, 게시글, 댓글, 강의)
+);
+
+-- 강의 테이블
+create table class_tb(
+id int primary key auto_increment not null,
+category_id int not null,
+author_id int not null,
+title varchar(20) not null,
+subtitle varchar(30) not null,
+content blob not null,
+limit_num int,
+current_num int,
+price bigint,
+total_num int,
+created_at timestamp default now()
+);
+
+-- 강의-강사 테이블
+create table class_instructor_tb(
+id int primary key auto_increment not null,
+class_id int,
+instructor_id int
+);
+
+-- 강의-수강생 테이블
+create table class_student_tb(
+id int primary key auto_increment not null,
+class_id int,
+student_id int,
+created_at timestamp
+);
+
+-- 강의-리뷰 테이블
+create table class_review_tb(
+id int primary key auto_increment not null,
+class_id int,
+author_id int,
+comment text,
+grade int,
+created_at timestamp default now()
+);
+
+-- 공지사항 테이블
+create table notice_tb(
+id int primary key auto_increment not null,
+title varchar(20) not null,
+content blob not null,
+author_id int not null,
+created_at timestamp default now()
+);
+
+-- 이벤트 테이블
+create table event_tb(
+id int primary key auto_increment not null,
+title varchar(20) not null,
+content blob not null,
+author_id int not null,
+created_at timestamp default now()
+);
+
+-- Q&A 테이블 (질문-유저)
+create table qna_question_tb(
+    id int primary key auto_increment not null,
+    title varchar(20) not null,
+    user_id varchar(30) not null,
+    writer varchar(30) not null,
+    content text not null,
+    status int default 0, -- 질문／답변　판별용　컬럼　status 0 = 질문 / 1 = 답변
+    reply_status int not null default 0,  -- 답변이 달린 질문인지 아닌지 판별용 컬럼 0일시 답변x 1일시 답변o
+    created_at timestamp default now()
+);
+
+-- Q&A 테이블 (답변-관리자)
+create table qna_answer_tb(
+id int primary key auto_increment not null,
+content blob not null,
+author_id int not null,
+created_at timestamp default now()
+);
+
+-- 자주 묻는 질문 테이블
+create table frequently_questions_tb(
+id int auto_increment primary key,
+title varchar(100) not null,
+user_id varchar(30) not null,
+writer varchar(30) not null,
+content blob not null,
+reply_status int not null default 0,
+created_at timestamp default now()
+);
+
+-- 커뮤니티 게시판 테이블
+create table board_tb (
+id int primary key auto_increment not null,
+category_id int not null,
+title varchar(20) not null,
+content blob not null,
+author_id int not null,
+view_num int default 0,
+good int default 0,
+report_status int default 0,
+created_at timestamp default current_timestamp
+);
+
+-- 댓글 테이블
+create table comment_tb (
+id int primary key auto_increment not null,
+post_id int not null,
+content text not null,
+author_id int not null,
+created_at timestamp default current_timestamp
+);
+
+-- 참여한 채팅방 테이블
+create table chat_room_tb(
+id int primary key auto_increment,
+name varchar(50) not null,
+head_count int default 0,
+created_at timestamp default now()
+);
+
+-- 채팅방 테이블
+create table chat_room_join_tb(
+id int primary key auto_increment not null,
+user_id int not null,
+room_id int not null,
+created_at timestamp default now(),
+foreign key (room_id) references chat_room_tb(id),
+foreign key (user_id) references user_tb(user_id)
+);
+
+-- 채팅방 히스토리 테이블
+create table chat_room_history_tb(
+id int primary key auto_increment not null,
+user_id_1 int,
+user_id_2 int,
+created_at timestamp default now()
+);
+
+-- 광고 테이블
+create table advertise_tb(
+    id int primary key auto_increment not null,
+    place_id int not null,
+    title varchar(20),
+    customer varchar(20),
+    link text,
+    origin_file_name varchar(200),
+    upload_file_name varchar(200),
+    created_at timestamp default now(),
+    start_date timestamp,
+    end_date timestamp,
+    status int default 0
+);
+
+-- 광고 위치 테이블
+create table ad_place_tb(
+id int primary key auto_increment not null,
+title varchar(20),
+image_file_name varchar(200),
+price bigint
+);
+
+-- 업적 테이블
+create table quest_tb(
+id int primary key auto_increment not null,
+title varchar(50) not null,
+type_id int, -- ex: 게시글 0, 댓글 1
+achievement_num int, -- ex: 달성 조건 = 게시글 30개 (achievement=30)
+title_id int
+);
+
+-- 유저-업적 테이블
+create table user_quest_tb(
+id int primary key auto_increment not null,
+user_id int not null,
+quest_id int not null,
+current_achievement int
+);
+
+-- 칭호 테이블
+create table title_tb(
+id int primary key auto_increment not null,
+title varchar(20),
+content text
+);
+
+-- 유저-칭호 테이블
+create table user_title_tb(
+id int primary key auto_increment not null,
+title_id int,
+user_id int
+);
+
+-- 친구 테이블
+create table friend_tb(
+id int primary key auto_increment not null,
+user_id int,
+friend_id int
+);
+
+-- 명성치 테이블
+create table fame_tb(
+id int primary key auto_increment not null,
+sender_id int,
+reciever_id int
+);
+
+-- 은행 고유 정보
+CREATE TABLE bank_info_tb (
+bank_id VARCHAR(10) PRIMARY KEY NOT NULL, -- bank_id를 VARCHAR로 정의
+bank_name VARCHAR(50) NOT NULL
+);
+
+-- 사용자-계좌 정보
+CREATE TABLE bank_tb (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL, -- 단일 기본 키 id 사용
+user_id INT NOT NULL,
+bank_id VARCHAR(10) NOT NULL,
+account_number VARCHAR(20)
+);
+
+-- 캐쉬 사용 내역
+CREATE TABLE spend_tb (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+user_id INT NOT NULL,
+class_id INT NOT NULL,
+spend BIGINT NOT NULL,
+created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 주문 테이블
+create table order_tb(
+id int primary key auto_increment,
+order_id varchar(200),
+user_id int,
+name varchar(20),
+amount bigint,
+created_at timestamp default now(),
+platform int, -- 0: 카카오페이, 1: 토스페이
+status int default 0
+);
+
+-- 결제 상세 내역
+create table order_detail_tb(
+id int primary key auto_increment,
+order_id varchar(100),
+cid varchar(100),
+tid varchar(100),
+partner_order_id varchar(100),
+partner_user_id varchar(100),
+item_name varchar(50),
+total_amount bigint,
+tax_free_amount bigint
+);
+
+-- 환불 테이블
+create table user_refund_tb(
+id int primary key auto_increment,
+order_id int,
+user_id int,
+created_at timestamp default now(),
+status int default 0
+);
+
+-- 정산일 tb
+create table exchange_schedule_tb(
+    id int primary key auto_increment not null,
+    year int default 2024,
+    month int not null,
+    day int not null
+);
+
+

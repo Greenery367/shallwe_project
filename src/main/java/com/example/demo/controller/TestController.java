@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.repository.QuestionRepository;
 import com.example.demo.repository.model.Answer;
 import com.example.demo.repository.model.Mbti;
+import com.example.demo.repository.model.Notice;
 import com.example.demo.repository.model.Question;
 import com.example.demo.service.MbtiService;
+import com.example.demo.service.NoticeService;
 import com.example.demo.service.QuestionService;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,13 +35,18 @@ public class TestController {
 	
 	@Autowired
 	private QuestionService questionService;
+	
+	@Autowired 
+	private NoticeService noticeService;
+	
 	@Autowired
 	private MbtiService mbtiService;
 	private int progressNumber;
 	
-	public TestController(HttpSession httpSession, QuestionService questionService){
+	public TestController(HttpSession httpSession, QuestionService questionService, NoticeService noticeService){
 		this.httpSession  = httpSession;
 		this.questionService = questionService;
+		this.noticeService = noticeService;
 		progressNumber=1;
 	}
 
@@ -49,7 +56,14 @@ public class TestController {
 	 */
 	// http://localhost:8080/test/main
 	@GetMapping("/main")
-	public String mainPage() {
+	public String mainPage(Model model) {
+//		
+//		// 최신 공지사항 글 
+//		List<Notice> noticeList = noticeService.getAllNotice(2);
+//		
+		// 최신 자유게시판 글 5개
+		
+		//model.addAttribute("noticeList", noticeList);
 		return "mainPage";
 	}
 	
@@ -148,9 +162,9 @@ public class TestController {
 
     	// 세션에 데이터 저장
     	model.addAttribute("resultMbti", resultMbti);
+    	httpSession.setAttribute("testResult", resultMbti);
     	model.addAttribute("goodMatchedMbti", goodMatchedMbti);
     	model.addAttribute("badMatchedMbti", badMatchedMbti);
-
         // 페이지 리디렉션
         return "/test/resultTest";
 	}
