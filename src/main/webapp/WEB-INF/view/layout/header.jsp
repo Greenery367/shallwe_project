@@ -126,10 +126,7 @@
 			<div class="menu-container">
 				<a href="/my-page/6" class="menu">회원 정보</a>
 			</div>	
-<<<<<<< HEAD
->>>>>>> ae88f71a5d98cf993b2fdaf0d6538975fc5d4348
 		</div>
->>>>>>> c7d0f2958845de706edbed9c6ce2b32075319536
 
 		<div class="nav-bar">
 			<div class="menus">
