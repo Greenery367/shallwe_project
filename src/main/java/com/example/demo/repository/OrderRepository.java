@@ -24,5 +24,6 @@ public interface OrderRepository {
 							@Param("orderId")String orderId,
 							@Param("totalAmount")int totalAmount);
 	
-	// 결제 내역 조회 - orderId
+	// 결제 삭제
+	public void deleteOrder(@Param("orderId")String orderId, @Param("tid")String tid,@Param("userId")int userId);
 }

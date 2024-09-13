@@ -21,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.dto.ApproveResponseDTO;
 import com.example.demo.dto.ReadyResponseDTO;
-import com.example.demo.dto.TossPayDTO;
 import com.example.demo.repository.model.Order;
 import com.example.demo.repository.model.OrderDetail;
 import com.example.demo.service.KakaoPayService;
@@ -36,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/cash")
 @Controller
 @RequiredArgsConstructor
-public class CashController {
+public class KakaoPayController {
 	
 	private HttpSession httpSession;
 	private final KakaoPayService kakaoPayService;
@@ -65,7 +64,7 @@ public class CashController {
 	public ReadyResponseDTO payCashByKakao(@PathVariable("totalAmount") String totalAmount) {
 		
 		int totalPrice = Integer.valueOf(totalAmount); // 결제 가격
-		String orderId = orderService.makeNewOrder(1,totalPrice,1); // 가주문 생성
+		String orderId = orderService.makeNewOrder(1,totalPrice,1, null); // 가주문 생성
 		ReadyResponseDTO readyResponseDTO = kakaoPayService.payReady(totalPrice,orderId); //  결제 요청
 		SessionUtils.addAtribute("tid", readyResponseDTO.getTid()); // tid
 		orderService.setTid(orderId, readyResponseDTO.getTid());
@@ -78,6 +77,7 @@ public class CashController {
 	 * @param model
 	 * @return
 	 */
+	// http://localhost:8080/cash/result/kakao
 	@GetMapping("/result/kakao")
 	public String resultKakaoPay(@RequestParam("pg_token") String pgToken) {
 		
@@ -105,7 +105,7 @@ public class CashController {
 		    // 주문 상태 변경
 		    orderService.changeOrderStatus(checkOrderRecord.orderId);
 		    
-		    // TODO - 캐쉬 히스토리 생성
+		    // TODO - 캐쉬 히스토리 -> DB 생성
 	    }
 	    
 	    else {
@@ -115,7 +115,7 @@ public class CashController {
 	    
 	    
 	    // 유저 캐쉬+
-	    return "/cash/chargeResultKakao";
+	    return "/cash/chargeResult";
 	}
 	
 	
@@ -124,9 +124,10 @@ public class CashController {
 	 * @param model
 	 * @return
 	 */
+	// http://localhost:8080/cash/canceled/kakao
 	@GetMapping("/canceled/kakao")
 	public String canceledKakaoPay(@RequestParam("pg_token") String pgToken) {
-		
+		// 가주문 삭제
 	    return "/cash/chargeCanceledToss";
 	}
 	
@@ -135,9 +136,10 @@ public class CashController {
 	 * @param model
 	 * @return
 	 */
+	// http://localhost:8080/cash/failed/kakao
 	@GetMapping("/failed/kakao")
 	public String failedKakaoPay(@RequestParam("pg_token") String pgToken) {
-		
+		// 가주문 삭제
 	    return "/cash/chargeFailedToss";
 	}
 	

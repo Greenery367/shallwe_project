@@ -1,6 +1,8 @@
-package com.example.demo.repository.model;
+package com.example.demo.dto;
 
 import java.sql.Timestamp;
+
+import com.example.demo.repository.model.Card;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

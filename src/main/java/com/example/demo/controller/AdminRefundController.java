@@ -37,20 +37,20 @@ public class AdminRefundController {
 	
 	
 	/**
-	 * 환불 페이지 접속
+	 * 관리자 환불 페이지 접속
 	 * @param model
 	 * @return
 	 */
-	// http://localhost:8080/admin/refund/
-	@GetMapping("/")
+	// http://localhost:8080/admin/refund
+	@GetMapping("")
 	public String refundBoardPage(Model model) {
-		List<Refund> refundList = refundService.getAllRefund(4, 0);
+		List<Refund> refundList = refundService.getAllRefund(10, 0);
 		model.addAttribute("refundList", refundList);
 		return "/admin/adminRefund";
 	}
 	
 	/**
-	 * 환불 처리
+	 * 카카오 - 환불 처리
 	 * @param refundData
 	 * @return
 	 */
@@ -63,6 +63,8 @@ public class AdminRefundController {
 		
 		return new ResponseEntity<>(refundResponseDTO,HttpStatus.OK);
 	}
+	
+	
 	
 	
 	

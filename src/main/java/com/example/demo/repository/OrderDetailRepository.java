@@ -24,4 +24,10 @@ public interface OrderDetailRepository {
 	// tid로 주문 세부사항 찾기
 	public OrderDetail selectOrderDetailByTid(@Param("tid")String tid);
 	
+	// orderId로 주문 세부사항 찾기
+	public OrderDetail selectOrderDetailByOrderId(@Param("orderId")String orderid);
+	
+	// orderId와 tid로 삭제
+	public void deleteOrderDetail(@Param("orderId")String orderId, @Param("userId")int userId);
+	
 }

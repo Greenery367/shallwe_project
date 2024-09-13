@@ -31,7 +31,7 @@
 							10,000 원<input type="radio" name="cash-btn" value="10000">
 						</div> 
 						<div>
-							30,000 원<input type="radio" name="cash-btn" value="3000">
+							30,000 원<input type="radio" name="cash-btn" value="30000">
 						</div> 
 					</div>
 					<p> 결제 후 내 캐쉬 10,000 캐쉬</p>
@@ -56,106 +56,6 @@
     var chk1 = document.querySelector(".check1");
     var chk2 = document.querySelector(".check2");
 
-    // 결제 요청에 필요한 변수 선언
-    let amount = 50000;
-    let path = "/";
-    let successUrl = window.location.origin + path + "success";
-    let failUrl = window.location.origin + path + "fail";
-    let callbackUrl = window.location.origin + path + "va_callback";
-    let orderId = new Date().getTime();
-
-    let jsons = {
-        "card": {
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": "토스 티셔츠 외 2건",
-            "successUrl": successUrl,
-            "failUrl": failUrl,
-            "cardCompany": null,
-            "cardInstallmentPlan": null,
-            "maxCardInstallmentPlan": null,
-            "useCardPoint": false,
-            "customerName": "박토스",
-            "customerEmail": null,
-            "customerMobilePhone": null,
-            "taxFreeAmount": null,
-            "useInternationalCardOnly": false,
-            "flowMode": "DEFAULT",
-            "discountCode": null,
-            "appScheme": null
-        },
-        "vaccount": { //가상계좌 결제창
-
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": "토스 티셔츠 외 2건",
-            "successUrl": successUrl,
-            "failUrl": failUrl,
-            "validHours": 72,
-            "virtualAccountCallbackUrl": callbackUrl,
-            "customerName": "박토스",
-            "customerEmail": null,
-            "customerMobilePhone": null,
-            "taxFreeAmount": null,
-            "cashReceipt": {
-                "type": "소득공제"
-            },
-            "useEscrow": false
-
-        },
-        "transfer": { //계좌이체 결제창
-
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": "토스 티셔츠 외 2건",
-            "successUrl": successUrl,
-            "failUrl": failUrl,
-            "customerName": "박토스",
-            "customerEmail": null,
-            "customerMobilePhone": null,
-            "taxFreeAmount": null,
-            "cashReceipt": {
-                "type": "소득공제"
-            },
-            "useEscrow": false
-
-        },
-        "phone": { // 휴대폰 결제창
-
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": "토스 티셔츠 외 2건",
-            "successUrl": successUrl,
-            "failUrl": failUrl,
-            "mobileCarrier": null
-
-        },
-
-        "certificate": { //상품권 결제창
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": "토스 티셔츠 외 2건",
-            "successUrl": successUrl,
-            "failUrl": failUrl
-        },
-
-        "bookcert": { //도서문화상품권 결제창
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": "토스 티셔츠 외 2건",
-            "successUrl": successUrl,
-            "failUrl": failUrl
-        },
-        "gamecert": { // 게임문화상품권 결제창
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": "토스 티셔츠 외 2건",
-            "successUrl": successUrl,
-            "failUrl": failUrl
-        }
-
-        // 다른 결제 방법 정의는 생략
-    };
 
     // 결제 진행 함수
     function startPayment(button) {
@@ -180,7 +80,7 @@
             requestPaymentToKakao(cashAmount.value);
         } else if (btnValue == "toss") {
             console.log("토스 결제 요청" + cashAmount.value);
-            requestPaymentToToss('gamecert', jsons.card);
+            requestPaymentToToss(cashAmount.value);
         }
     }
 
@@ -195,23 +95,57 @@
         })
         .then(response => response.json())
         .then(data => {
-            if (data.next_redirect_pc_url) {
+            if (data.success) {
                 location.href = data.next_redirect_pc_url;
-            } else {
-                console.error('Redirect URL이 응답에 포함되어 있지 않습니다.');
-            }
-        })
+            } 
+        })  
         .catch(error => {
             console.error('요청 처리 중 오류 발생:', error);
         });
     }
 
+    
+    
     // 토스 결제 요청
-    function requestPaymentToToss(method, requestJson) {
+    function requestPaymentToToss(amount) {
+    	
+
+        // 결제 요청에 필요한 변수 선언
+        let path = "/";
+        let successUrl = window.location.origin + path + "toss-pay/send-request";
+        let failUrl = window.location.origin + path + "toss-pay/failed";
+        let callbackUrl = window.location.origin + path + "cash/charge";
+        let orderId = new Date().getTime();
+
+        // 결제 정보
+        let json = {
+            "card": {
+                "amount": amount,
+                "orderId": "sample-" + orderId,
+                "orderName": "셸위 캐쉬 충전",
+                "successUrl": successUrl,
+                "failUrl": failUrl,
+                "cardCompany": null,
+                "cardInstallmentPlan": null,
+                "maxCardInstallmentPlan": null,
+                "useCardPoint": false,
+                "customerName": "유저id",
+                "customerEmail": null,
+                "customerMobilePhone": null,
+                "taxFreeAmount": null,
+                "useInternationalCardOnly": false,
+                "flowMode": "DEFAULT",
+                "discountCode": null,
+                "appScheme": null
+            }
+        };
+    	
         let tossPayments = TossPayments("test_ck_ALnQvDd2VJzdqzNAkgNYVMj7X41m");
-        tossPayments.requestPayment(method, requestJson)
-            .catch(function (error) {
+        
+        tossPayments.requestPayment("card", json.card)
+        	.catch(function (error) {
                 if (error.code === "USER_CANCEL") {
+                	console.log("111111111");
                     alert('유저가 취소했습니다.');
                 } else {
                     alert(error.message);

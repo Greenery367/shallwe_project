@@ -6,15 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@ToString
 @Data
+@ToString
 @AllArgsConstructor
-@Builder
 @NoArgsConstructor
-public class TossPayDTO {
+@Builder
+public class CheckoutDTO {
 	
-	public String responseStr;
-	public String method;
-	public String orderName;
-
+	public String url;
 }

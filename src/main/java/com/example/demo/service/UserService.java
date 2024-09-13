@@ -35,6 +35,10 @@ public class UserService {
 		return userRepository.updatePasswordByEmail(hashpwd, email);
 	}
 	
+	public User searchByUserId(Integer userId) {
+		return userRepository.findByUserId(userId);
+	}
+	
 	public User searchId(String id) {
 		return userRepository.findById(id);
 	}

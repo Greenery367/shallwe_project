@@ -13,8 +13,9 @@
 					<th>주문번호</th>
 					<th>유저명</th>
 					<th>환불사유</th>
-					<th>환불신청일자</th>
+					<th>플랫폼</th>
 					<th>처리 상태</th>
+					<th>자세히 보기</th>
 				</tr>
 			<c:forEach var="refund" items="${refundList}">
 				<tr>
@@ -26,6 +27,7 @@
 					<td><c:if test="${refund.status == 0 }"><button class="refund-table" value="${refund}" onclick="decideRefund(this)">환불 미완료</button></c:if>
 						<c:if test="${refund.status != 0 }"><div>환불 처리 완료</div></c:if>
 					</td>
+					<td><button value="${refund}" onclick="refundDetail(this)">자세히 보기</button></td>
 				</tr>
 			</c:forEach>
 			</table>

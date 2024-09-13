@@ -23,7 +23,7 @@ public class OrderService {
 	public OrderDetailRepository orderDetailRepository;
 	
 	
-	// DI
+	// DI - 생성자 의존 주입 
 	public OrderService(OrderRepository orderRepository) {
 		this.orderRepository = orderRepository;
 		this.orderDetailRepository = orderDetailRepository;
@@ -38,10 +38,12 @@ public class OrderService {
 	 * @return
 	 */
 	@Transactional
-	public String makeNewOrder(Integer userId, Integer cashAmount, Integer platform) {
+	public String makeNewOrder(Integer userId, Integer cashAmount, Integer platform, String orderId) {
 		String name = cashAmount+"원 캐쉬 충전"; // 주문명 생성
-		UUID uuid = UUID.randomUUID(); // 랜덤값 생성
-		String orderId = (String)(userId+"_"+uuid); // 주문 고유번호 생성
+		if(platform == 1 && orderId.equals(null)) {
+			UUID uuid = UUID.randomUUID(); // 랜덤값 생성
+			orderId = (String)(userId+"_"+uuid); // 주문 고유번호 생성
+		} 	
 		orderRepository.createdNewOrder(orderId, userId, name, cashAmount, platform); // DB에 가주문내역 생성
 		return orderId;
 	}
@@ -70,7 +72,6 @@ public class OrderService {
 													orderDetail.itemName, 
 													orderDetail.totalAmount, 
 													orderDetail.taxFreeAmount);	
-		System.out.println("흠 세부주문 완료");
 		return;
 	};
 	
@@ -86,13 +87,24 @@ public class OrderService {
 	}
 	
 	/**
-	 * 결제 요청 후 - 가주문 내역 확인
+	 * 결제 요청 후 - 가주문 내역 확인 (tid)
 	 * @param orderId
 	 * @param totalAmount
 	 * @return
 	 */
 	public OrderDetail checkOrder(String tid) {
 		OrderDetail newOrderDetail = orderDetailRepository.selectOrderDetailByTid(tid);
+		return newOrderDetail;
+	}
+	
+	/**
+	 * 결제 요청 후 - 가주문 내역 확인 (paymentKey-orderId)
+	 * @param orderId
+	 * @param totalAmount
+	 * @return
+	 */
+	public OrderDetail checkOrderByOrderId(String orderId) {
+		OrderDetail newOrderDetail = orderDetailRepository.selectOrderDetailByOrderId(orderId);
 		return newOrderDetail;
 	}
 	
@@ -104,6 +116,18 @@ public class OrderService {
 	public Order checkOrderRecord(int userId, OrderDetail orderDetail) {
 		Order order = orderRepository.checkOrder(userId ,orderDetail.orderId, orderDetail.totalAmount);
 		return order;
+	}
+	
+	/**
+	 * 진주문 삭제
+	 * @param orderId
+	 * @param tid
+	 * @param userId
+	 */
+	@Transactional
+	public void deleteFailedOrder(String orderId, String tid, int userId) {
+		orderRepository.deleteOrder(orderId, tid, userId);
+		orderDetailRepository.deleteOrderDetail(orderId, userId);
 	}
 	
 
