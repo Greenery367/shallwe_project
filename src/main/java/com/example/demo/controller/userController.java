@@ -64,7 +64,6 @@ public class userController {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	Random random = new Random();
 
-
 	@Value("${tenco.key}")
 	private String tencoKey;
 
@@ -82,7 +81,6 @@ public class userController {
 	
 	@Value("${naverClientSecret.key}")
 	private String naverClientSecret;
-	
 	
 	/**
 	 * 메인 페이지 이동
@@ -129,7 +127,6 @@ public class userController {
 
 		}
 	}
-	
 	
 	@GetMapping("find-pw")
 	public String findPw() {

@@ -5,7 +5,7 @@
 			<span class="title">나의 친구</span>
 			<span id="friends_ct" class="count">${count}</span>
 		</a>
-		<a class="add_friends" href="friends/add">
+		<a class="add_friends" href="friends/findUser">
 			<span class="title">친구 추가</span>
 		</a>
 		<a class="wait_friends" href="friends/wait">
