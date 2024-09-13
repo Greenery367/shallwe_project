@@ -97,8 +97,17 @@
 					</div>
 				</ul>
 			</div>
+			<div class="menu-container">
+				<a href="" class="menu">친구</a>
+				<div class="drop-down-menus">
+				<ul>
+					<li><a href='${pageContext.request.contextPath}/friends/all'><h4>나의 친구</h4></a></li>
+					<li><a href='${pageContext.request.contextPath}/friends/findUser'><h4>친구 추가</h4></a></li>
+					<li><a href='${pageContext.request.contextPath}/friends/wait'>대기중인 초대</h4></a></li>
+				</ul>
+				</div>
+			</div>
 			<p>|</p>
-
 			<div class="menu-container">
 				<a href="" class="menu">뉴스</a>
 				<ul class="drop-down-menus">
