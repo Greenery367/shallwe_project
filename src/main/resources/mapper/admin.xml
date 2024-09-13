@@ -10,17 +10,17 @@
 
 	<!-- 전체유저 충전 금액 -->
 	<select id="countChargeAmount"> 
-		select sum(charge) from user_cash_history_tb where spend is null and refund is null and exchange is null
+		select sum(amount) from order_tb
 	</select>
 
 	<!-- 전체유저 사용 금액  -->
 	<select id="countSpendAmount"> 
-		select sum(spend) from user_cash_history_tb where charge is null
+		select sum(spend) from spend_tb
 	</select>
 	
-	<!-- 캐쉬 사용률 -->
+	<!--전체 유저 캐쉬 사용률 -->
 	<select id="countSpendAmountRate">
-		select round(sum(spend) / sum(charge) * 100, 1) from user_cash_history_tb
+		SELECT round((SELECT SUM(spend) FROM spend_tb) / (SELECT SUM(amount) FROM order_tb) * 100,1)
 	</select>
 	
 	<!-- 전체 광고 조회 -->
@@ -92,6 +92,16 @@
 	<select id="findbyId" resultType="com.example.demo.repository.model.Admin">
 		select * from admin_tb where admin_id = #{adminId}
 	</select>
-
+	
+	<!-- 광고별 게시일 계산 -->
+	<select id="selectPostingPeriodById">
+		SELECT DATEDIFF(end_date, start_date) FROM advertise_tb where id = #{id}
+	</select>
+	
+	<!-- 광고별 위치 금액 조회 -->
+	<select id="selectAdvertisePriceById">
+		select p.price from advertise_tb as a join ad_place_tb as p on a.place_id = p.id where a.id = #{id}
+	</select>
+	
 
 </mapper>

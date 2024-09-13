@@ -78,4 +78,10 @@ public interface AdminRepository{
 
 	// 댓글 삭제 기능
 	public int deleteCommentById(Integer id);
+	
+	// 광고별 게시일 계산
+	public int selectPostingPeriodById(Integer id);
+	// 광고별 위치 금액 조회
+	public int selectAdvertisePriceById(Integer id);
+	
 }

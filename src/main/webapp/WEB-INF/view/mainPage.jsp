@@ -20,23 +20,17 @@
 			</div>
 		<div class="main-page">
 			<div class="banner-conatiner-whole-box">
-				<div class="banner-container">
-					<div class="banners">
-						<img class="admin-main-2" alt="로고" src="../static/images/banner2.jpg">
-					</div>
-					<div class="banners">
-						<img class="admin-main-2" alt="로고" src="../static/images/banner3.png">
-					</div>
-					<div class="banners">
-						<img class="admin-main-2" alt="로고" src="../static/images/banner4.jpg">
-					</div>
-					<div class="banners">
-						<img class="admin-main-2" alt="로고" src="../static/images/banner5.png">
-					</div>
-					<div class="banners">
-						<img class="admin-main-2" alt="로고" src="../static/images/banner6.jpg">
-					</div>
-				</div>
+				<div class="advertise-example-center">
+		        <div class="advertise-one-line-box advertise-container">
+		            <c:forEach var="advertise" items="${advertiseListTwo}">
+		                <div class="advertise-box-two" data-id="${advertise.id}">
+		                    <div class="advertise-img-two">
+		                        <img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
+		                    </div>
+		                </div>
+		            </c:forEach>
+		        </div>
+		    </div>
 			</div>
 			<div class="recommend">
 				<div class="recomment-user-bar">
@@ -249,7 +243,7 @@
 			        }
 		
 			        // 2초마다 광고를 변경
-			        setInterval(showNextAd, 2000);
+			        setInterval(showNextAd, 3000);
 			    });
 			});
 		</script>

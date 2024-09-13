@@ -477,6 +477,11 @@
 	width: 100%;
 }
 
+.advertise-example-left{
+	padding-top: 25px;
+	padding-right: 25px;
+}
+
 .advertise-example-left p,
 .advertise-example-center p,
 .advertise-example-right p {

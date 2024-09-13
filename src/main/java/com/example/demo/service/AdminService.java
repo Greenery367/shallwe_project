@@ -173,5 +173,15 @@ public class AdminService {
     	adminRepository.deleteCommentById(dto.getId());
     }
     
+    // 광고별 게시일 계산 (광고id)
+    public int selectPostingPeriodById(Integer id) {
+    	return adminRepository.selectPostingPeriodById(id);
+    }
+    
+    // 광고별 위치 금액 조회
+    public int selectAdvertisePriceById(Integer id) {
+    	return adminRepository.selectAdvertisePriceById(id);
+    }
+    
     
 }
