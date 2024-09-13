@@ -3,6 +3,8 @@ package com.example.demo.repository.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import com.example.demo.dto.BankInfoDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,10 +27,13 @@ public class User {
 	private String phoneNumber;
 	private String originFileName;
 	private String uploadFileName;
-	private int currentCash;
+	private long lectureCash;
+	private long currentCash;
 	private int challengePoint;
 	private Timestamp createdAt;
+	private String userAccount;
 	private int status;
+	private BankInfoDTO bankInfo;
 
 	public String setUpUserImage() {
 		if(originFileName == null) {

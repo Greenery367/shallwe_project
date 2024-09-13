@@ -17,4 +17,5 @@ public interface CsRepository {
 	public List<FrequeDTO> findAllFreq(@Param ("limit") int limit, @Param("offset") int offset);
 	public List<FAQDTO> findAllFAQ(@Param ("limit") int limit, @Param("offset") int offset);
 	public int insert(FAQDTO dto);
+	public int updateFAQ(@Param("id") int id, @Param("title") String title, @Param("content") String content);
 }
