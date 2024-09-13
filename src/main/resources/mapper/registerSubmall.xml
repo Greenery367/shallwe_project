@@ -1,13 +1,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.repository.RegisterRepository">
-	
+<mapper namespace="com.example.demo.repository.RegisterSubmallRepository">
+	<!-- c -->
 	<insert id="registerSubmall">
-		insert into register_submall_tb (user_id, submall_id, amount)	
-		values (#{userId}, #{submallId}, #{amount});
+		insert into register_submall_tb (user_id, bank_id)	
+		values (#{userId}, #{bank_id});
 	</insert>
 	
-		
+	<!-- c -->
 	<select id="checkSubmallExists">
     	SELECT COUNT(*) FROM register_submall_tb WHERE user_id = #{userId}
 	</select>

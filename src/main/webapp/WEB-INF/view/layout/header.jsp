@@ -30,7 +30,7 @@
 			<div class="account-menus">
 			
 					<img class="mini-logo" alt="로고" src="/static/images/shallwe-icon.png">
-					<a href="/test/main"><b>홈</b></a>
+					<a href="/user/main"><b>홈</b></a>
 					<p>|</p>
 					<a href="/user/sign-in"><b>로그인</b></a>
 					<p>|</p>
@@ -70,7 +70,7 @@
 					<div class="game-menu-box">
 						 <c:forEach var="category" items="${categoryList}">
 							<li>
-								<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">${category.gameName}</div>
+								<div onclick="location.href='${pageContext.request.contextPath}/lecture/category/${category.id}'" class="game--category--menu">${category.gameName}</div>
 							</li>
 						</c:forEach>
 						<li>
@@ -88,7 +88,7 @@
 						</li>
 						 <c:forEach var="category" items="${categoryList}">
 							<li>
-								<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">${category.gameName}</div>
+								<div onclick="location.href='${pageContext.request.contextPath}/community/category/${category.id}'" class="game--category--menu">${category.gameName}</div>
 							</li>
 						</c:forEach>
 						<li>

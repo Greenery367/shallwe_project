@@ -20,10 +20,6 @@ public class MyPageService {
 		this.myPageRepository = myPageRepository; 
 	}
 	
-	// 마이페이지 불러오기 
-	public User readUserDetail(Integer userId) {
-		return myPageRepository.selectMyPageUser(userId);
-	}
 	
 	 public String[] uploadFile(MultipartFile mFile, String uploadDir) {
 

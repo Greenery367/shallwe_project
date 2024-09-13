@@ -2,11 +2,9 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.BankDTO;
 import com.example.demo.dto.BankInfoDTO;
 import com.example.demo.dto.RecordDTO;
+import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.BankService;
 import com.example.demo.service.MyPageService;
 import com.example.demo.service.RecordService;
@@ -31,6 +32,7 @@ public class MyPageController {
 	private final MyPageService myPageService;
 	private final BankService bankService;
 	private final RecordService recordService;
+	private final AdminService adminService;
 	
 	private final HttpSession session;
 	
@@ -39,11 +41,17 @@ public class MyPageController {
 	@GetMapping("/")
 	public String myInfo(Model model) {
 		User user = (User) session.getAttribute("principal");
-		//myPageService.readUserDetail(userId);
 		List<BankInfoDTO> banks = bankService.getAllBanks(); // 은행 목록 조회
-		
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
 		BankDTO bankAccount = bankService.getAccountByUserIdAndBankId(user.getUserId());
 		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("user", user);
 		model.addAttribute("userId", user.getUserId());
 		model.addAttribute("banks", banks); // 모델에 은행 목록 추가

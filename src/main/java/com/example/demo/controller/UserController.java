@@ -263,10 +263,6 @@ public class UserController {
 		dto.setPhoneNumber(request.getParameter("phoneNumber"));
 		userService.createUser(dto);
 		request.setAttribute("msg", "회원가입 완료.");
-		dto.setEmail(request.getParameter("emailBody") + "@" + request.getParameter("emailDomain"));
-		dto.setPhoneNumber(request.getParameter("phoneNumber"));
-		userService.createUser(dto);
-		request.setAttribute("msg", "회원가입 완료.");
 		request.setAttribute("url", "sign-in");
 		return "alert";
 	}

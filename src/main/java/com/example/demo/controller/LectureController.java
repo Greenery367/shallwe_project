@@ -10,37 +10,46 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Board;
+import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Lecture;
 import com.example.demo.repository.model.Review;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.LectureService;
 import com.example.demo.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 
 @Controller
 @RequestMapping("/lecture")
+@RequiredArgsConstructor
 public class LectureController {
 
 	private final LectureService lectureService;
 	private final ReviewService reviewService;
+	private final AdminService adminService;
 	private final HttpSession httpSession;
 	
-	@Autowired
-	public LectureController(LectureService lectureService, ReviewService reviewService, HttpSession httpSession) {
-		this.lectureService = lectureService;
-		this.reviewService = reviewService;
-		this.httpSession = httpSession;
-	}
 	
 	// 카테고리별 강의 조회
 	@GetMapping("/category/{categoryId}")
 	public String getlectureByCategory(@PathVariable("categoryId") Integer categoryId, Model model) {
 		List<Lecture> lectureList;
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
 		
 		lectureList = lectureService.getLectureByCategory(categoryId);
 		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("lectureList", lectureList);
 		model.addAttribute("categoryId", categoryId);
 		
@@ -63,7 +72,7 @@ public class LectureController {
 	}
 	
 	// 강의 리뷰 등록
-	@PostMapping("/createReview")
+	@PostMapping("/create-review")
 	public String createReview(Review review, Model model) {
 		User user = (User)httpSession.getAttribute("principal");
 		int id = user.getUserId();

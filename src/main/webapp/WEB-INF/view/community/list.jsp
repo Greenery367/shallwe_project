@@ -7,7 +7,7 @@
 	<h1 href="">${categoryId}  게시글 목록</h1>
 
 	<!-- 새 게시글 작성 버튼 -->
-	<button class="new-post-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/createBoard/${categoryId}';">새글 작성</button>
+	<button class="new-post-button" type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/create-board/${categoryId}';">새글 작성</button>
 
 	<table>
 		<thead>
@@ -25,7 +25,7 @@
 				<c:forEach var="board" items="${boardList}">
 					<tr>
 						<th>${board.id}</th>
-						<td><a href="/community/boardDetail/${board.id}">${board.title}</a></td>
+						<td><a href="/community/board-detail/${board.id}">${board.title}</a></td>
 						<th>${board.nickName}</th>
 						<td><fmt:formatDate value="${board.createdAt}" type="DATE" pattern="yyyy-MM-dd" /></td>
 						<th>${board.viewNum}</th>

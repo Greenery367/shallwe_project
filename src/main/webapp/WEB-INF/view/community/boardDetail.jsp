@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
@@ -39,10 +38,10 @@
 		</table>
 	</c:if>
 
-	<button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/updateBoard/${board.id}';">수정</button>
+	<button type="button" onclick="window.location.href='${pageContext.request.contextPath}/community/update-board/${board.id}';">수정</button>
 
 	<!-- 게시글 삭제 폼 -->
-	<form action="${pageContext.request.contextPath}/community/deletBoard/${board.id}" method="post" style="display: inline;">
+	<form action="${pageContext.request.contextPath}/community/delet-board/${board.id}" method="post" style="display: inline;">
 		<input type="hidden" name="categoryId" value="${board.categoryId}" /> <input type="hidden" name="authorId" value="${board.authorId}" />
 		<button type="submit">삭제</button>
 	</form>
@@ -76,7 +75,7 @@
 	<!-- 댓글 작성 폼 -->
 	<h3>댓글 작성</h3>
 	<form action="${pageContext.request.contextPath}/community/createComment" method="post">
-		<input type="hidden" name="postId" value="${board.id}" /> <input type="hidden" name="authorId" value="${loggedInUserId}"/>
+		<input type="hidden" name="postId" value="${board.id}" /> <input type="hidden" name="authorId" value="${user.userId}"/>
 		<!-- 로그인한 사용자 ID -->
 		<div>
 			<textarea name="content" rows="4" cols="50" placeholder="댓글을 입력하세요." required></textarea>
