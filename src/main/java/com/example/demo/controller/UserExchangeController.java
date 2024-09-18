@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.repository.model.RegisterSubmall;
 import com.example.demo.repository.model.Submall;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.BankService;
 import com.example.demo.service.RegisterExchangeService;
 import com.example.demo.service.RegisterSubmallService;
 import com.example.demo.service.UserService;
@@ -23,6 +24,7 @@ public class UserExchangeController {
 	private final RegisterExchangeService registerExchangeService;
 	private final RegisterSubmallService registerSubmallService;
 	private final UserService userService;
+	private final BankService bankService;
 	private final HttpSession httpSession;
 
 	@GetMapping("/")
@@ -44,9 +46,10 @@ public class UserExchangeController {
 				if (registerSubMall == true && isSubMall != null) { // 섭몰과 신청 둘 다 있으면 환전 내역 페이지로 이동
 					return "/myPage/userExchange/exchangeRecord";
 				} else if (registerSubMall == true && isSubMall == null) { // 신청만 있으면 대기 상태 페이지로 이동
-					return "/myPage/userExchange/ResiterSubmall";
+					return "/myPage/userExchange/responseSubmall";
 				} else { // 신청도 없으면 신청 페이지로 이동
-					return "subMallApply";
+					model.addAttribute("banks", bankService.getAllBanks()); // 은행 목록 추가
+					return "/myPage/userExchange/resiterSubmall";
 				}
 			} else {
 				return "/myPage/userExchange/denyLecture"; // 렉처머니 부족 시 에러 페이지
