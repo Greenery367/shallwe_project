@@ -13,25 +13,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.BankInfoDTO;
 import com.example.demo.dto.BankVerificationDTO;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.BankService;
 import com.example.demo.service.BankVerificationService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/api/verify")
+@RequiredArgsConstructor
 public class BankVerificationController {
 
     private final BankVerificationService service;
     private final HttpSession session;
     private final BankService bankService;
-
-    // BankVerificationService 주입
-    public BankVerificationController(BankVerificationService service, HttpSession session, BankService bankService) {
-        this.service = service;
-        this.session = session;
-        this.bankService = bankService;
-    }
+   
     
  // 인증 페이지로 이동 (GET 요청)
     @GetMapping("/verifyPage")

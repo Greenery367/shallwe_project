@@ -1,13 +1,18 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.RegisterSubmall;
 import com.example.demo.repository.model.Submall;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.BankService;
 import com.example.demo.service.RegisterExchangeService;
 import com.example.demo.service.RegisterSubmallService;
@@ -25,12 +30,18 @@ public class UserExchangeController {
 	private final RegisterSubmallService registerSubmallService;
 	private final UserService userService;
 	private final BankService bankService;
+	private final AdminService adminService;
 	private final HttpSession httpSession;
 
 	@GetMapping("/")
 	public String exchangePage(Model model, HttpSession httpSession) {
 		System.out.println("호에에에");
 		User user = (User) httpSession.getAttribute("principal"); // 세션에서 유저 가져오기
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
+		
 		if (user == null) {
 			return "redirect:/user/sign-in";
 
@@ -48,7 +59,12 @@ public class UserExchangeController {
 				} else if (registerSubMall == true && isSubMall == null) { // 신청만 있으면 대기 상태 페이지로 이동
 					return "/myPage/userExchange/responseSubmall";
 				} else { // 신청도 없으면 신청 페이지로 이동
+					model.addAttribute("advertiseListOne", advertiseListOne);
+					model.addAttribute("advertiseListTwo", advertiseListTwo);
+					model.addAttribute("advertiseListThree", advertiseListThree);
+					model.addAttribute("categoryList",categoryList);
 					model.addAttribute("banks", bankService.getAllBanks()); // 은행 목록 추가
+					
 					return "/myPage/userExchange/resiterSubmall";
 				}
 			} else {
