@@ -4,7 +4,7 @@
 	<div style="width: 20%; padding: 10px; border-right: 1px solid #ccc;">
 		<h3>내 정보 관리</h3>
 		<ul style="list-style-type: none; padding-left: 0;">
-			<li><a href="/my-page/${userId}">개인정보</a></li>
+			<li><a href="/my-page/">개인정보</a></li>
 			<li><a href="#">비밀번호 변경</a></li>
 			<li><a href="#">강의관리</a></li>
 			<li><a href="#">회원탈퇴</a></li>
