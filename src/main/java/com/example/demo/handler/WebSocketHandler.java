@@ -35,6 +35,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		Integer key = (Integer) session.getAttributes().get("key");
 		ObjectMapper objectMapper = new ObjectMapper();
 		String message = " 님이 들어오셧습니다.";
+		System.out.println("웹소켓으로 입장!!!!!!!");
 		List<User>userList = chatService.getUserList(key);
 		MessageDTO messageDTO = MessageDTO.builder().name(user.getNickname()).uploadFileName(user.getUploadFileName())
 				.message(message).build();

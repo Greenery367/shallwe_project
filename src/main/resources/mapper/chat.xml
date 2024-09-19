@@ -26,11 +26,11 @@
 	</select>
 
 	<select id="checkRoom1vs1" resultType="Integer">
-		SELECT IFNULL(max(a.room_id), 0)
+        SELECT  distinct(IFNULL(max(b.room_id),0))
 		FROM chat_room_join_tb as a
         inner join chat_room_join_tb as b on a.id = b.id
-        AND b.user_id = #{userId_1}
-        where a.user_id = #{userId_2}
+        where a.user_id = #{userId_1}
+        or b.user_id = #{userId_2};
 	</select>
 	
 </mapper>

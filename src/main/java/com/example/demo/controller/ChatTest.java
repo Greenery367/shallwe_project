@@ -54,7 +54,7 @@ public class ChatTest {
 				opponent = user; // 매칭된 상대 정보 담기
 			}
 		}
-		session.setAttribute("chat", id);
+		session.setAttribute("key", id);
 		model.addAttribute("opponent",opponent);
 		return "chat/chatRoom";
 	}
@@ -117,6 +117,7 @@ public class ChatTest {
 		System.out.println("방 넘버 !!! : " + roomId);
 		if(roomId != 0) {
 			model.addAttribute("roomId",roomId);
+			session.setAttribute("key", roomId);
 		} else {
 			// 없다면 새로운 대화방을 만듬
 			ChatRoom chatRoom = ChatRoom.builder().name(principal.getNickname() + ","
@@ -130,9 +131,10 @@ public class ChatTest {
 			chatService.joinChatRoom(userJoin);
 			chatService.joinChatRoom(opponentJoin);
 			model.addAttribute("roomId",roomId);
+			session.setAttribute("key", roomId);
 		}
 		model.addAttribute("opponent",opponent);
-		return "chat/chatRoom";
+		return "chat/friendChatRoom";
 	}
 	
 }
