@@ -43,6 +43,7 @@ import com.example.demo.repository.model.User;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.EmailSendService;
 import com.example.demo.service.FriendService;
+import com.example.demo.service.MatchService;
 import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -61,6 +62,7 @@ public class UserController {
 	private final AdminService adminService;
 	private final FriendService friendService;
 	
+	private final MatchService matchService;
 	@Autowired
 	private final HttpSession session;
 	@Autowired
@@ -98,6 +100,9 @@ public class UserController {
 	@GetMapping("/main")
 	public String mainPage(Model model) {
 		User user = (User)session.getAttribute("principal");
+		int mbtiId = matchService.getMbtiIdByUserId(user.getUserId());
+		user.setMbti(mbtiId); 
+		session.setAttribute("principal", user); // 원석 추가
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();

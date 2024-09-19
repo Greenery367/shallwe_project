@@ -14,6 +14,7 @@ import com.example.demo.dto.JoinRoomDTO;
 import com.example.demo.dto.TestMatch;
 import com.example.demo.dto.TestUser;
 import com.example.demo.repository.model.ChatRoom;
+import com.example.demo.repository.model.User;
 import com.example.demo.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,9 +33,9 @@ public class MatchHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		TestUser user = (TestUser)session.getAttributes().get("principal");
+		User user = (User)session.getAttributes().get("principal");
 		TestMatch test = TestMatch.builder().mbti(user.getMbti()).uploadFileName(user.getUploadFileName())
-				.nickname(user.getNickname()).id(user.getId()).build();
+				.nickname(user.getNickname()).id(user.getUserId()).build();
 		CLIENTS.remove(session.getId());
 		MBTIS.remove(session.getId());
 		WANTED.remove(session.getId());
@@ -47,9 +48,9 @@ public class MatchHandler extends TextWebSocketHandler{
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		TestUser user = (TestUser)session.getAttributes().get("principal");
+		User user = (User)session.getAttributes().get("principal");
 		TestMatch test = TestMatch.builder().mbti(user.getMbti()).uploadFileName(user.getUploadFileName())
-				.nickname(user.getNickname()).id(user.getId()).build();
+				.nickname(user.getNickname()).id(user.getUserId()).build();
 		MBTIS.put(session.getId(), test);
 		CLIENTS.put(session.getId(), session);
 		WANTED.put(session.getId(), message.getPayload());
@@ -69,7 +70,7 @@ public class MatchHandler extends TextWebSocketHandler{
 			chatService.createChatRoom(chatRoom);
 			int roomId = chatService.selectRoomId();
 			JoinRoomDTO userJoin = JoinRoomDTO.builder()
-				.userId(user.getId()).roomId(roomId).build();
+				.userId(user.getUserId()).roomId(roomId).build();
 			JoinRoomDTO opponentJoin = JoinRoomDTO.builder()
 				.userId(opponentId).roomId(roomId).build();
 			chatService.joinChatRoom(userJoin);

@@ -13,17 +13,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <body>
-<!-- 알람 받는 소켓 ON -->
-<script>
-	var socket = new WebSocket("ws://192.168.0.131:8080/alarm");
-	socket.onmessage = function(event) {
-		const message = JSON.parse(event.data); // json 형식인 alarmDTO를 다시 객체로 만듬
-		const profile = message.uploadFileName; // 상대 프로필 사진
-		const name = message.nickname; // 상대 이름
-		const id = message.sendUserId; // 상대 userId
-		const content = message.content; // 알람 내용 예) ** 님의 댓글 : 이건좀 아닌데
-	}
-</script>
 <div class="main">
 	<header>
 		<div class="header">
@@ -51,11 +40,12 @@
 		<div class="menus">
 			<div class="menu-container">
 				<a href="#" class="menu">친구 찾기</a>
-				<ul class="drop-down-menus-game">
+				<div class="drop-down-menus-game">
+				<ul>
 					<div class="game-menu-box">
 						 <c:forEach var="category" items="${categoryList}">
 							<li>
-								<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">${category.gameName}</div>
+								<div onclick="match(${category.id})" class="game--category--menu">${category.gameName}</div>
 							</li>
 						</c:forEach>
 						<li>
@@ -63,6 +53,7 @@
 						</li>
 					</div>
 				</ul>
+				</div>
 			</div>
 			<div class="menu-container">
 				<a href="" class="menu">게임 강의</a>
@@ -133,5 +124,25 @@
 				<a href="${pageContext.request.contextPath}/my-page/${user.userId}" class="menu">회원 정보</a>
 			</div>	
 		</div>
-
 	</div>
+	
+<!-- 알람 받는 소켓 ON -->
+<script>
+	var socket = new WebSocket("ws://192.168.0.131:8080/alarm");
+	socket.onmessage = function(event) {
+		const message = JSON.parse(event.data); // json 형식인 alarmDTO를 다시 객체로 만듬
+		const profile = message.uploadFileName; // 상대 프로필 사진
+		const name = message.nickname; // 상대 이름
+		const id = message.sendUserId; // 상대 userId
+		const content = message.content; // 알람 내용 예) ** 님의 댓글 : 이건좀 아닌데
+	}
+	
+	function match(id) {
+		if(${principal.mbti == 0}) {
+			alert("먼저 mbti 검사를 하셔야합니다!");
+		} else {
+			location.href = "http://192.168.123.140:8080/chat/match?type=" + id;
+		}
+	}
+	
+</script>
