@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.dto.RegisterExchangeDTO;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.RegisterSubmall;
@@ -41,6 +42,7 @@ public class UserExchangeController {
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
+		List<RegisterExchangeDTO> exchangeList = registerExchangeService.getExchangeHistory(user.getUserId());
 		
 		if (user == null) {
 			return "redirect:/user/sign-in";
@@ -55,6 +57,8 @@ public class UserExchangeController {
 			if (lectureMoney >= 50000 || isSubMall != null ) { // 렉처머니 5만원 이상인지 확인
 				
 				if (registerSubMall == true && isSubMall != null) { // 섭몰과 신청 둘 다 있으면 환전 내역 페이지로 이동
+					model.addAttribute("exchangeList", exchangeList);
+					System.out.println("들어왔나요 환전내역"+exchangeList);
 					return "/myPage/userExchange/exchangeRecord";
 				} else if (registerSubMall == true && isSubMall == null) { // 신청만 있으면 대기 상태 페이지로 이동
 					return "/myPage/userExchange/responseSubmall";

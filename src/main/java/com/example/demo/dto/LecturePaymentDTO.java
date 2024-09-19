@@ -1,23 +1,21 @@
 package com.example.demo.dto;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RegisterExchangeDTO {
+@ToString
+public class LecturePaymentDTO {
 	
 	private int userId;
-	private int submallId;
-	private long amount;
-	private Timestamp createdAt;
-	private int status;
-	private long lectureCash;
+	private int classId;
+	private long currentCash;
+	private long price;
 	
 }

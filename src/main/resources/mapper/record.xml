@@ -2,38 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.RecordRepository">
-	<select id="ChargeFindById">
-		SELECT
-		u.user_id,
-		uch.charge,
-		uch.created_at
-		FROM
-		user_cash_history_tb uch
-		JOIN
-		user_tb u ON uch.user_id = u.user_id
-		WHERE
-		u.user_id = #{userId}
-		AND uch.charge IS NOT NULL
-		ORDER BY
-		uch.created_at DESC;
-	</select>
-
-	<select id="ExchangeFindById">
-		SELECT
-		u.user_id,
-		uch.exchange,
-		uch.created_at
-		FROM
-		user_cash_history_tb uch
-		JOIN
-		user_tb u ON uch.user_id = u.user_id
-		WHERE
-		u.user_id = #{userId}
-		AND uch.exchange IS NOT NULL
-		ORDER BY
-		uch.created_at DESC;
-	</select>
-
 	<select id="SpendFindById">
 		SELECT
 			s.id,
@@ -52,22 +20,6 @@
 			s.user_id = #{userId}
 		ORDER BY
 			s.created_at DESC;
-	</select>
-
-	<select id="RefundFindById">
-		SELECT
-		u.user_id,
-		uch.refund,
-		uch.created_at
-		FROM
-		user_cash_history_tb uch
-		JOIN
-		user_tb u ON uch.user_id = u.user_id
-		WHERE
-		u.user_id = #{userId}
-		AND uch.refund IS NOT NULL
-		ORDER BY
-		uch.created_at DESC;
 	</select>
 
 

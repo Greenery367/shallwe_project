@@ -31,15 +31,17 @@ th {
 	<table>
 		<thead>
 			<tr>
-				<th>날짜</th>
+				<th>상품 이름</th>
 				<th>충전 금액</th>
+				<th>날짜</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="history" items="${charges}">
+			<c:forEach var="order" items="${orders}">
 				<tr>
-					<td><fmt:formatDate value="${history.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-					<td><fmt:formatNumber value="${history.charge}" /></td>
+					<td>${order.name}</td>
+					<td><fmt:formatNumber value="${order.amount}" /></td>
+					<td><fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

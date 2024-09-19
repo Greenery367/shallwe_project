@@ -10,6 +10,7 @@ import com.example.demo.dto.RefundResponseDTO;
 import com.example.demo.repository.RefundRepository;
 import com.example.demo.repository.model.Refund;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,12 @@ public class RefundService {
 		headers.set("Content-type", "application/json");
         
         return headers;
+	}
+	
+	public List<Refund> refundFindById(Integer userId) {
+		List<Refund> refundList = new ArrayList<>();
+		refundList = refundRepository.refundFindById(userId);
+		return refundList;
 	}
 
 }
