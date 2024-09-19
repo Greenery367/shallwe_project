@@ -101,10 +101,12 @@
 			<p>|</p>
 			<div class="menu-container">
 				<a href="" class="menu">뉴스</a>
-				<ul class="drop-down-menus">
+				<div class="drop-down-menus">
+				<ul>
 					<li><h4>공지사항</h4></li>
 					<li><h4>이벤트</h4></li>
 				</ul>
+				</div>
 			</div>
 			<div class="menu-container">
 				<a href="" class="menu">고객 지원</a>
@@ -114,11 +116,13 @@
 			</div>
 			<div class="menu-container">
 				<a href="" class="menu">콘텐츠</a>
-				<ul class="drop-down-menus">
-					<li><h4>게임 성향 테스트</h4></li>
+				<div class="drop-down-menus">
+				<ul>
+					<li><a href='${pageContext.request.contextPath}/test/start-test'><h4>게임 성향 테스트</h4></a></li>
 					<li><h4>게임 이상형 월드컵</h4></li>
 					<li><h4>게임 챌린지</h4></li>
 				</ul>
+				</div>
 			</div>	
 			<div class="menu-container">
 				<a href="${pageContext.request.contextPath}/my-page/${user.userId}" class="menu">회원 정보</a>

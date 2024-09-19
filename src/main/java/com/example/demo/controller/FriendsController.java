@@ -1,17 +1,20 @@
 package com.example.demo.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.dto.FriendDTO;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.FriendService;
-import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -39,13 +42,16 @@ public class FriendsController {
 		int limit = 10;
 		// 오프셋은 limit * (page - 1)
 		int offset = limit * (page - 1);
-		List<User>userList = friendService.findLikeUser(name,limit,offset);
-		int size = friendService.findLikeUserSize(name);
+		String like = "%" + name + "%";
+		System.out.println("이름 재료는 : " + like);
+		List<User>userList = friendService.findLikeUser(like,limit,offset);
+		int size = friendService.findLikeUserSize(like);
 		int pageNum = (int)Math.ceil(size / limit);
 		request.setAttribute("userList", userList); // 검색된 유저리스트
 		request.setAttribute("name", name); // 검색어 
 		request.setAttribute("current",page); // 현재 페이지
 		request.setAttribute("pageSize", pageNum); // 총 페이지 수
+		System.out.println("페이지 사이즈는 : " + pageNum);
 		return "friend/findFriend";
 	}
 	
@@ -75,46 +81,62 @@ public class FriendsController {
 	
 	// 친구 요청 보내기
 	@PostMapping("/sendFriend")
-	public void postMethodName(@RequestParam(name="userId")int user,
-			@RequestParam(name="friendId")int friend) {
-		friendService.insertWaitingFriend(user, friend);
+	@ResponseBody
+	public String postMethodName(@RequestBody FriendDTO friendDTO) {
+		List<User> sendList = friendService.checkSendFriendList(friendDTO.getUserId());
+		for(User user : sendList) {
+			System.out.println("보낸 사용자 ID : " + user.getUserId());
+			if(user.getUserId() == friendDTO.getFriendId()) {
+				return "이미 친구요청을 보낸 사용자입니다.";
+			}
+		} 
+		friendService.insertWaitingFriend(friendDTO.getUserId(), friendDTO.getFriendId());
+		return "친구요청 성공";
 	}
 	
 	// 친구 요청 수락
 	@GetMapping("/accept/{id}")
-	public void acceptFriend(@PathVariable("id")int id) {
+	@ResponseBody
+	public String acceptFriend(@PathVariable("id")int id) {
 		User user = (User)session.getAttribute("principal");
 		int userId = user.getUserId();
 		int result =  friendService.checkWaitFriend(id, userId);
 		if(result != 0) {
 			friendService.addFriend(userId, id);
+			return "친구 요청 수락 성공";
 		} else {
-			// 추후 fetch 실패 추가
+			return "친구 요청 수락 실패";
 		}
 	}
 	
 	// 친구 요청 거절
 	@GetMapping("refuse/{id}")
-	public void refuseFriend(@PathVariable("id")int id) {
+	@ResponseBody
+	public String refuseFriend(@PathVariable("id")int id) {
 		User user = (User)session.getAttribute("principal");
 		int userId = user.getUserId();
 		friendService.removeWaitFriend(id, userId);
+		return "친구 요청 거절 성공";
 	}
 	
 	// 친구 요청 취소
 	@GetMapping("cancel/{id}")
-	public void cancelFriend(@PathVariable("id")int id) {
+	@ResponseBody
+	public String cancelFriend(@PathVariable("id")int id) {
 		User user = (User)session.getAttribute("principal");
 		int userId = user.getUserId();
 		friendService.removeWaitFriend(userId, id);
+		return "친구 요청 취소 성공";
 	}
 	
 	// 친구 삭제
 	@GetMapping("remove/{id}")
-	public void removeFriend(@PathVariable("id")int id) {
+	@ResponseBody
+	public String removeFriend(@PathVariable("id")int id) {
 		User user = (User)session.getAttribute("principal");
 		int userId = user.getUserId();
 		friendService.removeFriend(userId, id);
+		return "친구 삭제 성공";
 	}
 	
 }

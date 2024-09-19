@@ -1,30 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
+<%@ include file="/WEB-INF/view/layout/header.jsp" %>	
+<%@ include file="/WEB-INF/view/layout/friendHeader.jsp" %>	
 <link rel="stylesheet" href="/css/findFriend.css">
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 	<div class="content">
 	<div class="search-box">
 	<form action="/friends/findUser" method="POST">
 		<input type="text" placeholder="Search for friends" name="name">
-		<input type="hidden" value="0" name="pageNum">
+		<input type="hidden" value="1" name="pageNum">
 	</form>
 	</div>
 	<div class="search-result">
 		<c:forEach var="user" items="${userList}">
 		<div class="user-profile">
-            <a href="/chat/profileInfo?id=${user.id}">
+            <a href="/chat/profileInfo?id=${user.userId}">
+            <c:choose>
+            <c:when test="${user.uploadFileName == null}">
+            <img src="/static/images/defaultProfile.jpeg">
+            </c:when>
+            <c:otherwise>
             <img src="/images/${user.uploadFileName}" alt="Profile Picture">
+            </c:otherwise>
+            </c:choose>
             </a>
             <div class="user-info">
                 <div class="user-name">
-                <a href="/chat/profileInfo?id=${user.id}">${user.nickname}</a>
+                <a href="/chat/profileInfo?id=${user.userId}">${user.nickname}</a>
                 </div>
             </div>
         </div>
@@ -60,7 +61,7 @@
 		function pagePost(page) {
 			let form = document.createElement('form');
 			form.setAttribute('method','post');
-			form.setAttribute('action','/user/findUser');
+			form.setAttribute('action','/friends/findUser');
 			
 			let pageNum = document.createElement('input');
 			pageNum.setAttribute('type','hidden');

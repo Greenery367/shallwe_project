@@ -10,7 +10,6 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.example.demo.dto.AlarmDTO;
-import com.example.demo.dto.TestUser;
 import com.example.demo.repository.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

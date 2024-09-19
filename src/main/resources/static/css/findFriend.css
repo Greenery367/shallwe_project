@@ -1,10 +1,31 @@
 @charset "UTF-8";
+
 /* 공통 스타일 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f8f9fa;
+}
+
+/* 메인 콘텐츠 레이아웃 */
+.main-content {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.side-menu {
+    width: 200px;
+    margin-right: 20px;
+}
+
+.content-area {
+    width: calc(100% - 240px); /* 사이드 메뉴와 간격을 고려한 너비 */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 8px 6px -6px #d3d3d3;
+    border-radius: 15px;
 }
 
 /* 검색 박스 스타일 */
