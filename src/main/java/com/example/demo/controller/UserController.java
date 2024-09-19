@@ -144,7 +144,6 @@ public class UserController {
 			request.setAttribute("msg", "이름 또는 닉네임이 정확하지 않습니다.");
 			request.setAttribute("url", "find-id");
 			return "alert";
-
 		}
 	}
 	
