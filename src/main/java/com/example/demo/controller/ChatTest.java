@@ -84,14 +84,18 @@ public class ChatTest {
 	}
 	
 	@GetMapping("/match")
-	public String matchPage(HttpServletRequest request) throws JsonProcessingException {
+	public String matchPage(HttpServletRequest request,@RequestParam(name="type")int id) throws JsonProcessingException {
 		User user = (User)session.getAttribute("principal");
 		int mbtiId = matchService.getMbtiIdByUserId(user.getUserId());
+		user.setMbti(mbtiId);
+		session.setAttribute("principal", user);
+		MbtiDTO myMbti = matchService.getMbtiNameById(mbtiId);
 		List<CompatibilityListDTO> compatibility = matchService.getCompatibilityList(mbtiId);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String json = objectMapper.writeValueAsString(compatibility);
 		request.setAttribute("compatibilityList",compatibility);
 		request.setAttribute("compatibilityJson", json);
+		request.setAttribute("mbti", myMbti);
 		return "match/matchSystem";
 	}
 	

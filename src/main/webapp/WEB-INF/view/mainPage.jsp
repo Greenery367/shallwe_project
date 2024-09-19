@@ -221,7 +221,7 @@
 		<script>
 		const friendsDiv = document.querySelectorAll('.friend-container');
 	    const profileBox = document.querySelector('.profile-box');
-
+	    profileBox.style.display = 'none';
 	    friendsDiv.forEach((friendDiv) => {
 	        friendDiv.addEventListener('click', function(event) {
 	            const id = friendDiv.querySelector('input[type="hidden"]').value;

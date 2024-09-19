@@ -57,7 +57,7 @@
 		</div>
 	</div>
 	<script>
-	 var socket = new WebSocket("ws://192.168.0.131:8080/match");
+	 var socket = new WebSocket("ws://192.168.123.140:8080/match");
 	 var matching = false;
 	 var count = 0;
 	 const compatibilityList = JSON.parse(`${compatibilityJson}`);

@@ -27,6 +27,7 @@ public class User {
 	private String phoneNumber;
 	private String originFileName;
 	private String uploadFileName;
+	private int mbti; // 원석 추가
 	private long lectureCash;
 	private long currentCash;
 	private int challengePoint;
