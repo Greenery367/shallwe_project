@@ -100,9 +100,9 @@ public class UserController {
 	@GetMapping("/main")
 	public String mainPage(Model model) {
 		User user = (User)session.getAttribute("principal");
-		int mbtiId = matchService.getMbtiIdByUserId(user.getUserId());
-		user.setMbti(mbtiId); 
-		session.setAttribute("principal", user); // 원석 추가
+		// int mbtiId = matchService.getMbtiIdByUserId(user.getUserId());
+		// user.setMbti(mbtiId); 
+		// session.setAttribute("principal", user); // 원석 추가
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
