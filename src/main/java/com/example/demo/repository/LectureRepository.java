@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.dto.CreateLectureDTO;
+import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Lecture;
 
 @Mapper
@@ -18,4 +20,15 @@ public interface LectureRepository {
 	// userId로 내강의리스트 조회하기
 	public List<Lecture> findLectureListByUserId(Integer userId);
 	
+	// 카테고리 리스트 조회
+	public List<Category> getCategoryList();
+	
+	// 강의 개설
+	public void insertLecture(CreateLectureDTO dto);
+	
+	// 강좌 정보 수정
+	public int updateLecture(CreateLectureDTO dto);
+	
+	// 강좌 삭제 요청
+	public void deleteLecture(Integer lectureId);
 }
