@@ -1,23 +1,17 @@
 @charset "UTF-8";
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
-}
 
-/* 서브헤더 스타일 */
 .friends_nav {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
+    width: 100%;
     padding: 10px;
     background-color: #fff;
     box-shadow: 0px 4px 6px -4px #ccc;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
 .friends_nav a {
+    display: block;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #f1f1f1;

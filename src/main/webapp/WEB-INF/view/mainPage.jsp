@@ -3,15 +3,6 @@
 	<%@ include file="/WEB-INF/view/layout/header.jsp" %>	
 	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
-<!-- 클릭시 프로필 보기 창 -->
-<div class="profile-box">
-				<ul>
-					<li class="profile-info"><a>프로필 보기</a></li>
-					<li class="chat"><a>1:1 채팅</a></li>
-					<li class="close"><a>닫기</a></li>
-				</ul>
-			</div>
-			
 		<div class="main-board">
 			<div class="banner-container-vertical">
 				<div class="advertise-example-left">
@@ -81,7 +72,6 @@
 					</div>
 				</div>
 			</div>
-			
 			
 			<div class="recommend">
 				<div class="recomment-user-bar">
@@ -172,7 +162,7 @@
 				<c:forEach var="friends" items="${onlineFriends}">
 					<div class="friend-container">
 						<input type="hidden" value="${friends.userId}">
-						<img class="friend-icon" src="/images/${friends.uploadFilename}">
+						<img class="friend-icon" src="/images/${friends.uploadFileName}">
 						<h6 class="friend-name">${friends.nickname}</h6>
 					</div>
 				</c:forEach>
@@ -220,8 +210,6 @@
 </script>
 		<script>
 		const friendsDiv = document.querySelectorAll('.friend-container');
-	    const profileBox = document.querySelector('.profile-box');
-	    profileBox.style.display = 'none';
 	    friendsDiv.forEach((friendDiv) => {
 	        friendDiv.addEventListener('click', function(event) {
 	            const id = friendDiv.querySelector('input[type="hidden"]').value;

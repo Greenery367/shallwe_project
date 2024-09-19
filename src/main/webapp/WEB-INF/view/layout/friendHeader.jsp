@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="/static/css/FriendHeader.css">
 	<div class="friends_nav">
 		<a class="all_friends" href="friends/all">
 			<span class="title">나의 친구</span>

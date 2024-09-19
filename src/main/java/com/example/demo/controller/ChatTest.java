@@ -114,6 +114,7 @@ public class ChatTest {
 		int roomId = 0;
 		// 친구와 만든 대화방이 있는지 없는지 검사
 		roomId = chatService.checkRoom1vs1(userId, id);
+		System.out.println("방 넘버 !!! : " + roomId);
 		if(roomId != 0) {
 			model.addAttribute("roomId",roomId);
 		} else {

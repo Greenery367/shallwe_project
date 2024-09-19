@@ -1,144 +1,109 @@
 @charset "UTF-8";
-body, html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-.main {
-  display: flex;
-  justify-content: center;
-}
-
-.container {
-  width: 70%;
-  display: flex;
-}
-
-.friends_nav {
-  flex: 0 0 30%;
-  border-right: 1px solid #ccc;
-  padding: 20px;
-}
 
 .content {
-  flex: 1;
-  padding: 20px;
-}
-
-.header, .nav-bar, .banner {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.header .account-menus a, .nav-bar .menus a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #000;
-}
-
-.banner img.logo {
-  width: 150px;
-}
-
-.header .account-menus {
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px;
-}
-
-.nav-bar .menus {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-bar .menus a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #000;
-}
-
-.main-board {
-  display: flex;
-  justify-content: space-between;
-}
-
-.admin-main-1 {
-  width: 100%;
-  height: auto;
-}
-
-.swiper {
-  width: 100%;
-  height: 300px;
-}
-
-.swiper-wrapper {
-  display: flex;
-}
-
-.user_box {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.user_box img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.user_box span {
-  font-size: 16px;
-}
-
-.select_overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.friends_nav a {
-  display: block;
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: #000;
-}
-
-.friends_nav .title {
-  font-weight: bold;
+    width: 80%; /* 서브 헤더를 제외한 나머지 영역 */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px -4px #ccc;
+    border-radius: 8px;
+    flex-grow: 1;
 }
 
 .friends_count {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.friends_count span {
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .manage_fiends_btn, .add_friends_btn {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.manage_fiends_btn:hover, .add_friends_btn:hover {
+    background-color: #0056b3;
 }
 
 .search_friend input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.user_box {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.user_box img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.user_box span {
+    font-size: 18px;
+}
+
+.user_box:hover {
+    background-color: #f1f1f1;
+}
+
+.profile-box {
+    position: absolute;
+    display: none; /* 기본적으로 숨김 */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000; /* 다른 요소보다 위에 표시되도록 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.profile-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-box ul li {
+    margin: 5px 0;
+}
+
+.profile-box ul li a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.profile-box ul li.close a {
+    color: red;
 }
 
 .state_block {
-  font-weight: bold;
-  margin: 20px 0 10px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
 }

@@ -103,6 +103,8 @@ public class FriendsController {
 		int result =  friendService.checkWaitFriend(id, userId);
 		if(result != 0) {
 			friendService.addFriend(userId, id);
+			friendService.removeWaitFriend(id, userId);
+			friendService.removeWaitFriend(userId, id); // 서로 신청했을수있으니 다 삭제
 			return "친구 요청 수락 성공";
 		} else {
 			return "친구 요청 수락 실패";

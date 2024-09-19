@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +18,14 @@
 		</div>
 		<div id="opponent-info">
 			<div id="opponent-pic">
-				<img src="images/${opponent.uploadFilename}" id="opponent-profile">
-				<!-- 상대방 프로필 사진 -->
+				 <c:choose>
+                        <c:when test="${online.uploadFileName == null}">
+                            <img src="/static/images/defaultProfile.jpeg">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/images/${online.uploadFileName}" alt="Profile Picture">
+                        </c:otherwise>
+                   </c:choose>
 			</div>
 			<div id="opponent-name">${opponent.nickname}</div>
 		</div>
