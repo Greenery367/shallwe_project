@@ -18,4 +18,8 @@ public class LecturePaymentDTO {
 	private long currentCash;
 	private long price;
 	
+	// 잔액 업데이트 메서드
+    public void updateCurrentCash(long newCash) {
+        this.currentCash = newCash;
+    }
 }

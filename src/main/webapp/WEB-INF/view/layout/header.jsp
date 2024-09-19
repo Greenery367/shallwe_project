@@ -121,7 +121,7 @@
 				</ul>
 			</div>	
 			<div class="menu-container">
-				<a href="${pageContext.request.contextPath}/my-page/${user.userId}" class="menu">회원 정보</a>
+				<a href="${pageContext.request.contextPath}/my-page/" class="menu">회원 정보</a>
 			</div>	
 		</div>
 

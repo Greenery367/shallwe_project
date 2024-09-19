@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.dto.LecturePaymentDTO;
 import com.example.demo.repository.model.Advertise;
-import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Lecture;
 import com.example.demo.repository.model.Review;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.AdminService;
-import com.example.demo.service.LectureService;
 import com.example.demo.service.LecturePaymentService;
+import com.example.demo.service.LectureService;
 import com.example.demo.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
@@ -100,6 +98,8 @@ public class LectureController {
         // 결제 결과에 따른 리다이렉트
         if ("success".equals(result)) {
             model.addAttribute("message", "결제가 완료되었습니다.");
+            user.setCurrentCash(paymentDTO.getCurrentCash());  // 사용자 정보 업데이트
+            httpSession.setAttribute("principal", user);  // 세션에 업데이트된 사용자 정보 저장
         } else {
             model.addAttribute("message", result); // 실패 메시지 전달
         }

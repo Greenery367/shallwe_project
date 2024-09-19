@@ -39,6 +39,10 @@ public class LecturePaymentService {
 
         // 결제 내역 기록
         paymentRepository.createSpend(paymentDTO);
+        
+     // 결제 완료 후 사용자 정보를 다시 조회하여 업데이트된 캐시를 반영
+        long updatedCash = paymentRepository.getCurrentCash(paymentDTO.getUserId());
+        paymentDTO.updateCurrentCash(updatedCash);  // DTO의 currentCash 업데이트
 
         return "success";
     }
