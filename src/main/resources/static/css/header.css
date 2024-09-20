@@ -28,6 +28,7 @@ footer {
     text-align: center;
     background-color: #C0C0C0;
     padding: 50px 0;
+}
     
 .advertise-example-left{
 	padding-top: 25px;
@@ -590,5 +591,4 @@ ul, li {
 .advertise-one-line-box p {
     display: flex;
     justify-content: center;
-}
 }

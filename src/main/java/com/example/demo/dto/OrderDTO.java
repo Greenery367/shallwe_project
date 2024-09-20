@@ -13,6 +13,6 @@ public class OrderDTO {
 	public Long amount;
 	public Timestamp createdAt;
 	public int status;
-	public 
+	
 
 }
