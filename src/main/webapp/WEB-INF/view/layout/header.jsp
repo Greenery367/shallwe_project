@@ -11,11 +11,22 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 </head>
 <body>
+<div class="alarm-box">
+    <div class="alarm-header">
+        <span class="alarm-all active" onclick="selectAlarmType(this)">전체</span>
+        <span class="alarm-friend" onclick="selectAlarmType(this)">친구</span>
+        <span class="alarm-post" onclick="selectAlarmType(this)">게시글</span>
+        <span class="alarm-chat" onclick="selectAlarmType(this)">채팅</span>
+        <span class="alarm-lecture" onclick="selectAlarmType(this)">강의</span>
+    </div>
+    <div class="alarm-content"></div>
+</div>
 <div class="main">
 	<header>
 		<div class="header">
 			<div class="account-menus">
 				<img class="mini-logo" alt="로고" src="/static/images/shallwe-icon.png">
+				<img src="/static/images/alarm.png" class="alarm-bell">
 				<a href="/user/main"><b>홈</b></a>
 				<p>|</p>
 				<c:choose>
@@ -51,11 +62,11 @@
 						<div class="game-menu-box">
 							<c:forEach var="category" items="${categoryList}">
 								<li>
-									<div onclick="match(${category.id})" class="game--category--menu">${category.gameName}</div>
+									<div onclick="match(${principal.mbti})" class="game--category--menu">${category.gameName}</div>
 								</li>
 							</c:forEach>
 							<li>
-								<div onclick="location.href='${pageContext.request.contextPath}/admin/dashboard'" class="game--category--menu">기타게임</div>
+								<div onclick="location.href=http://192.168.0.131:8080/chat/match" class="game--category--menu">기타게임</div>
 							</li>
 						</div>
 					</ul>
@@ -133,22 +144,103 @@
 		</div>
 	</div>
 </div>
-<!-- 알람 받는 소켓 ON -->
 <script>
-	var socket = new WebSocket("ws://192.168.0.131:8080/alarm");
-	socket.onmessage = function(event) {
-		const message = JSON.parse(event.data); // json 형식인 alarmDTO를 다시 객체로 만듬
-		const profile = message.uploadFileName; // 상대 프로필 사진
-		const name = message.nickname; // 상대 이름
-		const id = message.sendUserId; // 상대 userId
-		const content = message.content; // 알람 내용 예) ** 님의 댓글 : 이건좀 아닌데
-	}
+	const alarmBox = document.querySelector(".alarm-box");
+	const alarmBell = document.querySelector(".alarm-bell");
+	const alarmContent = document.querySelector(".alarm-content");
+	const alarmAll = document.querySelector(".alarm-all");
+	const alarmFriend = document.querySelector(".alarm-friend");
+	const alarmPost = document.querySelector(".alarm-post");
+	const alarmChat = document.querySelector(".alarm-chat");
+	const alarmLecture = document.querySelector(".alarm-lecture");
+	
+	alarmBox.style.display = 'none';
+	
+	// 알림 정보를 서버에서 가져와서 알림 창에 표시
+    fetch("http://192.168.0.131:8080/user/alarm")
+    .then((response) => response.text())
+    .then((text) => {
+        if (text !== null) {
+            const alarmList  = JSON.parse(text);
+            console.log(alarmList);
+            if(alarmList.length > 0) {
+            	alarmList.forEach(function(alarms) {
+        			const alarm = document.createElement("div");
+                    const opponentPic = document.createElement("img");
+                    const opponentName = document.createElement("span");
+                    const content = document.createElement("span");
 
+                    alarm.classList.add("alarm-element");
+                    opponentPic.classList.add("alarm-pic");
+                    opponentName.classList.add("alarm-name");
+                    content.classList.add("alarm-message");
+
+                    opponentPic.src = "/images/" + alarms.uploadFileName;
+                    opponentName.innerText = alarms.nickname;
+                    content.innerText = alarms.content;
+
+                    alarm.appendChild(opponentPic);
+                    alarm.appendChild(opponentName);
+                    alarm.appendChild(content);
+                    if(alarms.typeId !== undefined) {
+                    
+                    	alarm.addEventListener('click', function (event) {
+                    		location.href=`${pageContext.request.contextPath}/user/move?type=` +  alarms.type
+                    				+ '&userId=' + alarms.userId
+                    });
+                    } else {
+                    	alarm.addEventListener('click', function (event) {
+                    		location.href=`${pageContext.request.contextPath}/user/move?type=` +  alarms.type
+                    				+ '&userId=0'
+                    });
+                    }
+                    alarmContent.appendChild(alarm);
+                    // 새로운 알림이 있을 경우 알림 아이콘 변경
+                    if (alarms.status === 0) {
+                        alarmBell.src = "/static/images/alarm2.png";
+                    }
+            	});
+            } else {
+                    const noAlarmMessage = document.createElement("div");
+                    noAlarmMessage.classList.add("no-alarm-message");
+                    noAlarmMessage.innerText = "알림이 없습니다.";
+                    alarmContent.appendChild(noAlarmMessage);
+                }
+        } 
+    });
+
+    // 알림 벨 클릭 시 알림 창이 벨 아래에 나타남
+    alarmBell.addEventListener('click', function(event) {
+        if (alarmBox.style.display === 'none') {
+            const bellPosition = alarmBell.getBoundingClientRect();
+            alarmBox.style.left = bellPosition.left + "px";
+            alarmBox.style.top = bellPosition.bottom + 10 + "px"; // 벨 아래로 약간의 간격
+            alarmBox.style.display = 'block';
+            alarmBell.src = "/static/images/alarm.png";
+        } else {
+            alarmBox.style.display = 'none';
+        }
+    });
+	
 	function match(id) {
 		if (${principal.mbti == 0}) {
 			alert("먼저 mbti 검사를 하셔야합니다!");
 		} else {
-			location.href = "http://192.168.123.140:8080/chat/match?type=" + id;
+			location.href = "http://192.168.0.131:8080/chat/match?type=" + id;
 		}
 	}
 </script>
+	
+	function selectAlarmType(selected) {
+	    // 기존의 active 클래스 제거
+	    document.querySelectorAll('.alarm-header span').forEach(function(item) {
+	        item.classList.remove('active');
+	    });
+
+	    // 선택된 항목에 active 클래스 추가
+	    selected.classList.add('active');
+	}
+
+</script>
+</body>
+</html>

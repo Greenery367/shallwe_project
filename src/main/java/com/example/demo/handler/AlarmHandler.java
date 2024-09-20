@@ -22,6 +22,7 @@ public class AlarmHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		User user = (User)session.getAttributes().get("principal");
 		CLIENTS.put(user.getUserId(), session); // 유저 id를 key로 session 저장
+		System.out.println("알람 서버 들어옴");
 	}
 	
 	@Override // 웹 소켓 종료시
@@ -35,6 +36,6 @@ public class AlarmHandler extends TextWebSocketHandler {
 		ObjectMapper objectMapper = new ObjectMapper();
 		AlarmDTO alarmDTO = objectMapper.readValue(message.getPayload(), AlarmDTO.class);
 		String content = objectMapper.writeValueAsString(alarmDTO);
-		CLIENTS.get(alarmDTO.getReceiveUserId()).sendMessage(new TextMessage(content)); // 보내는 유저에게 알람 content 전송
+		// CLIENTS.get(alarmDTO.getReceiveUserId()).sendMessage(new TextMessage(content)); // 보내는 유저에게 알람 content 전송
 	}
 }

@@ -7,8 +7,10 @@ import lombok.Data;
 @Builder
 public class AlarmDTO {
 
-	private int sendUserId;
-	private int receiveUserId;
+	private int id;
+	private int userId;
+	private int type;
+	private int status;
 	private String uploadFileName;
 	private String nickname;
 	private String content;

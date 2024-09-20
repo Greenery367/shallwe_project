@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +26,13 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.demo.dto.AlarmDTO;
 import com.example.demo.dto.GoogleOauthToken;
 import com.example.demo.dto.GoogleProfile;
 import com.example.demo.dto.KakaoProfile;
@@ -38,16 +42,20 @@ import com.example.demo.dto.OAuthToken;
 import com.example.demo.dto.SignUpDTO;
 import com.example.demo.handler.exception.DataDeleveryException;
 import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Alarm;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.News;
 import com.example.demo.repository.model.Notice;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.AdminService;
+import com.example.demo.service.AlarmService;
 import com.example.demo.service.EmailSendService;
 import com.example.demo.service.FriendService;
 import com.example.demo.service.MatchService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -68,6 +76,7 @@ public class UserController {
 	@Autowired 
 	private NoticeService noticeService;
 	
+	private final AlarmService alarmService;
 	private final MatchService matchService;
 	@Autowired
 	private final HttpSession session;
@@ -127,6 +136,8 @@ public class UserController {
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("newsList", newsList);
 		
+		user.setMbti(1);
+		session.setAttribute("principal", user);
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
@@ -495,6 +506,43 @@ public class UserController {
 		session.setAttribute("principal", oldUser);
 		return "redirect:/user/main";
 	}
+	
+	@GetMapping("/alarm")
+	@ResponseBody
+	public String getAlarmList() throws JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		User user = (User)session.getAttribute("principal");
+		List<Alarm> alarmList = null;
+		List<AlarmDTO> alarmDTO = new ArrayList<>();
+		alarmList = alarmService.findAlarmAll(user.getUserId());
+		for(Alarm alarm : alarmList) {
+			User opponent = userService.searchByUserId(alarm.getOpponentId());
+			AlarmDTO dto = AlarmDTO.builder().type(alarm.getType())
+					.id(alarm.getId()).status(alarm.getStatus())
+					.userId(opponent.getUserId()).nickname(opponent.getNickname())
+					.uploadFileName(opponent.getUploadFileName())
+					.content(alarm.getContent()).build();
+			alarmDTO.add(dto);
+		}
+		String alarmJSON = objectMapper.writeValueAsString(alarmDTO);
+		System.out.println(alarmJSON);
+		return alarmJSON;
+	}
+	
+	@GetMapping("move")
+	public String alarmMoveHandler(@RequestParam (name="type")int type, @RequestParam(name="userId")int userId) {
+		if(type == 1) {
+			return "redirect:/chat/friendChat?id=" + userId;
+		} else if (type == 2) {
+			return "redirect:/friends/wait";
+		} else if (type == 3) {
+			// 커뮤니티 관련 알림 이동 처리
+		} else if (type == 4) {
+			// 강의 관련 알림 이동 처리
+		}
+		return "redirect:/user/main";
+	}
+	
 	// git push protection error debug
 	
 }

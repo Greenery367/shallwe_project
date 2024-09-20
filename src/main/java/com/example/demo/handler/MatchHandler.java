@@ -29,8 +29,6 @@ public class MatchHandler extends TextWebSocketHandler{
 	@Autowired
 	private ChatService chatService;
 	
-	private int count = 0; // 채팅방을 만들기위한 카운트
-	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		User user = (User)session.getAttributes().get("principal");

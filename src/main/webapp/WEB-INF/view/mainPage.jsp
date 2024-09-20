@@ -261,7 +261,7 @@
 			            currentIndex = (currentIndex + 1) % ads.length;
 		
 			            // 다음 광고를 표시
-			            ads[currentIndex].classList.add('active');
+			            // ads[currentIndex].classList.add('active');
 			        }
 		
 			        // 첫 번째 광고를 표시
