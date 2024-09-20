@@ -51,6 +51,12 @@ public class SubmallService {
 		return submallRepository.selectAllRegisteredSubmall(limit, offset);
 	}
 	
+	/**
+	 * 모든 서브몰 객체 조회
+	 * @param limit
+	 * @param offset
+	 * @return
+	 */
 	public List<Submall> getllAllSubmall(int limit, int offset){
 		return submallRepository.selectAllSubmall(limit, offset);
 	}
@@ -73,38 +79,51 @@ public class SubmallService {
 	 */
 	public boolean makeNewSubmall(RegisterSubmall submall, User user, BankDTO bank) throws IOException, InterruptedException {
 		// 서브몰 ID 생성
-		System.out.println("-------------1111");
 		UUID uuid = UUID.randomUUID(); // 랜덤값 생성
-		String orderId = (String)(user.getUserId()+"_"+uuid);
-		String submallId = orderId.substring(0,19);
+		String orderId = (String)(user.getUserId()+"_"+uuid); // 서브몰 ID 생성
+		String submallId = orderId.substring(0,19); // 서브몰 ID 20자리 제한 - 20번째에서 자르기
 		
-		System.out.println("-----------orderId : "+orderId);
-		System.out.println("-----------submallId : "+submallId);
-		
-		BankDTO bankInfo = bankService.getAccountByUserIdAndBankId(user.getUserId());
-
-		System.out.println("--------------bankInfo : "+bankInfo);
+		BankDTO bankInfo = bankService.getAccountByUserIdAndBankId(user.getUserId()); // 유저 명의의 bank 객체 찾기
 		
 		// 서브몰 객체 생성
-		System.out.println("--------------2222");
 		Submall newSubmall = Submall.builder().submallId(submallId)
 											.accountId(bank.getBankId())
 											.email(user.getEmail())
 											.phoneNumber(user.getPhoneNumber())
 											.build();
+		// JSON 문자열을 직접 생성
+        String requestBody = String.format(
+        		"{\"subMallId\":\"%s\",\"account\":{\"bank\":\"%s\",\"accountNumber\":\"%s\",\"holderName\":\"%s\"}," +
+		        "\"type\":\"CORPORATE\",\"email\":\"%s\",\"phoneNumber\":\"%s\",\"companyName\":\"%s\"," +
+		        "\"representativeName\":\"%s\",\"businessNumber\":\"%s\"}",
+		        newSubmall.getSubmallId(), // 서브몰 ID
+	            bankInfo.getBankId(), // 은행 고유 코드
+                bankInfo.getAccountNumber(), // 계좌번호
+                user.getUsername(), // 계좌 주
+		        newSubmall.getEmail(), // 이메일
+		        newSubmall.getPhoneNumber(), // 전화번호
+		        "셸위-게임 친구 매칭 사이트", // 회사명
+		        user.getUsername(), // 대표명
+	            "1200220000" // 사업자번호
+		    );
 		
+		
+        // Http-POST 메세지 만들기
 		HttpRequest request = HttpRequest.newBuilder()
 			    .uri(URI.create("https://api.tosspayments.com/v1/payouts/sub-malls"))
 			    .header("Authorization", "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSOg==")
 			    .header("Content-Type", "application/json")
-			    .method("POST", HttpRequest.BodyPublishers.ofString("{\"subMallId\":\"testmall1dssdf00\",\"account\":{\"bank\":\"03\",\"accountNumber\":\"34000000000011\",\"holderName\":\"김토페\"},\"type\":\"CORPORATE\",\"email\":\"example@email.com\",\"phoneNumber\":\"01012341234\",\"companyName\":\"테스트몰100\",\"representativeName\":\"김토페\",\"businessNumber\":\"1200220000\"}"))
+			    .method("POST", HttpRequest.BodyPublishers.ofString(requestBody))
 			    .build();
+		
+		// TOSS 서버에서 응답 받아오기 - 서브몰 등록
 		HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 		
-		System.out.println(response.body());
-		
+		// 응답 메세지 String 으로 변환
 		String result = response.toString();
 		
+		
+		// 결과가 정상적으로 반환되었다면
 		if(result != null || !result.contains("null")) {
 			// 서브몰 객체 DB에 생성
 			submallRepository.addNewSubmall(newSubmall.submallId,user.getUserId(),newSubmall.accountId,newSubmall.email,newSubmall.phoneNumber);

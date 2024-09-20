@@ -33,7 +33,7 @@ public class KakaoPayService {
 	}
 	
 	@Transactional
-	public ReadyResponseDTO payReady(int totalPrice,String orderId) {
+	public ReadyResponseDTO payReady(Long totalPrice,String orderId) {
 		Map<String, String> parameters = new HashMap<>();
 		parameters.put("cid", "TC0ONETIME");
 		parameters.put("partner_order_id", "partner_order_id");
@@ -52,7 +52,7 @@ public class KakaoPayService {
 											.cid("TC0ONETIME")
 											.partnerOrderId("partner_order_id")
 											.partnerUserId("partner_user_id")
-											.totalAmount(totalPrice)
+											.totalAmount(Integer.parseInt(totalPrice.toString()))
 											.itemName(totalPrice+"원 캐쉬 충전")
 											.taxFreeAmount(0)
 											.build();

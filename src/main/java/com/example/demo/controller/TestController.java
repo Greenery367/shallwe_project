@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.repository.QuestionRepository;
 import com.example.demo.repository.model.Answer;
 import com.example.demo.repository.model.Mbti;
+import com.example.demo.repository.model.News;
 import com.example.demo.repository.model.Notice;
 import com.example.demo.repository.model.Question;
+import com.example.demo.repository.model.User;
 import com.example.demo.service.MbtiService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.QuestionService;
@@ -43,6 +45,7 @@ public class TestController {
 	private MbtiService mbtiService;
 	private int progressNumber;
 	
+	// DI
 	public TestController(HttpSession httpSession, QuestionService questionService, NoticeService noticeService){
 		this.httpSession  = httpSession;
 		this.questionService = questionService;
@@ -57,13 +60,19 @@ public class TestController {
 	// http://localhost:8080/test/main
 	@GetMapping("/main")
 	public String mainPage(Model model) {
+		
+		
 //		
 //		// 최신 공지사항 글 
-//		List<Notice> noticeList = noticeService.getAllNotice(2);
-//		
-		// 최신 자유게시판 글 5개
+		List<Notice> noticeList = noticeService.getAllNotice(0);
+		List<News> newsList = noticeService.getAllnews();
 		
-		//model.addAttribute("noticeList", noticeList);
+		// 최신 자유게시판 글 5개
+		System.out.println("----------노티스리스트"+noticeList);
+		System.out.println("----------뉴스리스트"+newsList);
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("newsList", newsList);
 		return "mainPage";
 	}
 	
@@ -165,6 +174,14 @@ public class TestController {
     	httpSession.setAttribute("testResult", resultMbti);
     	model.addAttribute("goodMatchedMbti", goodMatchedMbti);
     	model.addAttribute("badMatchedMbti", badMatchedMbti);
+    	
+    	// 로그인 상태 확인
+    	User user = (User)httpSession.getAttribute("principal");
+    	
+    	// 만약 로그인 중이라면 유저-mbti_tb에 mbti 저장
+    	if(user != null) {
+    		mbtiService.setMbtiAndUserInfo(user.getUserId(), resultMbti.getId());
+    	}
     	
         // 페이지 리디렉션
         return "/test/resultTest";

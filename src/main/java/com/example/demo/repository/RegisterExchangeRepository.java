@@ -20,4 +20,7 @@ public interface RegisterExchangeRepository {
 	
 	// id로 환전 내역 찾기
 	public RegisterExchange selectRegisterExchange(int id);
+
+	// 환전 신청 - 완료 처리하기
+	public void updateExchangeStatusToFinished(Integer exchageRecordId);
 }

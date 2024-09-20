@@ -200,6 +200,10 @@ a{
 	align-items: center;
 	margin: 20px;
 }
+.my-icon{
+	width: 170px;
+	height: 170px;
+}
 .mini{
 	width: 70px;
 	height: 70px;

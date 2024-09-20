@@ -38,7 +38,7 @@ public class OrderService {
 	 * @return
 	 */
 	@Transactional
-	public String makeNewOrder(Integer userId, Integer cashAmount, Integer platform, String orderId) {
+	public String makeNewOrder(Integer userId, Long cashAmount, Integer platform, String orderId) {
 		String name = cashAmount+"원 캐쉬 충전"; // 주문명 생성
 		if(platform == 1) {
 			UUID uuid = UUID.randomUUID(); // 랜덤값 생성
@@ -128,6 +128,16 @@ public class OrderService {
 	public void deleteFailedOrder(String orderId, String tid, int userId) {
 		orderRepository.deleteOrder(orderId, tid, userId);
 		orderDetailRepository.deleteOrderDetail(orderId, userId);
+	}
+
+	/**
+	 * user_id와 amount로 현재 캐쉬 정보 수정
+	 * @param userId
+	 * @param amount
+	 */
+	public void updateUsersCurrentCash(int userId, Long amount) {
+		orderRepository.updateCurrentCash(userId,amount);
+		return;
 	}
 	
 

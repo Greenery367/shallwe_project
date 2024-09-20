@@ -22,5 +22,10 @@
 		where id = #{id}
 	</select>
 	
+	<update id="updateExchangeStatusToFinished">
+		update register_exchange_tb
+		set status = 1
+		where id = #{exchageRecordId}
+	</update>
 	
 </mapper>

@@ -15,7 +15,6 @@
 					<th>환불 신청 일자</th>
 					<th>플랫폼</th>
 					<th>처리 상태</th>
-					<th>자세히 보기</th>
 				</tr>
 			<c:forEach var="refundDto" items="${refundList}">
 				<tr>

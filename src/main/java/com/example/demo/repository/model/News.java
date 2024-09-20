@@ -19,6 +19,6 @@ public class News {
 	public String title;
 	public String subTitle;
 	public String content;
-	public String image;
+	public String url;
 	public Timestamp createdAt;
 }

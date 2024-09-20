@@ -31,11 +31,19 @@
 			
 					<img class="mini-logo" alt="로고" src="/static/images/shallwe-icon.png">
 					<a href="/test/main"><b>홈</b></a>
-					<p>|</p>
-					<a href="/user/sign-in"><b>로그인</b></a>
-					<p>|</p>
-					<a href="/user/sign-up"><b>회원가입</b></a>
-					<p>|</p>
+					<c:choose>
+						<c:when test="${user == null }">
+							<a href="/user/sign-in"><b>로그인</b></a>
+							<p>|</p>
+							<a href="/user/sign-up"><b>회원가입</b></a>
+							<p>|</p>
+						</c:when>
+						<c:otherwise>
+							<a href="/user/sign-in"><b>로그아웃</b></a>
+							<p>|</p>
+						</c:otherwise>
+					</c:choose>
+					
 					<div class="charge-cash">
 						<a href="/cash/charge"><b>캐시충전</b></a> <img
 							src="/static/images/cash.png">
@@ -100,10 +108,10 @@
 			<p>|</p>
 
 			<div class="menu-container">
-				<a href="" class="menu">뉴스</a>
+				<a href="/notice/news-list" class="menu">뉴스</a>
 				<ul class="drop-down-menus">
-					<li><h4>공지사항</h4></li>
-					<li><h4>이벤트</h4></li>
+					<li onclick="location.href='/notice/notice-list'"><h4>공지사항</h4></li>
+					<li onclick="location.href='/notice/news-list'"><h4>게임 뉴스</h4></li>
 				</ul>
 			</div>
 			<div class="menu-container">

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class AdminRefundController {
 	 */
 	@PostMapping("/send-request/kakao")
 	@ResponseBody
-	public ResponseEntity<RefundResponseDTO> sendRefundToKakao(@RequestBody IdDTO id) {
+	public String sendRefundToKakao(@RequestBody IdDTO id, Model model) {
 		
 		Refund refund = refundService.getRefundById(Integer.parseInt(id.getId()));
 		
@@ -67,25 +68,31 @@ public class AdminRefundController {
 		RefundResponseDTO refundResponseDTO = refundService.readyRefundForKakao(refund);
 		
 		// 환불 결과 받아오기
-		return new ResponseEntity<>(refundResponseDTO,HttpStatus.OK);
+		new ResponseEntity<>(refundResponseDTO,HttpStatus.OK);
+		
+		List<RefundDTO> refundList = refundService.getAllRefundDto(10, 0);
+		model.addAttribute("refundList", refundList);
+		return "/admin/adminRefund";
 	}
 	
 	/**
 	 * 토스 - 환불 처리
 	 * @param refundData
 	 * @return
+	 * @throws InterruptedException 
+	 * @throws IOException 
 	 */
 	@PostMapping("/send-request/toss")
 	@ResponseBody
-	public List sendRefundToToss(@RequestBody IdDTO id) {
+	public void sendRefundToToss(@RequestBody IdDTO id) throws IOException, InterruptedException {
 		
 		System.out.println("흠흠흠흠흠 토스"+id);
 		
 		// 환불 요청
-		List response = refundService.readyRefundToToss(id.getId());
+		refundService.readyRefundToToss(id.getId());
 		
 		// 환불 결과 받아오기
-		return response;
+		return;
 	}
 	
 	

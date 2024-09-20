@@ -13,7 +13,7 @@ public interface OrderRepository {
 	public void createdNewOrder(@Param("orderId")String orderId,
 								@Param("userId")Integer userId, 
 								@Param("name")String name, 
-								@Param("cashAmount")Integer cashAmount, 
+								@Param("cashAmount")Long cashAmount, 
 								@Param("platform")Integer platform);
 	
 	// 결제 상태 수정 - 결제 완료
@@ -29,4 +29,7 @@ public interface OrderRepository {
 	
 	// 결제 삭제
 	public void deleteOrder(@Param("orderId")String orderId, @Param("tid")String tid,@Param("userId")int userId);
+
+	// 유저 현재 캐쉬 수정
+	public void updateCurrentCash(@Param("userId")int userId, @Param("amount")Long amount);
 }

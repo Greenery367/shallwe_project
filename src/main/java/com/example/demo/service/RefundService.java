@@ -16,6 +16,11 @@ import com.example.demo.repository.model.Order;
 import com.example.demo.repository.model.OrderDetail;
 import com.example.demo.repository.model.Refund;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,29 +120,44 @@ public class RefundService {
 	 * 토스 페이 - 환불 처리
 	 * @param refund
 	 * @return
+	 * @throws InterruptedException 
+	 * @throws IOException 
 	 */
-	public List readyRefundToToss(String id) {
+	public List<String> readyRefundToToss(String id) throws IOException, InterruptedException {
 		
 		
 		// order amount 찾기
-		Order order = orderRepository.selectOrderById(Integer.parseInt(id));
-		OrderDetail orderDetail = orderDetailRepository.selectOrderDetailByOrderId(order.orderId);
+				Order order = orderRepository.selectOrderById(Integer.parseInt(id));
+				OrderDetail orderDetail = orderDetailRepository.selectOrderDetailByOrderId(order.orderId);
 		
-		Map<String,String> parameters = new HashMap<>();
-		parameters.put("paymentKey", order.orderId);
-		parameters.put("cancelReason", "고객 변심");
-		
-		// HttpMessage 만들기
-		HttpEntity<Map<String,String>> requestEntity = new HttpEntity(parameters,this.getTossHeaders());
-		
-		RestTemplate template = new RestTemplate();
-		
-		// 환불 요청 url
-        String url = "https://api.tosspayments.com/v1/payments/5EnNZRJGvaBX7zk2yd8ydw26XvwXkLrx9POLqKQjmAw4b0e1/cancel";
-        
-        // 응답 객체 생성
-        List<String> response = template.postForObject(url, requestEntity, List.class);
-        
+				
+				HttpRequest request = HttpRequest.newBuilder()
+					    .uri(URI.create("https://api.tosspayments.com/v1/payments/5EnNZRJGvaBX7zk2yd8ydw26XvwXkLrx9POLqKQjmAw4b0e1"))
+					    .header("Authorization", "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSOg==")
+					    .method("GET", HttpRequest.BodyPublishers.noBody())
+					    .build();
+					HttpResponse<String> response11 = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+					System.out.println("결제 정보!!!--------------"+response11.body());
+				
+				
+				Map<String,String> parameters = new HashMap<>();
+				parameters.put("paymentKey", order.orderId);
+				parameters.put("cancelReason", "고객 변심");
+				
+				System.out.println("~~~~~~~~~~"+parameters);
+				
+				// HttpMessage 만들기
+				HttpEntity<Map<String,String>> requestEntity = new HttpEntity(parameters,this.getTossHeaders());
+				
+				RestTemplate template = new RestTemplate();
+				
+				// 환불 요청 url
+		        String url = "https://api.tosspayments.com/v1/payments/5EnNZRJGvaBX7zk2yd8ydw26XvwXkLrx9POLqKQjmAw4b0e1/cancel";
+		        
+		        // 응답 객체 생성
+		        List<String> response = template.postForObject(url, requestEntity, List.class);
+		        System.out.println("??????????????"+response);
+		        
         return response;
 	}
 

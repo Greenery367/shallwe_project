@@ -34,7 +34,6 @@
 							30,000 원<input type="radio" name="cash-btn" value="30000">
 						</div> 
 					</div>
-					<p> 결제 후 내 캐쉬 10,000 캐쉬</p>
 				</div>
 				<div class="cash-container">
 					<input type="checkbox" class="check1">[필수] 전체 동의</div>
@@ -56,7 +55,9 @@
     var chk1 = document.querySelector(".check1");
     var chk2 = document.querySelector(".check2");
 
-
+   
+    
+    
     // 결제 진행 함수
     function startPayment(button) {
         let btnValue = button.value;
@@ -95,32 +96,53 @@
         })
         .then(response => response.json())
         .then(data => {
-            if (data.success) {
-                location.href = data.next_redirect_pc_url;
-            } 
-        })  
+   			 if (data != null) {
+     		   console.log("Redirecting to:", data.next_redirect_pc_url); // 리다이렉트 URL 출력
+     		   location.href = data.next_redirect_pc_url;
+  		  } else {
+   		     console.error("결제 요청 실패:", data.message);
+   		 }
+		})
+ 
         .catch(error => {
             console.error('요청 처리 중 오류 발생:', error);
         });
     }
 
+    // 토스 보안 처리
+    function addInfoForSafe(orderId,totalAmount){
+    	fetch(`http://localhost:8080/toss-pay/send-request`, {
+    	    method: "POST",
+    	    headers: {
+    	        "Content-Type": "application/json"
+    	    },
+    	    body: JSON.stringify({ "orderId": orderId, "totalAmount": totalAmount })
+    	})
+    	.then(response => {
+    		console.log("보안 처리 성공");
+    	})
+    	.catch(error => {
+    	    console.error("Error:", error);
+    	});
+
+    }
     
     
     // 토스 결제 요청
-    function requestPaymentToToss(amount) {
+    function requestPaymentToToss(totalAmount) {
     	
-
-        // 결제 요청에 필요한 변수 선언
+    	// 결제 요청에 필요한 변수 선언
+        let orderId = new Date().getTime();
         let path = "/";
-        let successUrl = window.location.origin + path + "toss-pay/send-request";
+        let successUrl = window.location.origin + path + "toss-pay/success";
         let failUrl = window.location.origin + path + "toss-pay/failed";
         let callbackUrl = window.location.origin + path + "cash/charge";
-        let orderId = new Date().getTime();
-
+        
+        
         // 결제 정보
         let json = {
             "card": {
-                "amount": amount,
+                "amount": totalAmount,
                 "orderId": "sample-" + orderId,
                 "orderName": "셸위 캐쉬 충전",
                 "successUrl": successUrl,
@@ -132,21 +154,23 @@
                 "customerName": "유저id",
                 "customerEmail": null,
                 "customerMobilePhone": null,
-                "taxFreeAmount": null,
+                "taxFreeAmount": 0,
                 "useInternationalCardOnly": false,
                 "flowMode": "DEFAULT",
                 "discountCode": null,
                 "appScheme": null
             }
         };
-    	
         let tossPayments = TossPayments("test_ck_ALnQvDd2VJzdqzNAkgNYVMj7X41m");
         
+        // 정보 무결성을 위한 결제 정보 저장 처리
+        var nextUrl = addInfoForSafe("sample-" + orderId, totalAmount);
+        
+        // 결제 처리
         tossPayments.requestPayment("card", json.card)
         	.catch(function (error) {
                 if (error.code === "USER_CANCEL") {
-                	console.log("111111111");
-                    alert('유저가 취소했습니다.');
+                    alert('결제가 취소되었습니다.');
                 } else {
                     alert(error.message);
                 }
