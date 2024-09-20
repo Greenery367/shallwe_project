@@ -23,6 +23,29 @@
 		SELECT round((SELECT SUM(spend) FROM spend_tb) / (SELECT SUM(amount) FROM order_tb) * 100,1)
 	</select>
 	
+	<!-- 10일간 캐시 충전 최종승인된 내역 조회 -->
+	<select id="selectChargeAmountBetweenTenDays" resultType="com.example.demo.dto.CashChargeGraphVO">
+		select * from order_tb 
+        where status = 1 
+        and created_at between DATE_SUB(NOW(), INTERVAL 10 DAY) and NOW() 
+        order by created_at   
+	</select>
+	
+	<!-- 일별 충전 총합 계산 -->
+	<select id="countChargeAmountOneDay" resultType="int">
+		select sum(amount) FROM order_tb where date(created_at) = #{createdAt} group by date(created_at)
+	</select>
+	
+	<!-- 일별 충전 총합 리스트 -->
+	<select id="countChargeAmountAllDay"  resultType="com.example.demo.dto.CashChargeGraphVO">
+		SELECT DATE(created_at) AS createdAt, SUM(amount) AS amount, id, status
+		FROM order_tb
+		GROUP BY DATE(created_at)
+		ORDER BY DATE(created_at)
+	</select>
+	
+	
+	
 	<!-- 전체 광고 조회 -->
 	<select id="selectAllAdvertise">
 		select * from advertise_tb

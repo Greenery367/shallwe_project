@@ -25,6 +25,7 @@ public class Lecture {
 	private int totalNum;
 	private Timestamp createdAt;
 	private String nickName;
+	private int status;
 	
 		
 }

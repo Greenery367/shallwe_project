@@ -8,13 +8,13 @@
 <%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
 
 	<div>
-		<p>카테고리 관리</p><br>
+		<p>QnA</p><br>
 		
-		<p>카테고리 리스트</p>
+		<p>QnA 리스트</p>
 		<table class="table">
 			<thead>
 				<tr>
-					<th>카테고리id</th>
+					<th>QnA </th>
 					<th>카테고리명</th>
 					<th>관리</th>
 				</tr>

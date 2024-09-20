@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.dto.AdminSelectCommentDTO;
+import com.example.demo.dto.CashChargeGraphVO;
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.model.Admin;
@@ -14,6 +16,7 @@ import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Comment;
+import com.example.demo.repository.model.Lecture;
 
 @Mapper
 public interface AdminRepository{
@@ -29,6 +32,13 @@ public interface AdminRepository{
 	public int countSpendAmount();
 	// 캐쉬 사용률 
 	public double countSpendAmountRate();
+	
+	// 10일간 캐쉬 충전량
+	public List<CashChargeGraphVO> selectChargeAmountBetweenTenDays(CashChargeGraphVO chargeVO) throws Exception;
+	// 하루 캐쉬 충전 총액 계산
+	public Integer countChargeAmountOneDay(Timestamp createdAt);
+	// 일별 충전 총합 계산
+	public List<CashChargeGraphVO> countChargeAmountAllDay();
 	
 	// 전체 광고 조회
 	public List<Advertise> selectAllAdvertise();
@@ -83,5 +93,10 @@ public interface AdminRepository{
 	public int selectPostingPeriodById(Integer id);
 	// 광고별 위치 금액 조회
 	public int selectAdvertisePriceById(Integer id);
+	
+	// 전체 강의 조회
+	public List<Lecture> selectAllLecture();
+	// 강의 삭제
+	public int deleteLectureById(Integer id);
 	
 }
