@@ -11,6 +11,7 @@ import com.example.demo.dto.CreateLectureDTO;
 import com.example.demo.repository.LectureRepository;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Lecture;
+import com.example.demo.repository.model.Spend;
 
 @Service
 public class LectureService {
@@ -82,6 +83,12 @@ public class LectureService {
 	@Transactional
 	public void deleteLectureById(Integer lectureId) {
 		lectureRepository.deleteLecture(lectureId);
+	}
+	
+	// 강의 id로 결제 히스토리 불러오기
+	@Transactional
+	public List<Spend> getSpendHistoryByLectureId(Integer lectureId){
+		return lectureRepository.selectSpendHistoryByLectureId(lectureId);
 	}
 	
 }

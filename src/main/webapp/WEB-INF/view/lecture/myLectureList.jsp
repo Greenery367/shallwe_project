@@ -24,14 +24,12 @@
                     <p>${lecture.nickName}</p>
                     <p class="price">${lecture.price}원</p>
                     
-                    <a href="${pageContext.request.contextPath}lecture-profit/${lecture.id}">
-                    <button class="btn">수익 상세</button>
                     </a>
                     <a href="${pageContext.request.contextPath}lecture-update/${lecture.id}">
                     <button class="btn">강좌 정보 수정</button>
                     </a>
                     <a href="${pageContext.request.contextPath}lecture-review/${lecture.id}">
-                    <button class="btn">수강평 관리</button>
+                    <button class="btn">강좌 상세 내역 조회</button>
                     </a>
                     
                     <!-- 삭제 버튼 (폼 전송 방식) -->

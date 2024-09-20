@@ -70,6 +70,16 @@
             u.user_id = #{userId}
 </select>
 
+
+<select id="getCategoryList" resultType="com.example.demo.repository.model.Category">
+	select * from game_tb
+</select>
+
+<select id="selectSpendHistoryByLectureId" resultType="com.example.demo.repository.model.Spend">
+	select * from spend_tb
+	where class_id = #{classId}
+</select>
+
 <update id="updateLecture">
 	update class_tb
 	set category_id = #{categoryId}, title = #{title}, subtitle = #{subtitle}, content = #{content},
@@ -77,10 +87,6 @@
 	where id = #{id}
 </update>
 
-
-<select id="getCategoryList" resultType="com.example.demo.repository.model.Category">
-	select * from game_tb
-</select>
 
 <insert id="insertLecture">
 	INSERT INTO class_tb 

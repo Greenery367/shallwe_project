@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +14,13 @@ import com.example.demo.dto.CreateLectureDTO;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Lecture;
 import com.example.demo.repository.model.Review;
+import com.example.demo.repository.model.Spend;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.LectureService;
 import com.example.demo.service.ReviewService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @Controller
 @RequestMapping("/lecture")
@@ -84,7 +80,7 @@ public class LectureController {
 		User user = (User) httpSession.getAttribute("principal");
 		if (user == null) {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
-			request.setAttribute("url", "sign-in");
+			request.setAttribute("url", "/user/sign-in");
 			return "alert";
 		}
 		lectureList = lectureService.getLectureListByUserId(user.getUserId());
@@ -99,7 +95,7 @@ public class LectureController {
 		User user = (User) httpSession.getAttribute("principal");
 		if (user == null) {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
-			request.setAttribute("url", "sign-in");
+			request.setAttribute("url", "/user/sign-in");
 			return "alert";
 		}
 		model.addAttribute("user", user);
@@ -120,7 +116,7 @@ public class LectureController {
 				.totalNum(Integer.parseInt(request.getParameter("totalNum"))).build();
 		lectureService.createLecture(createLecture);
 		request.setAttribute("msg", "강좌 개설 완료");
-		request.setAttribute("url", "my-lecture");
+		request.setAttribute("url", "/lecture/my-lecture");
 		return "alert";
 	}
 
@@ -132,11 +128,11 @@ public class LectureController {
 		User user = (User) httpSession.getAttribute("principal");
 		if (user == null) {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
-			request.setAttribute("url", "sign-in");
+			request.setAttribute("url", "/user/sign-in");
 			return "alert";
 		} else if (user.getUserId() != lecture.getAuthorId()) {
 			request.setAttribute("msg", "수정 권한이 없습니다.");
-			request.setAttribute("url", "my-lecture");
+			request.setAttribute("url", "/lecture/my-lecture");
 			return "alert";
 		} else {
 			model.addAttribute("user", user);
@@ -153,21 +149,22 @@ public class LectureController {
 		CreateLectureDTO createLecture = CreateLectureDTO.builder().categoryId(0)
 				.categoryId(Integer.parseInt(request.getParameter("categoryId"))).title(request.getParameter("title"))
 				.subtitle(request.getParameter("subtitle")).content(request.getParameter("content"))
-				.limitNum(Integer.parseInt(request.getParameter("limitNum"))).id(Integer.parseInt(request.getParameter("classId")))
+				.limitNum(Integer.parseInt(request.getParameter("limitNum")))
+				.id(Integer.parseInt(request.getParameter("classId")))
 				.price(Long.parseLong(request.getParameter("price")))
 				.totalNum(Integer.parseInt(request.getParameter("totalNum"))).build();
 		int result = lectureService.updateLecture(createLecture);
 		if (result == 1) {
 			request.setAttribute("msg", "수정 완료");
-			request.setAttribute("url", "my-lecture");
+			request.setAttribute("url", "/lecture/my-lecture");
 			return "alert";
 		} else {
 			request.setAttribute("msg", "수정 실패, 다시 시도해 주세요");
-			request.setAttribute("url", "my-lecture");
+			request.setAttribute("url", "/lecture/my-lecture");
 			return "alert";
 		}
 	}
-	
+
 	// 삭제 요청 처리
 	@PostMapping("/lecture-delete/{lectureId}")
 	public String deleteLecture(@PathVariable("lectureId") Integer lectureId, HttpServletRequest request) {
@@ -175,20 +172,60 @@ public class LectureController {
 		User user = (User) httpSession.getAttribute("principal");
 		if (user == null) {
 			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
-			request.setAttribute("url", "sign-in");
+			request.setAttribute("url", "/user/sign-in");
 			return "alert";
-		}else if(lecture.getAuthorId() != user.getUserId()){
+		} else if (lecture.getAuthorId() != user.getUserId()) {
 			request.setAttribute("msg", "권한이 없습니다.");
-			request.setAttribute("url", "my-lecture");
+			request.setAttribute("url", "/lecture/my-lecture");
 			return "alert";
-		}else {
+		} else {
 			lectureService.deleteLectureById(lectureId);
 			request.setAttribute("msg", "강의 삭제 완료.");
 			request.setAttribute("url", "/lecture/my-lecture");
 			return "alert";
 		}
 	}
-	
-	// 강의 아이디로 강의 수강평 조회  
+
+	// 수강 평 조회
+	@GetMapping("/lecture-review/{id}")
+	public String lectureReview(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+		User user = (User) httpSession.getAttribute("principal");
+		if (user == null) {
+			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
+			request.setAttribute("url", "/user/sign-in");
+			return "alert";
+		}
+		Lecture lecture = lectureService.readLectureDetail(id);
+		if (lecture == null) {
+			request.setAttribute("msg", "강의 정보를 불러오던 중 오류가 발생하였습니다. 다시 시도해 주세요");
+			request.setAttribute("url", "/lecture/my-lecture");
+			return "alert";
+		}
+		List<Review> reviews = reviewService.getReviewByClassId(id);
+		double sum = 0;
+		int i = 0;
+		for (i = 0; i < reviews.size(); i++) {
+			sum += reviews.get(i).getGrade();
+		}
+		double avg = sum / reviews.size();
+		String formattedAvg = String.format("%.1f", avg);
+		request.setAttribute("avg", formattedAvg);
+		
+		List<Spend> spends = lectureService.getSpendHistoryByLectureId(id);
+		Long spendSum = 0L;
+		for(int j = 0; j<spends.size(); j++) {
+			spendSum += spends.get(j).getSpend();
+		}
+		
+		request.setAttribute("spendSum", spendSum);
+		
+		model.addAttribute("spends", spends);
+		model.addAttribute("user", user);
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("lecture", lecture);
+
+		return "lecture/lectureReview";
+	}
+
 	
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.demo.dto.CreateLectureDTO;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Lecture;
+import com.example.demo.repository.model.Spend;
 
 @Mapper
 public interface LectureRepository {
@@ -31,4 +32,7 @@ public interface LectureRepository {
 	
 	// 강좌 삭제 요청
 	public void deleteLecture(Integer lectureId);
+
+	//강좌 id로 결제내역 조회
+	public List<Spend> selectSpendHistoryByLectureId(Integer lectureId);
 }
