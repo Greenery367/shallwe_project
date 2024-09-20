@@ -68,7 +68,7 @@
 				</ul>
 			</div>
 			<div class="menu-container">
-				<a href="" class="menu">커뮤니티</a>
+				<a href="" class="menu">커뮤니티</a>	
 				<ul class="drop-down-menus-game">
 					<div class="game-menu-box">
 						<li>

@@ -28,6 +28,17 @@ footer {
     text-align: center;
     background-color: #C0C0C0;
     padding: 50px 0;
+    
+.advertise-example-left{
+	padding-top: 25px;
+	padding-right: 25px;
+}
+
+.advertise-example-left p,
+.advertise-example-center p,
+.advertise-example-right p {
+	text-align: center;
+	width: 100%;
 }
 
 hr {

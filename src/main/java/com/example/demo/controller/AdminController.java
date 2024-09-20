@@ -1,18 +1,29 @@
 package com.example.demo.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.dto.CashChargeGraphVO;
 import com.example.demo.repository.model.Admin;
 import com.example.demo.service.AdminService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,19 +36,58 @@ public class AdminController {
 	private final AdminService adminService;
 	
 	
-	@GetMapping({"", "/dashboard"})
-	public String adminMainPage(Model model) {
+	@GetMapping("")
+	public String adminMainPage( Model model) throws Exception {
 		
-		// 대시보드 통계를 위한 계산
-		int numberOfUser = adminService.countUser();
-		int numberOfChargeCash = adminService.countChargeCash();
-		double cashUseRate = adminService.countSpendCashRate();
-		
-		model.addAttribute("numberOfUser", numberOfUser);
-		model.addAttribute("numberOfChargeCash", numberOfChargeCash);
-		model.addAttribute("cashUseRate", cashUseRate);
-		return "admin/adminMain";
+	    // 대시보드 통계를 위한 계산
+	    int numberOfUser = adminService.countUser();
+	    int numberOfChargeCash = adminService.countChargeCash();
+	    double cashUseRate = adminService.countSpendCashRate();
+	    int cashChargeAmount = adminService.countChargeAmountOneDay(null);
+	    List<CashChargeGraphVO> cashChargeData = adminService.countChargeAmountAllDay();
+	    
+	    List<Integer> amountList = new ArrayList<>();
+	    List<String> dateList = new ArrayList<>();
+	    
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    
+	    for (CashChargeGraphVO data : cashChargeData) {
+	        amountList.add(data.getAmount());
+	        dateList.add(sdf.format(data.getCreatedAt())); // 날짜 포맷팅
+	    }
+	    
+	    // JSON으로 변환
+	    
+	    System.out.println("----------"+amountList);
+	    System.out.println("----------"+dateList);
+	    
+	    // 모델에 통계 데이터 추가
+	    model.addAttribute("numberOfUser", numberOfUser);
+	    model.addAttribute("numberOfChargeCash", numberOfChargeCash);
+	    model.addAttribute("cashUseRate", cashUseRate);
+	    model.addAttribute("cashChargeAmount", cashChargeAmount);
+	    model.addAttribute("amountList", amountList);
+	    model.addAttribute("dateList", dateList);
+
+	    // 기본적으로 HTML 페이지를 반환
+	    return "admin/adminMain";
 	}
+	
+	// 차트를 불러오기 위한 요청
+	@GetMapping("/dashboard")
+	@ResponseBody
+	public List<CashChargeGraphVO> getDashboardData(@RequestParam(value = "createdAt", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") String createdAtStr) throws Exception {
+	    Timestamp createdAt = null;
+	    if (createdAtStr != null && !createdAtStr.isEmpty()) {
+	        createdAt = Timestamp.valueOf(createdAtStr);
+	    }
+
+	    List<CashChargeGraphVO> chargeGraphVO = adminService.countChargeAmountAllDay();
+	    
+	    return chargeGraphVO; // 이 데이터가 JSON으로 반환됨
+	}
+	
+
 	
 	
 	@GetMapping("sign-in")

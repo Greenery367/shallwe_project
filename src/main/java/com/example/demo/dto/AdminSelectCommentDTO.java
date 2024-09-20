@@ -17,6 +17,6 @@ public class AdminSelectCommentDTO {
 	private Integer id;
 	private Integer postId;
 	private	String content;
-	private Integer author;
+	private Integer authorId;
 	private Timestamp createdAt;
 }

@@ -24,7 +24,7 @@
 					<tr>
 						<td>${category.id}</td>
 						<td>${category.gameName}</td>
-						<td> <button onclick="openWindow()">카테고리 보기</button> / <form action="/admin/community/delete-category" method="post">
+						<td> <button onclick="opentab(${category.id})">카테고리 보기</button> / <form action="/admin/community/delete-category" method="post">
 								<input type="hidden" id="id" name="id" value="${category.id}">
 							<button type="submit">삭제</button>
 							</form></td>
@@ -100,27 +100,6 @@
 		</table>
 	</div>
 	
-	<p>게시글 수정</p>
-	<form action="/admin/community/update-board" method="post" class="advertise">
-		<div class="form-group">
-			<label for="id">수정할 카테고리 id</label> 
-			<input type="text" id="id" name="id" value="1">
-		</div>
-		<div class="form-group">
-			<label for="id">수정할 카테고리 id</label> 
-			<input type="text" id="id" name="id" value="1">
-		</div>
-		<div class="form-group">
-			<label for="id">수정할 카테고리 id</label> 
-			<input type="text" id="id" name="id" value="1">
-		</div>
-		
-		<div class="form-group">
-			<label for="title">카테고리명</label> 
-			<input type="text" id="title" name="title" value="호호게시판">
-		</div>
-		<button type="submit">카테고리수정</button>
-	</form>
 	 <script>
 	 function openWindow(boardId) {
 		    // 데이터 전달을 위한 URL 생성
@@ -131,6 +110,16 @@
 		    window.open(url, name, specs);
 		}
     </script>
+    <script>
+	    function opentab(categoryId) {
+	        // 데이터 전달을 위한 URL 생성 TODO - 수정예정
+	        var url = '${pageContext.request.contextPath}/admin/community/detail?id=' + encodeURIComponent(categoryId);
+	
+	        // 새 탭에서 열기
+	        window.open(url, '_blank');
+	    }
+	</script>
+    
 
 
 <%@ include file="/WEB-INF/view/layout/adminFooter.jsp"%>
