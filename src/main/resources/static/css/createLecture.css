@@ -82,6 +82,11 @@ form textarea {
     font-size: 1em;
 }
 
+.openbtn{
+	display: flex;
+	align-self: flex-end; /* 버튼을 오른쪽으로 배치 */
+}
+
 /* 제출 버튼 */
 form button {
     padding: 15px 30px;
