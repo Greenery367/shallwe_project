@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import com.example.demo.service.AdminService;
 import com.example.demo.service.BankService;
 import com.example.demo.service.MyPageService;
 import com.example.demo.service.RecordService;
+import com.example.demo.service.RefundService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +45,7 @@ public class MyPageController {
 	@Autowired
 	private final RecordService recordService;
 	private final AdminService adminService;
+	private final RefundService refundService; 
 	private final OrderRepository orderRepository;
 	private final RefundRepository refundRepository;
 	
@@ -60,7 +63,7 @@ public class MyPageController {
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
 		BankDTO bankAccount = bankService.getAccountByUserIdAndBankId(user.getUserId());
-		System.out.println("유으으으윽적" + user);
+		
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
@@ -208,9 +211,20 @@ public class MyPageController {
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
 		
+		System.out.println(orders);
+		List<Boolean> flagList = new ArrayList<>(); 
+		for(int i = 0; i<orders.size(); i++) {
+			System.out.println("~~~~~~~~~~~~"+orders.get(i));
+			System.out.println("~~~~~~~~~~~~"+orders.get(i).getId());
+			Boolean flag = refundService.hasRequestedCashRefund(orders.get(i).getId(), user.getUserId());
+			flagList.add(flag);
+		}
+		
+		System.out.println("-----------------------------------"+flagList);
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("flagList", flagList);
 		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("user", user);
 		model.addAttribute("orders", orders);

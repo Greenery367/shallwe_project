@@ -67,6 +67,7 @@ public class UserExchangeController {
 					model.addAttribute("advertiseListOne", advertiseListOne);
 					model.addAttribute("advertiseListTwo", advertiseListTwo);
 					model.addAttribute("advertiseListThree", advertiseListThree);
+					model.addAttribute("user", user);
 					model.addAttribute("categoryList", categoryList);
 					return "/myPage/userExchange/exchangeRecord";
 				} else if (registerSubMall == true && isSubMall == null) { // 신청만 있으면 대기 상태 페이지로 이동
@@ -137,6 +138,34 @@ public class UserExchangeController {
 	        // 오류 메시지 추가
 	        model.addAttribute("error", "계좌가 존재하지 않습니다. 먼저 계좌를 등록해주세요.");
 	    }
+	    
+	    return "redirect:/my-page/exchange-list/";
+	}
+	
+	@PostMapping("/registerExchange")
+	public String registerExchange(@RequestParam("amount") Long amount,  
+	                               Model model) {
+	    User user = (User) session.getAttribute("principal");
+	    Integer userId = user.getUserId();
+
+	    // 렉처머니가 충분한지 확인
+	    long lectureMoney = userService.getLectureCash(userId);
+	    if (lectureMoney < amount) {
+	        model.addAttribute("error", "잔액이 부족합니다.");
+	        return "redirect:/my-page/exchange-list/";  // 잔액이 부족한 경우 리다이렉트
+	    }
+
+	    // 서브몰 ID 찾기
+	    Integer submallId = registerExchangeService.getSubmallFindById(userId);
+
+	    // 환전 신청 처리
+	    RegisterExchangeDTO registerExchangeDTO = RegisterExchangeDTO.builder()
+	        .userId(userId)
+	        .submallId(submallId)
+	        .amount(amount)
+	        .build();
+
+	    registerExchangeService.registerExchange(registerExchangeDTO);
 	    
 	    return "redirect:/my-page/exchange-list/";
 	}

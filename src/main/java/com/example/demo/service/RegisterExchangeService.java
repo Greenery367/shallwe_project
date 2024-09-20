@@ -25,13 +25,26 @@ public class RegisterExchangeService {
 	}
 	
 	/**
-	 * 환전 신청
-	 * @param registerExchangeDTO
-	 */
-	public void registerExchange(RegisterExchangeDTO registerExchangeDTO) {
-		registerExchangeRepository.registerExchange(registerExchangeDTO.getUserId(), registerExchangeDTO.getSubmallId(), registerExchangeDTO.getAmount());
-	}
-	
+     * 환전 신청
+     * @param registerExchangeDTO
+     */
+    public void registerExchange(RegisterExchangeDTO registerExchangeDTO) {
+        registerExchangeRepository.registerExchange(
+            registerExchangeDTO.getUserId(), 
+            registerExchangeDTO.getSubmallId(), 
+            registerExchangeDTO.getAmount()
+        );
+    }
+
+    /**
+     * 서브몰 ID 찾기
+     * @param userId
+     * @return
+     */
+    public Integer getSubmallFindById(Integer userId) {
+        return registerExchangeRepository.submallFindById(userId);
+    }
+
 	/**
 	 * 환전 내역 
 	 * @param userId

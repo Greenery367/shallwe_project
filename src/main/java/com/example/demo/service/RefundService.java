@@ -15,6 +15,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.demo.dto.CashRefundDTO;
 import com.example.demo.dto.RefundDTO;
 import com.example.demo.dto.RefundResponseDTO;
 import com.example.demo.repository.OrderDetailRepository;
@@ -36,6 +37,15 @@ public class RefundService {
 	public OrderRepository orderRepository;
 	@Autowired
 	public OrderDetailRepository orderDetailRepository;
+	
+	public void requestRefund(CashRefundDTO cashRefundDTO) {
+        // 환불 신청을 DB에 저장
+        refundRepository.insertRefundRequest(cashRefundDTO);
+    }
+	
+    public boolean hasRequestedCashRefund(int id, int userId) {
+        return refundRepository.checkRefundRequest(id, userId) > 0;
+    }
 	
 	/**
 	 * 모든 환불 정보 객체 가져오기

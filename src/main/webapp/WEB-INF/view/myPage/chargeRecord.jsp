@@ -34,20 +34,33 @@ th {
 				<th>상품 이름</th>
 				<th>충전 금액</th>
 				<th>날짜</th>
+				<th>캐시 환불</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="order" items="${orders}">
 				<tr>
 					<td>${order.name}</td>
-					<td><fmt:formatNumber value="${order.amount}" /></td>
-					<td><fmt:formatDate value="${order.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td>${order.amount}</td>
+					<p>${flagList.get(1)}</p>
+					<td>${order.createdAt}</td>
+					<td><c:choose>
+							<c:when test="${flagList.get(i) == truetrue}">
+								<span>환불 신청 어료</span>
+							</c:when>
+							<c:otherwise>
+								<form action="${pageContext.request.contextPath}/refund/request" method="post">
+									<input type="hidden" name="orderId" value="${order.orderId}" /> <input type="hidden" name="userId" value="${order.userId}" />
+									<button type="submit">환불 신청</button>
+								</form>
+							</c:otherwise>
+						</c:choose></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	</div>
+
+</div>
 
 
 
@@ -59,4 +72,4 @@ th {
 
 
 
-	<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
+<%@ include file="/WEB-INF/view/layout/footer.jsp"%>

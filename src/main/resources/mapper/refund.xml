@@ -2,8 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.RefundRepository">
-
-
+	<!-- 캐시환불 신청 -->
+	 <insert id="insertRefundRequest">
+        INSERT INTO user_refund_tb (order_id, user_id)
+        VALUES (#{orderId}, #{userId})  <!-- 0 = 승인 대기중 -->
+    </insert>
+	<!-- 캐쉬환불 신청 버튼 반별 쿼리 -->
+    <select id="checkRefundRequest" resultType="int">
+        SELECT COUNT(*) FROM user_refund_tb 
+        WHERE order_id = #{orderId} AND user_id = #{userId}
+    </select>
+	
+	
 	<select id="selectAllRefund" resultType="com.example.demo.repository.model.Refund">
 		select * from user_refund_tb 
 		limit #{limit} offset #{offset}
@@ -21,7 +31,7 @@
 		JOIN
 		    order_tb o ON ur.order_id = o.order_id
 		WHERE
-		    ur.user_id = #{userId};
+		    o.user_id = #{userId};
 				
 	</select>
 	
