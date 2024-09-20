@@ -8,14 +8,20 @@
 	<%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
 		
 		<p>광고 정보</p>
+	<nav class="advertise-nav">
+		<ul class="advertise-nav">
+			<li>
+				<button class="list active" onclick="showList()">목록 조회</button>
+				<button class="add" onclick="showAdd()">추가</button>
+				<button class="update" onclick="showUpdate()">수정</button>
+			</li>
+		</ul>
+	</nav>
 				
-		<div>
 		
-		</div>
-				
-		<p>현재 게시중인 광고 미리보기</p>	
-	
-	<div class="advertise-list-content">
+	<div id="advertise-list">
+	<p>현재 게시중인 광고 미리보기</p>	
+		<div class="advertise-list-content">
 	    <div class="advertise-example-left">
 	        <p>좌측</p>
 	        <div class="advertise-one-line-box advertise-container">
@@ -81,67 +87,109 @@
 			</table>
 		</div>
 	
-		<div>광고 추가</div>
+	</div>
+	
+	<div id="advertise-add">
+		<div class="function--box">
+		  <h2>광고 추가</h2>
 		<form action="/admin/advertise/insert-advertise" method="post" class="advertise" enctype="multipart/form-data">
 			<div class="form-group">
-				<label for="placeId">위치 :</label> <input type="number" id="placeId" name="placeId" value="1">
+				<label for="placeId">위치 : </label>
+					<select name="placeId" id="placeId">
+							<option value="1">좌측</option>
+							<option value="2">중앙</option>
+					</select> 
 			</div>
 			<div class="form-group">
-				<label for="title">광고명 :</label> <input type="text" id="title" name="title" value="예나의 화장품 광고">
+				<label for="title">광고명 : </label> <input type="text" id="title" name="title" value="예나의 화장품 광고">
 			</div>
 			<div class="form-group">
-				<label for="customer">광고주 :</label> <input type="text" id="customer" name="customer" value="최예나">
+				<label for="customer">광고주 : </label> <input type="text" id="customer" name="customer" value="최예나">
 			</div>
 			<div class="form-group">
-				<label for="link">링크 :</label> 
-				<input type="text" id="link" name="link" value="http://sssssss.sssss">
+				<label for="link">링크 : </label> 
+				<input type="text" id="link" name="link" value="http://sssssss.sssss" placeholder="연결할 링크를 입력해주세요">
 			</div>
 			<div class="form-group">
-		        <label for="file" class="file-input">광고파일</label> 
+		        <label for="file" class="file-input">광고파일 </label> 
 		        <input type="file" id="file" name="file" class="file-input">
 		    </div>
 			<div class="form-group">
-				<label for="startDate">시작시간 :</label> <input type="text" id="startDate" name="startDate" value="2024-09-01">
+				<label for="startDate">시작시간 : </label>
+				<input type="date" id="startDate" name="startDate" 
+					max="2030-12-31"
+			        min="2024-09-20"
+			        value="2024-09-20">
 			</div>
 			<div class="form-group">
-				<label for="endDate">종료시간 :</label> <input type="text" id="endDate" name="endDate" value="2024-09-06">
+				<label for="endDate">종료시간 : </label>
+				<input type="date" id="endDate" name="endDate" 
+					max="2030-12-31"
+			        min="2024-09-21"
+			        value="2024-09-21">
 			</div>
 			<div class="form-group">
-				<label for="status">현재상태 :</label> <input type="text" id="status" name="status" value="0">
+				<label for="status">즉시게시여부 : </label>
+				<select name="status" id="status">
+							<option value="0">저장만</option>
+							<option value="1">즉시게시</option>
+					</select> 
 			</div>
 			<button type="submit">광고추가</button>
 		</form>
+	</div>
+	</div>
 	
-		<div>광고 수정</div>
+	<div id="advertise-update">
+	<div class="function--box">
+		<h2>광고 수정</h2>
 		<form action="advertise/update-advertise" method="post" class="advertise">
 			<div class="form-group">
-				<label for="id">수정할 광고 id :</label> <input type="number" id="id" name="id" value="1">
+				<label for="id">수정할 광고 id :</label> 
+				<select name="id" id="id">
+				<c:forEach var="advertise" items="${advertiseList}">
+							<option value="${advertise.id}">${advertise.id}</option>
+				</c:forEach>
+					</select> 
 			</div>
 			<div class="form-group">
-				<label for="placeId">위치 :</label> <input type="number" id="placeId" name="placeId" value="2">
+				<label for="placeId">위치 : </label>
+					<select name="placeId" id="placeId">
+							<option value="1">좌측</option>
+							<option value="2">중앙</option>
+					</select> 
 			</div>
 			<div class="form-group">
-				<label for="title">광고명 :</label> <input type="text" id="title" name="title" value="예나의 치킨 광고">
+				<label for="title">광고명 :</label> 
+				<input type="text" id="title" name="title" value="예나의 치킨 광고">
 			</div>
 			<div class="form-group">
-				<label for="customer">광고주 :</label> <input type="text" id="customer" name="customer" value="최예나">
+				<label for="customer">광고주 :</label> 
+				<input type="text" id="customer" name="customer" value="최예나">
 			</div>
 			<div class="form-group">
 				<label for="link">링크 :</label> 
 				<input type="text" id="link" name="link" value="http://sssssss.sssss">
 			</div>
 			<div class="form-group">
-				<label for="startDate">시작시간 :</label> <input type="text" id="startDate" name="startDate" value="2024-09-01">
+				<label for="startDate">시작시간 :</label> 
+				<input type="text" id="startDate" name="startDate" value="2024-09-01">
 			</div>
 			<div class="form-group">
-				<label for="endDate">종료시간 :</label> <input type="text" id="endDate" name="endDate" value="2024-09-06">
+				<label for="endDate">종료시간 :</label> 
+				<input type="text" id="endDate" name="endDate" value="2024-09-06">
 			</div>
 			<div class="form-group">
-				<label for="status">현재상태 :</label> <input type="text" id="status" name="status" value="0">
+				<label for="status">현재상태 :</label> 
+				<input type="text" id="status" name="status" value="0">
 			</div>
 			<button type="submit">광고수정</button>
 		</form>
+		</div>
 	
+	</div>
+	
+		
 		
 	
 	
@@ -176,6 +224,40 @@
 			        setInterval(showNextAd, 2000);
 			    });
 			});
+			
+			
+			document.querySelectorAll('.advertise-nav button').forEach(button => {
+			    button.addEventListener('click', function () {
+			        document.querySelectorAll('.advertise-nav button').forEach(btn => btn.classList.remove('active'));
+			        this.classList.add('active');
+			    });
+			});
+			
+			var list = document.getElementById("advertise-list");
+			var add = document.getElementById("advertise-add");
+			var update = document.getElementById("advertise-update");
+			
+			function showList(){
+				console.log("aaaaaaaa");
+				list.style.display="block";
+				add.style.display="none";
+				update.style.display="none";
+			}
+			
+			function showAdd(){
+				console.log("aaaaaaaa");
+				list.style.display="none";
+				add.style.display="block";
+				update.style.display="none";
+			}
+			
+			function showUpdate(){
+				console.log("aaaaaaaa");
+				list.style.display="none";
+				add.style.display="none";
+				update.style.display="block";
+			}
+			showList();
 		</script>
 	
 	

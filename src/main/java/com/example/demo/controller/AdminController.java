@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,11 +50,20 @@ public class AdminController {
 	    List<Integer> amountList = new ArrayList<>();
 	    List<String> dateList = new ArrayList<>();
 	    
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
+	    
+//	    for (CashChargeGraphVO data : cashChargeData) {
+//	    	String a = String.valueOf(data.getCreatedAt());
+//	    	String realA = a.substring(5,7);
+//	    	String realB = a.substring(8,10);
+//	    	String RealDate = realA+"."+realB;
+//	    	dateList.add(RealDate);
+//	    }
 	    
 	    for (CashChargeGraphVO data : cashChargeData) {
-	        amountList.add(data.getAmount());
-	        dateList.add(sdf.format(data.getCreatedAt())); // 날짜 포맷팅
+	    	String a = String.valueOf(data.getCreatedAt());
+	    	amountList.add(data.getAmount());
+	    	dateList.add(a);
 	    }
 	    
 	    // JSON으로 변환

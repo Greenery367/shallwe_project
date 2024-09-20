@@ -2,6 +2,8 @@ package com.example.demo.repository.model;
 
 import java.sql.Timestamp;
 
+import com.example.demo.utils.Formatter;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -70,7 +70,7 @@ logging:
 
 file: 
   upload-dir: C:\\work_spring\\upload/
-  advertise-dir: C:\work_js_class\shallwe_project\src\main\resources\static\images\advertise/
+  advertise-dir: C:\Users\KDP\git\shallwe_project\src\main\resources\static\images\advertise/
 
 
 tenco:

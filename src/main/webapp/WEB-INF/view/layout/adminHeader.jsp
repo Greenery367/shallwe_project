@@ -35,7 +35,7 @@
 			<div class="sidebar">
 				<h2>관리 목록</h2>
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/admin/dashboard">대시보드</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin">대시보드</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/user">이용자 관리</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/lecture">강의 관리</a></li>
 					<li><a href="cash">캐쉬</a></li>
