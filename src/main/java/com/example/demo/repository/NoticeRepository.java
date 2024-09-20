@@ -12,7 +12,7 @@ import io.lettuce.core.dynamic.annotation.Param;
 public interface NoticeRepository {
 	
 	// 모든 공지 가져오기
-	public List<Notice> selectAllNotice(@Param("limit")int limit);
+	public List<Notice> selectAllNotice(@Param("offset")int offset);
 
 	// 특정 공지만 가져오기
 	public Notice selectNoticeById(Integer id);

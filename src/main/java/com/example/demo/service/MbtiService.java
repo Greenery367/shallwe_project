@@ -23,11 +23,16 @@ public class MbtiService {
 		return resultMbti;
 	}
 	
+	// 궁합도로 mbti 찾기
 	public Mbti selectMbtiByCompatibility(Integer compatibility) {
 		Integer matchedMbtiId = mbtiRepository.selectMbtiByCompatibility(compatibility);
-		System.out.println("로깅1:"+matchedMbtiId);
 		Mbti matchedMbti = mbtiRepository.selectMbtiById(matchedMbtiId);
-		System.out.println("로깅2:"+matchedMbti);
 		return matchedMbti;
+	}
+	
+	// MBTI 정보 - 저장하기
+	public void setMbtiAndUserInfo(Integer userId, Integer mbtiId) {
+		mbtiRepository.addMbtiInfo(userId,mbtiId);
+		return;
 	}
 }

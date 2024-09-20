@@ -14,7 +14,7 @@ import lombok.ToString;
 
 // MBTI 클래스
 public class Mbti {
-	
+	private int id;
 	private String name;
 	private String nickname;
 	private String content;

@@ -18,7 +18,7 @@ public class RegisterExchange {
 	
 	public int id;
 	public int userId;
-	public int submallId;
+	public String submallId;
 	public Long amount;
 	public Timestamp createdAt;
 	public int status;

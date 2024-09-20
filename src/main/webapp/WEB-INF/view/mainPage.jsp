@@ -72,7 +72,7 @@
 					<h2> 지금 인기많은 강사 추천하기</h2>
 					<button class="recomment-button"><b>나와 같은 타입</b></button>
 					<button class="recomment-button"><b>나와 잘 맞는 타입</b></button>
-					<button class="detail-button"><b>자세히 보러 가기 →</b></button>
+					<button class="detail-button" onclick="location.href='/lecture/category/2'"><b>자세히 보러 가기 →</b></button>
 				</div>
 				<hr/>
 				<div class="recommended-user-list">
@@ -106,29 +106,30 @@
 				<div class="post-board">
 					<div class="board-title">
 						<h2>공지사항</h2>
-						<button class="detail-button"><b>더보기</b></button>
+						<button class="detail-button" onclick = "location.href='/notice/notice-list'"><b>더보기</b></button>
 					</div>
 					<hr/>
-						<div class="post-board-small">
-							<div>
-								<a href="">1번 공지------------</a>
+					<div class="post-board-small">
+						<c:forEach items="${noticeList}" var="notice">
+							<div class="link-box">
+								<a href="/notice/notice-detail/${notice.id}" class="link-text">${notice.title}</a>
 							</div>
-							<div>
-								<a href="">1번 공지------------</a>
-							</div>
-							<div>
-								<a href="">1번 공지------------</a>
-							</div>
-							<div>
-								<a href="">1번 공지------------</a>
-							</div>
-					</div>
+						</c:forEach>
+						</div>
 				</div>
 				
 				<div class="post-board">
 					<div class="board-title">
 						<h2>자유 게시판</h2>
-						<button class="detail-button"><b>더보기</b></button>
+						<button class="detail-button" onclick = "location.href='/notice/news-list'"><b>더보기</b></button>
+					</div>
+					<hr/>
+					<div class="post-board-small">
+						<c:forEach items="${newsList}" var="news">
+							<div class="link-box">
+								<a href="/notice/news-detail/${news.id}" class="link-text">${news.title}</a>
+							</div>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -138,16 +139,30 @@
 			<div class="pro-title">
 				<h2><b>나의 프로필</b></h2>
 			</div>
-				<img class="pro-icon" src="../static/images/아기춘식.jpg">
-				<div class="user-info-list">
-					<div class="user-name"><h4 class="user-figurative">댓글장인</h4>&nbsp;<h4>길동</h4>&nbsp;<h4>님</h4></div>
-						<p class="user-mbti"><b>SQRC :장군</b></p>
-						<p>명성치: </p>
-					</div>
-					<div class="user-button-list">
-						<button class="user-button"><b>마이페이지</b></button>
+					<c:choose>
+						<c:when test="${user != null }">
+							<img class="pro-icon" src="${user.uploadFileName}" alt = "프로필 사진">
+							<div class="user-info-list">
+							<div class="user-name"><h4 class="user-figurative">댓글장인</h4>&nbsp;<h4>${user.nickname}</h4>&nbsp;<h4>님</h4></div>
+							<p class="user-mbti"><b>SQRC :장군</b></p>
+							<p>현재 캐쉬: ${user.currentCash}</p>
+						<div class="user-button-list">
+						<button class="user-button" onclick="location.href='/my-page/${user.userId}'"><b>마이페이지</b></button>
 						<button class="user-button"><b>로그아웃</b></button>
-					</div>			
+						</div>	
+						</c:when>
+						<c:otherwise>
+							<img class="pro-icon" src="../static/images/image.png">
+							<div class="user-info-list">
+							<div class="user-name">&nbsp;<h4>익명님</h4></div>
+							<div class="user-button-list">
+							<button class="user-button" onclick="location.href='/user/sign-in'""><b>로그인</b></button>
+							<button class="user-button" onclick="location.href='/user/sign-up'"><b>회원가입</b></button>
+							</div>	
+						</c:otherwise>
+					</c:choose>
+					</div>
+							
 			</div>
 		<div class="friend-list">
 			<div class="friend-list-container">
@@ -197,9 +212,6 @@
 	setInterval(nextBanner, 2000);
  })
  
- function up(){
-	 
- }
  
 </script>
 		<script>

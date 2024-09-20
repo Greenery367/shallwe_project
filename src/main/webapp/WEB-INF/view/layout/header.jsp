@@ -18,14 +18,23 @@
 				<img class="mini-logo" alt="로고" src="/static/images/shallwe-icon.png">
 				<a href="/user/main"><b>홈</b></a>
 				<p>|</p>
-				<a href="/user/sign-in"><b>로그인</b></a>
-				<p>|</p>
-				<a href="/user/sign-up"><b>회원가입</b></a>
-				<p>|</p>
-				<div class="charge-cash">
-					<a href="/cash/charge"><b>캐시충전</b></a>
-					<img src="/static/images/cash.png">
-				</div>
+				<c:choose>
+						<c:when test="${user == null }">
+							<a href="/user/sign-in"><b>로그인</b></a>
+							<p>|</p>
+							<a href="/user/sign-up"><b>회원가입</b></a>
+							<p>|</p>
+						</c:when>
+						<c:otherwise>
+							<a href="/user/sign-in"><b>로그아웃</b></a>
+							<p>|</p>
+						</c:otherwise>
+					</c:choose>
+					
+					<div class="charge-cash">
+						<a href="/cash/charge"><b>캐시충전</b></a> <img
+							src="/static/images/cash.png">
+					</div>
 			</div>
 		</div>
 	</header>
@@ -97,16 +106,15 @@
 			</div>
 			<p>|</p>
 			<div class="menu-container">
-				<a href="" class="menu">뉴스</a>
-				<div class="drop-down-menus">
-					<ul>
-						<li><h4>공지사항</h4></li>
-						<li><h4>이벤트</h4></li>
-					</ul>
-				</div>
+				<a href="/notice/news-list" class="menu">뉴스</a>
+				<ul class="drop-down-menus">
+					<li onclick="location.href='/notice/notice-list'"><h4>공지사항</h4></li>
+					<li onclick="location.href='/notice/news-list'"><h4>게임 뉴스</h4></li>
+				</ul>
 			</div>
+
 			<div class="menu-container">
-				<a href="" class="menu">고객 지원</a>
+				<a href="/cs/main" class="menu">고객 지원</a>
 				<ul class="drop-down-menus">
 					<li><h4>Q&A</h4></li>
 				</ul>
@@ -116,8 +124,6 @@
 				<div class="drop-down-menus">
 					<ul>
 						<li><a href='${pageContext.request.contextPath}/test/start-test'><h4>게임 성향 테스트</h4></a></li>
-						<li><h4>게임 이상형 월드컵</h4></li>
-						<li><h4>게임 챌린지</h4></li>
 					</ul>
 				</div>
 			</div>
@@ -146,5 +152,3 @@
 		}
 	}
 </script>
-</body>
-</html>

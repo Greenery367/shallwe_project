@@ -1,16 +1,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.RegisterSubmallRepository">
-	<!-- c -->
+	
 	<insert id="registerSubmall">
 		insert into register_submall_tb (user_id, bank_id)	
 		values (#{userId}, #{bankId});
 	</insert>
 	
 	<!-- c -->
-	<select id="checkSubmallExists" >
+	<select id="checkSubmallExists">
     	SELECT COUNT(*) FROM register_submall_tb WHERE user_id = #{userId}
 	</select>
+	
+	<select id="selectRegisterSubmallById" resultType="com.example.demo.repository.model.RegisterSubmall">
+    	SELECT * FROM register_submall_tb WHERE id = #{id}
+	</select>
+	
+	<select id="selectRegisterSubmallDtoById" resultType="com.example.demo.repository.model.RegisterSubmall">
+    	SELECT COUNT(*) FROM register_submall_tb WHERE id = #{id}
+	</select>
+	
 	<!-- c -->
 	<select id="submallFindById" resultType="com.example.demo.repository.model.Submall">		
 		SELECT * FROM user_submall_tb WHERE user_id = #{userId}
@@ -18,6 +27,7 @@
 	
 	<select id="selectAllRegisteredSubmall"  resultType="com.example.demo.repository.model.RegisterSubmall">
 		select * from register_submall_tb
+		limit #{limit} offset #{offset}
 	</select>
 	
 	<select id="getBankInfo"  resultType="com.example.demo.dto.BankDTO">

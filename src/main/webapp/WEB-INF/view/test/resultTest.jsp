@@ -30,21 +30,21 @@
 				<h1>게임 성향 테스트 결과</h1>		
 			<div class="my-result">
 				<h1 class="title">당신의 성향은...</h1>
-				<img src="../static/images/icon.png">
+				<img class="my-mbti my-icon">
 				<h2>${resultMbti.name} : ${resultMbti.nickname}</h2>
 				<h3>${resultMbti.content}</h3>
 			</div>
 			<div class="matching-container">
 				<div class="good-matched">
 					<h4 class="title">나와 잘 맞는 사람은...</h4>
-					<img class="mini" src="../static/images/icon.png">
+					<img class="mini well-matched" src="../static/images/icon.png">
 					<h5>${goodMatchedMbti.name} : ${goodMatchedMbti.nickname}</h5>
 					<p>${goodMatchedMbti.content}</p>
 				</div>
 			
 				<div class="bad-matched">
 					<h4 class="title">나와 잘 맞지 않는 사람은...</h4>
-					<img class="mini" src="../static/images/icon.png">
+					<img class="mini bad-matched" src="../static/images/icon.png">
 					<h5>${badMatchedMbti.name} : ${badMatchedMbti.nickname}</h5>
 					<p>${badMatchedMbti.content}</p>
 				</div>
@@ -69,6 +69,16 @@
 	</footer>
 <script>
 	const mbti = document.getElementById('question-text');
+	
+	let myImg = document.querySelector(".my-result > img");
+	let wellImg = document.querySelector(".good-matched > img");
+	let badImg = document.querySelector(".bad-matched > img");
+	
+	myImg.src = "/static/images/icons/${resultMbti.nickname}.png";
+	wellImg.src = "/static/images/icons/${goodMatchedMbti.nickname}.png";
+	badImg.src = "/static/images/icons/${badMatchedMbti.nickname}.png";
+	 
+
 	
 	
 </script>

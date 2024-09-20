@@ -138,10 +138,6 @@ function checkId() {
     xhr.send('id=' + encodeURIComponent(id));
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> JY-7
 // 닉네임 중복 체크 함수
 function checkNickname() {
     const nickname = document.getElementById('nickname').value;

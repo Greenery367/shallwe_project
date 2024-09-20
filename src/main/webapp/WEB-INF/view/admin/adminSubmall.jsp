@@ -24,7 +24,7 @@
                 <td>${submallInfoDto.submallInfo.createdAt}</td>
                 <td>
                     <c:if test="${submallInfoDto.submallInfo.status == 0}">
-                        <button class="refund-table" value="${submallInfoDto}" onclick="requestMakeNewSubmall(this)">생성 미완료</button>
+                        <button class="refund-table" value="${submallInfoDto.submallInfo.id}" onclick="requestMakeNewSubmall(this)">생성 미완료</button>
                     </c:if>
                     <c:if test="${submallInfoDto.submallInfo.status != 0}">
                         <div>생성 처리 완료</div>
@@ -37,37 +37,37 @@
 	<h1>서브몰 목록 관리</h1>
 			<table class="main-table">
 				<tr>
-					<th>id</th>
-					<th>유저명</th>
-					<th>은행</th>
-					<th>계좌명</th>
+					<th>서브몰 id</th>
+					<th>유저 id</th>
+					<th>지급 타입</th>
+					<th>지급 상태</th>
+					<th>은행 코드</th>
 					<th>이메일</th>
 					<th>전화번호</th>
 				</tr>
-			<c:forEach var="refund" items="${refundList}">
+			<c:forEach var="submall" items="${submallList}">
 				<tr>
-					<td>${refund.id}</td>
-					<td>${refund.orderId}</td>
-					<td>${refund.userId}</td>
-					<td>${refund.reason}</td>
-					<td>${refund.createdAt}</td>
-					<td><c:if test="${refund.status == 0 }"><button class="refund-table" value="${refund}" >환불 미완료</button></c:if>
-						<c:if test="${refund.status != 0 }"><div>환불 처리 완료</div></c:if>
-					</td>
+					<td>${submall.submallId}</td>
+					<td>${submall.userId}</td>
+					<td>${submall.type}</td>
+					<td>${submall.status}</td>
+					<td>${submall.accountId}</td>
+					<td>${submall.email}</td>
+					<td>${submall.phoneNumber}</td>
 				</tr>
 			</c:forEach>
 			</table>
 	</div>
 	<script>
     function requestMakeNewSubmall(data) {
-    	var a = data.value.get[1] ; 
+    	var a = data.value ; 
     	console.log(a);
-        fetch(`http://localhost:8080/admin/exchange/add-submall`, {
+        fetch(`http://localhost:8080/admin/submall/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ "submallInfo": a })
+            body: JSON.stringify({ "id": a })
         })
         .catch(error => {
             console.error('요청 처리 중 오류 발생:', error);

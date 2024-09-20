@@ -23,6 +23,7 @@ import com.example.demo.dto.ApproveResponseDTO;
 import com.example.demo.dto.ReadyResponseDTO;
 import com.example.demo.repository.model.Order;
 import com.example.demo.repository.model.OrderDetail;
+import com.example.demo.repository.model.User;
 import com.example.demo.service.KakaoPayService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.UserService;
@@ -37,7 +38,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class KakaoPayController {
 	
-	private HttpSession httpSession;
+	private final HttpSession httpSession;
 	private final KakaoPayService kakaoPayService;
 	private final OrderService orderService;
 	private final UserService userService;
@@ -49,7 +50,12 @@ public class KakaoPayController {
 	// http://localhost:8080/cash/charge
 	@GetMapping("/charge")
 	public String chargeCash(Model model) {
+		User user = (User)httpSession.getAttribute("principal");
+	//	if(user == null) {
+	///		return "/user/signIn";
+	//	}
 		return "/cash/chargeCash";
+		
 	}
 	
 	/**
@@ -62,13 +68,19 @@ public class KakaoPayController {
 	@PostMapping("/send-request/kakao/{totalAmount}")
 	@ResponseBody
 	public ReadyResponseDTO payCashByKakao(@PathVariable("totalAmount") String totalAmount) {
-		
-		int totalPrice = Integer.valueOf(totalAmount); // 결제 가격
+
+		// 1. 가주문 생성하기 (보안을 위한 정보 저장)
+		Long totalPrice = Long.valueOf(totalAmount); // 결제 가격
 		String orderId = orderService.makeNewOrder(1,totalPrice,1, null); // 가주문 생성
+
+		// 2. 결제 요청 메세지 보내기
 		ReadyResponseDTO readyResponseDTO = kakaoPayService.payReady(totalPrice,orderId); //  결제 요청
-		SessionUtils.addAtribute("tid", readyResponseDTO.getTid()); // tid
+
+		// 3. tid 생성하기
+		SessionUtils.addAtribute("tid", readyResponseDTO.getTid()); // tid 생성
 		orderService.setTid(orderId, readyResponseDTO.getTid());
-		
+
+		// 4. response 값 보내기 - chargeCash.jsp의 redirect_url_pc로 연결
 		return readyResponseDTO;
 	}
 	
@@ -81,40 +93,46 @@ public class KakaoPayController {
 	@GetMapping("/result/kakao")
 	public String resultKakaoPay(@RequestParam("pg_token") String pgToken) {
 		
-		// tid 가져오기
+		// 유저 정보 가지고 오기
+		User user = (User)httpSession.getAttribute("principal");
+		
+		// 1. 결제 보안 처리를 위한 정보 가져오기
+		// (1) tid 가져오기
 	    String tid = SessionUtils.getStringAttributeValue("tid");
-	    // 주문 세부사항 가져오기
+	    // (2) 주문 세부사항 가져오기
 	    OrderDetail orderDetail = orderService.checkOrder(tid);
-	    // 예외 처리
+	    // (3) 예외 처리 - 만약 가주문 정보가 없다면, 정상적인 주문 경로 x -> return
 	    if(orderDetail == null) {
 	    	// 예외 처리
 	    	return null;
 	    }
+	    
 	    int userId = 1;
 	    
-	    // 주문 세부사항을 통해 가주문 - 진주문 확인 (인증)
+	    // 2. 주문 세부사항을 통해 가주문 - 진주문 대조 확인 (인증)
 	    Order checkOrderRecord = orderService.checkOrderRecord(userId,orderDetail);
 	    
+	    // 3. 만약 주문 테이블이 있다면 ...
 	    if(checkOrderRecord != null) {
-	    	// 인증된 유저는 카카오 결제 요청
+	    	// (1) 인증된 유저는 카카오 결제 승인 요청
 		    ApproveResponseDTO approveResponseDTO = kakaoPayService.payApprove(tid, pgToken);
 		    
-		    // 결제 후 -> 유저 캐쉬 변경
+		    // (2) 결제 후 -> DB 상의 유저 캐쉬 변경
 		    userService.updateUserCash(userId,checkOrderRecord.amount);
 		    
-		    // 주문 상태 변경
+		    // (3) 주문 상태 변경
 		    orderService.changeOrderStatus(checkOrderRecord.orderId);
 		    
-		    // TODO - 캐쉬 히스토리 -> DB 생성
 	    }
 	    
+	    // 3. 보안 인증을 거치지 못한다면 실패 페이지로 이동
 	    else {
-	    	return "/cash/chargeFailedKakao";
+	    	return "/cash/chargeFailed";
 	    }
 	    
+	    // 4. 유저 캐쉬 상태 변경
+	    orderService.updateUsersCurrentCash(user.getUserId(),checkOrderRecord.getAmount());
 	    
-	    
-	    // 유저 캐쉬+
 	    return "/cash/chargeResult";
 	}
 	

@@ -69,9 +69,10 @@ logging:
     org.apache.ibatis: DEBUG
 
 file: 
-  upload-dir: C:\work_spring\upload/
-  advertise-dir: C:\Users\KDP\git\shallwe_project\src\main\resources\static\images\advertise/
-  
+  upload-dir: C:\\work_spring\\upload/
+  advertise-dir: C:\work_js_class\shallwe_project\src\main\resources\static\images\advertise/
+
+
 tenco:
   key: 07f5efbd3004db57fcd53846050461b203e984faa9d957285aa26f8b
 

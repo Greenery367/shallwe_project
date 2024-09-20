@@ -25,10 +25,8 @@ public class NoticeService {
 	}
 	
 	// 모든 공지 가져오기
-	public List<Notice> getAllNotice(int limit){
-		System.out.println("리밋"+limit);
-		List<Notice> noticeList = noticeRepository.selectAllNotice(limit);
-		System.out.println("로깅2");
+	public List<Notice> getAllNotice(int offset){
+		List<Notice> noticeList = noticeRepository.selectAllNotice(offset);
 		return noticeList;
 	}
 	// 한 공지 가져오기

@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.repository.model.Mbti;
 
@@ -15,5 +16,8 @@ public interface MbtiRepository {
 	
 	// 궁합에 따른 MBTI 찾기
 	public Integer selectMbtiByCompatibility(Integer compatibility);
+	
+	// 유저-mbti 정보 저장
+	public void addMbtiInfo(@Param("userId")Integer userId, @Param("mbtiId")Integer mbtiId);
 
 }

@@ -6,13 +6,13 @@
 	<!-- 모든 공지 조회 -->
 	<select id="selectAllNotice" resultType="com.example.demo.repository.model.Notice">
 		select * from admin_content_tb 
-		where status = 1 
-		limit #{limit} offset #{offset}
+		where type = 0 
+		limit 5 offset #{offset}
 	</select>
 	
 	<!-- id로 공지 조회 -->
 	<select id="selectNoticeById" resultType="com.example.demo.repository.model.Notice">
-		select * from admin_content_tb where status = 1 and id = #{id}
+		select * from admin_content_tb where type = 0 and id = #{id}
 	</select>
 	
 

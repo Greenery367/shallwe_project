@@ -39,11 +39,14 @@ import com.example.demo.dto.SignUpDTO;
 import com.example.demo.handler.exception.DataDeleveryException;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Category;
+import com.example.demo.repository.model.News;
+import com.example.demo.repository.model.Notice;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.EmailSendService;
 import com.example.demo.service.FriendService;
 import com.example.demo.service.MatchService;
+import com.example.demo.service.NoticeService;
 import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,7 +63,10 @@ public class UserController {
 	private final UserService userService;
 	@Autowired
 	private final AdminService adminService;
+	@Autowired
 	private final FriendService friendService;
+	@Autowired 
+	private NoticeService noticeService;
 	
 	private final MatchService matchService;
 	@Autowired
@@ -100,18 +106,36 @@ public class UserController {
 	// http://localhost:8080/user/main
 	@GetMapping("/main")
 	public String mainPage(Model model) {
+		
 		User user = (User)session.getAttribute("principal");
+		
+		if(user != null) {
+			List<User> onlineFriendList = friendService.checkOnlineFriend(user.getUserId());
+			model.addAttribute("onlineFriends",onlineFriendList);
+			model.addAttribute("user",user);
+		} 
+
+		
+		// 최신 공지사항 글 
+		List<Notice> noticeList = noticeService.getAllNotice(0);
+		List<News> newsList = noticeService.getAllnews();
+		
+		// 최신 자유게시판 글 5개
+		System.out.println("----------노티스리스트"+noticeList);
+		System.out.println("----------뉴스리스트"+newsList);
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("newsList", newsList);
+		
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
-		List<User> onlineFriendList = friendService.checkOnlineFriend(user.getUserId());
-		model.addAttribute("onlineFriends",onlineFriendList);
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
 		model.addAttribute("categoryList",categoryList);
-		
+	
 		return "mainPage";
 	}
 	/*
@@ -169,7 +193,6 @@ public class UserController {
 		String email = emailBody+"@"+emailDomain;
 		
 		User user = userService.searchId(id);
-		
 		if(user == null) {
 			request.setAttribute("msg", "존재하지 않는 ID 입니다.");
 	        request.setAttribute("url", "find-pw");
@@ -237,8 +260,8 @@ public class UserController {
 			return "alert";
 		} else {
 //	비밀번호 해싱 처리 개발단계에서 생략
-			//if (passwordEncoder.matches(password, user.getPassword())) {
-			if (password.equals(user.getPassword())) {
+			if (passwordEncoder.matches(password, user.getPassword())) {
+			//if (password.equals(user.getPassword())) {
 				session.setAttribute("principal", user);
 				return "redirect:/user/main";
 			} else {

@@ -21,6 +21,11 @@
 		where m.id=c.my_mbti_id and c.compatibility=#{compatibility}
 		group by m.id=1 limit 1;
 	</select>
-
+	
+	<!-- MBTI 테스트 정보 저장 -->
+	<insert id="addMbtiInfo">
+		insert into mbti_user_tb (user_id,mbti_id)
+		values (#{userId}, #{mbtiId})
+	</insert>
 
 </mapper>
