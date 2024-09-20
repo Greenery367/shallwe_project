@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,14 +33,20 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/my-page")
 @RequiredArgsConstructor
 public class MyPageController {
-
+	
+	@Autowired
 	private final MyPageService myPageService;
+	
+	@Autowired
 	private final BankService bankService;
+	
+	@Autowired
 	private final RecordService recordService;
 	private final AdminService adminService;
 	private final OrderRepository orderRepository;
 	private final RefundRepository refundRepository;
 	
+	@Autowired
 	private final HttpSession session;
 	
  
@@ -253,5 +260,7 @@ public class MyPageController {
 		
 		return "myPage/refundRecord";
 	}
+	
+	
 	
 }

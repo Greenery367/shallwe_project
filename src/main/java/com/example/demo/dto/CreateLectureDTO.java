@@ -1,4 +1,4 @@
-package com.example.demo.repository.model;
+package com.example.demo.dto;
 
 import java.sql.Timestamp;
 
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Lecture {
+public class CreateLectureDTO {
 
 	private int id;
 	private int categoryId;
@@ -24,9 +24,6 @@ public class Lecture {
 	private long price;
 	private int totalNum;
 	private Timestamp createdAt;
-	private String nickName;
-	private int status;
-	private String uploadFileName; // user테이블의 프로필 이미지 url 경로를 join해서 가져옴
 	
 		
 }

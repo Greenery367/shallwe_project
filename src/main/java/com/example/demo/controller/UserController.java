@@ -69,6 +69,7 @@ public class UserController {
 	private final PasswordEncoder passwordEncoder;
 	@Autowired
 	private final EmailSendService emailSendService;
+	
 	private Integer authNumber;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -235,7 +236,9 @@ public class UserController {
 			request.setAttribute("url", "sign-in");
 			return "alert";
 		} else {
-			if (passwordEncoder.matches(password, user.getPassword())) {
+//	비밀번호 해싱 처리 개발단계에서 생략
+			//if (passwordEncoder.matches(password, user.getPassword())) {
+			if (password.equals(user.getPassword())) {
 				session.setAttribute("principal", user);
 				return "redirect:/user/main";
 			} else {
@@ -371,7 +374,7 @@ public class UserController {
 			request.setAttribute("url", "sign-in");
 			return "alert";
 		} catch (Exception e) {
-			throw new DataDeleveryException("이미 가입된 이메일입니다.", HttpStatus.BAD_REQUEST);
+			throw new DataDeleveryException("회원가입에 실패하였습니다 올바른 정보를 입력해 주세요.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	

@@ -14,7 +14,8 @@
             c.current_num AS currentNum, 
             c.price, 
             c.total_num AS totalNum, 
-            c.created_at AS createdAt
+            c.created_at AS createdAt,
+            u.upload_file_name AS uploadFileName
         FROM 
             class_tb c
         JOIN 
@@ -26,6 +27,7 @@
 <select id="LectureFindById" resultType="com.example.demo.repository.model.Lecture">
 	 select 
         c.id, 
+	 	c.author_id,
         c.category_id, 
         u.nickname AS nickName, 
         c.title, 
@@ -35,7 +37,8 @@
         c.current_num AS currentNum, 
         c.price, 
         c.total_num AS totalNum, 
-        c.created_at AS createdAt
+        c.created_at AS createdAt,
+        u.upload_file_name AS uploadFileName
     from 
         class_tb c
     join 
@@ -44,6 +47,60 @@
         c.id = #{id};
 </select>
 
+
+<select id="findLectureListByUserId" resultType="com.example.demo.repository.model.Lecture">
+	select 
+		c.id, 
+            c.category_id, 
+            u.nickname AS nickName, 
+            c.title, 
+            c.subtitle, 
+            c.content, 
+            c.limit_num AS limitNum, 
+            c.current_num AS currentNum, 
+            c.price, 
+            c.total_num AS totalNum, 
+            c.created_at AS createdAt,
+            u.upload_file_name AS uploadFileName
+        FROM 
+            class_tb c
+        JOIN 
+            user_tb u ON c.author_id = u.user_id
+        WHERE 
+            u.user_id = #{userId}
+</select>
+
+
+<select id="getCategoryList" resultType="com.example.demo.repository.model.Category">
+	select * from game_tb
+</select>
+
+<select id="selectSpendHistoryByLectureId" resultType="com.example.demo.repository.model.Spend">
+	select * from spend_tb
+	where class_id = #{classId}
+</select>
+
+<update id="updateLecture">
+	update class_tb
+	set category_id = #{categoryId}, title = #{title}, subtitle = #{subtitle}, content = #{content},
+		limit_num = #{limitNum}, price = #{price}, total_num = #{totalNum}
+	where id = #{id}
+</update>
+
+
+<insert id="insertLecture">
+	INSERT INTO class_tb 
+			(category_id, author_id, title, subtitle, content, 
+			limit_num, price, total_num)
+	VALUES
+			(#{categoryId}, #{authorId}, #{title}, #{subtitle}, #{content}, #{limitNum}, #{price}, #{totalNum})
+</insert>
+
+<delete id="deleteLecture">
+	delete from class_tb
+	where id = #{lectureId}
+	
+</delete>
 
 
 </mapper>
