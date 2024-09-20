@@ -1,14 +1,49 @@
 @charset "UTF-8";
 
-.content {
-    width: 80%; /* 서브 헤더를 제외한 나머지 영역 */
+/* 공통 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* 메인 컨테이너: 가로로 정렬 */
+.main-container {
+    display: flex;
+    flex-direction: row; /* 가로 정렬 */
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px; /* 페이지 중앙으로 배치되도록 최대 너비 설정 */
+    background-color: #f9f9f9;
+}
+
+/* 서브헤더: 세로로 정렬 */
+.sub-header {
+    width: 20%;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* 메인 콘텐츠: 세로로 정렬 */
+.main-content {
+    width: 80%;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
     padding: 20px;
     background-color: #fff;
     box-shadow: 0px 4px 6px -4px #ccc;
     border-radius: 8px;
-    flex-grow: 1;
+    margin-left: 20px;
 }
 
+/* 나머지 스타일 */
 .friends_count {
     display: flex;
     justify-content: space-between;
@@ -72,11 +107,11 @@
 
 .profile-box {
     position: absolute;
-    display: none; /* 기본적으로 숨김 */
+    display: none;
     background-color: white;
     border: 1px solid #ccc;
     padding: 10px;
-    z-index: 1000; /* 다른 요소보다 위에 표시되도록 */
+    z-index: 1000;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }

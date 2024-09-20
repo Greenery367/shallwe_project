@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
-<%@ include file="/WEB-INF/view/layout/friendHeader.jsp"%>
 <link rel="stylesheet" href="/static/css/myFriendList.css">
 
-<div class="main" style="display: flex;">
-    <div class="content">
+<!-- 메인 컨테이너: 서브헤더와 메인 콘텐츠를 감싸는 div -->
+<div class="main-container">
+    <!-- 서브헤더 -->
+    <div class="sub-header">
+        <jsp:include page="/WEB-INF/view/layout/friendHeader.jsp"/>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
         <div class="friends_count">
             <span>나의 친구 ${count}</span>
             <button id="manage_friends" class="manage_fiends_btn">
@@ -17,7 +23,7 @@
         <div class="search_friend">
             <input type="text" placeholder="이름으로 친구 검색">
         </div>
-        <!-- 클릭시 프로필 보기 창 -->
+        <!-- 클릭 시 프로필 보기 창 -->
         <div class="profile-box">
             <ul>
                 <li class="profile-info"><a>프로필 보기</a></li>
@@ -63,36 +69,36 @@
 </div>
 
 <script>
-const friendsDiv = document.querySelectorAll('.user_box');
-const profileBox = document.querySelector('.profile-box');
-profileBox.style.display = 'none';
-friendsDiv.forEach((friendDiv) => {
-    friendDiv.addEventListener('click', function(event) {
-        const id = friendDiv.querySelector('input[type="hidden"]').value;
-        const x = event.clientX + 3;
-        const y = event.clientY + 115;
-        console.log(profileBox);
-        profileBox.style.left = x + "px";
-        profileBox.style.top = y + "px";
+    const friendsDiv = document.querySelectorAll('.user_box');
+    const profileBox = document.querySelector('.profile-box');
+    profileBox.style.display = 'none';
+    friendsDiv.forEach((friendDiv) => {
+        friendDiv.addEventListener('click', function(event) {
+            const id = friendDiv.querySelector('input[type="hidden"]').value;
+            const x = event.pageX + 1;
+            const y = event.pageY;
+            profileBox.style.left = x + "px";
+            profileBox.style.top = y + "px";
 
-        document.querySelector(".profile-info").firstElementChild
-            .setAttribute("onclick", "window.open('/chat/profileInfo?id=" + id + "')");
-        document.querySelector(".chat").firstElementChild
-            .setAttribute("onclick", "window.open('/chat/friendChat?id=" + id + "')");
+            document.querySelector(".profile-info").firstElementChild
+                .setAttribute("onclick", "window.open('/chat/profileInfo?id=" + id + "')");
+            document.querySelector(".chat").firstElementChild
+                .setAttribute("onclick", "window.open('/chat/friendChat?id=" + id + "')");
 
-        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
-        event.stopPropagation(); // 클릭 이벤트 전파 방지
+            profileBox.style.display = 'block';
+            event.stopPropagation();
 
-        document.querySelector(".close").addEventListener("click", function() {
-            profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
+            document.querySelector(".close").addEventListener("click", function() {
+                profileBox.style.display = 'none';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && !friendDiv.contains(event.target)) {
+                    profileBox.style.display = 'none';
+                }
+            }, { once: true });
         });
-
-        document.addEventListener('click', function(event) {
-            if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && !friendDiv.contains(event.target)) {
-                profileBox.style.display = 'none'; // profile-box 외부를 클릭하면 숨깁니다.
-            }
-        }, { once: true }); // 이벤트가 한 번만 실행되도록 설정합니다.
     });
-});
 </script>
+
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

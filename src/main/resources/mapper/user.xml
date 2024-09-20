@@ -77,6 +77,14 @@
 		where f.user_id = #{id} and u.online_status = #{status}
 	</select>
 	
+	<!-- 친구 목록 리스트 가져오기 -->
+	<select id="checkFriendList" resultType="com.example.demo.repository.model.User">
+		select u.upload_file_name as upload_file_name, f.friend_id as user_id, u.nickname as nickname
+		 from user_tb as u join friend_tb as f
+		on u.user_id = f.friend_id
+		where f.user_id = #{id}
+	</select>
+	
 	<!-- 나에게 친구 요청을 보낸 유저들 -->
 	<select id="checkWaitFriend" resultType="com.example.demo.repository.model.User">
 		select u.upload_file_name as upload_file_name, w.user_id as user_id, u.nickname as nickname

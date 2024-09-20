@@ -160,9 +160,6 @@
 				    });
 			   });
         	
-        	
-        	
-        	
         } else {
         	newMessage.classList.add("chat-message");
             messageContent.classList.add("message-content");

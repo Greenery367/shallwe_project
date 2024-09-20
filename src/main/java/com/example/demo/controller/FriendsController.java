@@ -84,12 +84,17 @@ public class FriendsController {
 	@ResponseBody
 	public String postMethodName(@RequestBody FriendDTO friendDTO) {
 		List<User> sendList = friendService.checkSendFriendList(friendDTO.getUserId());
+		List<User> friendList = friendService.findFriendList(friendDTO.getUserId());
 		for(User user : sendList) {
-			System.out.println("보낸 사용자 ID : " + user.getUserId());
 			if(user.getUserId() == friendDTO.getFriendId()) {
 				return "이미 친구요청을 보낸 사용자입니다.";
 			}
-		} 
+		}
+		for(User user : friendList) {
+			if(user.getUserId() == friendDTO.getFriendId()) {
+				return "이미 친구추가된 사용자입니다.";
+			}
+		}
 		friendService.insertWaitingFriend(friendDTO.getUserId(), friendDTO.getFriendId());
 		return "친구요청 성공";
 	}
