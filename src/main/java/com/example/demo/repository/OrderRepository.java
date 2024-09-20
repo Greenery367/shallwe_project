@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.repository.model.Order;
@@ -26,4 +28,7 @@ public interface OrderRepository {
 	
 	// 결제 삭제
 	public void deleteOrder(@Param("orderId")String orderId, @Param("tid")String tid,@Param("userId")int userId);
+	
+	// 충전 내역
+	public List<Order> orderFindById (@Param("userId")int userId); 
 }

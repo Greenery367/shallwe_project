@@ -4,7 +4,7 @@
 	<!-- c -->
 	<insert id="registerSubmall">
 		insert into register_submall_tb (user_id, bank_id)	
-		values (#{userId}, #{bank_id});
+		values (#{userId}, #{bankId});
 	</insert>
 	
 	<!-- c -->

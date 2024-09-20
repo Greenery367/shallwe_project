@@ -10,7 +10,7 @@
 	
 	<!-- c -->
 	<select id="getExchangeHistory" resultType="com.example.demo.dto.RegisterExchangeDTO">
-    	SELECT * FROM register_exchange_tb WHERE user_id = #{userId}
+    	SELECT created_at, amount, status FROM register_exchange_tb WHERE user_id = #{userId}
 	</select>
 	
 	

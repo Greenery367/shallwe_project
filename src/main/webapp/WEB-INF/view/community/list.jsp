@@ -12,7 +12,6 @@
 	<table>
 		<thead>
 			<tr>
-				<td>번호</td>
 				<td>제목</td>
 				<td>작성자</td>
 				<td>작성일</td>
@@ -24,7 +23,6 @@
 			<c:if test="${not empty boardList}">
 				<c:forEach var="board" items="${boardList}">
 					<tr>
-						<th>${board.id}</th>
 						<td><a href="/community/board-detail/${board.id}">${board.title}</a></td>
 						<th>${board.nickName}</th>
 						<td><fmt:formatDate value="${board.createdAt}" type="DATE" pattern="yyyy-MM-dd" /></td>

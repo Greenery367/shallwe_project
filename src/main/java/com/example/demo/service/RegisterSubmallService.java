@@ -18,14 +18,11 @@ public class RegisterSubmallService {
 		this.registerSubmallRepositroy = registerSubmallRepositroy;
 	}
 	
-	public void registerSubmall(RegisterSubmallForAdminDTO registerSubmallDTO) {
-		//registerSubmallRepositroy.registerSubmall(registerSubmallDTO.user.getUserId(), registerSubmallDTO.getBankInfo());
-	}
 	
 	// 서브몰 신청하기
-	public void requestSubmall(RegisterSubmallDTO registerSubmallDTO) {
-		registerSubmallRepositroy.registerSubmall(registerSubmallDTO.getUserId(), registerSubmallDTO.getBankId());
-	}
+    public void registerSubmall(Integer userId, Integer bankId) {
+        registerSubmallRepositroy.registerSubmall(userId, bankId);
+    }
 	
 	 // 서브몰 신청 여부 확인 메서드
     public boolean isSubmallRegistered(Integer userId) {

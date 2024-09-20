@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.LecturePaymentRepository">
+	
+	<!-- 결제 완료시 수강자 -->
+	<update id="paymentUserCash">
+		update user_tb set current_cash = current_cash - #{price}
+    	where user_id = #{userId};
+	</update>
+    
+    <!-- 결제 완료시 강사 -->
+    <update id="paymentLectureCash">
+    	update user_tb set lecture_cash = lecture_cash + #{price}
+    	where user_id = #{userId};
+    </update>
+    
+    <!-- 수강자 사용 내역 -->
+    <insert id="createSpend" parameterType="com.example.demo.dto.LecturePaymentDTO">
+    	insert into spend_tb (user_id, class_id, spend) 
+		values (#{userId}, #{classId}, #{price});
+	</insert>
+	
+	<!-- 유저 현재 캐시 확인 -->
+	<select id="getCurrentCash">
+        SELECT current_cash
+        FROM user_tb
+        WHERE user_id = #{userId}
+    </select>
+    
+      <!-- 강사의 ID를 class_id로부터 조회 -->
+    <select id="getLecturerId">
+        SELECT author_id
+        FROM class_tb
+        WHERE id = #{classId}  
+    </select>
+	
+</mapper>

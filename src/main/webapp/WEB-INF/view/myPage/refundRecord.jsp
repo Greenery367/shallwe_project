@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
@@ -32,15 +31,28 @@ th {
 	<table>
 		<thead>
 			<tr>
-				<th>날짜</th>
+				<th>상품 명</th>
 				<th>환불 금액</th>
+				<th>날짜</th>
+				<th>승인</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="history" items="${refunds}">
+			<c:forEach var="refund" items="${refunds}">
 				<tr>
-					<td><fmt:formatDate value="${history.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-					<td><fmt:formatNumber value="${history.refund}" /></td>
+					<td>${refund.name}</td>
+					<td><fmt:formatNumber value="${refund.amount}" /></td>
+					<td><fmt:formatDate value="${refund.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td>
+						<c:choose>
+					        <c:when test="${refund.status == 0}">
+					            처리중
+					        </c:when>
+					        <c:when test="${refund.status == 1}">
+					            환불 완료
+					        </c:when>
+					    </c:choose>
+					</td> 
 				</tr>
 			</c:forEach>
 		</tbody>

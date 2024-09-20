@@ -9,5 +9,20 @@
 		limit #{limit} offset #{offset}
 	</select>
 
+	<select id="refundFindById">
+		SELECT
+			ur.id,
+		    o.name,
+		    o.amount,
+		    o.created_at,
+		    ur.status
+		FROM
+		    user_refund_tb ur
+		JOIN
+		    order_tb o ON ur.order_id = o.order_id
+		WHERE
+		    ur.user_id = #{userId};
+				
+	</select>
 
 </mapper>
