@@ -25,7 +25,6 @@ th {
 <div style="display: flex;">
 	<%@ include file="/WEB-INF/view/layout/myPageMenu.jsp"%>
 
-
 	<h2 style="text-align: center;">충전 이력</h2>
 
 	<table>
@@ -42,34 +41,41 @@ th {
 				<tr>
 					<td>${order.name}</td>
 					<td>${order.amount}</td>
-					<p>${flagList.get(1)}</p>
 					<td>${order.createdAt}</td>
-					<td><c:choose>
-							<c:when test="${flagList.get(i) == truetrue}">
-								<span>환불 신청 어료</span>
+					<td>
+						<c:choose>
+							<c:when test="${flagList[fn:indexOf(orders, order)]}">
+								<span>환불 신청 완료</span>
 							</c:when>
 							<c:otherwise>
-								<form action="${pageContext.request.contextPath}/refund/request" method="post">
-									<input type="hidden" name="orderId" value="${order.orderId}" /> <input type="hidden" name="userId" value="${order.userId}" />
-									<button type="submit">환불 신청</button>
-								</form>
+							    <form action="${pageContext.request.contextPath}/my-page/request-refund" method="post">
+							        <input type="hidden" name="orderId" value="${order.id}" />
+							        <input type="hidden" name="userId" value="${userId}" />
+							        <button type="submit">환불 신청</button>
+							    </form>
 							</c:otherwise>
-						</c:choose></td>
+						</c:choose>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
 </div>
 
-
-
-
-
-
-
-
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('form').on('submit', function(event) {
+            event.preventDefault(); // 기본 폼 제출 막기
+            const form = $(this);
+            $.post(form.attr('action'), form.serialize(), function(response) {
+                // 환불 요청 성공 시 버튼 비활성화
+                form.find('button').prop('disabled', true).text('환불 신청 완료');
+            }).fail(function() {
+                alert('환불 신청에 실패했습니다.');
+            });
+        });
+    });
+</script>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

@@ -43,8 +43,8 @@ public class RefundService {
         refundRepository.insertRefundRequest(cashRefundDTO);
     }
 	
-    public boolean hasRequestedCashRefund(int id, int userId) {
-        return refundRepository.checkRefundRequest(id, userId) > 0;
+    public boolean hasRequestedCashRefund(int orderId, int userId) {
+        return refundRepository.checkRefundRequest(orderId, userId) > 0;
     }
 	
 	/**

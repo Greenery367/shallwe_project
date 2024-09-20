@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.BankDTO;
 import com.example.demo.dto.BankInfoDTO;
+import com.example.demo.dto.CashRefundDTO;
 import com.example.demo.dto.RecordDTO;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.RefundRepository;
@@ -273,6 +274,24 @@ public class MyPageController {
 		model.addAttribute("refunds", refunds);
 		
 		return "myPage/refundRecord";
+	}
+	
+	@PostMapping("/request-refund")
+	public String requestRefund(@RequestParam("orderId") String orderId) {
+	    User user = (User) session.getAttribute("principal");
+	    Integer userId = user.getUserId();
+	    
+	    // CashRefundDTO 객체 생성
+	    CashRefundDTO cashRefundDTO = CashRefundDTO.builder()
+	        .orderId(orderId)
+	        .userId(userId)
+	        .build();
+
+	    // 환불 요청을 데이터베이스에 삽입
+	    refundRepository.insertRefundRequest(cashRefundDTO);
+
+	    // 환불 요청 후 페이지 리다이렉트
+	    return "redirect:/my-page/charge-list"; // 원하는 페이지로 리다이렉트
 	}
 	
 	

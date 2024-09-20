@@ -5,7 +5,7 @@
 	<!-- 캐시환불 신청 -->
 	 <insert id="insertRefundRequest">
         INSERT INTO user_refund_tb (order_id, user_id)
-        VALUES (#{orderId}, #{userId})  <!-- 0 = 승인 대기중 -->
+        VALUES (#{orderId}, #{userId})  
     </insert>
 	<!-- 캐쉬환불 신청 버튼 반별 쿼리 -->
     <select id="checkRefundRequest" resultType="int">

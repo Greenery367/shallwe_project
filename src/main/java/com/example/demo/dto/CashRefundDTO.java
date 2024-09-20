@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CashRefundDTO {
 	
-	 private int orderId;
-	 private int userId;
+	 private String orderId;
+	 private Integer userId;
 	
 }

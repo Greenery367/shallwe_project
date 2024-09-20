@@ -27,7 +27,7 @@ spring:
     url: jdbc:mysql://localhost:3306/shallwe_db?serverTimeZone=Asia/Seoul #데이터 베이스 연결을 위한 URL을 설정 합니다.
     driver-class-name: com.mysql.cj.jdbc.Driver #드라이버 클래스를 설정 합니다.
     username: root #사용자 ID를 지정
-    password: 1234 #DB 비밀번호 여기서는 빈 문자열로 설정
+    password: asd123 #DB 비밀번호 여기서는 빈 문자열로 설정
   sql:
     init:
       schema-locations:
