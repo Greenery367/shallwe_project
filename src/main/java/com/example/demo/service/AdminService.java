@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,6 +11,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.UUID;
 
+import org.eclipse.tags.shaded.org.apache.regexp.recompile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.AdminSelectCommentDTO;
+import com.example.demo.dto.CashChargeGraphVO;
 import com.example.demo.dto.CreateAdvertiseDTO;
 import com.example.demo.dto.CreateCategoryDTO;
 import com.example.demo.repository.AdminRepository;
@@ -27,6 +30,7 @@ import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Board;
 import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Comment;
+import com.example.demo.repository.model.Lecture;
 
 @Service
 public class AdminService {
@@ -63,13 +67,33 @@ public class AdminService {
     public double countSpendCashRate() {
         return adminRepository.countSpendAmountRate();
     }
+    
+    // 10일간 캐쉬 충전 내역 조회
+    @Transactional
+    public List<CashChargeGraphVO> selectChargeAmountBetweenTenDays(CashChargeGraphVO chargeVO) throws Exception{
+    	return adminRepository.selectChargeAmountBetweenTenDays(chargeVO);
+    }
+    
+    // 하루 충전 총액 계산
+    @Transactional
+    public Integer countChargeAmountOneDay(Timestamp createdAt) {
+    	Integer count = adminRepository.countChargeAmountOneDay(createdAt);
+    	if (count == null) {
+    	    count = 0;  // null일 경우 0으로 처리
+    	}
+    	return count; 
+    }
+    
+    @Transactional
+    public List<CashChargeGraphVO> countChargeAmountAllDay(){
+    	return adminRepository.countChargeAmountAllDay();
+    }
 
     // 광고 추가
     @Transactional
     public void insertAdvertise(CreateAdvertiseDTO dto) throws IOException {
     	// 광고 정보를 데이터베이스에 추가
         adminRepository.insertAdvertise(dto);
-        
     }
 
     // 광고 수정
@@ -172,6 +196,27 @@ public class AdminService {
     public void deleteCommentById(AdminSelectCommentDTO dto){
     	adminRepository.deleteCommentById(dto.getId());
     }
+    
+    // 광고별 게시일 계산 (광고id)
+    public int selectPostingPeriodById(Integer id) {
+    	return adminRepository.selectPostingPeriodById(id);
+    }
+    
+    // 광고별 위치 금액 조회
+    public int selectAdvertisePriceById(Integer id) {
+    	return adminRepository.selectAdvertisePriceById(id);
+    }
+    
+    // 강의 전체 조회
+    public List<Lecture> selectAllLecture(){
+    	return adminRepository.selectAllLecture();
+    }
+   
+    // 강의 삭제
+    @Transactional
+	public void deleteLectureById(Lecture lecture) {
+		adminRepository.deleteLectureById(lecture.getId());
+	}
     
     
 }

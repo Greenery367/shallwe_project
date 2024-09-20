@@ -98,4 +98,10 @@ public class FriendService {
 		return sendFriendList;
 	}
 	
+	// 친구 목록 리스트 가져오기
+	public List<User> findFriendList(int id) {
+		List<User>friendList = null;
+		friendList = userRepository.checkFriendList(id);
+		return friendList;
+	}
 }

@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
     <h1>새 게시글 작성</h1>
 
-    <form action="${pageContext.request.contextPath}/community/createBoard" method="post">
+    <form action="${pageContext.request.contextPath}/community/create-board" method="post">
         <!-- 작성자 ID를 숨겨진 필드로 추가 -->
         <input type="hidden" name="authorId" value="${authorId}" />
         <input type="hidden" name="categoryId" value="${categoryId}" />

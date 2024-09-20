@@ -16,6 +16,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.example.demo.dto.MessageDTO;
 import com.example.demo.dto.TestUser;
+import com.example.demo.repository.model.User;
 import com.example.demo.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -34,7 +35,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		Integer key = (Integer) session.getAttributes().get("key");
 		ObjectMapper objectMapper = new ObjectMapper();
 		String message = " 님이 들어오셧습니다.";
-		List<Integer>userList = chatService.getUserList(key);
+		System.out.println("웹소켓으로 입장!!!!!!!");
+		List<User>userList = chatService.getUserList(key);
 		MessageDTO messageDTO = MessageDTO.builder().name(user.getNickname()).uploadFileName(user.getUploadFileName())
 				.message(message).build();
 		// 방에 들어온 사용자 세션 추가

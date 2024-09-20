@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
@@ -34,13 +33,24 @@ th {
 			<tr>
 				<th>날짜</th>
 				<th>환전 금액</th>
+				<th>승인</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="history" items="${exchanges}">
+			<c:forEach var="exchange" items="${exchangeList}">
 				<tr>
-					<td><fmt:formatDate value="${history.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-					<td><fmt:formatNumber value="${history.exchange}" /></td>
+					<td><fmt:formatDate value="${exchange.createdAt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+					<td><fmt:formatNumber value="${exchange.amount}" /></td>
+					<td>
+						<c:choose>
+					        <c:when test="${exchange.status == 0}">
+					            처리중
+					        </c:when>
+					        <c:when test="${exchange.status == 1}">
+					            환전 완료
+					        </c:when>
+					    </c:choose>
+					</td> 
 				</tr>
 			</c:forEach>
 		</tbody>

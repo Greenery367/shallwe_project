@@ -13,33 +13,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.BoardCreateDTO;
 import com.example.demo.repository.CommentRepository;
+import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Board;
+import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Comment;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AdminService;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.CommentService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/community")
+@RequiredArgsConstructor
 public class BoardController {
 
 	private final BoardService boardService;
 	private final CommentService commentService;
+	private final AdminService adminService;
 	private final HttpSession httpSession;
-
-	@Autowired
-	public BoardController(BoardService boardService, CommentService commentService, HttpSession httpSession) {
-		this.boardService = boardService;
-		this.commentService = commentService;
-		this.httpSession = httpSession;
-	}
 
 	// 커뮤니티에서 전체 게시글을 보여주는 메소드
 	@GetMapping("/")
 	public String boardList(Model model) {
 		List<Board> boards = boardService.findAll();
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
+		
 		model.addAttribute("boards", boards);
 		return "community/list";
 	}
@@ -54,6 +62,10 @@ public class BoardController {
 		int limit = 3;
 		int calculatedOffset = limit * (currentPage - 1);
 		List<Board> boardList;
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
 		int totalBoardNum = 0;
 
 		// 검색 필터에 따라 처리
@@ -75,6 +87,10 @@ public class BoardController {
 		int totalPage = (int) Math.ceil((double) totalBoardNum / limit);
 		currentPage = 1;
 		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("limit", limit);
 		model.addAttribute("totalPage", totalPage);
@@ -94,14 +110,22 @@ public class BoardController {
 	}
 
 	// 글 상세보기 이동
-	@GetMapping("/boardDetail/{id}")
+	@GetMapping("/board-detail/{id}")
 	public String boardDetail(@PathVariable("id") Integer id,
 			@RequestParam(name = "currentPage", defaultValue = "1") int currentPage, Model model) {
 		boardService.increaseViewNum(id);
 		Board board = boardService.readBoardDetail(id);
 		List<Comment> comments = commentService.getCommentsByPostId(id); // 댓글 목록 조회
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
 		User user = (User)httpSession.getAttribute("principal");
 		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("user", user);
 		model.addAttribute("board", board);
 		model.addAttribute("comments", comments); // 댓글 목록을 모델에 추가
@@ -122,13 +146,13 @@ public class BoardController {
     	System.out.println("유저 네임 : " + user.getNickname());
     	comment.setAuthorId(id); // 작성자 ID 설정
         commentService.createComment(comment);
-        return "redirect:/community/boardDetail/" + comment.getPostId();   // 게시글 목록으로 리다이렉트
+        return "redirect:/community/board-detail/" + comment.getPostId();   // 게시글 목록으로 리다이렉트
     }
 	
 	
 	// 게시글 작성 페이지 이동
 	// hint : 주소에서 카테고리 id를 동적으로 받아 넘겨야함 <-- 해라 꼭.. 
-    @GetMapping("/createBoard/{categoryId}")
+    @GetMapping("/create-board/{categoryId}")
     public String createBoardForm(@RequestParam(name = "currentPage", defaultValue = "1") int currentPage,
     		 					  @PathVariable("categoryId") Integer categoryId,
                                   Model model) {
@@ -149,7 +173,7 @@ public class BoardController {
 	
 
  // 게시글 작성 기능
-    @PostMapping("/createBoard")
+    @PostMapping("/create-board")
     public String createBoard(BoardCreateDTO boardCreateDTO,
     		@RequestParam(name = "categoryId", required = false) Integer categoryId,
     		Model model) {
@@ -164,7 +188,7 @@ public class BoardController {
     }
 
 	// 게시글 수정 페이지 이동
-	@GetMapping("/updateBoard/{id}")
+	@GetMapping("/update-board/{id}")
 	public String updateBoardForm(@PathVariable("id") Integer id, Model model) {
 		System.out.println("아이디다!!" + id);
 		
@@ -191,7 +215,7 @@ public class BoardController {
 	}
 	
 	// 삭제하기 
-	@PostMapping("/deletBoard/{id}")
+	@PostMapping("/delet-board/{id}")
 	public String deleteBoard(Model model, Board board,
 							@PathVariable("id") Integer id,
 							@RequestParam(name = "authorId", required = false) Integer authorId,

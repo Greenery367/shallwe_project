@@ -18,7 +18,7 @@ public interface UserRepository {
 	public User findById(@Param("id")String id);
 	public User findByEmail(@Param("email")String email);
 	public int updatePasswordByEmail(@Param("password")String password, @Param("email")String email);
-
+	
 	public long getLectureCash(@Param("userId")Integer userId);
 
 	public User findByUserId(@Param("id")int id);
@@ -30,6 +30,7 @@ public interface UserRepository {
 	public List<User> checkStatusFriend(@Param("id")int id,@Param("status")int status);
 	public List<User> checkWaitFriend(@Param("id")int id);
 	public List<User> checkSendFriend(@Param("id")int id);
+	public List<User> checkFriendList(@Param("id")int id);
 	// 유저 캐쉬 변경
 	public void updateCurrentCash(@Param("userId")int userId, @Param("amount")Long amount);
 }

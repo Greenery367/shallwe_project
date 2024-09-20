@@ -6,10 +6,15 @@
 	<link rel="stylesheet" href="/css/adminAdvertise.css">
 	
 	<%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
+		
+		<p>광고 정보</p>
 				
-		<p>현재 게시중인 게시글</p>
+		<div>
 		
-		
+		</div>
+				
+		<p>현재 게시중인 광고 미리보기</p>	
+	
 	<div class="advertise-list-content">
 	    <div class="advertise-example-left">
 	        <p>좌측</p>
@@ -37,18 +42,6 @@
 	        </div>
 	    </div>
 	
-	    <div class="advertise-example-right">
-	        <p>우측</p>
-	        <div class="advertise-one-line-box advertise-container">
-	            <c:forEach var="advertise" items="${advertiseListThree}">
-	                <div class="advertise-box-three" data-id="${advertise.id}">
-	                    <div class="advertise-img-three">
-	                        <img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
-	                    </div>
-	                </div>
-	            </c:forEach>
-	        </div>
-	    </div>
 	</div>
 	
 		<div>

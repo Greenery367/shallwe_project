@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +130,12 @@ public class OrderService {
 	public void deleteFailedOrder(String orderId, String tid, int userId) {
 		orderRepository.deleteOrder(orderId, tid, userId);
 		orderDetailRepository.deleteOrderDetail(orderId, userId);
+	}
+	
+	public List<Order> orderFindById(Integer userId) {
+		List<Order> orderList = new ArrayList<>();
+		orderList = orderRepository.orderFindById(userId);
+		return orderList;
 	}
 	
 

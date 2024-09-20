@@ -1,11 +1,11 @@
 
 package com.example.demo.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -29,19 +29,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.demo.dto.KakaoProfile;
-import com.example.demo.dto.OAuthToken;
-import com.example.demo.dto.SignUpDTO;
-import com.example.demo.repository.model.Advertise;
-import com.example.demo.repository.model.Category;
 import com.example.demo.dto.GoogleOauthToken;
 import com.example.demo.dto.GoogleProfile;
+import com.example.demo.dto.KakaoProfile;
 import com.example.demo.dto.NaverOauthToken;
 import com.example.demo.dto.NaverProfile;
+import com.example.demo.dto.OAuthToken;
+import com.example.demo.dto.SignUpDTO;
 import com.example.demo.handler.exception.DataDeleveryException;
+import com.example.demo.repository.model.Advertise;
+import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.EmailSendService;
+import com.example.demo.service.FriendService;
+import com.example.demo.service.MatchService;
 import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,7 +60,9 @@ public class UserController {
 	private final UserService userService;
 	@Autowired
 	private final AdminService adminService;
+	private final FriendService friendService;
 	
+	private final MatchService matchService;
 	@Autowired
 	private final HttpSession session;
 	@Autowired
@@ -95,16 +99,18 @@ public class UserController {
 	// http://localhost:8080/user/main
 	@GetMapping("/main")
 	public String mainPage(Model model) {
+		User user = (User)session.getAttribute("principal");
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
+		List<User> onlineFriendList = friendService.checkOnlineFriend(user.getUserId());
+		model.addAttribute("onlineFriends",onlineFriendList);
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
 		model.addAttribute("categoryList",categoryList);
-		User user = (User) session.getAttribute("principal");
-		System.out.println(user);
+		
 		return "mainPage";
 	}
 	/*
@@ -140,7 +146,6 @@ public class UserController {
 			request.setAttribute("msg", "이름 또는 닉네임이 정확하지 않습니다.");
 			request.setAttribute("url", "find-id");
 			return "alert";
-
 		}
 	}
 	
@@ -260,10 +265,6 @@ public class UserController {
 		dto.setUsername(request.getParameter("username"));
 		dto.setBirthDate(request.getParameter("birthDate"));
 		dto.setEmail(request.getParameter("emailBody")+"@"+request.getParameter("emailDomain"));
-		dto.setPhoneNumber(request.getParameter("phoneNumber"));
-		userService.createUser(dto);
-		request.setAttribute("msg", "회원가입 완료.");
-		dto.setEmail(request.getParameter("emailBody") + "@" + request.getParameter("emailDomain"));
 		dto.setPhoneNumber(request.getParameter("phoneNumber"));
 		userService.createUser(dto);
 		request.setAttribute("msg", "회원가입 완료.");

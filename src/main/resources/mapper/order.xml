@@ -23,4 +23,22 @@
 		delete order_table
 		where order_id = #{orderId} and tid = #{tid} and user_id = #{userId}
 	</delete>
+	
+	<select id="orderFindById">
+		SELECT
+		u.user_id,
+		o.name,
+        o.amount,
+		o.created_at
+		FROM
+		order_tb o
+		JOIN
+		user_tb u ON o.user_id = u.user_id
+		WHERE
+		u.user_id = #{userId}
+		AND o.amount IS NOT NULL
+		ORDER BY
+		o.created_at DESC;
+	</select>
+		
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import com.example.demo.dto.TestUser;
+import com.example.demo.repository.model.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,9 +24,9 @@ public class HttpSessionHandshakeInterceptor implements HandshakeInterceptor{
             HttpSession httpSession = servletRequest.getSession(false); // 세션이 없으면 null 반환
             if (httpSession != null) {
                 // HttpSession에서 저장된 Principal 객체를 가져옴
-                TestUser principal = (TestUser)httpSession.getAttribute("principal");
+                User principal = (User)httpSession.getAttribute("principal");
                 if (principal != null) {
-                	Integer key = (Integer)httpSession.getAttribute("chat");
+                	Integer key = (Integer)httpSession.getAttribute("key");
                     // WebSocketSession의 attributes에 저장
                     attributes.put("principal", principal);
                     attributes.put("key", key);

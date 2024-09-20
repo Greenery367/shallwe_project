@@ -14,6 +14,7 @@ import lombok.ToString;
 
 public class Submall {
 	
+	public int userId;
 	public String submallId;
 	public String type;
 	public String status;

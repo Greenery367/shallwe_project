@@ -17,16 +17,20 @@
 		select LAST_INSERT_ID()
 	</select>
 
-	<select id="getUserList" resultType="Integer">
-		select user_id from
-		chat_room_join_tb where room_id = #{roomId}
+	<select id="getUserList" resultType="com.example.demo.repository.model.User">
+		select * from
+		chat_room_join_tb as c
+		join user_tb as u
+		on c.user_id = u.user_id 
+		where c.room_id = #{roomId}
 	</select>
 
 	<select id="checkRoom1vs1" resultType="Integer">
-		SELECT room_id
-		FROM chat_room_join_tb
-		WHERE user_id IN (#{userId_1}, #{userId_2})
-		GROUP BY room_id
-		HAVING COUNT(DISTINCT user_id) = 2;
+        SELECT  distinct(IFNULL(max(b.room_id),0))
+		FROM chat_room_join_tb as a
+        inner join chat_room_join_tb as b on a.id = b.id
+        where a.user_id = #{userId_1}
+        or b.user_id = #{userId_2};
 	</select>
+	
 </mapper>

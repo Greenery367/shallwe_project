@@ -6,6 +6,7 @@ server:
       force: true
 
 spring:
+
   data:
     redis:
       host: localhost
@@ -42,8 +43,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: # 이메일 인증 용 gmail 정보 
-    password: # 이메일 인증 용 mail api pw 정보 
+    username: secondclover714@gmail.com
+    password: pawf rjzd mnwd ptsq
     properties:
       mail:
         transport:
@@ -68,27 +69,23 @@ logging:
     org.apache.ibatis: DEBUG
 
 file: 
-  upload-dir: C:\\work_spring\\upload/
-  advertise-dir: C:\\Users\\KDP\git\\shallwe_project\\src\\main\\resources\\static\\images\\advertise/
-
+  upload-dir: C:\work_spring\upload/
+  advertise-dir: C:\Users\KDP\git\shallwe_project\src\main\resources\static\images\advertise/
+  
 tenco:
   key: 07f5efbd3004db57fcd53846050461b203e984faa9d957285aa26f8b
   
-
-# 소셜 로그인 관련 정보  
 googleClientId:
-  key: # 구글 클라이언트 아이디
-    
-googleClientSecret:
-  key: # 구글 클라이언트 시크릿
+  key: 310509781431-ianh0bki0s8pg729fnhtmqqujthsjcqt.apps.googleusercontent.com
 
+googleClientSecret:
+  key: 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
+  
 kakaoClientId:
-  key: # 카카오 클라이언트 아이디
+  key: 61e5a7465f3248de0332e984c98de103
 
 naverClientId:
-  key: # 네이버 클라이언트 아이디
+  key: L2nqlUqxr9srIFoflYqq
     
 naverClientSecret:
-  key: # 네이버 클라이언트 시크릿 
-
-  
+  key: 44d4mAxRwE

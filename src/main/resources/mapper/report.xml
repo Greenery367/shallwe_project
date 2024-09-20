@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.ReportRepository">
+
+	<insert id="createReport">
+		insert into report_tb(type, type_id, reason, sender_id, reciever_id)
+		values(#{type}, #{typeId}, #{reason}, #{senderId}, #{recieverId})
+	</insert>
+	
+	<select id="getReportList" resultType="com.example.demo.repository.model.Report">
+		select * from report_tb ORDERS LIMIT #{limit} offset #{offset}
+	</select>
+
+	<select id="getReportSize" resultType="Integer">
+		select count(*) from report_tb
+	</select>
+
+	<delete id="solvedReport">
+		delete from report_tb
+		where id = #{id}
+	</delete>
+	
+</mapper>
