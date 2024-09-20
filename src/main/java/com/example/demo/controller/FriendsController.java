@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dto.FriendDTO;
+import com.example.demo.repository.model.Alarm;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AlarmService;
 import com.example.demo.service.FriendService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ public class FriendsController {
 	
 	private final FriendService friendService;
 	private final HttpSession session;
+	private final AlarmService alarmService;
 	
 	// 친구 검색
 	@GetMapping("/findUser")
@@ -83,19 +85,23 @@ public class FriendsController {
 	@PostMapping("/sendFriend")
 	@ResponseBody
 	public String postMethodName(@RequestBody FriendDTO friendDTO) {
+		User principal = (User)session.getAttribute("principal");
 		List<User> sendList = friendService.checkSendFriendList(friendDTO.getUserId());
 		List<User> friendList = friendService.findFriendList(friendDTO.getUserId());
-		for(User user : sendList) {
+		for(User user : sendList) { // 이미 친구추가 요청을 보낸 사용자인지 확인
 			if(user.getUserId() == friendDTO.getFriendId()) {
 				return "이미 친구요청을 보낸 사용자입니다.";
 			}
 		}
-		for(User user : friendList) {
+		for(User user : friendList) { // 이미 친구추가 되어있는 사용자인지 확인
 			if(user.getUserId() == friendDTO.getFriendId()) {
 				return "이미 친구추가된 사용자입니다.";
 			}
 		}
 		friendService.insertWaitingFriend(friendDTO.getUserId(), friendDTO.getFriendId());
+		Alarm alarm = Alarm.builder().type(2).userId(friendDTO.getFriendId())
+				.opponentId(friendDTO.getUserId()).content(principal.getNickname() + " 님이 친구추가 요청을 보냈습니다.").build();
+		alarmService.sendAlarm(alarm);
 		return "친구요청 성공";
 	}
 	
@@ -110,6 +116,9 @@ public class FriendsController {
 			friendService.addFriend(userId, id);
 			friendService.removeWaitFriend(id, userId);
 			friendService.removeWaitFriend(userId, id); // 서로 신청했을수있으니 다 삭제
+			Alarm alarm = Alarm.builder().type(2).userId(id).opponentId(userId)
+					.content(user.getNickname() + " 님이 친구요청을 수락하셨습니다").build();
+			alarmService.sendAlarm(alarm);
 			return "친구 요청 수락 성공";
 		} else {
 			return "친구 요청 수락 실패";
@@ -122,7 +131,13 @@ public class FriendsController {
 	public String refuseFriend(@PathVariable("id")int id) {
 		User user = (User)session.getAttribute("principal");
 		int userId = user.getUserId();
-		friendService.removeWaitFriend(id, userId);
+		int result = 0;
+		result = friendService.removeWaitFriend(id, userId);
+		if(result != 0) {
+			Alarm alarm = Alarm.builder().type(2).userId(id).opponentId(userId)
+					.content(user.getNickname() + " 님이 친구요청을 거절하셨습니다").build();
+			alarmService.sendAlarm(alarm);
+		}
 		return "친구 요청 거절 성공";
 	}
 	

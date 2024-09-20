@@ -43,8 +43,10 @@
 	profileBox.style.display = 'none';
 	const opponent = document.querySelector('#opponent-pic');
 	opponent.addEventListener('click', function(event) {
-		const x = event.clientX + 3;
-        const y = event.offsetY - 65;
+		const x = event.pageX;
+        const y = event.pageY;
+        document.querySelector(".report").firstChild.
+        style.display = 'block'; // 상대방은 신고기능이 뜨게 만듬
         profileBox.style.left = x +"px";
         profileBox.style.top = y +"px";
         document.querySelector(".profile-info").firstChild.
@@ -52,7 +54,7 @@
         document.querySelector(".profile-info").firstChild.
         setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${opponent.userId}` + "')");
         document.querySelector(".report").firstChild.
-        setAttribute("onclick", "window.open(`/report/match?roomId=${chat}&opponentId=${opponent.userId}&type=match`,'신고 페이지','width=500,height=600');");
+        setAttribute("onclick", "window.open(`/report?roomId=${roomId}&opponentId=${opponent.userId}&type=chat`,'신고 페이지','width=500,height=600');");
         document.querySelector(".close").addEventListener("click", function() {
 	        profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
 	    });
@@ -94,12 +96,14 @@
 			chatWindow.scrollTop = chatWindow.scrollHeight;
 			
 			profileImage.addEventListener('click', function(event) {
-		    		const x = event.clientX + 3;
-			        const y = event.offsetY + 175;
+		    		const x = event.pageX;
+			        const y = event.pageY;
 			        profileBox.style.left = x +"px";
 			        profileBox.style.top = y +"px";
 			        document.querySelector(".profile-info").firstChild.
 			        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
+			        document.querySelector(".report").firstChild.
+			        style.display = 'none'; // 나에게는 신고기능이 안뜨도록 방어
 			        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
 			        event.stopPropagation(); // 클릭 이벤트 전파 방지
 			        document.querySelector(".close").addEventListener("click", function() {
@@ -142,12 +146,14 @@
 			chatWindow.scrollTop = chatWindow.scrollHeight;
 			
 			profileImage.addEventListener('click', function(event) {
-		    		const x = event.clientX + 3;
-			        const y = event.offsetY + 175;
+		    		const x = event.pageX;
+			        const y = event.pageY;
 			        profileBox.style.left = x +"px";
 			        profileBox.style.top = y +"px";
 			        document.querySelector(".profile-info").firstChild.
 			        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
+			        document.querySelector(".report").firstChild.
+			        style.display = 'none'; // 나에게는 신고기능이 안뜨도록 방어
 			        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
 			        event.stopPropagation(); // 클릭 이벤트 전파 방지
 			        document.querySelector(".close").addEventListener("click", function() {
@@ -177,8 +183,10 @@
         // 프로필 이미지에 이벤트 추가
         const profileBox = document.querySelector('.profile-box');
         profileImage.addEventListener('click', function(event) {
-    		const x = event.clientX + 3;
-	        const y = event.offsetY + 115;
+        	const x = event.pageX;
+	        const y = event.pageY;
+	        document.querySelector(".report").firstChild.
+	        style.display = 'block'; // 상대방은 신고 기능이 뜨게 만듬
 	        profileBox.style.left = x +"px";
 	        profileBox.style.top = y +"px";
 	        console.log(message.name);
@@ -186,7 +194,7 @@
 	        document.querySelector(".profile-info").firstChild.
 	        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + message.id + "')");
 	        document.querySelector(".report").firstChild.
-	        setAttribute("onclick", "window.open(`/report?roomId=${chat}&opponentId=${opponent.userId}&type=match`,'신고 페이지','width=500,height=600');");
+	        setAttribute("onclick", "window.open(`/report?roomId=${chat}&opponentId=${opponent.userId}&type=chat`,'신고 페이지','width=500,height=600');");
 	        document.querySelector(".close").addEventListener("click", function() {
 		        profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
 		    });

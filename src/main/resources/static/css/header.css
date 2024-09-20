@@ -580,3 +580,110 @@ ul, li {
     display: flex;
     justify-content: center;
 }
+
+/* 알람 박스 스타일 */
+.alarm-box {
+    position: absolute;
+    display: none;  /* 기본적으로 숨김 */
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;  /* 최대 높이 설정 */
+    overflow-y: auto;  /* 알림이 많을 경우 스크롤 */
+    padding: 10px;
+}
+
+/* 알람 헤더 스타일 */
+.alarm-header {
+    background-color: white;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;  /* 모서리 위쪽 둥글게 */
+}
+
+.alarm-header span {
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #808080;  /* 선택되지 않은 경우 회색 */
+    transition: color 0.3s;
+}
+
+/* 선택된 헤더는 검은색 */
+.alarm-header span.active {
+    color: red;  /* 선택된 항목은 검은색 */
+}
+
+/* 알림 헤더에서 처음에 전체가 선택된 상태 */
+.alarm-all.active {
+    color: #000;  /* '전체'가 선택된 상태로 시작 */
+}
+
+.alarm-header span:hover {
+    background-color: #0056b3;
+}
+
+.alarm-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 알림 항목 스타일 */
+.alarm-element {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    transition: background-color 0.3s;
+}
+
+.alarm-element:hover {
+    background-color: #f9f9f9;
+}
+
+.alarm-pic {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.alarm-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.alarm-message {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 알림 벨 스타일 */
+.alarm-bell {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.alarm-bell:hover {
+    opacity: 0.8;
+}
+
+/* 알림이 없을 경우 표시되는 메시지 */
+.no-alarm-message {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}

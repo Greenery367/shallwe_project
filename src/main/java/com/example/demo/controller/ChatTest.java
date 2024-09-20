@@ -56,6 +56,7 @@ public class ChatTest {
 		}
 		session.setAttribute("key", id);
 		model.addAttribute("opponent",opponent);
+		model.addAttribute("roomId",roomId);
 		return "chat/chatRoom";
 	}
 	
@@ -84,7 +85,7 @@ public class ChatTest {
 	}
 	
 	@GetMapping("/match")
-	public String matchPage(HttpServletRequest request,@RequestParam(name="type")int id) throws JsonProcessingException {
+	public String matchPage(HttpServletRequest request) throws JsonProcessingException {
 		User user = (User)session.getAttribute("principal");
 		int mbtiId = matchService.getMbtiIdByUserId(user.getUserId());
 		user.setMbti(mbtiId);
@@ -114,7 +115,6 @@ public class ChatTest {
 		int roomId = 0;
 		// 친구와 만든 대화방이 있는지 없는지 검사
 		roomId = chatService.checkRoom1vs1(userId, id);
-		System.out.println("방 넘버 !!! : " + roomId);
 		if(roomId != 0) {
 			model.addAttribute("roomId",roomId);
 			session.setAttribute("key", roomId);
@@ -134,6 +134,7 @@ public class ChatTest {
 			session.setAttribute("key", roomId);
 		}
 		model.addAttribute("opponent",opponent);
+		model.addAttribute("roomId",roomId);
 		return "chat/friendChatRoom";
 	}
 	
