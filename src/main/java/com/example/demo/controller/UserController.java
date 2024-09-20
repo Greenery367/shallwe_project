@@ -39,6 +39,7 @@ import com.example.demo.dto.SignUpDTO;
 import com.example.demo.handler.exception.DataDeleveryException;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Category;
+import com.example.demo.repository.model.Mbti;
 import com.example.demo.repository.model.News;
 import com.example.demo.repository.model.Notice;
 import com.example.demo.repository.model.User;
@@ -46,6 +47,7 @@ import com.example.demo.service.AdminService;
 import com.example.demo.service.EmailSendService;
 import com.example.demo.service.FriendService;
 import com.example.demo.service.MatchService;
+import com.example.demo.service.MbtiService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.UserService;
 
@@ -75,6 +77,8 @@ public class UserController {
 	private final PasswordEncoder passwordEncoder;
 	@Autowired
 	private final EmailSendService emailSendService;
+	@Autowired
+	private final MbtiService mbtiService;
 	
 	private Integer authNumber;
 	
@@ -114,7 +118,7 @@ public class UserController {
 			model.addAttribute("onlineFriends",onlineFriendList);
 			model.addAttribute("user",user);
 		} 
-
+		Mbti myMbti = mbtiService.getRecentMbtiInfo(user.getUserId());
 		
 		// 최신 공지사항 글 
 		List<Notice> noticeList = noticeService.getAllNotice(0);
@@ -135,6 +139,7 @@ public class UserController {
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
 		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("myMbti",myMbti);
 	
 		return "mainPage";
 	}

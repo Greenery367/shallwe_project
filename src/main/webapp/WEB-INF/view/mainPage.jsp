@@ -34,8 +34,10 @@
 			<div class="recommend">
 				<div class="recomment-user-bar">
 					<h2> 나와 잘 맞는 사람 추천하기</h2>
-					<button class="recomment-button"><b>나와 같은 타입</b></button>
-					<button class="recomment-button"><b>나와 잘 맞는 타입</b></button>
+					<c:if test="${user != null }">
+						<button class="recomment-button"><b>나와 같은 타입</b></button>
+						<button class="recomment-button"><b>나와 잘 맞는 타입</b></button>
+					</c:if>
 					<button class="detail-button"><b>자세히 보러 가기 →</b></button>
 				</div>
 				<hr/>
@@ -70,8 +72,10 @@
 			<div class="recommend">
 				<div class="recomment-user-bar">
 					<h2> 지금 인기많은 강사 추천하기</h2>
-					<button class="recomment-button"><b>나와 같은 타입</b></button>
-					<button class="recomment-button"><b>나와 잘 맞는 타입</b></button>
+					<c:if test="${user != null }">
+						<button class="recomment-button"><b>나와 같은 타입</b></button>
+						<button class="recomment-button"><b>나와 잘 맞는 타입</b></button>
+					</c:if>
 					<button class="detail-button" onclick="location.href='/lecture/category/2'"><b>자세히 보러 가기 →</b></button>
 				</div>
 				<hr/>
@@ -141,13 +145,13 @@
 			</div>
 					<c:choose>
 						<c:when test="${user != null }">
-							<img class="pro-icon" src="${user.uploadFileName}" alt = "프로필 사진">
+							<img class="pro-icon" src="/images/${user.uploadFileName}" alt = "프로필 사진">
 							<div class="user-info-list">
-							<div class="user-name"><h4 class="user-figurative">댓글장인</h4>&nbsp;<h4>${user.nickname}</h4>&nbsp;<h4>님</h4></div>
-							<p class="user-mbti"><b>SQRC :장군</b></p>
+							<div class="user-name"><h4>${user.nickname}</h4>&nbsp;<h4>님</h4></div>
+							<p class="user-mbti"><b>${myMbti.name} : ${myMbti.nickname}</b></p>
 							<p>현재 캐쉬: ${user.currentCash}</p>
 						<div class="user-button-list">
-						<button class="user-button" onclick="location.href='/my-page/${user.userId}'"><b>마이페이지</b></button>
+						<button class="user-button" onclick="location.href='/my-page/'"><b>마이페이지</b></button>
 						<button class="user-button"><b>로그아웃</b></button>
 						</div>	
 						</c:when>
@@ -164,7 +168,8 @@
 					</div>
 							
 			</div>
-		<div class="friend-list">
+		<c:if test="${user != null }">
+			<div class="friend-list">
 			<div class="friend-list-container">
 				<h2><b>접속 중인 친구</b></h2>
 				<div class="friend-box-container">
@@ -177,7 +182,8 @@
 				</c:forEach>
 				</div>
 			</div>
-		</div>
+			</div>
+		</c:if>
 	</div>
 </div>
 	<div class="floating-menu-up">

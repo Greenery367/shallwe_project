@@ -160,15 +160,21 @@ public class TestController {
     	// 키워드 합치기
     	String result=first+second+third+fourth;
     	
-    	System.out.println(result);
+    	System.out.println("~~~~~~~~~~~~키워드"+result);
     	
     	// 키워드를 통해 결과 탐색
     	Mbti resultMbti = mbtiService.selectMbtiByName(result);
     	
+    	System.out.println("~~~~~~~~~~~myMBTI"+resultMbti);
+    	System.out.println("~~~~~~~~~~~myMBTI"+resultMbti.getId());
+    	
     	// 키워드를 통해 궁합 탐색
-    	Mbti goodMatchedMbti = mbtiService.selectMbtiByCompatibility(100);
-    	Mbti badMatchedMbti = mbtiService.selectMbtiByCompatibility(0);
+    	Mbti goodMatchedMbti = mbtiService.selectMbtiByCompatibility(resultMbti.getId(),100);
+    	Mbti badMatchedMbti = mbtiService.selectMbtiByCompatibility(resultMbti.getId(),0);
 
+    	System.out.println("~~~~~~~~~~굿"+goodMatchedMbti);
+    	System.out.println("~~~~~~~~~~뱃"+badMatchedMbti);
+    	
     	// 세션에 데이터 저장
     	model.addAttribute("resultMbti", resultMbti);
     	httpSession.setAttribute("testResult", resultMbti);
@@ -181,6 +187,9 @@ public class TestController {
     	// 만약 로그인 중이라면 유저-mbti_tb에 mbti 저장
     	if(user != null) {
     		mbtiService.setMbtiAndUserInfo(user.getUserId(), resultMbti.getId());
+    		user.setMbti(resultMbti.getId());
+    		httpSession.setAttribute("principal", user);
+    		System.out.println(httpSession.getAttribute("principal"));
     	}
     	
         // 페이지 리디렉션

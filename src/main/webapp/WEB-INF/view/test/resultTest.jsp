@@ -26,27 +26,28 @@
 	</header>
 	<div class="result-container">
 		<div class="result-page">	
-		
-				<h1>게임 성향 테스트 결과</h1>		
+			<div class = "result-title">
+				<h1>게임 성향 테스트 결과</h1>
+			</div>
 			<div class="my-result">
 				<h1 class="title">당신의 성향은...</h1>
 				<img class="my-mbti my-icon">
 				<h2>${resultMbti.name} : ${resultMbti.nickname}</h2>
-				<h3>${resultMbti.content}</h3>
+				<h3 class="test">${resultMbti.content}</h3>
 			</div>
 			<div class="matching-container">
-				<div class="good-matched">
+				<div class="well-matched">
 					<h4 class="title">나와 잘 맞는 사람은...</h4>
 					<img class="mini well-matched" src="../static/images/icon.png">
 					<h5>${goodMatchedMbti.name} : ${goodMatchedMbti.nickname}</h5>
-					<p>${goodMatchedMbti.content}</p>
+					<p class="test">${goodMatchedMbti.content}</p>
 				</div>
 			
 				<div class="bad-matched">
 					<h4 class="title">나와 잘 맞지 않는 사람은...</h4>
 					<img class="mini bad-matched" src="../static/images/icon.png">
 					<h5>${badMatchedMbti.name} : ${badMatchedMbti.nickname}</h5>
-					<p>${badMatchedMbti.content}</p>
+					<p class="test">${badMatchedMbti.content}</p>
 				</div>
 			</div>
 			<div class="button-list">
@@ -71,7 +72,7 @@
 	const mbti = document.getElementById('question-text');
 	
 	let myImg = document.querySelector(".my-result > img");
-	let wellImg = document.querySelector(".good-matched > img");
+	let wellImg = document.querySelector(".well-matched > img");
 	let badImg = document.querySelector(".bad-matched > img");
 	
 	myImg.src = "/static/images/icons/${resultMbti.nickname}.png";
