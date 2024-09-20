@@ -34,6 +34,8 @@ import com.example.demo.dto.OAuthToken;
 import com.example.demo.dto.SignUpDTO;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Category;
+import com.example.demo.repository.model.News;
+import com.example.demo.repository.model.Notice;
 import com.example.demo.dto.GoogleOauthToken;
 import com.example.demo.dto.GoogleProfile;
 import com.example.demo.dto.NaverOauthToken;
@@ -42,6 +44,7 @@ import com.example.demo.handler.exception.DataDeleveryException;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.EmailSendService;
+import com.example.demo.service.NoticeService;
 import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,6 +61,8 @@ public class UserController {
 	private final UserService userService;
 	@Autowired
 	private final AdminService adminService;
+	@Autowired 
+	private NoticeService noticeService;
 	
 	@Autowired
 	private final HttpSession session;
@@ -95,6 +100,18 @@ public class UserController {
 	// http://localhost:8080/user/main
 	@GetMapping("/main")
 	public String mainPage(Model model) {
+
+		// 최신 공지사항 글 
+		List<Notice> noticeList = noticeService.getAllNotice(0);
+		List<News> newsList = noticeService.getAllnews();
+		
+		// 최신 자유게시판 글 5개
+		System.out.println("----------노티스리스트"+noticeList);
+		System.out.println("----------뉴스리스트"+newsList);
+		
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("newsList", newsList);
+		
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
