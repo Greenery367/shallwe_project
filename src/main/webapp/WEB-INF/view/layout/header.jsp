@@ -123,7 +123,7 @@
 					</ul>
 				</div>
 				<div class="menu-container">
-					<a href="" class="menu">고객 지원</a>
+					<a href="/cs/main" class="menu">고객 지원</a>
 					<ul class="drop-down-menus">
 						<li><h4>Q&A</h4></li>
 					</ul>

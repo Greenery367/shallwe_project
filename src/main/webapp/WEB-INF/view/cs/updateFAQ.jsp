@@ -1,22 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
-<div>
-    <div>
-        <div><b>수정하기</b></div>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/postFAQ.css">
+
+<div class="faq-container">
+    <h1>수정하기</h1>
+    <form action="/cs/update/${FAQ.id}" method="POST">
         <div>
-            <form action="/cs/update/${FAQ.id}" method="POST">
-                <div>
-                    <input type="text" name="title" value="${FAQ.title}">
-                </div>
-                <div>
-                    <textarea rows="5" name="content" id="editorTxt0">${FAQ.content}</textarea>
-                </div>
-                <button type="submit">저장</button>
-            </form>
+            <input type="text" name="title" value="${FAQ.title}" placeholder="수정할 제목을 입력하세요">
         </div>
-    </div>
+        <div>
+            <textarea rows="5" name="content" id="editorTxt0">${FAQ.content}</textarea>
+        </div>
+        <button type="submit">저장</button>
+    </form>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/lib/smarteditor2-2.9.2/workspace/js/service/HuskyEZCreator.js"></script>
 
@@ -42,4 +40,5 @@ $(document).ready(function() {
     });
 });
 </script>
+
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>

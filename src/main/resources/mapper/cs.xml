@@ -32,10 +32,8 @@
 	</select>
 	
 	<insert id="insert">
-		SET SESSION auto_increment_increment = 2
 		insert into qna_question_tb(title, content, writer, user_id)
 			values(#{title}, #{content}, #{writer}, #{userId})
-		SET SESSION auto_increment_increment = 1
 	</insert>
 	
 	<update id="updateFAQ">

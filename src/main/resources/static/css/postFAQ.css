@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 메인 컨테이너 */
+.faq-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 문의글 작성하기 제목 */
+.faq-container h1 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #FF5722;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* 입력 폼 */
+.faq-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* 텍스트 필드 및 텍스트 에어리어 */
+.faq-container input[type="text"], 
+.faq-container textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fafafa;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-container input[type="text"]:focus, 
+.faq-container textarea:focus {
+    border-color: #FF5722;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.2), inset 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 제목 필드 */
+.faq-container input[type="text"] {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+/* 에디터 텍스트 에어리어 */
+.faq-container textarea {
+    height: 350px; /* 높이를 살짝 늘려서 더 편리하게 */
+    resize: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+/* 제출 버튼 */
+.faq-container button[type="submit"] {
+    padding: 15px 30px;
+    background-color: #FF5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    align-self: flex-end; /* 버튼을 오른쪽으로 배치 */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.faq-container button[type="submit"]:hover {
+    background-color: #e64a19;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.faq-container button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .faq-container {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .faq-container h1 {
+        font-size: 2em;
+    }
+
+    .faq-container button[type="submit"] {
+        font-size: 1em;
+        padding: 12px;
+    }
+}

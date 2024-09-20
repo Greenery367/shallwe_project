@@ -140,6 +140,8 @@
   		z-index: 98;
   		padding: 10px;
 	}
+	
+	
 	.menu-container:hover .drop-down-menus-game{
 		display: block;
 	}

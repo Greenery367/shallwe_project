@@ -5,10 +5,9 @@
 <div class="qna-container">
 	<nav class="qna-nav">
 		<ul>
-			<li><a href="main">자주 묻는 질문</a></li>
-			<li><a href="FAQ">FAQ</a></li>  <!-- active 적용 -->
-			<li><a href="#">1:1 문의</a></li>
-			<li><a href="#">공지사항</a></li>
+			<li class="active"><a href="main">자주 묻는 질문</a></li> 
+			<li><a href="FAQ">FAQ</a></li>  
+			<li><a href="/notice/notice-list">공지사항</a></li>
 		</ul>
 	</nav>
 

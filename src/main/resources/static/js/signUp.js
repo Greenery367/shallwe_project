@@ -1,3 +1,6 @@
+// 이메일 인증 완료 여부를 추적하는 변수
+let isEmailVerified = false;
+
 // 버튼 중복 클릭 방지(디바운싱)
 function debounce(func, timeout = 300) {
     let timer;
@@ -26,6 +29,7 @@ function sendEmailVerification() {
         success: function (code) {
             if (code) {
                 alert("입력하신 메일로 인증번호가 전송되었습니다.");
+                isEmailVerified = false; // 이메일 인증 요청 후 다시 인증 필요
             } else {
                 alert("인증번호를 받을 수 없습니다.");
             }
@@ -57,9 +61,10 @@ function verifyEmailAuthCode() {
                 document.querySelector('#authNum').readOnly = true;
                 document.querySelector('.email-check').style.color = 'green';
                 document.querySelector('.email-check').textContent = '이메일 인증 완료.';
-                
+                isEmailVerified = true; // 이메일 인증 완료
             } else {
                 alert("인증에 실패하였습니다.");
+                isEmailVerified = false;
             }
         },
         error: function(xhr, status, error) {
@@ -68,6 +73,7 @@ function verifyEmailAuthCode() {
             } else {
                 alert("오류가 발생했습니다: " + status);
             }
+            isEmailVerified = false;
         }
     });
 }
@@ -77,7 +83,6 @@ const debouncedCheckId = debounce(checkId, 300);
 
 // 디바운스를 적용한 닉네임 중복 체크
 const debouncedCheckNickname = debounce(checkNickname, 300);
-
 
 // ID 중복 체크 함수
 function checkId() {
@@ -215,47 +220,50 @@ function checkEmail(callback) {
 // 이메일 인증 버튼 클릭 핸들러
 function handleEmailBtnClick(event) {
     event.preventDefault(); // 폼 제출 방지
-
     checkEmail(sendEmailVerification); // 이메일 중복 체크 후 이메일 인증 요청
 }
 
 // DOMContentLoaded 이벤트에 대한 처리
 document.addEventListener('DOMContentLoaded', function() {
-    // 버튼 클릭 이벤트 핸들러 등록
     const idBtn = document.querySelector('.id-btn');
     const nickBtn = document.querySelector('.nickname-btn');
     const emailButton = document.querySelector('#email-btn');
     const authButton = document.querySelector('#email-auth-button');
 
-    // 이벤트 리스너가 중복 등록되지 않도록 확인
+    // 아이디 중복 체크 버튼 이벤트 리스너 등록
     if (idBtn) {
-        idBtn.removeEventListener('click', handleIdBtnClick);
+        idBtn.removeEventListener('click', handleIdBtnClick); // 중복 방지
         idBtn.addEventListener('click', handleIdBtnClick);
     }
 
+    // 닉네임 중복 체크 버튼 이벤트 리스너 등록
     if (nickBtn) {
-        nickBtn.removeEventListener('click', handleNickBtnClick);
+        nickBtn.removeEventListener('click', handleNickBtnClick); // 중복 방지
         nickBtn.addEventListener('click', handleNickBtnClick);
     }
 
+    // 이메일 인증 번호 발송 버튼 이벤트 리스너 등록
     if (emailButton) {
-        emailButton.removeEventListener('click', handleEmailBtnClick);
+        emailButton.removeEventListener('click', handleEmailBtnClick); // 중복 방지
         emailButton.addEventListener('click', handleEmailBtnClick);
     }
 
+    // 이메일 인증 번호 검증 버튼 이벤트 리스너 등록
     if (authButton) {
-        authButton.removeEventListener('click', verifyEmailAuthCode);
+        authButton.removeEventListener('click', verifyEmailAuthCode); // 중복 방지
         authButton.addEventListener('click', verifyEmailAuthCode);
     }
 
-    function handleIdBtnClick(event) {
-        event.preventDefault();
-        debouncedCheckId();
-    }
-
+    // 닉네임 중복 체크 함수
     function handleNickBtnClick(event) {
         event.preventDefault();
         debouncedCheckNickname();
+    }
+    
+    // 아이디 중복 체크 함수
+    function handleIdBtnClick(event) {
+        event.preventDefault();
+        debouncedCheckId();
     }
 });
 
@@ -326,3 +334,65 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmPasswordInput.addEventListener('input', validatePasswords);
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('#login-form');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // 기본 폼 제출 막기
+        // 필드 값 가져오기
+        const id = document.querySelector('#id').value.trim();
+        const password = document.querySelector('#password').value.trim();
+        const confirmPassword = document.querySelector('#confirmPassword').value.trim();
+        const nickname = document.querySelector('#nickname').value.trim();
+        const username = document.querySelector('input[name="username"]').value.trim();
+        const emailBody = document.querySelector('#emailBody').value.trim();
+        const emailDomain = document.querySelector('#emailDomain').value.trim();
+        const phoneNumber = document.querySelector('input[name="phoneNumber"]').value.trim();
+
+        // 아이디 유효성 검사
+        if (id.length < 6 || id.length > 12) {
+            alert('아이디는 6자 이상 12자 이하로 입력해야 합니다.');
+            return;
+        }
+
+        // 비밀번호 유효성 검사
+        if (password.length < 8 || password.length > 15 || !/[A-Za-z]/.test(password) || !/[0-9]/.test(password)) {
+            alert('비밀번호는 8자 이상 15자 이하이며 영문, 숫자 및 특수문자를 포함해야 합니다.');
+            return;
+        }
+
+        // 비밀번호 확인
+        if (password !== confirmPassword) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        // 닉네임 유효성 검사
+        if (nickname === '') {
+            alert('닉네임을 입력해주세요.');
+            return;
+        }
+
+        // 이메일 유효성 검사
+        if (emailBody === '' || emailDomain === '') {
+            alert('이메일을 입력해주세요.');
+            return;
+        }
+
+        // 전화번호 유효성 검사
+        if (phoneNumber.length !== 11) {
+            alert('전화번호는 11자리 숫자로 입력해야 합니다.');
+            return;
+        }
+	
+		if (!isEmailVerified) {
+            alert('이메일 인증을 완료해주세요.');
+            return;
+        }
+	
+        // 유효성 검사를 통과하면 폼 제출
+        form.submit();
+    });
+});
+

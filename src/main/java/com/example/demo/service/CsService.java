@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,8 @@ public class CsService {
 	
 	@Autowired
 	private final CsRepository csRepository;
+	@Autowired
+	private final JdbcTemplate jdbcTemplate;
 	
 	public int countFreq() {
 		return csRepository.countFreq();
@@ -66,7 +69,9 @@ public class CsService {
 	public void createFAQ(FAQDTO dto) {
 		int result = 0;
 		try {
-			result = csRepository.insert(dto);
+			jdbcTemplate.execute("SET SESSION auto_increment_increment = 2");
+            result = csRepository.insert(dto);
+            jdbcTemplate.execute("SET SESSION auto_increment_increment = 1");
 		} catch (DataDeleveryException e) {
 			throw new DataDeleveryException("문의글 작성에 실패하였습니다.", HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {

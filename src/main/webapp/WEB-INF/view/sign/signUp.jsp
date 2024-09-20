@@ -34,7 +34,7 @@
             <h4>닉네임</h4>
             <input type="text" id="nickname" name="nickname" maxlength="30" placeholder="닉네임을 입력하세요(30자 제한)" class="nickname-input">
             <label class="nickname-check">닉네임 중복 여부를 확인해 주세요</label>
-            <button class="nickname-btn" type="button" onclick="checkNickname();">중복 체크</button>
+            <button class="nickname-btn" type="button">중복 체크</button>
             <h4>생년월일</h4>
             <input type="text" pattern="\d*" name="birthDate"  maxlength="8" placeholder="ex)19980307 (-은 제외하고 8자리 숫자로 입력)"
             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
