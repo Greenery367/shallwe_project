@@ -60,7 +60,7 @@ public class MyPageController {
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
 		BankDTO bankAccount = bankService.getAccountByUserIdAndBankId(user.getUserId());
-		
+		System.out.println("유으으으윽적" + user);
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);

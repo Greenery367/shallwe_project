@@ -94,7 +94,8 @@
 		<!-- 캐시 및 포인트 관리 -->
 		<h3>캐시 및 포인트</h3>
 		<div style="margin-bottom: 10px;">
-			<strong>현재 캐시:</strong> ${user.currentCash}점
+			<p><strong>현재 캐시:</strong> ${user.currentCash}점</p>
+			<p><strong>현재 강의 캐시:</strong> ${user.lectureCash}점</p>
 			<button style="margin-left: 10px;">충전</button>
 			<button style="margin-left: 10px;">환전</button>
 			<button style="margin-left: 10px;">환불</button>
