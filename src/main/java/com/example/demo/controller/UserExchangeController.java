@@ -83,7 +83,7 @@ public class UserExchangeController {
 					model.addAttribute("banks", bankService.getAllBanks()); // 은행 목록 추가
 					model.addAttribute("bankAccount", bankAccount);
 
-					return "/myPage/userExchange/resiterSubmall";
+					return "/myPage/userExchange/registerSubmall";
 				}
 			} else {
 				model.addAttribute("advertiseListOne", advertiseListOne);
