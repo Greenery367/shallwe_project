@@ -46,18 +46,6 @@
 	</div>
 	
 	
-	<p>강의 수정</p>
-	<form action="/admin/lecture/update-lecture" method="post" class="advertise">
-		<div class="form-group">
-			<label for="id">수정할 카테고리 id</label> 
-			<input type="text" id="id" name="id" value="1">
-		</div>
-		<div class="form-group">
-			<label for="gameName">카테고리명</label> 
-			<input type="text" id="gameName" name="gameName" value="사이퍼즈">
-		</div>
-		<button type="submit">카테고리수정</button>
-	</form>
 	    
 
 
