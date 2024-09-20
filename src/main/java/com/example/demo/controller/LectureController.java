@@ -20,6 +20,7 @@ import com.example.demo.service.LecturePaymentService;
 import com.example.demo.service.LectureService;
 import com.example.demo.service.ReviewService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -59,15 +60,29 @@ public class LectureController {
 	
 	// 강의 상세보기 
 	@GetMapping("/lectureDetail/{id}")
-	public String lectureDetail(@PathVariable("id") Integer id, Model model) {
+	public String lectureDetail(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
 		Lecture lecture = lectureService.readLectureDetail(id);
 		List<Review> reviews = reviewService.getReviewByClassId(id);
 		User user = (User)httpSession.getAttribute("principal");
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
+		double sum = 0;
+        int i = 0;
+        for(i = 0; i<reviews.size(); i++) {
+            sum += reviews.get(i).getGrade();
+        }
+        double avg = sum / reviews.size();
 		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("user", user);
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("lecture", lecture);
-		
+		request.setAttribute("avg", avg);
 		
 		return "lecture/lectureDetail";
 	}

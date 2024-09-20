@@ -14,8 +14,8 @@ import lombok.ToString;
 public class RegisterSubmallDTO {
 	
 
-	public int userId;
-	public int bankId;
+	public Integer userId;
+	public Integer bankId;
 	
 
 }

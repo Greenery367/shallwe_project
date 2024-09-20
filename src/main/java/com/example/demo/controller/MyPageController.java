@@ -196,7 +196,15 @@ public class MyPageController {
 		User user = (User)session.getAttribute("principal");
 		System.out.println("쁘아아악!!!!!!!!!!!!!!!!!!");
 		List<Order> orders = orderRepository.orderFindById(user.getUserId());
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
 		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("user", user);
 		model.addAttribute("orders", orders);
 		
@@ -231,7 +239,15 @@ public class MyPageController {
 			) {
 		User user = (User)session.getAttribute("principal");
 		List<Refund> refunds = refundRepository.refundFindById(user.getUserId());
+		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
+		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
+		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
+		List<Category> categoryList = adminService.selectAllCategory();
 		
+		model.addAttribute("advertiseListOne", advertiseListOne);
+		model.addAttribute("advertiseListTwo", advertiseListTwo);
+		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("user", user);
 		model.addAttribute("refunds", refunds);
 		
