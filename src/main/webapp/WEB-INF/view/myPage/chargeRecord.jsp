@@ -37,18 +37,18 @@ th {
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="order" items="${orders}">
+			<c:forEach var="order" items="${orders}" varStatus="status">
 				<tr>
 					<td>${order.name}</td>
 					<td>${order.amount}</td>
 					<td>${order.createdAt}</td>
 					<td>
 						<c:choose>
-							<c:when test="${flagList[fn:indexOf(orders, order)]}">
+							<c:when test="${flagList[status.index] == true}">
 								<span>환불 신청 완료</span>
 							</c:when>
 							<c:otherwise>
-							    <form action="${pageContext.request.contextPath}/my-page/request-refund" method="post">
+							    <form action="${pageContext.request.contextPath}/my-page/request-refund" method="post" onsubmit="return disableBtn(this, ${status.index});">
 							        <input type="hidden" name="orderId" value="${order.id}" />
 							        <input type="hidden" name="userId" value="${userId}" />
 							        <button type="submit">환불 신청</button>
@@ -62,20 +62,15 @@ th {
 	</table>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('form').on('submit', function(event) {
-            event.preventDefault(); // 기본 폼 제출 막기
-            const form = $(this);
-            $.post(form.attr('action'), form.serialize(), function(response) {
-                // 환불 요청 성공 시 버튼 비활성화
-                form.find('button').prop('disabled', true).text('환불 신청 완료');
-            }).fail(function() {
-                alert('환불 신청에 실패했습니다.');
-            });
-        });
-    });
+	// 폼이 제출될 때 해당 폼의 버튼을 비활성화하고 텍스트를 변경하는 함수
+	function disableBtn(form, index) {
+		// index에 따라 고유한 버튼을 선택하여 비활성화
+		const button = document.getElementById(`refundBtn${index}`);
+		button.disabled = true;
+		button.innerText = '환불 신청 완료';
+		return true; // 폼 제출 허용
+	}
 </script>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

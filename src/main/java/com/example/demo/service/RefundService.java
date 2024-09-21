@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.dto.CashRefundDTO;
@@ -38,11 +39,13 @@ public class RefundService {
 	@Autowired
 	public OrderDetailRepository orderDetailRepository;
 	
+	
 	public void requestRefund(CashRefundDTO cashRefundDTO) {
         // 환불 신청을 DB에 저장
         refundRepository.insertRefundRequest(cashRefundDTO);
     }
 	
+	@Transactional
     public boolean hasRequestedCashRefund(int orderId, int userId) {
         return refundRepository.checkRefundRequest(orderId, userId) > 0;
     }
