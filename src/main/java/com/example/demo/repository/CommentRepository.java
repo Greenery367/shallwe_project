@@ -14,10 +14,19 @@ public interface CommentRepository {
 	public int InsertComment(@Param("postId") Integer postId,
 							@Param("content") String content,
 							@Param("authorId") Integer authorId);
+	
 	// 댓글 수정
-//	public int commentUpdate();
-	// 댓글 삭제
-	 int commentDelete(@Param("id") int id);
+    public int UpdateComment(@Param("id") Integer id,
+                             @Param("content") String content,
+                             @Param("authorId") Integer authorId, 
+                             @Param("postId") Integer postId); 
+        
+    // 댓글 삭제
+    public int DeleteComment(@Param("id") Integer id,
+                             @Param("authorId") Integer authorId, 
+                             @Param("postId") Integer postId); 
+	
+	
 	// 게시글 별 댓글 조회
 	public List<Comment> FindByPostId(@Param("postId") int postId);
 	

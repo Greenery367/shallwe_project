@@ -17,5 +17,18 @@
 	values 
 	(#{postId}, #{content}, #{authorId}, now())
 </insert>
+
+<!-- 댓글 수정 -->
+<update id="UpdateComment">
+    UPDATE comment_tb
+    SET content = #{content}
+    WHERE id = #{id} AND author_id = #{authorId} AND post_id = #{postId}
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="DeleteComment">
+    DELETE FROM comment_tb
+    WHERE id = #{id} AND author_id = #{authorId} AND post_id = #{postId}
+</delete>
 	 
 </mapper>

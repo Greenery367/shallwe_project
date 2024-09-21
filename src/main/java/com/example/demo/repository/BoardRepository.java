@@ -73,4 +73,6 @@ public interface BoardRepository {
 	// 작성자 검색 전체 갯수
 	public int SearchAuthorTotalBoard(@Param("categoryId")Integer categoryId, @Param("nickName") String nickName);
 	
+	public String getCategoryNameById(@Param("categoryId")Integer categoryId); 
+	
 }

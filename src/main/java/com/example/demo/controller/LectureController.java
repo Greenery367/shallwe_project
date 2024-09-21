@@ -59,6 +59,9 @@ public class LectureController {
 		
 		lectureList = lectureService.getLectureByCategory(categoryId);
 		
+		String categoryName = lectureService.getCategoryNameById(categoryId);
+		
+		model.addAttribute("categoryName" ,categoryName);
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);

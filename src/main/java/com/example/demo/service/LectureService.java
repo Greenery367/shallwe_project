@@ -91,4 +91,8 @@ public class LectureService {
 		return lectureRepository.selectSpendHistoryByLectureId(lectureId);
 	}
 	
+	public String getCategoryNameById(Integer categoryId) {
+        return lectureRepository.getCategoryNameById(categoryId);
+    }
+	
 }

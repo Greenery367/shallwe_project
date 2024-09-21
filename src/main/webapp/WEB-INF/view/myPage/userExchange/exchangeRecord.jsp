@@ -33,6 +33,16 @@
         color: red;
         text-align: center;
     }
+    input[type="number"] {
+    -moz-appearance: textfield; /* Firefox에서 스피너 숨기기 */
+	}
+
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none; /* Chrome, Safari에서 스피너 숨기기 */
+	    margin: 0;
+	}
+    
 </style>
 
 <div style="display: flex; justify-content: space-between;">
@@ -44,9 +54,9 @@
         <!-- 환전 신청 폼 -->
         <div class="form-container">
             <h2>포인트 환전 신청</h2>
-            <form action="registerExchange" method="post">
+            <form action="registerExchange" method="post" onsubmit="return validateAmount()">
                 <label for="amount">포인트 환전 금액:</label>
-                <input type="number" id="amount" name="amount" min="0" required />
+                <input type="number" id="amount" name="amount" min="0" required oninput="onlyNumbers(this)" />
                 <button type="submit">포인트 환전 신청</button>
 	            <p><strong>현재 포인트:</strong> ${user.lectureCash}점</p>
             </form>
@@ -85,5 +95,24 @@
         </table>
     </div>
 </div>
+
+<script>
+    function validateAmount() {
+        const amountInput = document.getElementById('amount');
+        const currentPoints = ${user.lectureCash};
+
+        if (parseInt(amountInput.value) > currentPoints) {
+            alert('환전 금액이 부족합니다.');
+            return false; // 폼 제출 방지
+        }
+        return true; // 폼 제출 허용
+    }
+    
+    function onlyNumbers(input) {
+        // 입력값에서 숫자 이외의 문자 제거
+        input.value = input.value.replace(/[^0-9]/g, '');
+    }
+    
+</script>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

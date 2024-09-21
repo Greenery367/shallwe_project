@@ -29,9 +29,10 @@
 		FROM
 		    user_refund_tb ur
 		JOIN
-		    order_tb o ON ur.order_id = o.order_id
+		    order_tb o ON ur.order_id = o.id
 		WHERE
-		    o.user_id = #{userId};
+		    o.user_id = #{userId}
+		order by ur.created_at desc
 				
 	</select>
 	

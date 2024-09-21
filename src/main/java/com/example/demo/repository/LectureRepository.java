@@ -3,6 +3,7 @@ package com.example.demo.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.dto.CreateLectureDTO;
 import com.example.demo.repository.model.Category;
@@ -35,4 +36,6 @@ public interface LectureRepository {
 
 	//강좌 id로 결제내역 조회
 	public List<Spend> selectSpendHistoryByLectureId(Integer lectureId);
+	
+	public String getCategoryNameById(@Param("categoryId")Integer categoryId); 
 }
