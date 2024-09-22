@@ -7,6 +7,14 @@
 		insert into register_exchange_tb (user_id, submall_id, amount)	
 		values (#{userId}, #{submallId}, #{amount});
 	</insert>
+	<!-- c -->
+	<select id="submallFindById">
+		select us.submall_id 
+			from user_submall_tb us
+			join user_tb u
+			on us.user_id = u.user_id
+			where u.user_id = #{userId};
+	</select>
 	
 	<!-- c -->
 	<select id="getExchangeHistory" resultType="com.example.demo.dto.RegisterExchangeDTO">

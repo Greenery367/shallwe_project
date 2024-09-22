@@ -186,7 +186,9 @@ public class BoardService {
 		return SearchTitleList;
 	}
 	
-	
+	public String getCategoryNameById(Integer categoryId) {
+        return boardRepository.getCategoryNameById(categoryId);
+    }
 	
 	
 	

@@ -124,6 +124,12 @@
 	
 </select>
 
+<select id="getCategoryNameById">
+    SELECT game_name
+    FROM game_tb
+    WHERE id = #{categoryId}
+</select>
+
 
 
 

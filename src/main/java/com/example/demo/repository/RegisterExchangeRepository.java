@@ -17,7 +17,10 @@ public interface RegisterExchangeRepository {
 								@Param("submallId") Integer submallId,
 								@Param("amount") Long amount);
 	
-
+	// 서브몰 찾기 
+	public Integer submallFindById(@Param("userId") Integer userId);
+	
+	
 	// 환전 내역
 	public List<RegisterExchangeDTO> getExchangeHistory (@Param("userId")Integer userId);
 	

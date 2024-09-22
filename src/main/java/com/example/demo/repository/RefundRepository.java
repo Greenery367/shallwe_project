@@ -5,12 +5,18 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.example.demo.dto.CashRefundDTO;
 import com.example.demo.dto.RefundDTO;
 import com.example.demo.repository.model.Refund;
 
 
 @Mapper
 public interface RefundRepository {
+	// 캐쉬 환불 신청
+	public void insertRefundRequest(CashRefundDTO cashRefundDTO);
+	// 캐쉬 환불 버튼 활성화 체크 
+    public int checkRefundRequest(@Param("orderId")int orderId, @Param("userId")int userId);
+	
 	
 	// 모든 환불 정보 가져오기
 	public List<Refund> selectAllRefund(@Param("limit") Integer limit,
