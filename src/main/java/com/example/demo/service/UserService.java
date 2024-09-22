@@ -60,6 +60,12 @@ public class UserService {
 		}
     }
 	
+	// 로그인 로그아웃 시 친구 요청용 상태값 변경 쿼리 (유저 아이디와 상태값[0일떄 로그아웃 / 1일떄 로그인]을 Integer 타입으로 전달 )
+	public void updateUserStatus(Integer userId, Integer onlineStatus) {
+		userRepository.updateUserStatus(userId, onlineStatus);
+	}
+	
+	
 	public User findUserByNickname(String nickname) {
 		User user = null;
 		user = userRepository.findByNickname(nickname);

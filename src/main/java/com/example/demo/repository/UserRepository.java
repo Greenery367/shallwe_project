@@ -19,6 +19,8 @@ public interface UserRepository {
 	public User findByEmail(@Param("email")String email);
 	public int updatePasswordByEmail(@Param("password")String password, @Param("email")String email);
 
+	public void updateUserStatus(@Param("userId")Integer userId, @Param("onlineStatus") Integer onlineStatus);
+	
 	public long getLectureCash(@Param("userId")Integer userId);
 
 	public User findByUserId(@Param("id")int id);
