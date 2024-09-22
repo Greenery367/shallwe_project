@@ -24,11 +24,14 @@
         #{id}
     </foreach>
 	</update>
-
+	
 	<!-- 알람 삭제 -->
-	<delete id = "deleteAlarm">
-		delete  from alarm_tb
-		where id = #{id}
+	<delete id="deleteAlarmBatch">
+    DELETE FROM alarm_tb
+    WHERE id IN
+    <foreach collection="alarmIdList" item="id" open="(" separator="," close=")">
+        #{id}
+    </foreach>
 	</delete>
 	
 	<!-- 알람 전부 삭제 -->
@@ -36,5 +39,13 @@
 		delete from alarm_tb
 		where user_id = #{userId}
 	</delete>
+	
+	<!-- 알람 확인했는지 체크 -->
+	<select id = "checkStatusAlarm" resultType ="Integer">
+		select status from alarm_tb
+		where user_id = #{userId}
+		and opponent_id = #{opponentId}
+		and type = 1
+	</select>
 	
 </mapper>

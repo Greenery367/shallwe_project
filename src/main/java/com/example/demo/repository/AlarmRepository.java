@@ -13,7 +13,8 @@ public interface AlarmRepository {
 	public int sendAlarm(Alarm alarm);
 	public List<Alarm> findAlarmAll(@Param("userId")int userId);
 	public int changeStatusBatch(@Param("alarmIdList")List<Integer> alarmIdList);
-	public int deleteAlarm(@Param("id")int id);
+	public int deleteAlarmBatch(@Param("alarmIdList")List<Integer> alarmIdList);
 	public int deleteAlarmAll(@Param("userId")int userId);
+	public List<Integer> checkStatusAlarm(@Param("userId")int userId,@Param("opponentId")int opponentId);
 	
 }

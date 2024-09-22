@@ -549,6 +549,28 @@ public class UserController {
 		alarmService.changeStatusBatch(alarmIdList);
 		return "ok";
 	}
+	
+	@PostMapping("deleteAlarm")
+	@ResponseBody
+	public String postMethodName(@RequestBody List<Integer> alarmId) {
+		List<Integer>deleteList = alarmId;
+		alarmService.deleteAlarm(deleteList);
+		return "ok";
+	}
+	
+	@GetMapping("deleteFriend")
+	@ResponseBody
+	public String postMethodName(@RequestParam(name="userId")int id) {
+		User user = (User)session.getAttribute("principal");
+		int result = 0;
+		result = friendService.removeFriend(user.getUserId(), id);
+		if(result != 0) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
 	// git push protection error debug
 
 }

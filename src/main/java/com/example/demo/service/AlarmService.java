@@ -33,9 +33,9 @@ public class AlarmService {
         alarmRepository.changeStatusBatch(alarmIdList);
     }
 	
-	public int deleteAlarm(int id) {
+	public int deleteAlarm(List<Integer>alarmIdList){
 		int result = 0;
-		result = alarmRepository.deleteAlarm(id);
+		result = alarmRepository.deleteAlarmBatch(alarmIdList);
 		return result;
 	}
 	
@@ -43,5 +43,11 @@ public class AlarmService {
 		int result = 0;
 		result = alarmRepository.deleteAlarmAll(userId);
 		return result;
+	}
+	
+	public List<Integer>checkStatusAlarm(int userId,int opponentId) {
+		List<Integer>statusList = null;
+		statusList = alarmRepository.checkStatusAlarm(userId, opponentId);
+		return statusList;
 	}
 }

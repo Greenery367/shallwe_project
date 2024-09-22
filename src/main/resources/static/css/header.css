@@ -471,21 +471,6 @@ ul, li {
     align-items: center;
 }
 
-.friend-box-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.friend-container {
-    width: 100%;
-    height: 60px;
-    box-shadow: 0px 8px 6px -6px #E6E6E6;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    margin: 10px;
-}
 
 .friend-icon {
     width: 50px;
@@ -747,3 +732,70 @@ ul, li {
     .cancel-btn {
         background-color: #ccc;
     }
+    
+.friend-box-container {
+    display: flex;
+    flex-wrap: wrap; /* 요소들을 가로로 배치하고 넘칠 경우 줄바꿈 */
+    justify-content: space-between; /* 친구 박스 간격 조절 */
+    align-items: center;
+    width: 100%; /* 전체 너비 맞춤 */
+    padding: 10px;
+}
+
+.friend-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* 각 friend-container를 적절한 너비로 설정 (50%보다 살짝 작게) */
+    height: 70px; /* 높이 조정 */
+    margin: 10px 0; /* 위아래 여백 추가 */
+    box-shadow: 0px 4px 6px -4px #E6E6E6;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+}
+
+.friend-container img {
+    width: 40px; /* 프로필 사진 크기 조정 */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.friend-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 넘칠 경우 숨김 */
+    text-overflow: ellipsis; /* 넘칠 경우 ... */
+}
+
+.profile-box {
+    position: absolute;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.profile-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-box ul li {
+    margin: 5px 0;
+}
+
+.profile-box ul li a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.profile-box ul li.close a {
+    color: red;
+}
