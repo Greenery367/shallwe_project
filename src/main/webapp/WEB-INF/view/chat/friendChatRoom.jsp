@@ -37,7 +37,7 @@
 	</div>
 	<script>
 	console.log(`${principal.nickname}`);
-	var socket = new WebSocket("ws://192.168.0.131:8080/friend");
+	var socket = new WebSocket("ws://localhost:8080/friend");
 	var input = document.querySelector('.message');
 	const profileBox = document.querySelector('.profile-box');
 	profileBox.style.display = 'none';

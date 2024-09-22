@@ -28,7 +28,7 @@ footer {
     text-align: center;
     background-color: #C0C0C0;
     padding: 50px 0;
-    
+}
 .advertise-example-left{
 	padding-top: 25px;
 	padding-right: 25px;
@@ -592,21 +592,6 @@ ul, li {
     justify-content: center;
 }
 
-/* 알람 박스 스타일 */
-.alarm-box {
-    position: absolute;
-    display: none;  /* 기본적으로 숨김 */
-    width: 300px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    max-height: 400px;  /* 최대 높이 설정 */
-    overflow-y: auto;  /* 알림이 많을 경우 스크롤 */
-    padding: 10px;
-}
-
 /* 알람 헤더 스타일 */
 .alarm-header {
     background-color: white;
@@ -627,6 +612,34 @@ ul, li {
     transition: color 0.3s;
 }
 
+/* alarm-box를 alarm-bell의 왼쪽 하단에 위치하고, 너비 340px로 설정 */
+.alarm-box {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;  /* 최대 높이 설정 */
+    overflow-y: auto;   /* 알림이 많을 경우 스크롤 */
+    padding: 10px;
+    width: 340px;       /* 너비를 340px로 늘림 */
+}
+
+/* 알림 메시지 내용 줄바꿈 허용 */
+.alarm-message {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* 닉네임과 헤더는 한 줄로만 표시되게 */
+.alarm-header span,
+.alarm-name {
+    white-space: nowrap;   /* 줄바꿈 없이 한 줄로 표시 */
+    overflow: hidden;      /* 넘치는 부분은 숨김 */
+    display: inline-block; /* 인라인 블록으로 설정 */
+    max-width: 100%;       /* 최대 너비 설정 */
+}
 /* 선택된 헤더는 검은색 */
 .alarm-header span.active {
     color: red;  /* 선택된 항목은 검은색 */
@@ -698,3 +711,38 @@ ul, li {
     background-color: #f9f9f9;
     border-radius: 5px;
 }
+
+ /* 원형 체크박스 스타일 */
+    .round-checkbox {
+        width: 25px;
+        height: 25px;
+        appearance: none;
+        border-radius: 50%;
+        border: 2px solid #000;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .round-checkbox:checked {
+        background-color: #fd6f22;
+    }
+
+    /* 삭제 모드 버튼 스타일 */
+    .delete-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .delete-alarms-btn, .cancel-btn {
+        padding: 10px 15px;
+        background-color: #fd6f22;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .cancel-btn {
+        background-color: #ccc;
+    }

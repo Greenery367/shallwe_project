@@ -136,12 +136,14 @@ public class UserController {
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("newsList", newsList);
 		
-		user.setMbti(1);
-		session.setAttribute("principal", user);
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
+		int mbti = matchService.getMbtiIdByUserId(user.getUserId());
+		user.setMbti(mbti);
+		session.setAttribute("principal", user);
+		
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
@@ -543,6 +545,16 @@ public class UserController {
 		return "redirect:/user/main";
 	}
 	
+	@PostMapping("status")
+	@ResponseBody
+	public String alarmStatusHandler(@RequestBody List<AlarmDTO> alarmList) {
+		List<Integer> alarmIdList = new ArrayList<>();
+		for(AlarmDTO alarms : alarmList) {
+			alarmIdList.add(alarms.getId());
+		}
+		alarmService.changeStatusBatch(alarmIdList);
+		return "ok";
+	}
 	// git push protection error debug
 	
 }

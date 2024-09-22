@@ -219,14 +219,14 @@
 	    friendsDiv.forEach((friendDiv) => {
 	        friendDiv.addEventListener('click', function(event) {
 	            const id = friendDiv.querySelector('input[type="hidden"]').value;
-	            const x = event.clientX + 3;
-	            const y = event.clientY + 115;
+	            const x = event.pageX;
+	            const y = event.pageY;
 
 	            profileBox.style.left = x + "px";
 	            profileBox.style.top = y + "px";
 
 	            document.querySelector(".profile-info").firstElementChild
-	                .setAttribute("onclick", "window.open('/chat/profileInfo?id=" + id + "')");
+	                .setAttribute("onclick", "window.open('/chat/profileInfo?userId=" + id + "')");
 	            document.querySelector(".chat").firstElementChild
 	                .setAttribute("onclick", "window.open('/chat/friendChat?id=" + id + "')");
 

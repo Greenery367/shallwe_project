@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="/css/matchPage.css">
-</head>
-<body>
 	<div class="page-wrapper">
 		<div class="container">
 			<!-- 프로필 박스 -->
@@ -21,7 +15,14 @@
 			<!-- 왼쪽: 내 정보 -->
 			<div class="left">
 				<div class="profile-pic" id="my-profile">
-					<img src="/images/${principal.uploadFileName}" alt="내 프로필 사진">
+					<c:choose>
+                        <c:when test="${principal.uploadFileName == null}">
+                            <img src="/static/images/defaultProfile.jpeg">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="/images/${principal.uploadFileName}" alt="Profile Picture">
+                        </c:otherwise>
+                    </c:choose>
 				</div>
 				<h3>${principal.nickname}</h3>
 				<p>MBTI: ${mbti.name}</p>
@@ -57,7 +58,7 @@
 		</div>
 	</div>
 	<script>
-	 var socket = new WebSocket("ws://192.168.0.131:8080/match");
+	 var socket = new WebSocket("ws://localhost:8080/match");
 	 var matching = false;
 	 var count = 0;
 	 const compatibilityList = JSON.parse(`${compatibilityJson}`);
@@ -71,12 +72,12 @@
 		    profileBox.style.display = 'none'; // 처음에는 profile-box를 숨깁니다.
 			
 		    myProfilePic.addEventListener('click', function(event) {
-		        const x = event.clientX - 160;
-		        const y = event.offsetY + 30;
+		        const x = event.pageX;
+		        const y = event.pageY;
 		        profileBox.style.left = x + "px";
 		        profileBox.style.top = y + "px";
 		        document.querySelector(".profile-info").firstChild.
-				setAttribute("onclick",`window.open("/chat/profileInfo?id=${principal.id}")`);
+				setAttribute("onclick",`window.open("/chat/profileInfo?userId=${principal.userId}")`);
 		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
 		        event.stopPropagation(); // 클릭 이벤트 전파 방지
 		    });
@@ -150,7 +151,7 @@
             	if(event.data.startsWith("roomId")) {
             		var roomId = event.data.split(":");
             		alert("매칭 성사 완료!!!");
-        			location.href = "/chat/room?roomId=" + roomId[1];
+        			window.open("/chat/room?roomId=" + roomId[1]);
             	} else if(event.data === "quit") {
             		alert("상대가 나갔습니다!");
             		location.reload(true);
@@ -168,6 +169,11 @@
             		button.disabled = true;
             		const opponent = JSON.parse(event.data);
             		const profileImage = document.createElement("img");
+            		if(opponent.uploadFileName === '') {
+        				profileImage.src = "/static/images/defaultProfile.jpeg";
+        			} else {
+        	        profileImage.src = "/images/" + opponent.uploadFileName;
+        			}
                     profileImage.src = "/images/" + opponent.uploadFileName;
                     profileImage.alt = "Profile Image";
                     profileImage.classList.add("profile-image");
@@ -178,12 +184,12 @@
                 	document.getElementById('matchingTime').textContent = '매칭 성공!!';
                 	const opponentProfilePic = document.querySelector("#opponent-profile");
                 	opponentProfilePic.addEventListener('click', function(event) {
-                		const x = event.clientX - 160;
-        		        const y = event.offsetY + 30;
+                		const x = event.pageX;
+        		        const y = event.pageY;
         		        profileBox.style.left = x + "px";
         		        profileBox.style.top = y + "px";
         		        document.querySelector(".profile-info").firstChild.
-        		        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + opponent.id + "')");
+        		        setAttribute("onclick", "window.open('/chat/profileInfo?userId=" + opponent.userId + "')");
         		        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
         		        event.stopPropagation(); // 클릭 이벤트 전파 방지
         		        document.querySelector(".close").addEventListener("click", function() {
@@ -230,5 +236,5 @@
         }
         
     </script>
-</body>
-</html>
+    
+<%@ include file="/WEB-INF/view/layout/footer.jsp"%>
