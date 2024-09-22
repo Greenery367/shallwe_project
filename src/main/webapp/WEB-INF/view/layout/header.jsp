@@ -181,6 +181,7 @@
 		</div>
 	</div>
 	<script>
+	var socket = new WebSocket("ws://localhost:8080/alarm");
     const alarmBox = document.querySelector(".alarm-box");
     const alarmBell = document.querySelector(".alarm-bell");
     const alarmContent = document.querySelector(".alarm-content");
@@ -232,6 +233,19 @@
                         alarm.appendChild(opponentPic);
                         alarm.appendChild(content);
 
+                     	// 체크박스 클릭 시 이벤트 전파 중지
+                        checkbox.addEventListener('click', function(event) {
+                            event.stopPropagation(); // 이벤트 전파 중지하여 체크박스 클릭 시 div의 이벤트가 발생하지 않도록 함
+                        
+                            if (checkbox.checked) {
+                                selectedAlarms.push(alarms.id); // 체크된 경우 선택된 알람 ID 추가
+                            } else {
+                                selectedAlarms = selectedAlarms.filter(id => id !== alarms.id); // 체크 해제 시 ID 제거
+                            }
+                            
+                        });
+                     
+                        
                         // 클릭 시 체크박스 선택
                         alarm.addEventListener('click', function () {
                             if (deleteMode) {
@@ -244,7 +258,7 @@
                             } else {
                                 // 원래의 클릭 이벤트 동작
                                 if (alarms.userId !== undefined) { 
-                                    location.href = `${pageContext.request.contextPath}/user/move?type=` + alarms.type + '&userId=' + alarms.userId;
+                                    window.open(`${pageContext.request.contextPath}/user/move?type=` + alarms.type + '&userId=' + alarms.userId);
                                 } else {
                                     location.href = `${pageContext.request.contextPath}/user/move?type=` + alarms.type + '&userId=0';
                                 }
@@ -334,30 +348,40 @@
 
     // 선택된 알람 삭제
     function deleteSelectedAlarms() {
-        if (selectedAlarms.length === 0) {
-            alert("삭제할 알림을 선택하세요.");
-            return;
-        }
-
-        fetch("http://localhost:8080/user/deleteAlarm", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(selectedAlarms) // 선택된 알람 ID를 서버로 전송
-        })
-            .then((response) => response.text())
-            .then((text) => {
-                console.log(text);
-                // 삭제된 알람을 UI에서 즉시 제거
-                selectedAlarms.forEach(id => {
-                    const alarm = document.querySelector(`input[value="${id}"]`).parentElement;
-                    alarm.remove();
-                });
-                selectedAlarms = []; // 선택 목록 초기화
-                toggleDeleteMode(); // 삭제 모드 종료
-            });
+    if (selectedAlarms.length === 0) {
+        alert("삭제할 알림을 선택하세요.");
+        return;
     }
+
+    fetch("http://localhost:8080/user/deleteAlarm", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedAlarms) // 선택된 알람 ID를 서버로 전송
+    })
+    .then((response) => response.text())
+    .then((text) => {
+        console.log(text);
+        if (text === 'ok') {
+            // 삭제 성공 후 화면에서 선택된 알람 요소 제거
+            selectedAlarms.forEach(id => {
+                const alarmElement = document.querySelector(`input[value='${id}']`).closest('.alarm-element');
+                if (alarmElement) {
+                    alarmElement.remove(); // 해당 알람 DOM 요소 제거
+                }
+            });
+            // 선택된 알람 리스트 초기화
+            selectedAlarms = [];
+            alert('선택된 알람이 삭제되었습니다.');
+        } else {
+            alert('알람 삭제에 실패했습니다.');
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
 
     function match(id) {
         if (${principal.mbti == 0}) {

@@ -17,7 +17,9 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.example.demo.dto.MessageDTO;
 import com.example.demo.dto.TestUser;
+import com.example.demo.repository.model.Alarm;
 import com.example.demo.repository.model.User;
+import com.example.demo.service.AlarmService;
 import com.example.demo.service.ChatService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -27,11 +29,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class Chat1vs1Handler extends TextWebSocketHandler {
 
-	private final Map<String, WebSocketSession> CLIENTS = new ConcurrentHashMap<>();
+	private final Map<WebSocketSession, Integer> CLIENTS = new ConcurrentHashMap<>();
 	private final Map<WebSocketSession, Integer> KEYS = new ConcurrentHashMap<>();
 
 	@Autowired
 	private ChatService chatService;
+	@Autowired
+	private AlarmService alarmService;
 
 	@Override // 웹 소켓 연결시
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -39,10 +43,9 @@ public class Chat1vs1Handler extends TextWebSocketHandler {
 		Integer key = (Integer) session.getAttributes().get("key");
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		System.out.println(key + "번방 입장!!!!!!!!!");
 		List<User> userList = chatService.getUserList(key);
 		// 방에 들어온 사용자 세션 추가
-		CLIENTS.put(user.getNickname(), session);
+		CLIENTS.put(session, user.getUserId());
 		KEYS.put(session, key);
 		// 대화기록 가져오기
 		// d드라이브의 chat 폴더의 chat 파일
@@ -63,17 +66,8 @@ public class Chat1vs1Handler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		User user = (User) session.getAttributes().get("principal");
 		Integer key = (Integer) session.getAttributes().get("key");
-		ObjectMapper objectMapper = new ObjectMapper();
-		String message = " 님이 나가셧습니다.";
-		MessageDTO messageDTO = MessageDTO.builder().name(user.getNickname()).uploadFileName(user.getUploadFileName())
-				.message(message).build();
 		// 방에서 나간 사용자 세션 제거
-		CLIENTS.remove(user.getNickname());
-		for (WebSocketSession users : KEYS.keySet()) {
-			if (KEYS.get(users) == key && users != session) {
-				users.sendMessage(new TextMessage(objectMapper.writeValueAsString(messageDTO)));
-			}
-		}
+		CLIENTS.remove(session);
 		KEYS.remove(session);
 	}
 
@@ -85,9 +79,42 @@ public class Chat1vs1Handler extends TextWebSocketHandler {
 		String userMessage = message.getPayload();
 		MessageDTO messageDTO = MessageDTO.builder().name(user.getNickname()).uploadFileName(user.getUploadFileName())
 				.message(userMessage).build();
+		boolean view = false; // 상대가 매세지를 봤는지 확인
 		for (WebSocketSession users : KEYS.keySet()) {
 			if (KEYS.get(users) == key && users != session) {
 				users.sendMessage(new TextMessage(objectMapper.writeValueAsString(messageDTO)));
+				view = true;
+			} 
+		}
+		if(view == false) {
+			// 방에 상대방이 없다면 알림 전송
+			// 상대방에게 간 알림이 상태값이 0이면 전송 X
+			List<User>userList = chatService.getUserList(key);
+			for(User opponent : userList) {
+				if(opponent.getUserId() != user.getUserId()) {
+					List<Integer>statusList = alarmService.checkStatusAlarm(opponent.getUserId(), user.getUserId());
+					if(statusList != null) {
+						int read = 0;
+						for(int i : statusList) {
+							if(i == 1) {
+								read++;
+							}
+						}
+						if(read == statusList.size()) {
+							// 만약 알림을 전부 읽은 상태라면 새로운 알림을 보냄
+							String content = user.getNickname() + " 님이 채팅을 보내셨습니다.";
+							Alarm alarm = Alarm.builder().type(1).typeId(key).userId(opponent.getUserId())
+									.opponentId(user.getUserId()).content(content).build();
+							alarmService.sendAlarm(alarm);
+						}
+					} else {
+						// 만약 보낸  채팅 알람이 하나도 없다면 새로운 알림을 보냄
+						String content = user.getNickname() + " 님이 채팅을 보내셨습니다.";
+						Alarm alarm = Alarm.builder().type(1).typeId(key).userId(opponent.getUserId())
+								.opponentId(user.getUserId()).content(content).build();
+						alarmService.sendAlarm(alarm);
+					}
+				}
 			}
 		}
 		saveFile(user, message.getPayload(), key); // 채팅 로그 저장

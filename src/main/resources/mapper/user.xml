@@ -101,6 +101,18 @@
 		where w.user_id = #{id}
 	</select>
 	
+	<!-- 접속하면 온라인으로 변경 -->
+	<update id="changeUserOnline">
+		update user_tb set online_status = 1
+		where user_id = #{userId}
+	</update>
+	
+	<!-- 접속 종료하면 오프라인으로 변경 -->
+	<update id="changeUserOffline">
+		update user_tb set online_status = 0
+		where user_id = #{userId}
+	</update>	
+	
 	<update id="updateCurrentCash">
 		update user_tb set current_cash = #{amount}
 		where user_id = #{userId}
