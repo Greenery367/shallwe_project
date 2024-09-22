@@ -20,10 +20,10 @@
 			<div id="opponent-pic">
 				 <c:choose>
                         <c:when test="${opponent.uploadFileName == null}">
-                            <img src="/static/images/defaultProfile.jpeg">
+                            <img src="/static/images/defaultProfile.jpeg" id="opponent-img">
                         </c:when>
                         <c:otherwise>
-                            <img src="/images/${opponent.uploadFileName}" alt="Profile Picture">
+                            <img src="/images/${opponent.uploadFileName}" alt="Profile Picture" id="opponent-img">
                         </c:otherwise>
                  </c:choose>
 			</div>
@@ -37,12 +37,14 @@
 	</div>
 	<script>
 	console.log(`${principal.nickname}`);
-	var socket = new WebSocket("ws://192.168.0.131:8080/chat");
+	var socket = new WebSocket("ws://localhost:8080/chat");
 	var input = document.querySelector('.message');
 	const profileBox = document.querySelector('.profile-box');
 	profileBox.style.display = 'none';
 	// var imoticon = document.querySelector('.imoticon');
-	const opponent = document.querySelector('#opponent-profile');
+	const opponent = document.querySelector('#opponent-info');
+	const opponentPic = document.querySelector('#opponent-img');
+	
 	opponent.addEventListener('click', function(event) {
 		const x = event.pageX;
         const y = event.pageY;
@@ -51,9 +53,7 @@
         profileBox.style.left = x +"px";
         profileBox.style.top = y +"px";
         document.querySelector(".profile-info").firstChild.
-        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
-        document.querySelector(".profile-info").firstChild.
-        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + message.id + "')");
+        setAttribute("onclick", "window.open('/chat/profileInfo?userId=" + `${opponent.userId}` + "')");
         document.querySelector(".report").firstChild.
         setAttribute("onclick", "window.open(`/report?roomId=${roomId}&opponentId=${opponent.userId}&type=match`,'신고 페이지','width=500,height=600');");
         document.querySelector(".close").addEventListener("click", function() {
@@ -65,11 +65,12 @@
 	        profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
 	    });
 	    document.addEventListener('click', function(event) {
-	        if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && event.target !== profileImage) {
+	        if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && event.target !== opponentPic) {
 	            profileBox.style.display = 'none'; // profile-box 외부를 클릭하면 숨깁니다.
 	        }
 	    });
-	        
+	});
+	
 	input.addEventListener('keyup', (event) => {
 		if(event.keyCode === 13 && input.value.trim() !== "") {
 			const chatWindow = document.getElementById("chatWindow");
@@ -79,7 +80,11 @@
 	        const messageContent = document.createElement("div");
 			myMessage.classList.add("chat-message");
 			messageContent.classList.add("my-message");
+			if(`${principal.uploadFileName}` === '') {
+				profileImage.src = "/static/images/defaultProfile.jpeg";
+			} else {
 	        profileImage.src = "/images/" + `${principal.uploadFileName}`;
+			}
 	        profileImage.alt = "/images/fukuoka4.gif";
 	        profileImage.classList.add("myProfile-image");
 	        textContent.innerText = input.value;
@@ -97,7 +102,7 @@
 			        profileBox.style.left = x +"px";
 			        profileBox.style.top = y +"px";
 			        document.querySelector(".profile-info").firstChild.
-			        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
+			        setAttribute("onclick", "window.open('/chat/profileInfo?userId=" + `${principal.id}` + "')");
 			        document.querySelector(".report").firstChild.
 			        style.display = 'none'; // 나에게는 신고기능이 안뜨도록 방어
 			        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
@@ -125,8 +130,11 @@
 		
     	// 프로필 이미지를 생성
         const profileImage = document.createElement("img");
-    	console.log(message.uploadFileName);
+    	if(message.uploadFileName === null) {
+			profileImage.src = "/static/images/defaultProfile.jpeg";
+		} else {
         profileImage.src = "/images/" + message.uploadFileName;
+		}
         profileImage.alt = "Profile Image";
         profileImage.classList.add("profile-image");
 
@@ -140,9 +148,8 @@
 	        profileBox.style.left = x +"px";
 	        profileBox.style.top = y +"px";
 	        console.log(message.name);
-	        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
 	        document.querySelector(".profile-info").firstChild.
-	        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + message.id + "')");
+	        setAttribute("onclick", "window.open('/chat/profileInfo?userId=" + message.userId + "')");
 	        document.querySelector(".report").firstChild.
 	        setAttribute("onclick", "window.open(`/report?roomId=${chat}&opponentId=${opponent.userId}&type=match`,'신고 페이지','width=500,height=600');");
 	        document.querySelector(".close").addEventListener("click", function() {

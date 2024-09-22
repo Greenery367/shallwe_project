@@ -24,7 +24,7 @@
                             <img src="/images/${user.uploadFileName}" alt="Profile Picture">
                         </c:otherwise>
                     </c:choose>
-                    <span class="user_name">${user.nickname}</span>
+                    <span>${user.nickname}</span>
                     <button class="accept_btn" id="accept" onclick="accept(${user.userId})">수락</button>
                     <button class="refuse_btn" id="refuse" onclick="refuse(${user.userId})">거절</button>
                 </div>
@@ -57,7 +57,7 @@
     // 친구요청 수락시 친구추가처리
     function accept(userId) {
         const profile = document.querySelector("#profile_" + userId);
-        fetch("http://192.168.0.131:8080/friends/accept/" + userId)
+        fetch("http://localhost:8080/friends/accept/" + userId)
         .then((response) => response.text())
         .then((text) => {
             alert(text),
@@ -68,7 +68,7 @@
     // 친구요청 거절시 요청테이블 삭제처리
     function refuse(userId) {
         const profile = document.querySelector("#profile_" + userId);
-        fetch("http://192.168.0.131:8080/friends/refuse/" + userId)
+        fetch("http://localhost:8080/friends/refuse/" + userId)
         .then((response) => response.text())
         .then((text) => {
             alert(text);
@@ -79,7 +79,7 @@
     // 친구요청 취소시 요청테이블 삭제처리
     function cancel(userId) {
         const profile = document.querySelector("#profile_" + userId);
-        fetch("http://192.168.0.131:8080/friends/cancel/" + userId)
+        fetch("http://localhost:8080/friends/cancel/" + userId)
         .then((response) => response.text())
         .then((text) => {
             alert(text);

@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class TestMatch {
 
-	private int id;
+	private int userId;
 	private String nickname;
 	private String uploadFileName;
 	private int mbti;

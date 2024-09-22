@@ -35,7 +35,6 @@
         <c:forEach var="online" items="${onlineList}">
             <div class="user_box">
                 <input type="hidden" value="${online.userId}"> 
-                <a class="select_overlay" href="/chat/profileInfo?id=${online.userId}"> 
                     <c:choose>
                         <c:when test="${online.uploadFileName == null}">
                             <img src="/static/images/defaultProfile.jpeg">
@@ -44,10 +43,7 @@
                             <img src="/images/${online.uploadFileName}" alt="Profile Picture">
                         </c:otherwise>
                     </c:choose>
-                </a> 
-                <a class="select_overlay" href="/chat/profileInfo?id=${online.userId}"> 
                     <span>${online.nickname}</span>
-                </a>
             </div>
         </c:forEach>
         <div id="state_offline" class="state_block">오프라인</div>
@@ -81,7 +77,7 @@
             profileBox.style.top = y + "px";
 
             document.querySelector(".profile-info").firstElementChild
-                .setAttribute("onclick", "window.open('/chat/profileInfo?id=" + id + "')");
+                .setAttribute("onclick", "window.open('/chat/profileInfo?userId=" + id + "')");
             document.querySelector(".chat").firstElementChild
                 .setAttribute("onclick", "window.open('/chat/friendChat?id=" + id + "')");
 

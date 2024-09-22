@@ -181,6 +181,9 @@ public class TestController {
     	// 만약 로그인 중이라면 유저-mbti_tb에 mbti 저장
     	if(user != null) {
     		mbtiService.setMbtiAndUserInfo(user.getUserId(), resultMbti.getId());
+    		user.setMbti(resultMbti.getId());
+    		httpSession.setAttribute("principal", user);
+    		System.out.println(httpSession.getAttribute("principal"));
     	}
     	
         // 페이지 리디렉션

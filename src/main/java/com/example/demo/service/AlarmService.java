@@ -29,11 +29,9 @@ public class AlarmService {
 		return alarmList;
 	}
 	
-	public int changeStatus(int id) {
-		int result = 0;
-		result = alarmRepository.changeStatus(id);
-		return result;
-	}
+	public void changeStatusBatch(List<Integer> alarmIdList) {
+        alarmRepository.changeStatusBatch(alarmIdList);
+    }
 	
 	public int deleteAlarm(int id) {
 		int result = 0;
