@@ -231,7 +231,7 @@ public class BoardController {
 	}
 
 	// 삭제하기
-	@PostMapping("/delet-board/{id}")
+	@PostMapping("/delete-board/{id}")
 	public String deleteBoard(Model model, Board board, @PathVariable("id") Integer id,
 			@RequestParam(name = "authorId", required = false) Integer authorId,
 			@RequestParam(name = "categoryId", required = false) Integer categoryId) {

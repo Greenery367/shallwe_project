@@ -84,6 +84,21 @@
         border-radius: 5px; /* 모서리 둥글게 */
         background-color: #f9f9f9; /* 배경색 추가 */
     }
+    
+    /* 신고 버튼 스타일 */
+    .report-button {
+        background-color: #cccccc; /* 기본 회색 */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .report-button:hover {
+        background-color: #ff4d4d; /* hover 상태에서 빨간색 */
+    }
 </style>
 
 <div class="container">
@@ -127,6 +142,11 @@
                 </form>
             </div>
         </c:if>
+        <%-- 신고 버튼 추가 --%>
+        <form action="${pageContext.request.contextPath}/community/report-board/${board.id}" method="post" style="display: inline;">
+            <input type="hidden" name="categoryId" value="${board.categoryId}" />
+            <button type="submit" class="report-button">신고</button>
+        </form>
     </c:if>
 
     <div class="comments-section">
@@ -153,6 +173,11 @@
                             </form>
                         </div>
                     </c:if>
+                     <%-- 댓글 신고 버튼 추가 --%>
+		             <form action="${pageContext.request.contextPath}/community/report-comment/${comment.id}" method="post" style="display: inline;">
+		                <input type="hidden" name="postId" value="${comment.postId}"/>
+		                <button type="submit" class="report-button">신고</button>
+		             </form>
                 </div>
             </c:forEach>
         </c:if>
