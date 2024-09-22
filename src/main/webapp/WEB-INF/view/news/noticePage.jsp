@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 	<%@ include file="/WEB-INF/view/layout/header.jsp" %>	
 	<link rel="stylesheet" href="/static/css/news.css">
-	<div class="notice-container">
+	
+	<div class="notice--container">
+	
+		<div class="notice-container">
 		<h1>공지사항 (${noticeList.size()})</h1>
 		<table class="notice-table">
 			<thead>
@@ -26,5 +29,7 @@
 		</table>
 	
 	</div>
+	</div>
+	
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>	
 	
