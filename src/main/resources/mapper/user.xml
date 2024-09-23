@@ -41,6 +41,13 @@
 		values(#{userId}, #{friendId})
 	</insert>
 	
+	<!-- 유저 상태값 변경 코드 -->
+	<update id="updateUserStatus">
+		update user_tb set online_status = #{onlineStatus}
+		where user_id = #{userId}
+	</update>
+	
+	
 	<!-- 친구 추가 -->
 	<insert id="addFriendById">
 		insert into friend_tb(user_id,friend_id)

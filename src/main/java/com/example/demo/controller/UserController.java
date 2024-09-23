@@ -74,9 +74,11 @@ public class UserController {
 	private final FriendService friendService;
 	@Autowired
 	private NoticeService noticeService;
-
+	@Autowired
 	private final AlarmService alarmService;
+	@Autowired
 	private final MatchService matchService;
+
 	@Autowired
 	private final HttpSession session;
 	@Autowired
@@ -84,7 +86,6 @@ public class UserController {
 	@Autowired
 	private final EmailSendService emailSendService;
 
-	private Integer authNumber;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	Random random = new Random();
@@ -106,7 +107,6 @@ public class UserController {
 
 	@Value("${naverClientSecret.key}")
 	private String naverClientSecret;
-
 	/**
 	 * 메인 페이지 이동
 	 * 
@@ -230,15 +230,6 @@ public class UserController {
 		}
 	}
 
-	public void makeRandomNum() {
-		Random r = new Random();
-		String randomNumber = "";
-		for (int i = 0; i < 6; i++) {
-			randomNumber += Integer.toString(r.nextInt(10));
-		}
-
-		authNumber = Integer.parseInt(randomNumber);
-	}
 
 	/*
 	 * 로그인 페이지 요청
@@ -297,18 +288,71 @@ public class UserController {
 	 * 회원가입 폼 -> 회원가입 처리 요청
 	 */
 	@PostMapping("/sign-up")
-	public String postMethodName(HttpServletRequest request) {
+	public String postSignUp(HttpServletRequest request, Model model) {
 		SignUpDTO dto = new SignUpDTO();
-		dto.setId(request.getParameter("id"));
-		dto.setNickname(request.getParameter("nickname"));
-		dto.setPassword(request.getParameter("password"));
-		dto.setUsername(request.getParameter("username"));
+
+		// 필수 입력 항목 체크
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		String confirmPassword = request.getParameter("confirmPassword");
+		String nickname = request.getParameter("nickname");
+		String username = request.getParameter("username");
+		String emailBody = request.getParameter("emailBody");
+		String emailDomain = request.getParameter("emailDomain");
+		String phoneNumber = request.getParameter("phoneNumber");
+
+		if (id == null || id.trim().isEmpty() || id.length() < 6 || id.length() > 12) {
+			model.addAttribute("msg", "아이디는 6자 이상 12자 이하로 입력해야 합니다.");
+			model.addAttribute("url", "sign-up");
+			return "alert";
+		}
+
+		if (password == null || password.trim().isEmpty() || password.length() < 8 || password.length() > 15
+				|| !password.matches("^(?=.*[A-Za-z])(?=.*\\d).{8,15}$")) {
+			model.addAttribute("msg", "비밀번호는 8자 이상 15자 이하로, 영문, 숫자를 포함해야 합니다.");
+			model.addAttribute("url", "sign-up");
+			return "alert";
+		}
+
+		if (!password.equals(confirmPassword)) {
+			model.addAttribute("msg", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			model.addAttribute("url", "sign-up");
+			return "alert";
+		}
+
+		if (nickname == null || nickname.trim().isEmpty()) {
+			model.addAttribute("msg", "닉네임을 입력해야 합니다.");
+			model.addAttribute("url", "sign-up");
+			return "alert";
+		}
+
+		if (emailBody == null || emailBody.trim().isEmpty() || emailDomain == null || emailDomain.trim().isEmpty()) {
+			model.addAttribute("msg", "이메일을 입력해주세요.");
+			model.addAttribute("url", "sign-up");
+			return "alert";
+		}
+
+		if (phoneNumber == null || phoneNumber.trim().isEmpty() || phoneNumber.length() != 11) {
+			model.addAttribute("msg", "전화번호는 11자리 숫자로 입력해야 합니다.");
+			model.addAttribute("url", "sign-up");
+			return "alert";
+		}
+
+		// 모든 유효성 검사를 통과하면 회원가입 처리
+		dto.setId(id);
+		dto.setNickname(nickname);
+		dto.setPassword(password);
+		dto.setUsername(username);
 		dto.setBirthDate(request.getParameter("birthDate"));
 		dto.setEmail(request.getParameter("emailBody") + "@" + request.getParameter("emailDomain"));
 		dto.setPhoneNumber(request.getParameter("phoneNumber"));
+		dto.setEmail(emailBody + "@" + emailDomain);
+		dto.setPhoneNumber(phoneNumber);
+
 		userService.createUser(dto);
-		request.setAttribute("msg", "회원가입 완료.");
-		request.setAttribute("url", "sign-in");
+
+		model.addAttribute("msg", "회원가입이 완료되었습니다.");
+		model.addAttribute("url", "sign-in");
 		return "alert";
 	}
 
@@ -575,6 +619,15 @@ public class UserController {
 		}
 	}
 	
-	// git push protection error debug
+	@GetMapping("logout")
+	public String logout() {
+		User user = (User)session.getAttribute("principal");
+		userService.changeUserOffline(user.getUserId());
+		session.invalidate();
+		return "redirect:/user/main";
+	}
+	
+	
+	
 
 }

@@ -14,7 +14,8 @@
         		<h2>비밀번호 찾기</h2>
     	    </div>
 	        <div>
-        		<a href="main"><img class="img-concert" src="/images/logo.png"></a>
+        		<a href="main"><img class="img-concert"
+					src="../static/images/logo.png"></a>
         	</div>
         </div>
 	
@@ -34,7 +35,7 @@
 	    	<input type="submit" value="비밀번호 찾기">
 	    </form>
 	    <div class="su-btn">
-	     	<a href="find-id">아이디 찾기</a> | <a href="sign-up">회원가입</a>
+	     	<a href="find-id">아이디 찾기</a> | <a href="sign-in">로그인</a> | <a href="sign-up">회원가입</a>
 	    </div>
 	</div>
 </body>

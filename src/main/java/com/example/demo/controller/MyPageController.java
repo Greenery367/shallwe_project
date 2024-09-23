@@ -29,6 +29,7 @@ import com.example.demo.service.MyPageService;
 import com.example.demo.service.RecordService;
 import com.example.demo.service.RefundService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -56,8 +57,13 @@ public class MyPageController {
  
 
 	@GetMapping("/")
-	public String myInfo(Model model) {
+	public String myInfo(Model model, HttpServletRequest request) {
 		User user = (User) session.getAttribute("principal");
+		if(user == null) {
+			request.setAttribute("msg", "로그인 후 이용 가능합니다.");
+			request.setAttribute("url", "/user/sign-in");
+			return "alert";
+		}
 		List<BankInfoDTO> banks = bankService.getAllBanks(); // 은행 목록 조회
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();

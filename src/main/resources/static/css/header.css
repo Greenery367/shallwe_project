@@ -12,6 +12,466 @@ body {
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+<<<<<<< HEAD
+=======
+	}
+	
+	a{
+		text-decoration: none;
+		padding: 5px;
+		margin: 10px;
+		color: black;
+	}
+	footer{
+		width: 100%;
+		height: 100px;
+		color: white;
+		text-align: center;
+		background-color:#C0C0C0;
+		padding:50px 0;
+	}
+	hr{
+		height: 2px;
+		width: 100%;
+		background: #D3D3D3;
+  		border : 0;
+  		margin-bottom: 15px;
+	}
+	ul, li{
+
+	  list-style-type: none;
+
+	}
+	
+	
+	.header{
+		display: flex;
+		align-items: center;
+		height:70px;
+		justify-content: center;
+	}
+	
+	.account-menus{
+		color: orange;
+		height:50px;
+		width: 100%;
+		margin: 20px;
+		padding:20px;
+		margin-right: 300px;
+		margin-top: 50px;
+		display: flex;
+		justify-content: right;
+		align-items: center;
+	}
+	.banner{
+		display: flex;
+		align-items: center;
+		height:250px;
+		justify-content: center;
+	}
+	.logo{
+		width: 400px;
+		height: 150px;
+		margin-bottom:20px;
+	}
+	.mini-logo{
+		width: 50px;
+		height: 50px;
+	}
+	.nav-bar{
+		display:flex;
+		height:60px;
+		width:100%;
+		justify-content:center;
+		align-items:center;
+		background: #FD6F22;
+		box-shadow: 0px 8px 6px -6px #666;
+	}
+	.menus{
+		height:80px;
+		width:60%;
+		display:flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+	.menu{
+		color: white;
+		text-decoration: none;
+		font-size: 20px;
+		border: none;
+  		cursor: pointer;
+	}
+	.menu:hover {
+		background-color: white;
+		border-radius: 15px;
+		color: #FD6F22;
+		transform: translateY(-5px);
+	}
+	.drop-down-menus-game{
+		color: white;
+		position: absolute;
+		display: none;
+		flex-direction: row;
+ 		height: 280px;
+ 		padding: 30px;
+  		background-color: #212121;
+  		border-radius:15px;
+		box-shadow: 0px 8px 6px -6px #666;
+  		z-index: 98;
+  		padding: 10px;
+	}
+	.game-menu-box{
+	 display: flex;
+	 flex-direction: column;
+	 flex-wrap: wrap;
+	 height: 300px;
+	}
+	
+	.drop-down-menus{
+		position: absolute;
+		display: none;
+		text-align: center;
+		padding-top:5px;
+		padding-bottom:5px;
+		flex-direction: row;
+ 		width: 10%;
+ 		padding: 30px;
+  		background-color: #FD6F22;
+  		border-radius:15px;
+		box-shadow: 0px 8px 6px -6px #666;
+		color: white;
+  		z-index: 98;
+  		padding: 10px;
+	}
+	
+	
+	.menu-container:hover .drop-down-menus-game{
+		display: block;
+	}
+	.drop-down-menus-game:hover .drop-down-menus-game{
+		display: block;
+	}
+	.menu-container:hover .drop-down-menus{
+		display: block;
+	}
+	.drop-down-menus:hover .drop-down-menus{
+		display: block;
+	}
+	.main-board{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		box-shadow: 0px 8px 6px -6px #666;
+		background: linear-gradient(180deg, white,#f1f1f1);
+	}
+	.admin-main-1 {
+		margin: 20px;
+		width: 150px;
+		height: 500px;
+		box-shadow: 0px 8px 6px -6px #E6E6E6;
+	}
+	.admin-main-2{
+		width: 750px;
+		height: 350px;
+		box-shadow: 0px 8px 6px -6px #666;
+	}
+	.banner-conatiner-whole-box{
+		 width: 750px; /* 이미지 크기 설정  */
+ 	     position: relative;
+		 height: 300px;
+    	 overflow: hidden;
+    	 user-select: none;
+    	 margin-top:30px;
+		box-shadow: 0px 8px 6px -6px #666;
+	}
+	.banner-container{
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: transform 1s;
+	}
+	.banners{
+		position: relative;
+	}
+	
+	.recommend{
+		width: 750px;
+		height: 300px;
+		margin: 2%;
+		display: flex;
+		flex-direction: column; 
+		justify-content: center;
+		align-items: center;
+	}
+	.main-page{
+		width: 850px;
+		height: 1350px;
+		margin-right: 20px;
+		display: flex;
+		flex-direction: column; 
+		border-radius: 15px;
+		align-items: center;
+		margin-top: 20px;
+		margin-bottom: 60px;
+		background: white;
+		border-radius: 18px;
+		border: 1px solid #E6E6E6;
+		box-shadow: 0px 8px 6px -6px #d3d3d3;
+	}
+	.charge-cash{
+		display: flex;
+		align-items: center;
+	}
+	.recomment-button{
+		border: #FD6F22;
+		background: #FEEFC5;
+		color: #FD6F22;
+		border-radius: 15px;
+		width: 17%;
+		margin-left: 10px;
+		margin: 10px;
+		height: 43%;
+		box-shadow: 0px 8px 6px -6px #D3D3D3;
+	}
+	.detail-button{
+		border: none;
+		background: #FD6F22;
+		box-shadow: 0px 8px 6px -6px #D3D3D3;
+		color: white;
+		border-radius: 15px;
+		width: 18%;
+		margin-left: 10px;
+		height: 43%;
+	}
+	.recomment-button:hover, .detail-button:hover{
+    	transform: translateY(-5px);
+	}
+	.recomment-user-bar{
+		width: 100%;
+		display: flex;
+		align-items: center;
+		height: 20%;
+	}
+	.recommended-user-list{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 60%;
+		padding-bottom:10px;
+		border-radius: 10px;
+		background: #f3f4f8;
+		box-shadow: 0px 8px 6px -6px #D3D3D3;
+	}
+	.recommended-user{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.game--category--menu{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 200px;
+		height: 50px;
+		background-color: orange;
+		text-align: center;
+		margin: 10px;
+		border-radius: 1em;
+		font-size: 21px;
+		font-family: 'SBAggroB';
+		cursor: pointer;
+	}
+	
+	.btn-circle{
+		width: 80px;
+		height: 80px;
+		margin: 10px;
+		margin-bottom: 20px;
+		border-radius: 70%;
+		border: none;
+		box-shadow: 0px 8px 6px -6px #666;
+	}
+	.recommended-user:hover{
+  	  transform: translateY(-5px);
+	}
+	.pro-icon{
+		border-radius:70%;
+		width: 120px;
+		height: 120px;
+		box-shadow: 0px 8px 6px -6px #666;
+	}
+	.post-board-container{
+		display: flex;
+		width: 750px;
+		height: 300px;
+		justify-content: center;
+		align-items: center;
+	}
+	.board-title{
+		display:flex;
+		width: 100%;
+		height: 20%;
+	    align-items: center;
+	}
+	.post-board{
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+		width: 48%;
+		height: 270px;
+		margin: 10px;
+	}
+	.post-board-small{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		border-radius: 15px;
+		box-shadow: 0px 8px 6px -6px #D3D3D3;
+		height: 120%;
+		background: #f3f4f8;
+		width: 100%;
+	}
+	.side-menu{
+		width: 12%;
+		height: 55%;
+		border-radius: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+	}
+	.my-profile{
+		background: white;
+		border-radius: 15px;
+		border: 1px solid #E6E6E6;
+		width: 90%;
+		height: 410px;
+		padding: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0px 8px 6px -6px #d3d3d3;
+	}
+	.pro-title{
+		color: #FD6F22;
+		display: flex;
+		margin: 10px;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 70%;
+		height: 7%;
+		border-radius: 15px;
+	}
+	.user-info-list{
+		display: flex;
+		height:40%;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 10px;
+	}
+	.user-name{
+		display: flex;
+		width: 150%;
+		justify-content: center;
+		align-items: center;
+	}
+	.user-button-list{
+		display: flex;
+		width: 120%;
+		justify-content: center;
+		align-items: center;
+	}
+	.user-figurative{
+		background: #FEEFC5;
+		border: 0.2px solid #FD6F22;
+		border-radius: 15px;
+		color: #FD6F22;
+		width: 50%;
+		text-align: center;
+	}
+	.user-button{
+		border: 0.2px solid #FD6F22;
+		background: #FEEFC5;
+		color: #FD6F22;
+		border-radius: 15px;
+		width: 40%;
+		margin: 10px;
+		height: 40px;
+	}
+	.friend-list{
+		background: white;
+		border: 1px solid #E6E6E6;
+		border-radius: 15px;
+		width: 90%;
+		height: 500px;
+		padding: 15px;
+		margin: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0px 8px 6px -6px #d3d3d3;
+	}
+	.friend-list-container{
+		width: 90%;
+		height: 500px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.friend-box-container{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.friend-container{
+		width: 100%;
+		height: 60px;
+		box-shadow: 0px 8px 6px -6px #E6E6E6;
+		border-radius: 15px;
+		display: flex;
+		align-items: center;
+		margin: 10px;
+	}
+	.friend-icon{
+		width: 50px;
+		height: 50px;
+		margin: 20px;
+		border-radius: 70%;
+		box-shadow: 0px 8px 6px -6px #d3d3d3;
+	}
+	.footer-menu{
+		text-decoration: none;
+		color: white;
+	}
+	.floating-menu-up {
+		width: 70px;
+		height: 70px;
+		border-radius: 70%;
+ 		position: fixed;
+  		top: 880px; /* 윗쪽 끝에서부터의 거리 */
+  		right: 50px;
+  		z-index: 99;
+		box-shadow: 0px 8px 6px -6px #E6E6E6;
+	}
+	
+	.advertise-list-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+	align-items: center; /* 광고를 세로로 중앙에 배치 */
+	margin-top: 20px; /* 광고 섹션 위쪽 여백 */
+>>>>>>> JY-7
 }
 
 a {

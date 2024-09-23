@@ -49,7 +49,7 @@
 							<p>|</p>
 						</c:when>
 						<c:otherwise>
-							<a href="/user/sign-in"><b>로그아웃</b></a>
+							<a href="/user/logout"><b>로그아웃</b></a>
 							<p>|</p>
 						</c:otherwise>
 					</c:choose>

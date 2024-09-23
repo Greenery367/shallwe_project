@@ -23,8 +23,9 @@ public class CsService {
 	
 	@Autowired
 	private final CsRepository csRepository;
-	
+	@Autowired
 	private final JdbcTemplate jdbcTemplate;
+	
 	
 	public int countFreq() {
 		return csRepository.countFreq();
@@ -70,8 +71,8 @@ public class CsService {
 		int result = 0;
 		try {
 			jdbcTemplate.execute("SET SESSION auto_increment_increment = 2");
-			result = csRepository.insert(dto);
-			jdbcTemplate.execute("SET SESSION auto_increment_increment = 1");
+            result = csRepository.insert(dto);
+            jdbcTemplate.execute("SET SESSION auto_increment_increment = 1");
 		} catch (DataDeleveryException e) {
 			throw new DataDeleveryException("문의글 작성에 실패하였습니다.", HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {

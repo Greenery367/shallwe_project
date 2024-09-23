@@ -25,8 +25,8 @@
 			</div>
 		</div>
 		<form method="post" action="sign-in" id="login-form">
-			<input type="text" name="id" placeholder="ID" value="aaaaaaa"> 
-			<input type="password" name="password" placeholder="Password" value="AaaaaaA!"> 
+			<input type="text" name="id" placeholder="ID" value="aaa"> 
+			<input type="password" name="password" placeholder="Password" value="123"> 
 			<label for="remember-check"> 
 			<input type="checkbox" id="remember-check">아이디 저장하기 </label> 
 			<input type="submit" value="Login">
