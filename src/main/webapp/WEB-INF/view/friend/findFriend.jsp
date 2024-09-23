@@ -22,8 +22,7 @@
         <!-- 검색 결과 -->
         <div class="search-result">
             <c:forEach var="user" items="${userList}">
-                <div class="user-profile">
-                    <a href="/chat/profileInfo?userId=${user.userId}">
+                <div class="user-profile" onclick="window.open('http://localhost:8080/chat/profileInfo?userId=${user.userId}')">
                         <c:choose>
                             <c:when test="${user.uploadFileName == null}">
                                 <img src="/static/images/defaultProfile.jpeg">
@@ -32,10 +31,9 @@
                                 <img src="/images/${user.uploadFileName}" alt="Profile Picture">
                             </c:otherwise>
                         </c:choose>
-                    </a>
                     <div class="user-info">
                         <div class="user-name">
-                            <a href="/chat/profileInfo?userId=${user.userId}">${user.nickname}</a>
+                            <span>${user.nickname}</span>
                         </div>
                     </div>
                 </div>

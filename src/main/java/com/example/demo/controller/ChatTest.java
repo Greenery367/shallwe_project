@@ -79,11 +79,13 @@ public class ChatTest {
 	@GetMapping("/profileInfo")
 	public String getMethodName(@RequestParam("userId") int id, Model model) {
 		User user = friendService.findByUserID(id);
-		int mbti =	matchService.getMbtiIdByUserId(id);
-		MbtiDTO mbtiDTO = matchService.getMbtiNameById(mbti);
-		System.out.println("MBTI 설명 !!! : " + mbtiDTO);
+		if(matchService.getMbtiIdByUserId(id) != null) {
+			System.out.println("--------------dㅇㅇㅇㅇㅇㅇㅇ------------");
+			int mbti =	matchService.getMbtiIdByUserId(id);
+			MbtiDTO mbtiDTO = matchService.getMbtiNameById(mbti);
+			model.addAttribute("mbti",mbtiDTO);
+		}
 		model.addAttribute("user",user);
-		model.addAttribute("mbti",mbtiDTO);
 		return "match/userInfo";
 	}
 	

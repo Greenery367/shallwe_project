@@ -549,7 +549,9 @@ public class UserController {
 		for(AlarmDTO alarms : alarmList) {
 			alarmIdList.add(alarms.getId());
 		}
-		alarmService.changeStatusBatch(alarmIdList);
+		if(!alarmIdList.isEmpty()) {
+			alarmService.changeStatusBatch(alarmIdList);
+		}
 		return "ok";
 	}
 	

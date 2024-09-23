@@ -12,7 +12,7 @@ public interface MatchRepository {
 
 	public List<CompatibilityListDTO> getCompatibilityListByMbti(int id);
 	
-	public int getMbtiIdByUserId(int id);
+	public Integer getMbtiIdByUserId(int id);
 	
 	public MbtiDTO getMbtiNameByMbtiId(int id);
 }
