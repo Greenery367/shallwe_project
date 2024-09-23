@@ -33,7 +33,9 @@
 		            <c:forEach var="advertise" items="${advertiseListTwo}">
 		                <div class="advertise-box-two" data-id="${advertise.id}">
 		                    <div class="advertise-img-two">
-		                        <img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
+		                         <a href="${advertise.link}" target='_blank'>
+                                    <img src="/static/images/advertise/${advertise.uploadFileName}${advertise.uploadFileName}" alt="광고사진">
+                                </a>
 		                    </div>
 		                </div>
 		            </c:forEach>
@@ -290,7 +292,7 @@
 			            currentIndex = (currentIndex + 1) % ads.length;
 		
 			            // 다음 광고를 표시
-			            // ads[currentIndex].classList.add('active');
+			            ads[currentIndex].classList.add('active');
 			        }
 		
 			        // 첫 번째 광고를 표시

@@ -41,7 +41,7 @@ public class RegisterExchangeService {
      * @param userId
      * @return
      */
-    public Integer getSubmallFindById(Integer userId) {
+    public String getSubmallFindById(Integer userId) {
         return registerExchangeRepository.submallFindById(userId);
     }
 

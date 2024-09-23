@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class RegisterExchangeDTO {
 	
 	private int userId;
-	private int submallId;
+	private String submallId;
 	private long amount;
 	private Timestamp createdAt;
 	private int status;

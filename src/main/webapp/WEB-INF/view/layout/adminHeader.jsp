@@ -38,7 +38,7 @@
 					<li><a href="${pageContext.request.contextPath}/admin/dashboard">대시보드</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/user">이용자 관리</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/lecture">강의 관리</a></li>
-					<li><a href="cash">캐쉬</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/exchange/list">캐쉬</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/support">고객 지원</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/advertise">광고 / 배너</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/community">카테고리 / 게시판</a></li>

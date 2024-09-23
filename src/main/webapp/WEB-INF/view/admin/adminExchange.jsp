@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="/css/adminRefund.css">
 	<div class="main-board">
-	<h1>환불 내역 관리</h1>
+	<h1>환전 내역 관리</h1>
 	<c:if test="${exchangeList != null}">
 			<table class="table">
 				<tr>

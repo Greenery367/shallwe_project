@@ -156,7 +156,7 @@ public class UserExchangeController {
 	    }
 
 	    // 서브몰 ID 찾기
-	    Integer submallId = registerExchangeService.getSubmallFindById(userId);
+	    String submallId = registerExchangeService.getSubmallFindById(userId);
 
 	    // 환전 신청 처리
 	    RegisterExchangeDTO registerExchangeDTO = RegisterExchangeDTO.builder()

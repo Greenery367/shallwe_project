@@ -14,11 +14,11 @@ public interface RegisterExchangeRepository {
 	
 	// 환전 신청
 	public int registerExchange( @Param("userId") Integer userId,
-								@Param("submallId") Integer submallId,
+								@Param("submallId") String submallId,
 								@Param("amount") Long amount);
 	
 	// 서브몰 찾기 
-	public Integer submallFindById(@Param("userId") Integer userId);
+	public String submallFindById(@Param("userId") Integer userId);
 	
 	
 	// 환전 내역
