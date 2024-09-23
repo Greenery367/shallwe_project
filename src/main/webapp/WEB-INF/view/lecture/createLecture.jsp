@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>	
 <%@page import="com.example.demo.repository.model.User"%>
-<%@ include file="/WEB-INF/view/layout/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

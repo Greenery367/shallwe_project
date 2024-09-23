@@ -42,6 +42,11 @@ public class CsService {
 	}
 	
 	@Transactional
+	public void deleteFAQ(Integer id) {
+		csRepository.deleteFAQ(id);
+	}
+	
+	@Transactional
 	public int updateFAQ(Integer id, String title, String content) {
 		return csRepository.updateFAQ(id, title, content);
 	}

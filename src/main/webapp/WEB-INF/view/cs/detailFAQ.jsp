@@ -1,80 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/detailFAQ.css">
+<title>게시글 상세 보기</title>
 </head>
 <body>
-	    <main class="content-wrapper">
-        <section class="form-title">
-            <h1> 게시글 상세 보기 </h1>
-            
-        </section>
+	<main class="content-wrapper">
+		<!-- 제목 섹션 -->
+		<section class="post-header">
+			<h1>${FAQ.title}</h1>
+		</section>
 
-        <section>
-            <table>
-                <tr>
-                    <th>제목</th>
-                    <td>
-		            	<input type="hidden" id="id" value="${FAQ.id}">
-                        <input type="text" readonly id="title" value="${FAQ.title}">
-                    </td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td>
-                        <input type="text" readonly id="writer" value="${FAQ.writer}">
-                    </td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td>
-                        <pre id="content" class="content" >${FAQ.content}</pre>                        
-                    </td>
-                </tr>
-                <tr>
-                    <th>작성시간</th>
-                    <td>
-                        <input type="text" readonly id="createdAt" value="${FAQ.createdAt}">
-                    </td>
-                </tr>
-            </table>
-            <%int status = Integer.parseInt(request.getParameter("status")); %>
-            <c:if test="${status == 0}">
-            <div class="btn-area">
-                <button type="button" class="update-button" >수정</button>
-                &nbsp;
-                <button type="button" class="delete-button" >삭제</button>
-            </div>
-            </c:if>
-        </section>
-      </main>
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
+		<!-- 작성자와 작성시간 -->
+		<section class="meta-info">
+			<span>작성자: ${FAQ.writer}</span>
+			<span>작성시간: ${FAQ.createdAt}</span>
+		</section>
 
-    	// 입력 필드의 값을 가져옴
-        const id = document.getElementById('id').value;
-    	
-        // 수정 버튼 클릭 이벤트
-        const updateButton = document.querySelector('.update-button');
-        
-        updateButton.addEventListener('click', function() {
-			
-            // 컨트롤러로 GET 요청을 보냄
-            window.location.href = "/cs/update?id="+id;
-        });
-    });
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        // 삭제 버튼 클릭 이벤트
-        const deleteButton = document.querySelector('.delete-button');
-        
-        updateButton.addEventListener('click', function() {
+		<!-- 구분선 -->
+		<div class="separator"></div>
 
-            // 컨트롤러로 GET 요청을 보냄
-        	window.location.href = "/cs/delete?id="+id;
-        });
-    });
-    
-</script>
+		<!-- 본문 내용 -->
+		<section class="post-content">
+			<pre>${FAQ.content}</pre>
+		</section>
 
-<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+		<!-- 숨겨진 ID 필드 추가 -->
+		<input type="hidden" id="id" value="${FAQ.id}" />
+
+		<!-- 버튼 영역 -->
+		<div class="btn-area">
+			<% int status = Integer.parseInt(request.getParameter("status")); %>
+			<c:if test="${status == 0}">
+				<button type="button" class="update-button">수정</button>
+				
+				<!-- 삭제 버튼 (폼 전송 방식) -->
+				<form id="deleteForm" action="/cs/delete" method="GET">
+					<input type="hidden" name="id" value="${FAQ.id}" />
+					<button class="btn-btn"type="button" class="delete-button" onclick="removeCheck()">삭제</button>
+				</form>
+			</c:if>
+		</div>
+	</main>
+
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			// ID 값이 페이지에 있는지 확인 후 가져옴
+			const id = document.getElementById('id') ? document.getElementById('id').value : null;
+
+			if (id) {
+				const updateButton = document.querySelector('.update-button');
+				updateButton.addEventListener('click', function () {
+					window.location.href = "/cs/update?id=" + id;
+				});
+			} else {
+				console.error('ID 값이 정의되지 않았습니다.');
+			}
+		});
+	</script>
+
+	<script>
+	function removeCheck() {
+	    if (confirm("정말 삭제하시겠습니까?")) {  
+	        // 확인을 누르면 해당 폼 제출
+	        document.getElementById("deleteForm").submit();
+	    } else {
+	        return false;  // 취소를 누르면 아무런 동작도 하지 않음
+	    }
+	}
+	</script>
+
+	<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+</body>
+</html>

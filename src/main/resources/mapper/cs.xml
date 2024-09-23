@@ -10,6 +10,11 @@
 		select count(*) from qna_question_tb
 	</select>
 	
+	<delete id="deleteFAQ">
+		delete from qna_question_tb
+		where id = #{id}
+	</delete>
+	
 	<select id ="findAllFreq" resultType="com.example.demo.dto.FrequeDTO">
 		select * from frequently_questions_tb
 		order by id desc

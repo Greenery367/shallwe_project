@@ -1,48 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/detailFAQ.css">
+<title>게시글 상세 보기</title>
 </head>
 <body>
-	    <main class="content-wrapper">
-        <section class="form-title">
-            <h1> 게시글 상세 보기 </h1>
-            
+    <main class="content-wrapper">
+        <!-- 제목 섹션 -->
+        <section class="post-header">
+            <h1>${FAQ.title}</h1>
         </section>
 
-        <section>
-            <table>
-                <tr>
-                    <th>제목</th>
-                    <td>
-                        <input type="text" readonly id="title" value="${FAQ.title}">
-                    </td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td>
-                        <input type="text" readonly id="writer" value="${FAQ.writer}">
-                    </td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td>
-                        <pre id="content" class="content" >${FAQ.content}</pre>                        
-                    </td>
-                </tr>
-                <tr>
-                    <th>작성시간</th>
-                    <td>
-                        <input type="text" readonly id="writer" value="${FAQ.createdAt}">
-                    </td>
-                </tr>
-            </table>
-
-            <div class="btn-area">
-                <button type="button" class="btn update-button" style=display:none;>수정</button>
-                &nbsp;
-                <button type="button" class="btn delete-button" style=display:none;>삭제</button>
-            </div>
+        <!-- 작성자와 작성시간을 같은 줄에 배치 -->
+        <section class="meta-info">
+            <span>작성자: ${FAQ.writer}</span>
+            <span>작성시간: ${FAQ.createdAt}</span>
         </section>
-      </main>
+
+        <!-- 구분선 -->
+        <div class="separator"></div>
+
+        <!-- 본문 내용 -->
+        <section class="post-content">
+            <pre>${FAQ.content}</pre>
+        </section>
+
+        <!-- 버튼 영역 -->
+        <div class="btn-area">
+            <button type="button" class="btn update-button" style="display: none;">수정</button>
+            <button type="button" class="btn delete-button" style="display: none;">삭제</button>
+        </div>
+    </main>
+
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
+</body>
+</html>

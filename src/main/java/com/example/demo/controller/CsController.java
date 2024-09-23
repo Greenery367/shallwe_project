@@ -143,13 +143,25 @@ public class CsController {
 	 * 자주 묻는 질문 목록에서 클릭시 -> 상세보기 이동
 	 */
 	@GetMapping("detailFreq")
-	public String getFreqDetail(@RequestParam("writer") String writer, @RequestParam("id") Integer id, Model model,
+	public String getFreqDetail(@RequestParam("writer") String writer, @RequestParam("id") String id, Model model,
 			HttpServletRequest request) {
-		FrequeDTO dto = csService.readFreqById(id);
-		model.addAttribute("FAQ", dto);
-		return "cs/detailFreq";
-	}
-
+		if (id == null || id.trim().isEmpty()) {
+			// id 값이 null이거나 빈 문자열인 경우 처리
+			request.setAttribute("msg", "유효하지 않은 ID 값입니다.");
+			request.setAttribute("url", "FAQ");
+			return "alert";
+		}
+			try {
+				Integer Pid = Integer.parseInt(id.trim()); // id 파라미터를 정수로 변환
+					FrequeDTO dto = csService.readFreqById(Pid);
+					model.addAttribute("FAQ", dto);
+					return "cs/detailFreq";
+			} catch (NumberFormatException e) {
+				request.setAttribute("msg", "유효하지 않은 ID 값입니다.@@@@@@@@");
+				request.setAttribute("url", "FAQ");
+				return "alert";
+			}
+		}
 	@GetMapping("update")
 	public String getUpdateRequest(@RequestParam("id") String idstr, Model model, HttpServletRequest request) {
 		try {
@@ -175,6 +187,15 @@ public class CsController {
 		}else {
 			throw new DataDeleveryException("문의글 수정에 실패하셨습니다. 잠시 후 다시 시도해 주세요", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("delete")
+	public String deleteFAQ(@RequestParam("id") String idstr, Model model, HttpServletRequest request) {
+		Integer id = Integer.parseInt(idstr.trim());
+		csService.deleteFAQ(id);
+		request.setAttribute("msg", "삭제 완료");
+		request.setAttribute("url", "/cs/FAQ");
+		return "alert";
 	}
 	
 }

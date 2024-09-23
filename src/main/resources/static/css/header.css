@@ -12,8 +12,6 @@ body {
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-<<<<<<< HEAD
-=======
 	}
 	
 	a{
@@ -471,7 +469,6 @@ body {
 	width: 100%;
 	align-items: center; /* 광고를 세로로 중앙에 배치 */
 	margin-top: 20px; /* 광고 섹션 위쪽 여백 */
->>>>>>> JY-7
 }
 
 a {
