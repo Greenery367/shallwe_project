@@ -7,7 +7,6 @@
 	
 	<%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
 		
-		<p>광고 정보</p>
 	<nav class="advertise-nav">
 		<ul class="advertise-nav">
 			<li>
@@ -20,10 +19,13 @@
 				
 		
 	<div id="advertise-list">
-	<p>현재 게시중인 광고 미리보기</p>	
+	<br>
+	<p>현재 게시중인 광고 미리보기</p>
+	<br>	
 		<div class="advertise-list-content">
 	    <div class="advertise-example-left">
 	        <p>좌측</p>
+	        <br>
 	        <div class="advertise-one-line-box advertise-container">
 	            <c:forEach var="advertise" items="${advertiseListOne}">
 	                <div class="advertise-box-one" data-id="${advertise.id}">
@@ -39,6 +41,7 @@
 	
 	    <div class="advertise-example-center">
 	        <p>중앙</p>
+	        <br>
 	        <div class="advertise-one-line-box advertise-container">
 	            <c:forEach var="advertise" items="${advertiseListTwo}">
 	                <div class="advertise-box-two" data-id="${advertise.id}">
@@ -152,7 +155,7 @@
 				<label for="id">수정할 광고 id :</label> 
 				<select name="id" id="id">
 				<c:forEach var="advertise" items="${advertiseList}">
-							<option value="${advertise.id}">${advertise.id}</option>
+							<option value="${advertise.id}">${advertise.id} - ${advertise.title}</option>
 				</c:forEach>
 					</select> 
 			</div>
@@ -176,16 +179,25 @@
 				<input type="text" id="link" name="link" value="http://sssssss.sssss">
 			</div>
 			<div class="form-group">
-				<label for="startDate">시작시간 :</label> 
-				<input type="text" id="startDate" name="startDate" value="2024-09-01">
+				<label for="startDate">시작시간 : </label>
+				<input type="date" id="startDate" name="startDate" 
+					max="2030-12-31"
+			        min="2024-09-20"
+			        value="2024-09-20">
 			</div>
 			<div class="form-group">
-				<label for="endDate">종료시간 :</label> 
-				<input type="text" id="endDate" name="endDate" value="2024-09-06">
+				<label for="endDate">종료시간 : </label>
+				<input type="date" id="endDate" name="endDate" 
+					max="2030-12-31"
+			        min="2024-09-21"
+			        value="2024-09-21">
 			</div>
 			<div class="form-group">
-				<label for="status">현재상태 :</label> 
-				<input type="text" id="status" name="status" value="0">
+				<label for="status">즉시게시여부 : </label>
+				<select name="status" id="status">
+							<option value="0">저장만</option>
+							<option value="1">즉시게시</option>
+					</select> 
 			</div>
 			<button type="submit">광고수정</button>
 		</form>
@@ -201,7 +213,7 @@
 	
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
-			    // 모든 광고 박스 컨테이너를 선택
+				
 			    const advertiseContainers = document.querySelectorAll('.advertise-container');
 		
 			    advertiseContainers.forEach(container => {

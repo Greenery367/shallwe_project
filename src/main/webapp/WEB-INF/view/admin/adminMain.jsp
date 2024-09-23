@@ -18,7 +18,7 @@
 					<div class="number-of-user-box">
 						<div class="number-of-user-content">
 							<h1>200</h1>
-							<p>매칭수</p>
+							<p>누적 매칭수</p>
 						</div>
 						<div class="number-of-user-info-box">
 							<a href="dashboard/matching" class="btn-info">자세히 보기</a>
@@ -58,7 +58,7 @@
 					</div>
 					<div class="number-of-user-box">
 						<div class="number-of-user-content">
-							<h1>500000</h1>
+							<h1>110000</h1>
 							<p>캐쉬환전액</p>
 						</div>
 						<div class="number-of-user-info-box">
@@ -67,7 +67,7 @@
 					</div>
 					<div class="number-of-user-box">
 						<div class="number-of-user-content">
-							<h1>200000</h1>
+							<h1>205000</h1>
 							<p>캐쉬 환불액</p>
 						</div>
 						<div class="number-of-user-info-box">
@@ -80,7 +80,7 @@
 				<div class="statistics-user-box">
 					<div class="number-of-user-box">
 						<div class="number-of-user-content">
-							<h1>400000</h1>
+							<h1>40000000</h1>
 							<p>광고수익</p>
 						</div>
 						<div class="number-of-user-info-box">
@@ -151,7 +151,7 @@
                 data: {
                     labels: dateArray,
                     datasets: [{
-                        label: '금액',
+                        label: '일별 전체 충전량',
                         data: amountArray,
                         borderWidth: 1
                     }]

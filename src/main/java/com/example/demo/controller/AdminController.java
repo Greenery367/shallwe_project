@@ -52,14 +52,6 @@ public class AdminController {
 	    
 	    SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일");
 	    
-//	    for (CashChargeGraphVO data : cashChargeData) {
-//	    	String a = String.valueOf(data.getCreatedAt());
-//	    	String realA = a.substring(5,7);
-//	    	String realB = a.substring(8,10);
-//	    	String RealDate = realA+"."+realB;
-//	    	dateList.add(RealDate);
-//	    }
-	    
 	    for (CashChargeGraphVO data : cashChargeData) {
 	    	String a = String.valueOf(data.getCreatedAt());
 	    	amountList.add(data.getAmount());
@@ -67,7 +59,6 @@ public class AdminController {
 	    }
 	    
 	    // JSON으로 변환
-	    
 	    System.out.println("----------"+amountList);
 	    System.out.println("----------"+dateList);
 	    
@@ -130,7 +121,7 @@ public class AdminController {
 		} else {
 			if (password.equals(admin.getPassword())) {
 				session.setAttribute("principal", admin);
-				return "redirect:/admin/dashboard";
+				return "redirect:/admin";
 			} else {
 				request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
 				request.setAttribute("url", "sign-in");

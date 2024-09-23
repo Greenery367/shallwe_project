@@ -18,6 +18,7 @@ import com.example.demo.repository.model.Category;
 import com.example.demo.repository.model.Comment;
 import com.example.demo.service.AdminService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -29,11 +30,17 @@ public class AdminCommunityController {
 	private final AdminService adminService;
 		
 	@GetMapping("")
-	public String adminCommunityPage(Model model){
+	public String adminCommunityPage(Model model, HttpSession session){
+		
 		List<Category> categoryList = adminService.selectAllCategory();
 		List<Board> boardList = adminService.selectAllBoard();
+		
 		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("boardList", boardList);		
+		
+		// 세션에 데이터 저장
+        session.setAttribute("categoryList", categoryList);
+        session.setAttribute("boardList", boardList);
 		
 		return "admin/adminCommunity"; 
 	}

@@ -20,7 +20,7 @@
 				<h2>Admin Login</h2>
 			</div>
 			<div>
-				<a href="dashboard"><img class="img-concert"
+				<a href="${pageContext.request.contextPath}/admin"><img class="img-concert"
 					src="../static/images/logo_blue.png"></a>
 			</div>
 		</div>
