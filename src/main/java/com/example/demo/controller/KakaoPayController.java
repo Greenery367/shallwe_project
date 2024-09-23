@@ -51,9 +51,11 @@ public class KakaoPayController {
 	@GetMapping("/charge")
 	public String chargeCash(Model model) {
 		User user = (User)httpSession.getAttribute("principal");
-	//	if(user == null) {
-	///		return "/user/signIn";
-	//	}
+		if(user == null) {
+			return "/sign/signIn";
+		}
+		
+		model.addAttribute("user",user);
 		return "/cash/chargeCash";
 		
 	}
