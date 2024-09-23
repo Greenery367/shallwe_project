@@ -10,7 +10,9 @@
 		            <c:forEach var="advertise" items="${advertiseListOne}">
 		                <div class="advertise-box-one" data-id="${advertise.id}">
 		                    <div class="advertise-img-one">
-		                        <img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
+		                    	<a href="${advertise.link}" target='_blank'>
+		                        	<img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
+		                        </a>
 		                    </div>
 		                </div>
 		           	</c:forEach>
@@ -24,7 +26,9 @@
 		            <c:forEach var="advertise" items="${advertiseListTwo}">
 		                <div class="advertise-box-two" data-id="${advertise.id}">
 		                    <div class="advertise-img-two">
-		                        <img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
+		                       	<a href="${advertise.link}" target='_blank'>
+		                        	<img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
+		                        </a>
 		                    </div>
 		                </div>
 		            </c:forEach>
