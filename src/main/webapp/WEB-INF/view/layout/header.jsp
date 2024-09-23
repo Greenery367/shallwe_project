@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -43,13 +42,13 @@
 					<p>|</p>
 					<c:choose>
 						<c:when test="${user == null }">
-							<a href="/user/sign-in"><b>로그인</b></a>
+							<a href="${pageContext.request.contextPath}//user/sign-in"><b>로그인</b></a>
 							<p>|</p>
-							<a href="/user/sign-up"><b>회원가입</b></a>
+							<a href="${pageContext.request.contextPath}//user/sign-up"><b>회원가입</b></a>
 							<p>|</p>
 						</c:when>
 						<c:otherwise>
-							<a href="/user/sign-in"><b>로그아웃</b></a>
+							<a href="/user/logout"><b>로그아웃</b></a>
 							<p>|</p>
 						</c:otherwise>
 					</c:choose>
@@ -170,7 +169,7 @@
 					</div>
 				</div>
 				<div class="menu-container">
-					<a href="" class="menu">콘텐츠</a>
+					<a href='${pageContext.request.contextPath}/test/start-test' class="menu">콘텐츠</a>
 					<div class="drop-down-menus">
 						<ul>
 							<li><a

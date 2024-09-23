@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 컨테이너 */
+.container {
+    width: 85%;
+    max-width: 1300px;
+    margin: 40px auto;
+}
+
+/* 헤더 스타일 */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.8em;
+    font-weight: 700;
+    color: #FF5722;
+    letter-spacing: 1px;
+}
+
+/* 강의 그리드 */
+.lecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    margin-bottom: 20px; /* 강의 그리드와 버튼 간 여백 추가 */
+}
+
+/* 강의 카드 */
+.lecture-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 카드 안에서 모든 항목을 가운데 정렬 */
+}
+
+.lecture-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* 강의 이미지 */
+.lecture-card img {
+    width: 150px; /* 크기를 조절 */
+    height: 150px; /* 크기를 조절 */
+    border-radius: 50%; /* 원형 이미지 */
+    object-fit: cover;
+    margin-top: 20px; /* 위쪽에 약간의 여백 */
+}
+
+/* 강의 정보 */
+.lecture-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.lecture-info h2 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #333;
+}
+
+.lecture-info p {
+    font-size: 1em;
+    margin-bottom: 10px; /* 각 문단의 간격 줄임 */
+    color: #666;
+}
+
+.price {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #FF5722;
+    margin-bottom: 15px;
+}
+
+/* 버튼 스타일 */
+.btn {
+    background-color: #FF5722;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 5px 0; /* 버튼 간 간격 조정 */
+}
+
+.btn:hover {
+    background-color: #e64a19;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* 강의 생성 버튼을 오른쪽으로 이동 (카드 그리드와 함께) */
+.create-lecture-btn {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+    margin-top: 20px;
+}
+
+.create-lecture-btn .btn {
+    margin-right: 0;
+    padding: 12px 25px;
+    font-size: 1em;
+}

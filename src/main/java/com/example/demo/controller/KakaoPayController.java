@@ -94,7 +94,8 @@ public class KakaoPayController {
 	 */
 	// http://localhost:8080/cash/result/kakao
 	@GetMapping("/result/kakao")
-	public String resultKakaoPay(@RequestParam("pg_token") String pgToken) {
+	public String resultKakaoPay(@RequestParam("pg_token") String pgToken,
+									Model model) {
 		
 		// 유저 정보 가지고 오기
 		User user = (User)httpSession.getAttribute("principal");
@@ -106,11 +107,8 @@ public class KakaoPayController {
 	    OrderDetail orderDetail = orderService.checkOrder(tid);
 	    // (3) 예외 처리 - 만약 가주문 정보가 없다면, 정상적인 주문 경로 x -> return
 	    if(orderDetail == null) {
-	    	// 예외 처리
-	    	return null;
+	    	return "/cash/chargeFailed";
 	    }
-	    
-	 
 	    
 	    // 2. 주문 세부사항을 통해 가주문 - 진주문 대조 확인 (인증)
 	    Order checkOrderRecord = orderService.checkOrderRecord(user.getUserId(),orderDetail);
@@ -126,17 +124,17 @@ public class KakaoPayController {
 		    // (3) 주문 상태 변경
 		    orderService.changeOrderStatus(checkOrderRecord.orderId);
 		    
-	    }
-	    
-	    // 3. 보안 인증을 거치지 못한다면 실패 페이지로 이동
-	    else {
+	    } else {
 	    	return "/cash/chargeFailed";
 	    }
 	    
 	    // 4. 유저 캐쉬 상태 변경
 	    orderService.updateUsersCurrentCash(user.getUserId(),checkOrderRecord.getAmount());
+	    User updateUser = userService.searchByUserId(user.getUserId());
 	    
-	    return "/cash/chargeResult";
+	    httpSession.setAttribute("principal",user);
+	    model.addAttribute("user", updateUser);
+    	return "/cash/chargeResult" ;
 	}
 	
 	

@@ -5,10 +5,9 @@
 <div class="qna-container">
 	<nav class="qna-nav">
 		<ul>
-			<li><a href="main">자주 묻는 질문</a></li>
-			<li><a href="FAQ">FAQ</a></li>  <!-- active 적용 -->
-			<li><a href="#">1:1 문의</a></li>
-			<li><a href="#">공지사항</a></li>
+			<li class="active"><a href="main">자주 묻는 질문</a></li> 
+			<li><a href="FAQ">FAQ</a></li>  
+			<li><a href="/notice/notice-list">공지사항</a></li>
 		</ul>
 	</nav>
 
@@ -30,7 +29,9 @@
 					<td>${post.title}</td>
 					<td>${post.writer}</td>
 					<td>${post.createdAt}</td>
-				<input id="FAQid" name="id" type="hidden" value="${post.id}">
+					<td style="display:none;">
+            			<input type="hidden" class="id" value="${post.id}" />
+       				</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -79,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function () {
     rows.forEach(function(row) {
         row.addEventListener('click', function() {
             const writer = this.querySelector('td:nth-child(3)').innerText; // 작성자
-            const id = this.querySelector('input[name="id"]').value; // 히든 필드의 id 값 가져오기
+            const id = this.querySelector('.id').value.trim(); // 히든 필드의 id 값 가져오기
 
             // detail 컨트롤러로 이동 (GET 요청)
-            window.location.href = `/cs/detailFreq?writer=${writer}&id=${id}`;
+            window.location.href = "/cs/detailFreq?writer="+writer+"&id="+id
         });
     });
 });

@@ -7,15 +7,21 @@ body {
     color: #333;
 }
 
+.qna-nav ul li.active a {
+    background-color: rgba(255, 255, 255, 0.2); /* 배경 색 변화 */
+    border-bottom: 2px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+}
+
 /* 컨테이너 스타일 */
 .qna-container {
     width: 60%;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 30px;
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border-radius: 12px;
-    margin-top: 150px; /* 헤더와 네비게이션 바를 고려한 상단 마진 */
 }
 
 /* 헤더 및 네비게이션 */
@@ -159,7 +165,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.qna-write-btn a:hover {
+.qna-write-btn:hover {
     background-color: #004bbd;
 }
 

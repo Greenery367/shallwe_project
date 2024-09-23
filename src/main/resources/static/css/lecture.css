@@ -18,44 +18,52 @@ body {
 .container {
     width: 90%;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 40px auto;
+    padding: 0 15px;
 }
 
 /* 헤더 스타일 */
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 2.5em;
-    color: #FD6F22;
+    font-weight: bold;
+    color: #FF5722;
 }
 
 /* 강의 그리드 */
 .lecture-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-    justify-content: space-around;
+    justify-items: center;
+    margin-bottom: 30px;
 }
 
 /* 강의 카드 */
 .lecture-card {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 300px;
-    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center; /* 가운데 정렬 */
 }
 
 .lecture-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* 강의 이미지 */
 .lecture-card img {
-    width: 100%;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
+    border-radius: 50%;
+    margin: 20px auto;
 }
 
 /* 강의 정보 */
@@ -65,36 +73,80 @@ h1 {
 }
 
 .lecture-info h2 {
-    font-size: 1.5em;
+    font-size: 1.6em;
     margin-bottom: 10px;
     color: #333;
+    font-weight: bold;
 }
 
 .lecture-info p {
-    font-size: 1em;
-    margin-bottom: 15px;
-    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    color: #555;
 }
 
-.price {
-    font-size: 1.2em;
+.lecture-info .price {
+    font-size: 1.3em;
     font-weight: bold;
     color: #FF5722;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 /* 버튼 스타일 */
 .btn {
-    background-color: #FD6F22;
-    color: #fff;
-    padding: 10px 20px;
+    background-color: #FF5722;
+    color: white;
+    padding: 8px 15px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 1em;
+    cursor: pointer;
     transition: background-color 0.3s ease;
+    display: block;
+    margin: 5px auto;  /* 버튼 간격 조정 */
+    width: 80%;
+    max-width: 200px;
 }
 
 .btn:hover {
-    background-color: #45A049;
+    background-color: #E64A19;
+}
+
+/* 강의 생성 버튼 */
+a.btn {
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    float: right; /* 오른쪽 정렬 */
+}
+
+/* 반응형 설정 */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .lecture-info h2 {
+        font-size: 1.4em;
+    }
+
+    .lecture-info p {
+        font-size: 1em;
+    }
+
+    .lecture-info .price {
+        font-size: 1.2em;
+    }
+
+    a.btn {
+        float: none;
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+    }
 }

@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* 메인 컨테이너 */
+.content-wrapper {
+    width: 80%;
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일 */
+.post-header h1 {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 작성자와 작성시간을 같은 줄에 배치 */
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* 구분선 */
+.separator {
+    border-bottom: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* 본문 스타일 */
+.post-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 300px; /* 본문이 적더라도 일정한 영역 차지 */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+/* 버튼 영역 */
+.btn-area {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-area form{
+	display: inline-block;
+}
+
+.btn-area button, .btn-area form button {
+    background-color: #FF6F61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.btn-area button:hover, .btn-area form button:hover {
+    background-color: #e65c4f;
+}
+
+.btn-area button:active, .btn-area form button:active {
+    transform: scale(0.98);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .content-wrapper {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .post-header h1 {
+        font-size: 1.5em;
+    }
+
+    .meta-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-area , btn-area form {
+        text-align: center;
+    }
+
+    .btn-area button, .btn-area form button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

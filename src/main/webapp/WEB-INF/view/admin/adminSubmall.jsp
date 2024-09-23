@@ -5,8 +5,8 @@
 
 <link rel="stylesheet" href="/css/adminRefund.css">
 	<div class="main-board">
-	<h1>서브몰 신청 목록 관리</h1>
-			<table class="main-table">
+	<h1>서브몰 신청 목록</h1>
+			<table class="table">
 				<tr>
 					<th>id</th>
 					<th>유저id</th>

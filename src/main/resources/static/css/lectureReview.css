@@ -1,0 +1,145 @@
+@charset "UTF-8";
+/* lectureReview.css */
+
+/* 전체 컨테이너 스타일 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+/* 강의 상세 정보 스타일 */
+.lecture-detail {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 강의 이미지 스타일 */
+.lecture-detail img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 강의 정보 스타일 */
+.lecture-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* 강의 제목 및 강사 정보 */
+.lecture-info h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 700;
+}
+
+.lecture-info p {
+    font-size: 1em;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* 가격 스타일 */
+.price {
+    font-weight: bold;
+    color: #e74c3c;
+    font-size: 1.2em;
+}
+
+/* 수강 인원, 수강평 갯수, 수익 카드 스타일 */
+.stats-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.stat-card p {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #555;
+}
+
+/* 리뷰 섹션 스타일 */
+.reviews {
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.reviews h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #333;
+    font-weight: 700;
+}
+
+/* 리뷰 항목 스타일 */
+.review {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.review strong {
+    display: block;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.review p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+/* 리뷰 작성 버튼 */
+.form button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form button:hover {
+    background-color: #2980b9;
+}

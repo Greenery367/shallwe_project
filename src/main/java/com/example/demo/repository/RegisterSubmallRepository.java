@@ -19,7 +19,6 @@ public interface RegisterSubmallRepository {
     // 서브몰 id 유무 판단 메서드
     public Submall submallFindById(@Param("userId") Integer userId);
    
-
     // 유저 정보를 통해 계좌 찾기
     public BankDTO getBankInfo(int userId);
 

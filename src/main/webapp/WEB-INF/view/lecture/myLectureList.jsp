@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/layout/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/lecture.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/myLecture.css">
 
 <div class="container">
     <h1>내 강의 목록</h1>
@@ -40,9 +40,10 @@
             </div>
         </c:forEach>
     </div>
+    <div class="create-lecture-btn">
+        <a class="btn" href="/lecture/create-lecture">강의 생성</a>
+    </div>
 </div>
-
-<a class="btn" href="/lecture/create-lecture">강의 생성</a>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
 

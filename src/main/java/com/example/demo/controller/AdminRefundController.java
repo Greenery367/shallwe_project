@@ -64,6 +64,8 @@ public class AdminRefundController {
 		
 		Refund refund = refundService.getRefundById(Integer.parseInt(id.getId()));
 		
+		refundService.updateRefundStatus(Integer.parseInt(id.id));
+		
 		// 환불 요청
 		RefundResponseDTO refundResponseDTO = refundService.readyRefundForKakao(refund);
 		
@@ -72,6 +74,8 @@ public class AdminRefundController {
 		
 		List<RefundDTO> refundList = refundService.getAllRefundDto(10, 0);
 		model.addAttribute("refundList", refundList);
+
+		System.out.println("!!!!!!!!!!!!!!!!!"+refundList);
 		return "/admin/adminRefund";
 	}
 	
@@ -84,15 +88,19 @@ public class AdminRefundController {
 	 */
 	@PostMapping("/send-request/toss")
 	@ResponseBody
-	public void sendRefundToToss(@RequestBody IdDTO id) throws IOException, InterruptedException {
+	public String sendRefundToToss(@RequestBody IdDTO id, Model model) throws IOException, InterruptedException {
 		
-		System.out.println("흠흠흠흠흠 토스"+id);
+		// DB 상의 데이터 처리
+		refundService.updateRefundStatus(Integer.parseInt(id.id));
 		
 		// 환불 요청
 		refundService.readyRefundToToss(id.getId());
 		
+		List<RefundDTO> refundList = refundService.getAllRefundDto(10, 0);
+		model.addAttribute("refundList", refundList);
+		
 		// 환불 결과 받아오기
-		return;
+		return  "/admin/adminRefund";
 	}
 	
 	

@@ -33,6 +33,7 @@ public class EmailController {
         return response;
     }
     
+    
     /* Email Auth: 인증번호 입력 후 인증 버튼 click */
     @PostMapping("/signup/emailAuth")
     public String authCheck(@RequestBody @Valid EmailCheckDTO emailCheckDto) {
