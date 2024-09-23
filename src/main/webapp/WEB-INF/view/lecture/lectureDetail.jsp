@@ -30,7 +30,7 @@
 			<button class="btn pay-btn" onclick="openPaymentModal()">결제하기</button>
 
 			<!-- 결제 전 채팅 -->
-			<button class="btn chat-btn">채팅 문의</button>
+			<button class="btn chat-btn" onclick ="window.open(`${pageContext.request.contextPath}/chat/friendChat?id=${lecture.authorId}`)">채팅 문의</button>
 
 			<p>강의 내용: ${lecture.content}</p>
 		</div>

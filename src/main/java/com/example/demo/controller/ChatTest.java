@@ -91,6 +91,7 @@ public class ChatTest {
 	
 	@GetMapping("/friendChat")
 	public String friendChatPage(@RequestParam("id") int id, Model model) {
+		System.out.println("채팅 들어옴!!!!!!!!!!!!!!!!!!!!");
 		User principal = (User)session.getAttribute("principal");
 		User opponent = userService.searchByUserId(id);
 		int userId = principal.getUserId();

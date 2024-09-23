@@ -314,7 +314,7 @@
 
         if (deleteMode) {
             // 삭제 모드 활성화 시 delete-header 표시
-            alarmHeader.innerHTML = ''
+            alarmHeader.innerHTML = `
                 <span>
                     <input type="checkbox" id="select-all" onchange="toggleSelectAll(this)">
                     <label for="select-all">전체 선택</label>
@@ -366,7 +366,7 @@
         if (text === 'ok') {
             // 삭제 성공 후 화면에서 선택된 알람 요소 제거
             selectedAlarms.forEach(id => {
-                const alarmElement = document.querySelector(`input[value='${id}']`).closest('.alarm-element');
+                const alarmElement = document.querySelector('input[value="'+id+'"]').closest('.alarm-element');
                 if (alarmElement) {
                     alarmElement.remove(); // 해당 알람 DOM 요소 제거
                 }
