@@ -14,7 +14,7 @@
 				<h2>쉘위 계정 설정</h2>
 			</div>
 			<div>
-				<a href="main"><img class="img-concert" src="/images/logo.png"></a>
+				<a href="main"><img class="img-concert" src="../static/images/logo.png"></a>
 			</div>
 		</div>
 		<h5>

@@ -1,6 +1,4 @@
-@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
 
 /* 기본 스타일 초기화 */
 * {
@@ -39,20 +37,12 @@ h1 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     justify-items: center;
+    margin-bottom: 20px; /* 강의 그리드와 버튼 간 여백 추가 */
 }
 
 /* 강의 카드 */
 .lecture-card {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 300px;
-    transition: transform 0.3s ease;
-}
-
-.lecture-card:hover {
-    transform: translateY(-5px);
     border-radius: 12px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -71,9 +61,6 @@ h1 {
 
 /* 강의 이미지 */
 .lecture-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
     width: 150px; /* 크기를 조절 */
     height: 150px; /* 크기를 조절 */
     border-radius: 50%; /* 원형 이미지 */
@@ -96,7 +83,7 @@ h1 {
 
 .lecture-info p {
     font-size: 1em;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* 각 문단의 간격 줄임 */
     color: #666;
 }
 
@@ -104,34 +91,23 @@ h1 {
     font-size: 1.4em;
     font-weight: 700;
     color: #FF5722;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 /* 버튼 스타일 */
 .btn {
-    background-color: #FD6F22;
+    background-color: #FF5722;
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #FF5722;
-    color: #fff;
-    padding: 12px 25px;
-    border: none;
     border-radius: 30px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 500;
     transition: all 0.3s ease;
     text-transform: uppercase;
     display: inline-block;
-    margin-top: 10px;
+    margin: 5px 0; /* 버튼 간 간격 조정 */
 }
 
 .btn:hover {
@@ -142,7 +118,7 @@ h1 {
     transform: scale(0.98);
 }
 
-/* 강의 생성 버튼을 오른쪽으로 이동 */
+/* 강의 생성 버튼을 오른쪽으로 이동 (카드 그리드와 함께) */
 .create-lecture-btn {
     display: flex;
     justify-content: flex-end; /* 오른쪽 정렬 */
@@ -150,5 +126,7 @@ h1 {
 }
 
 .create-lecture-btn .btn {
-    margin-right: 0; /* 버튼을 오른쪽에 붙여서 위치 */
+    margin-right: 0;
+    padding: 12px 25px;
+    font-size: 1em;
 }

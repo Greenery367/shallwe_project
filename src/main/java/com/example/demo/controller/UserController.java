@@ -262,8 +262,8 @@ public class UserController {
 			request.setAttribute("url", "sign-in");
 			return "alert";
 		} else {
-//	비밀번호 해싱 처리 개발단계에서 생략
-			// if (passwordEncoder.matches(password, user.getPassword())) {
+			
+			//if (passwordEncoder.matches(password, user.getPassword())) {
 				if (password.equals(user.getPassword())) {
 				session.setAttribute("principal", user);
 				userService.changeUserOnline(user.getUserId());

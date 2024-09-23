@@ -48,7 +48,6 @@
             </c:if>
         </section>
       </main>
-<%@ include file="/WEB-INF/view/layout/footer.jsp" %>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
 

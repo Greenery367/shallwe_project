@@ -40,9 +40,9 @@
             </div>
         </c:forEach>
     </div>
-</div>
-<div class="create-lecture-btn">
-    <a class="btn" href="/lecture/create-lecture">강의 생성</a>
+    <div class="create-lecture-btn">
+        <a class="btn" href="/lecture/create-lecture">강의 생성</a>
+    </div>
 </div>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp" %>
