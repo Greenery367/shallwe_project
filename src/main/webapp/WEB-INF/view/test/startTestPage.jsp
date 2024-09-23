@@ -14,10 +14,17 @@
 			<div class="menu-container">
 				<div class="to-home">
 					<img class="logo" alt="로고" src="../static/images/shallwe-icon.png">
-					<a href="/test/main"><b>홈</b></a>
+					<a href="/user/main"><b>홈</b></a>
 				</div>
 				<p>|</p>
-				<a href="/user/sign-in"><b>로그인</b></a>
+				<c:choose>
+					<c:when test="${user ==  null }">
+						<a href="/user/sign-in"><b>로그인</b></a>
+					</c:when>
+					<c:otherwise>
+						<a href="/user/sign-in"><b>로그아웃</b></a>
+					</c:otherwise>
+				</c:choose>
 				<p>|</p>
 				<a href="/user/sign-up"><b>회원가입</b></a>
 				</div>

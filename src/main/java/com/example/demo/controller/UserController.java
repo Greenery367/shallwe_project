@@ -113,23 +113,24 @@ public class UserController {
 		
 		User user = (User)session.getAttribute("principal");
 		
+
+		// 최신 공지사항 글 
+		List<Notice> noticeList = noticeService.getAllNotice(0);
+		List<News> newsList = noticeService.getAllnews();
+
+		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("newsList", newsList);
+		
 		if(user != null) {
 			List<User> onlineFriendList = friendService.checkOnlineFriend(user.getUserId());
 			model.addAttribute("onlineFriends",onlineFriendList);
 			model.addAttribute("user",user);
-		} 
+		} else {
+			return "mainPage";
+		}
 		Mbti myMbti = mbtiService.getRecentMbtiInfo(user.getUserId());
 		
-		// 최신 공지사항 글 
-		List<Notice> noticeList = noticeService.getAllNotice(0);
-		List<News> newsList = noticeService.getAllnews();
 		
-		// 최신 자유게시판 글 5개
-		System.out.println("----------노티스리스트"+noticeList);
-		System.out.println("----------뉴스리스트"+newsList);
-		
-		model.addAttribute("noticeList", noticeList);
-		model.addAttribute("newsList", newsList);
 		
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();

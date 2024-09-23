@@ -52,7 +52,7 @@ public class KakaoPayController {
 	public String chargeCash(Model model) {
 		User user = (User)httpSession.getAttribute("principal");
 		if(user == null) {
-			return "/user/signIn";
+			return "/sign/signIn";
 		}
 		
 		model.addAttribute("user",user);

@@ -48,7 +48,7 @@ public class TossPayService {
 	public String sendTossPayRequest(String orderId, int userId, Long amount) throws UnsupportedEncodingException, URISyntaxException {
 		
 		UUID uuid = UUID.randomUUID(); // 랜덤값 생성
-		String paymentKey = (String)(userId+"_"+uuid); // 주문 고유번호 생성
+		String paymentKey = (String)(userId+"__"+uuid); // 주문 고유번호 생성
         String userIdStr = String.valueOf(userId);
 		
         // 가주문 생성
@@ -67,6 +67,11 @@ public class TossPayService {
      	orderService.makeNewOrderDetail(orderDetail);
      	orderService.makeNewOrder(userId, amount, 2, paymentKey);
 
+
+     	
+     	System.out.println("~~~~~~주문 생성"+paymentKey);
+     	
+     	
      	// response 리턴
         return paymentKey;
         
@@ -85,22 +90,28 @@ public class TossPayService {
 	 * @throws IOException 
 	 */
 	public  String sendTossPayRequestFinish(String orderId, String paymentKey, Long amount) throws URISyntaxException, IOException, InterruptedException {
-		String secretKey = "test_ck_ALnQvDd2VJzdqzNAkgNYVMj7X41m";
-        String baseUrl = "https://api.tosspayments.com/v1/payments/confirm";
+		String secretKey = "test_sk_4yKeq5bgrpyxEo7Ndn5p8GX0lzW6";
+	    String baseUrl = "https://api.tosspayments.com/v1/payments/confirm";
 
-        
-        
-        HttpRequest request = HttpRequest.newBuilder()
-        	    .uri(URI.create("https://api.tosspayments.com/v1/payments/confirm"))
-        	    .header("Authorization", "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSOg==")
-        	    .header("Content-Type", "application/json")
-        	    .method("POST", HttpRequest.BodyPublishers.ofString("{\"paymentKey\":\"5EnNZRJGvaBX7zk2yd8ydw26XvwXkLrx9POLqKQjmAw4b0e1\",\"orderId\":\"a4CWyWY5m89PNh7xJwhk1\",\"amount\":1000}"))
-        	    .build();
-        	HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        	System.out.println(response.body());
-       
-        	return response.body();
-        
+	    // 요청 본문을 JSON 문자열로 생성
+	    String requestBody = String.format(
+	        "{\"paymentKey\":\"%s\",\"orderId\":\"%s\",\"amount\":%d}",
+	        paymentKey, // 결제 키
+	        orderId, // 주문 ID
+	        amount // 금액
+	    );
+
+	    HttpRequest request = HttpRequest.newBuilder()
+	        .uri(URI.create(baseUrl))
+	        .header("Authorization", "Basic dGVzdF9za180eUtlcTViZ3JweXhFbzdOZG41cDhHWDBselc2Og==")
+	        .header("Content-Type", "application/json")
+	        .method("POST", HttpRequest.BodyPublishers.ofString(requestBody))
+	        .build();
+
+	    HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+	    System.out.println(response.body());
+
+	    return response.body();
 
 	}
 
@@ -112,8 +123,6 @@ public class TossPayService {
 			String orderId = responseEntity.getPaymentKey();
 	        int amount = responseEntity.getTotalAmount();
 
-	        System.out.println("aaaaaa");
-	        
 	        // Toss Payments API URL
 	        String url = "https://api.tosspayments.com/v1/payments/" + orderId;
 

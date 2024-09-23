@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>셸위</title>
 <link rel="stylesheet" href="../css/test.css">
 </head>
 <body>
@@ -16,7 +17,14 @@
 					<a href="/test/main"><b>홈</b></a>
 				</div>
 				<p>|</p>
-				<a href="/user/sign-in"><b>로그인</b></a>
+				<c:choose>
+					<c:when test="${user ==  null }">
+						<a href="/user/sign-in"><b>로그인</b></a>
+					</c:when>
+					<c:otherwise>
+						<a href="/user/sign-in"><b>로그아웃</b></a>
+					</c:otherwise>
+				</c:choose>
 				<p>|</p>
 				<a href="/user/sign-up"><b>회원가입</b></a>
 				</div>
@@ -51,7 +59,14 @@
 				</div>
 			</div>
 			<div class="button-list">
-				<button class='start-btn' onclick="location.href='../user/sign-up'"><b>나와 잘 맞는 친구 만나러 가기→</b></button>
+				<c:choose>
+					<c:when test="${user == null}">
+						<button class='start-btn' onclick="location.href='../user/sign-in'"><b>나와 잘 맞는 친구 만나러 가기→</b></button>
+					</c:when>
+					<c:when test="${user != null}">
+						<button class='start-btn' onclick="location.href='../user/main'"><b>나와 잘 맞는 친구 만나러 가기→</b></button>
+					</c:when>
+				</c:choose>
 				<button class='start-btn' onclick="location.href='/test/start-test'"><b>테스트 다시 하기→</b></button>
 				<button class='share-btn' onclick="location.href='#''"><b>SNS 공유하기→</b></button>
 			</div>

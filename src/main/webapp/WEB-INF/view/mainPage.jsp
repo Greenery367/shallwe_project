@@ -173,6 +173,9 @@
 			<div class="friend-list-container">
 				<h2><b>접속 중인 친구</b></h2>
 				<div class="friend-box-container">
+				<c:if test="${onlineFriends == null}">
+					<p>현재 접속 중인 유저가 없습니다.</p>
+				</c:if>
 				<c:forEach var="friends" items="${onlineFriends}">
 					<div class="friend-container">
 						<input type="hidden" value="${friends.userId}">

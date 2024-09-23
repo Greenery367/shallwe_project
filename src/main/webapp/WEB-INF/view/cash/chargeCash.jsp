@@ -164,7 +164,7 @@
         let tossPayments = TossPayments("test_ck_ALnQvDd2VJzdqzNAkgNYVMj7X41m");
         
         // 정보 무결성을 위한 결제 정보 저장 처리
-        var nextUrl = addInfoForSafe("sample-" + orderId, totalAmount);
+        // var nextUrl = addInfoForSafe("sample-" + orderId, totalAmount);
         
         // 결제 처리
         tossPayments.requestPayment("card", json.card)
