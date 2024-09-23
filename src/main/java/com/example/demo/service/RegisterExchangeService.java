@@ -139,8 +139,8 @@ public class RegisterExchangeService {
     */
    public void sendExchangeRequest(RegisterExchange exchageRecord) throws IOException, InterruptedException {
 	   String requestBody = String.format(
-	            "[{\"subMallId\":\"%s\",\"payoutAmount\":%d,\"payoutDate\":\"%s\"}," +
-	            "{\"subMallId\":\"%s\",\"payoutAmount\":%d,\"payoutDate\":\"%s\"}]",
+	            "[{\"subMallId\":\"%s\",\"payoutAmount\":%s,\"payoutDate\":\"%s\"}," +
+	            "{\"subMallId\":\"%s\",\"payoutAmount\":%s,\"payoutDate\":\"%s\"}]",
 	            exchageRecord.getSubmallId(), // 서브몰 ID 
 	            exchageRecord.getAmount()*0.7, // 환전 신청 액수
 	            "2024-09-03",  // 지급일
