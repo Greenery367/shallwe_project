@@ -7,7 +7,7 @@
 	<div class="main-board">
 	<h1>환불 내역 관리</h1>
 	<c:if test="${exchangeList != null}">
-			<table class="main-table">
+			<table class="table">
 				<tr>
 					<th>id</th>
 					<th>유저ID</th>

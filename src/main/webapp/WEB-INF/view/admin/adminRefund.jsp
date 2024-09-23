@@ -7,7 +7,7 @@
 	<div class="main-board">
 	<h1>환불 내역 관리</h1>
 	<c:if test="${refundList != null}">
-			<table class="main-table">
+			<table class="table">
 				<tr>
 					<th>id</th>
 					<th>주문번호</th>
@@ -27,7 +27,7 @@
 					</td>
 					<td><c:if test="${refundDto.status == 0 }">
 						<button class="refund-table" onclick="decideRefund(${refundDto.platform}, ${refundDto.id}, ${refundDto.orderId}, ${refundDto.userId},)">환불 미완료</button></c:if>
-						<c:if test="${refundDto.status != 0 }"><div>환불 처리 완료</div></c:if>
+						<c:if test="${refundDto.status == 1 }"><div>환불 처리 완료</div></c:if>
 					</td>
 					</tr>
 			</c:forEach>
@@ -49,23 +49,7 @@
 		            },
 		            body: JSON.stringify({"id" : id}) // 요청 본문에 데이터를 포함
 		        })
-		        .then(response => {
-		            if (!response.ok) {
-		                return response.json().then(err => {
-		                    console.error('Error response from server:', err);
-		                    throw new Error(err.message || 'Network response was not ok');
-		                });
-		            }
-		            return response.json(); // Parse the response JSON
-		        })
-		        .then(data => {
-		            console.log('Refund request successful:', data); // Handle the success response
-		            alert('Refund request sent successfully!');
-		        })
-		        .catch(error => {
-		            console.error('Error processing request:', error); // Log the error to the console
-		            alert('An error occurred while sending the refund request.');
-		        });
+			}
 			}
 			
 			
@@ -79,23 +63,6 @@
 		            },
 		            body: JSON.stringify({"id" : id}) // 요청 본문에 데이터를 포함
 		        })
-		        .then(response => {
-		            if (!response.ok) {
-		                return response.json().then(err => {
-		                    console.error('Error response from server:', err);
-		                    throw new Error(err.message || 'Network response was not ok');
-		                });
-		            }
-		            return response.json(); // Parse the response JSON
-		        })
-		        .then(data => {
-		            console.log('Refund request successful:', data); // Handle the success response
-		            alert('Refund request sent successfully!');
-		        })
-		        .catch(error => {
-		            console.error('Error processing request:', error); // Log the error to the console
-		            alert('An error occurred while sending the refund request.');
-		        });
 			}
 			 
 		}

@@ -85,7 +85,7 @@
 						<button class="recomment-button"><b>나와 같은 타입</b></button>
 						<button class="recomment-button"><b>나와 잘 맞는 타입</b></button>
 					</c:if>
-					<button class="detail-button" onclick="location.href='/lecture/category/2'"><b>자세히 보러 가기 →</b></button>
+					<button class="detail-button" onclick="location.href='/lecture/category/1'"><b>자세히 보러 가기 →</b></button>
 				</div>
 				<hr/>
 				<div class="recommended-user-list">
