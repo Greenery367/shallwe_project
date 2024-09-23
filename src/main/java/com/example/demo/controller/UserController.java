@@ -563,7 +563,6 @@ public class UserController {
 			alarmIdList.add(alarms.getId());
 		}
 		if(!alarmIdList.isEmpty()) {
-			System.out.println("알림값 변경!!");
 			alarmService.changeStatusBatch(alarmIdList);
 		}
 		return "ok";

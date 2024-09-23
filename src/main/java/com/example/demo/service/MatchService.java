@@ -37,7 +37,7 @@ public class MatchService {
 		return compatibilityList;
 	}
 
-	public int getMbtiIdByUserId(int id) {
+	public Integer getMbtiIdByUserId(int id) {
 		return matchRepository.getMbtiIdByUserId(id);
 	}
 

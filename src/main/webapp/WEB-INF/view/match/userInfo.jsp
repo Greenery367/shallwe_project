@@ -20,9 +20,14 @@
 			</c:otherwise>
 		</c:choose>
 		<h1>${user.nickname}</h1>
+		<c:if test="${mbti != null}">
 		<p>MBTI : ${mbti.name}</p>
 		<p>직업 : ${mbti.nickname}</p>
 		<p>특징 : ${mbti.content}</p>
+		</c:if>
+		<c:if test="${mbti == null}">
+		<p>아직 mbti 검사를 하지 않은 유저 입니다.</p>
+		</c:if>
 		<button class="add-friend">친구 추가</button>
 	</div>
 

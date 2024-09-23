@@ -314,7 +314,7 @@
 
         if (deleteMode) {
             // 삭제 모드 활성화 시 delete-header 표시
-            alarmHeader.innerHTML = `
+            alarmHeader.innerHTML = ''
                 <span>
                     <input type="checkbox" id="select-all" onchange="toggleSelectAll(this)">
                     <label for="select-all">전체 선택</label>
