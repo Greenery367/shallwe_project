@@ -206,7 +206,7 @@ button:disabled {
 
 			<form action="/my-page/update-phone-number" method="post" onsubmit="return confirmUpdate()" class="personal-info-form">
 				<div>
-					<label>핸드폰:</label> <input type="text" name="phoneNumber" placeholder="${user.phoneNumber}" maxlength="12" oninput="formatPhoneNumber(this)" required />
+					<label>핸드폰:</label> <input type="text" name="phoneNumber" placeholder="${user.phoneNumber}" maxlength="13" oninput="formatPhoneNumber(this)" required />
 					<button type="submit">변경</button>
 				</div>
 			</form>
@@ -267,15 +267,15 @@ button:disabled {
 		// 입력값에서 모든 비숫자 문자 제거
 		let value = input.value.replace(/\D/g, '');
 		// 10자리 숫자까지만 허용
-		if (value.length > 10) {
-			value = value.slice(0, 10);
+		if (value.length > 11) {
+			value = value.slice(0, 11);
 		}
 		// 포맷 설정
 		let formattedValue = '';
 		if (value.length > 6) {
 			formattedValue += value.slice(0, 3) + '-';
-			formattedValue += value.slice(3, 6) + '-';
-			formattedValue += value.slice(6);
+			formattedValue += value.slice(3, 7) + '-';
+			formattedValue += value.slice(7);
 		} else if (value.length > 3) {
 			formattedValue += value.slice(0, 3) + '-';
 			formattedValue += value.slice(3);
