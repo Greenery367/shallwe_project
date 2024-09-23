@@ -29,11 +29,11 @@
 	
 	<select id="getRecentInfo">
 		select m.* 
-		from mbti_user_tb as au
-		join mbti_tb as m
-		on au.mbti_id = m.id
-		order by created_at desc
-		limit 1;
+        from mbti_user_tb as au
+        join mbti_tb as m
+        on au.mbti_id = m.id
+        order by au.created_at desc
+        limit 1;
 	</select>
 
 </mapper>
