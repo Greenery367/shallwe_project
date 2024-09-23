@@ -53,15 +53,6 @@
     position: relative;
 }
 
-input.message {
-    width: calc(100% - 60px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-right: 10px;
-    outline: none;
-}
-
 button {
     width: 50px;
     height: 40px;
@@ -129,6 +120,13 @@ button:hover {
     margin-bottom: 10px; /* 사진과 이름 사이 간격 */
 }
 
+#opponent-pic img {
+    width: 300px; /* 원하는 크기로 고정 */
+    height: 300px; /* 원하는 크기로 고정 */
+    border-radius: 50%; /* 둥근 이미지 */
+    object-fit: cover; /* 이미지가 컨테이너를 채우도록 */
+}
+
 #opponent-profile {
     border-radius: 50%;
     width: 80px;
@@ -142,4 +140,32 @@ button:hover {
     font-weight: bold;
     color: #00796b;
     text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+input.message {
+    flex: 1; /* 입력 필드가 가능한 한 많은 공간을 차지하게 설정 */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+}
+
+button.send-button {
+    margin-left: 10px;
+    width: 60px;
+    height: 40px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button.send-button:hover {
+    background-color: #0056b3;
 }

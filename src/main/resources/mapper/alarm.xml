@@ -13,6 +13,7 @@
  	<select id = "findAlarmAll" resultType="com.example.demo.repository.model.Alarm">
 		select * from alarm_tb
 		where user_id = #{userId}
+		order by id DESC
 	</select>
 
 	<!-- 읽은 알람은 상태값 변경 -->

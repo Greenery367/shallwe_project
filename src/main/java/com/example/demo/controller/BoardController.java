@@ -242,4 +242,5 @@ public class BoardController {
 		return "redirect:/community/category/" + categoryId;
 	}
 
+	
 }

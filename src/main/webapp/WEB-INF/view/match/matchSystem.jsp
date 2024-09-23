@@ -152,6 +152,7 @@
             		var roomId = event.data.split(":");
             		alert("매칭 성사 완료!!!");
         			window.open("/chat/room?roomId=" + roomId[1]);
+        			location.href = `${pageContext.request.contextPath}/user/main`;
             	} else if(event.data === "quit") {
             		alert("상대가 나갔습니다!");
             		location.reload(true);
@@ -169,12 +170,11 @@
             		button.disabled = true;
             		const opponent = JSON.parse(event.data);
             		const profileImage = document.createElement("img");
-            		if(opponent.uploadFileName === '') {
+            		if(opponent.uploadFileName === null) {
         				profileImage.src = "/static/images/defaultProfile.jpeg";
         			} else {
         	        profileImage.src = "/images/" + opponent.uploadFileName;
         			}
-                    profileImage.src = "/images/" + opponent.uploadFileName;
                     profileImage.alt = "Profile Image";
                     profileImage.classList.add("profile-image");
                     profile.appendChild(profileImage);
@@ -221,6 +221,8 @@
         // 수락 버튼 이벤트
         function accept() {
         	socket.send("accept");
+        	const accept = document.querySelector("#accept-btn");
+        	const refuse = document.querySelector("#refuse-btn");
         	accept.disabled = true; // 수락버튼을 비활성화
         	refuse.disabled = true; // 거절버튼을 비활성화
         	document.querySelector(".left").style.backgroundColor = "green";
