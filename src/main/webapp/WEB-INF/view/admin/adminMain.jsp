@@ -118,58 +118,78 @@
 
 				<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 				
-				<script>
-    const ctx = document.getElementById('myChart');
-    let dateArray = [];
-    let amountArray = [];
-
-    function makeAmountArray(array, data) {
-        for (let i = 0; i < data.length; i++) {
-            let a = data[i].amount; // 'amount' 필드 사용
-            array.push(a);
-            console.log("추가된 금액: " + a);
-        }
-    }
-
-    function makeDateArray(array, data) {
-        for (let i = 0; i < data.length; i++) {
-            let a = data[i].createdAt; // 'createdAt' 필드 사용
-            array.push(a);
-            console.log("추가된 날짜: " + a);
-        }
-    }
-
-    // 서버에서 데이터 가져오기
-    fetch('/admin/dashboard')
-        .then(response => response.json())
-        .then(data => {
-            makeAmountArray(amountArray, data);
-            makeDateArray(dateArray, data);
-
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: dateArray,
-                    datasets: [{
-                        label: '일별 전체 충전량',
-                        data: amountArray,
-                        borderWidth: 1
-                    }]
-                },	
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        })
-        .catch(error => {
-            console.error('데이터 가져오기 오류:', error);
-        });
-</script>
-
+		<script>
+		    const ctx = document.getElementById('myChart');
+		    let dateArray = [];
+		    let amountArray = [];
+		    let amountArray2 = [];  // ctx2에 대한 데이터를 저장할 배열
+		
+		    function makeAmountArray(array, data) {
+		        for (let i = 0; i < data.length; i++) {
+		            let a = data[i].amount; // 'amount' 필드 사용
+		            array.push(a);
+		            console.log("추가된 금액: " + a);
+		        }
+		    }
+		    
+		    function makeAmountArray2(array, data) {
+		        for (let i = 0; i < data.length; i++) {
+		            let a = data[i].spend; // 'spend' 필드 사용
+		            array.push(a);
+		            console.log("추가된 금액: " + a);
+		        }
+		    }
+		
+		    function makeDateArray(array, data) {
+		        for (let i = 0; i < data.length; i++) {
+		            let a = data[i].createdAt; // 'createdAt' 필드 사용
+		            array.push(a);
+		            console.log("추가된 날짜: " + a);
+		        }
+		    }
+		
+		    // 서버에서 데이터 가져오기
+		    fetch('/admin/dashboard')
+		        .then(response => response.json())
+		        .then(data => {
+		            makeAmountArray(amountArray, data);  // ctx1 데이터
+		            makeAmountArray2(amountArray2, data); // ctx2 데이터
+		            makeDateArray(dateArray, data);
+		
+		            new Chart(ctx, {
+		                type: 'line',
+		                data: {
+		                    labels: dateArray,
+		                    datasets: [
+		                        {
+		                            label: '일별 전체 충전량',
+		                            data: amountArray,
+		                            borderWidth: 1,
+		                            borderColor: 'blue',  // ctx1 데이터 색상
+		                            fill: false
+		                        },
+		                        {
+		                            label: '일별 전체 사용량',
+		                            data: amountArray2,
+		                            borderWidth: 1,
+		                            borderColor: 'red',  // ctx2 데이터 색상
+		                            fill: false
+		                        }
+		                    ]
+		                },
+		                options: {
+		                    scales: {
+		                        y: {
+		                            beginAtZero: true
+		                        }
+		                    }
+		                }
+		            });
+		        })
+		        .catch(error => {
+		            console.error('데이터 가져오기 오류:', error);
+		        });
+		</script>
 
 				
 					

@@ -17,6 +17,7 @@ public class CashChargeGraphVO {
 	
 	private int id;
 	private int amount;
+	private int spend;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date createdAt;

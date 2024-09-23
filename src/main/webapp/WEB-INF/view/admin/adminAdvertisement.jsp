@@ -220,7 +220,7 @@
 			        const ads = container.querySelectorAll('.advertise-box-one, .advertise-box-two, .advertise-box-three');
 			        let currentIndex = 0;
 		
-			        function showNextAd() {
+			        function showNextAd() {	
 			            // 현재 활성 광고를 숨김
 			            ads.forEach(ad => ad.classList.remove('active'));
 		
