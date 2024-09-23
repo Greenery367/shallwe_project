@@ -13,7 +13,15 @@
 
 	<!-- 강의 상세 정보와 이미지가 가로로 배치됨 -->
 	<div class="lecture-detail">
-		<img src="${pageContext.request.contextPath}/static/images/lalLecture.png" alt="${lecture.title}">
+		<c:choose>
+			<c:when test="${empty lecture.uploadFileName}">
+				<img src="${pageContext.request.contextPath}/static/images/default.png" alt="${lecture.title}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
+			</c:when>
+			<c:otherwise>
+				<img src="${pageContext.request.contextPath}/images/${lecture.uploadFileName}" alt="${lecture.title}"
+					style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" />
+			</c:otherwise>
+		</c:choose>
 		<div class="lecture-info">
 			<h1>${lecture.title}</h1>
 			<p>
