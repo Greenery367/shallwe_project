@@ -114,7 +114,7 @@
 	</update>	
 	
 	<update id="updateCurrentCash">
-		update user_tb set current_cash = #{amount}
+		update user_tb set current_cash = current_cash + #{amount}
 		where user_id = #{userId}
 	</update>
 	

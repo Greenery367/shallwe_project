@@ -29,7 +29,9 @@ public interface RefundRepository {
 	public List<RefundDTO> selectAllRefundDto(@Param("limit") Integer limit,
 										@Param("offset")Integer offset);
 
-
+	// 환불 상태 수정
+	public void updateRefundStatus(int id);
+	
 	// id로 환불 내역 조회하기
 	public Refund selectRefundById(int refundId);
 	

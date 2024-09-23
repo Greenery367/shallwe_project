@@ -37,6 +37,7 @@ public class TossPayService {
 	
 	/**
 	 * 토스 페이 - 결제 정보 저장 페이지
+	 * @param orderId2 
 	 * @param secretKey
 	 * @param paymentKey
 	 * @param amount
@@ -45,10 +46,8 @@ public class TossPayService {
 	 * @throws UnsupportedEncodingException
 	 * @throws URISyntaxException
 	 */
-	public String sendTossPayRequest(String orderId, int userId, Long amount) throws UnsupportedEncodingException, URISyntaxException {
+	public String sendTossPayRequest(String paymentKey, String orderId, int userId, Long amount) throws UnsupportedEncodingException, URISyntaxException {
 		
-		UUID uuid = UUID.randomUUID(); // 랜덤값 생성
-		String paymentKey = (String)(userId+"__"+uuid); // 주문 고유번호 생성
         String userIdStr = String.valueOf(userId);
 		
         // 가주문 생성
@@ -90,7 +89,7 @@ public class TossPayService {
 	 * @throws IOException 
 	 */
 	public  String sendTossPayRequestFinish(String orderId, String paymentKey, Long amount) throws URISyntaxException, IOException, InterruptedException {
-		String secretKey = "test_sk_4yKeq5bgrpyxEo7Ndn5p8GX0lzW6";
+		String base64 = "test_sk_4yKeq5bgrpyxEo7Ndn5p8GX0lzW6:";
 	    String baseUrl = "https://api.tosspayments.com/v1/payments/confirm";
 
 	    // 요청 본문을 JSON 문자열로 생성

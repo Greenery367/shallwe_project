@@ -5,13 +5,16 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -61,6 +64,11 @@ public class RefundService {
 		return allRefundDtoList;
 	}
 	
+	public void updateRefundStatus(int id) {
+		refundRepository.updateRefundStatus(id);
+		return;
+	}
+	
 	/**
 	 * id로 환불 내역 조회하기
 	 * @param refundId
@@ -91,27 +99,26 @@ public class RefundService {
 		// order amount 찾기
 		Order order = orderRepository.selectOrderById(refundDto.orderId);
 		OrderDetail orderDetail = orderDetailRepository.selectOrderDetailByOrderId(order.orderId);
-		
+		Long cancelAmount = order.getAmount();
 		
 		Map<String,String> parameters = new HashMap<>();
 		parameters.put("cid", "TC0ONETIME");
 		parameters.put("tid", orderDetail.tid);
-		parameters.put("cancel_amount", order.getAmount().toString());
+		parameters.put("cancel_amount", (cancelAmount.toString()));
 		parameters.put("cancel_tax_free_amount", "0");
 		parameters.put("cancel_vat_amount", "0");
 		parameters.put("cancel_available_amount",order.getAmount().toString());
 		
 		// HttpMessage 만들기
 		HttpEntity<Map<String,String>> requestEntity = new HttpEntity(parameters,this.getKakaoHeaders());
-		
+		System.out.println(requestEntity);
 		RestTemplate template = new RestTemplate();
-		
 		// 환불 요청 url
         String url = "https://open-api.kakaopay.com/online/v1/payment/cancel";
         
         // 응답 객체 생성
         RefundResponseDTO refundResponse = template.postForObject(url, requestEntity, RefundResponseDTO.class);
-        
+        System.out.println(refundResponse);
         return refundResponse;
 	}
 	
@@ -141,39 +148,42 @@ public class RefundService {
 	 * @throws IOException 
 	 */
 	public List<String> readyRefundToToss(String id) throws IOException, InterruptedException {
-		
+		String base64 = "test_sk_4yKeq5bgrpyxEo7Ndn5p8GX0lzW6";
+		String encodedKey= new String(Base64.getEncoder().encode((base64+":").getBytes(StandardCharsets.UTF_8)));
 		
 		// order amount 찾기
-				Order order = orderRepository.selectOrderById(Integer.parseInt(id));
+				Refund refund = refundRepository.selectRefundById(Integer.parseInt(id));
+	
+				Order order = orderRepository.selectOrderById(refund.getOrderId());
 				OrderDetail orderDetail = orderDetailRepository.selectOrderDetailByOrderId(order.orderId);
-		
-				
+
 				HttpRequest request = HttpRequest.newBuilder()
-					    .uri(URI.create("https://api.tosspayments.com/v1/payments/5EnNZRJGvaBX7zk2yd8ydw26XvwXkLrx9POLqKQjmAw4b0e1"))
-					    .header("Authorization", "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSOg==")
-					    .method("GET", HttpRequest.BodyPublishers.noBody())
+					    .uri(URI.create("https://api.tosspayments.com/v1/payments/"+order.orderId+"/cancel"))
+					    .header("Authorization", "Basic dGVzdF9za180eUtlcTViZ3JweXhFbzdOZG41cDhHWDBselc2Og==")
+					    .header("Content-Type", "application/json")
+					    .method("POST", HttpRequest.BodyPublishers.noBody())
 					    .build();
 					HttpResponse<String> response11 = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 					System.out.println("결제 정보!!!--------------"+response11.body());
-				
-				
+
 				Map<String,String> parameters = new HashMap<>();
 				parameters.put("paymentKey", order.orderId);
 				parameters.put("cancelReason", "고객 변심");
-				
-				System.out.println("~~~~~~~~~~"+parameters);
+				parameters.put("cancelamount", order.getAmount().toString());
+				parameters.put("refundReceiveAccount ", "{bank: '1111', accountNumber: '1111111111111', holderName: '엄송'}");
+
 				
 				// HttpMessage 만들기
 				HttpEntity<Map<String,String>> requestEntity = new HttpEntity(parameters,this.getTossHeaders());
+				System.out.println(requestEntity);
 				
 				RestTemplate template = new RestTemplate();
 				
 				// 환불 요청 url
-		        String url = "https://api.tosspayments.com/v1/payments/5EnNZRJGvaBX7zk2yd8ydw26XvwXkLrx9POLqKQjmAw4b0e1/cancel";
+		        String url = "https://api.tosspayments.com/v1/payments/"+order.orderId+"/cancel";
 		        
 		        // 응답 객체 생성
 		        List<String> response = template.postForObject(url, requestEntity, List.class);
-		        System.out.println("??????????????"+response);
 		        
         return response;
 	}
