@@ -19,6 +19,7 @@
 	<!-- c -->
 	<select id="getExchangeHistory" resultType="com.example.demo.dto.RegisterExchangeDTO">
     	SELECT created_at, amount, status FROM register_exchange_tb WHERE user_id = #{userId}
+    	order by created_at desc
 	</select>
 	
 	<select id="selectAllExchange" resultType="com.example.demo.repository.model.RegisterExchange">
