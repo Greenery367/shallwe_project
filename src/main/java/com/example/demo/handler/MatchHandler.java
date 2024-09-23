@@ -29,13 +29,12 @@ public class MatchHandler extends TextWebSocketHandler{
 	@Autowired
 	private ChatService chatService;
 	
-	private int count = 0; // 채팅방을 만들기위한 카운트
-	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		System.out.println("매치 입장!!!");
 		User user = (User)session.getAttributes().get("principal");
 		TestMatch test = TestMatch.builder().mbti(user.getMbti()).uploadFileName(user.getUploadFileName())
-				.nickname(user.getNickname()).id(user.getUserId()).build();
+				.nickname(user.getNickname()).userId(user.getUserId()).build();
 		CLIENTS.remove(session.getId());
 		MBTIS.remove(session.getId());
 		WANTED.remove(session.getId());
@@ -50,7 +49,7 @@ public class MatchHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		User user = (User)session.getAttributes().get("principal");
 		TestMatch test = TestMatch.builder().mbti(user.getMbti()).uploadFileName(user.getUploadFileName())
-				.nickname(user.getNickname()).id(user.getUserId()).build();
+				.nickname(user.getNickname()).userId(user.getUserId()).build();
 		MBTIS.put(session.getId(), test);
 		CLIENTS.put(session.getId(), session);
 		WANTED.put(session.getId(), message.getPayload());
@@ -61,7 +60,7 @@ public class MatchHandler extends TextWebSocketHandler{
 			for(TestMatch userDTO : MATCHED.keySet()) {
 				if(MATCHED.get(userDTO) == session) {
 					opponentName = userDTO.getNickname();
-					opponentId = userDTO.getId();
+					opponentId = userDTO.getUserId();
 					MATCHED.remove(userDTO);
 				}
 			}

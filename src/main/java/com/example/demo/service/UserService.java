@@ -106,9 +106,19 @@ public class UserService {
 		return userRepository.getLectureCash(userId);
 	}
 	
+	// 접속하면 유저 상태값 online으로 변경
+	public int changeUserOnline (int userId) {
+		int result = 0;
+		result = userRepository.changeUserOnline(userId);
+		return result;
+	}
 	
-	
-	
+	// 접속종료하면 유저 상태값 offline으로 변경
+		public int changeUserOffline (int userId) {
+			int result = 0;
+			result = userRepository.changeUserOffline(userId);
+			return result;
+		}
 	
 	
 }

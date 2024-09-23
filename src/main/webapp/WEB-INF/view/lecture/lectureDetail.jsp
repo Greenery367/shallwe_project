@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/view/layout/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/lectureDetail.css">
 
+
 <div class="container">
 	<!-- 메시지 표시 -->
 	<c:if test="${not empty message}">
@@ -135,7 +136,7 @@
 
 <!-- JavaScript -->
 <script>
-	//JSP에서 전달된 avg 값을 소수점 한 자리까지 반올림
+	// JSP에서 전달된 avg 값을 소수점 한 자리까지 반올림
 	const avg = parseFloat("${avg}");
 	const avgFormatted = avg.toFixed(1); // 소수점 한 자리까지 반올림
 
@@ -153,39 +154,29 @@
 	}
 
 	// 결제 검증 및 처리
-	function validatePayment(event) {
+function validatePayment(userCash, lecturePrice) {
+	if (userCash < lecturePrice) {
+		alert("잔액이 부족합니다. 캐시를 충전한 후 다시 시도해 주세요.");
+		closePaymentModal(); // 모달 닫기
+		return false; // 결제 진행하지 않음
+	}
+	return true; // 결제 진행
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+	var paymentForm = document.getElementById("paymentForm");
+	paymentForm.addEventListener("submit", function(event) {
 		event.preventDefault(); // 기본 폼 제출 방지
 
-		var userCash = $
-		{
-			user.currentCash
-		}
-		; // 서버에서 전달받은 현재 캐시
-		var lecturePrice = $
-		{
-			lecture.price
-		}
-		; // 서버에서 전달받은 강의 가격
+		var userCash = ${user.currentCash}; // 서버에서 전달받은 현재 캐시
+		var lecturePrice = ${lecture.price}; // 서버에서 전달받은 강의 가격
 
-		if (userCash < lecturePrice) {
-			// 잔액 부족 시 경고
-			alert("잔액이 부족합니다. 캐시를 충전한 후 다시 시도해 주세요.");
-			closePaymentModal(); // 모달 닫기
-			return false; // 결제 진행하지 않음
-		} else {
-			// 결제 성공 시 알림
-			alert("결제가 완료되었습니다.");
-			// 결제 완료 후 폼 제출
-			var paymentForm = document.getElementById("paymentForm");
-			paymentForm.submit(); // 폼 제출
-			return true; // 결제 진행
+		if (validatePayment(userCash, lecturePrice)) {
+			alert("결제가 완료되었습니다."); // 결제 성공 시 알림
+			paymentForm.submit(); // 검증 통과 시 폼 제출
 		}
-	}
-
-	document.addEventListener("DOMContentLoaded", function() {
-		var paymentForm = document.getElementById("paymentForm");
-		paymentForm.addEventListener("submit", validatePayment);
 	});
+});
 </script>
 
 <%@ include file="/WEB-INF/view/layout/footer.jsp"%>

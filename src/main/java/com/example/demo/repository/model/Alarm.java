@@ -1,4 +1,6 @@
-package com.example.demo.dto;
+package com.example.demo.repository.model;
+
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,17 +8,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AlarmDTO {
-
+@Builder
+public class Alarm {
+	
 	private int id;
-	private int userId;
 	private int type;
+	private int typeId;
+	private int userId;
+	private int opponentId;
 	private int status;
-	private String uploadFileName;
-	private String nickname;
 	private String content;
+	private Timestamp createdAt;
 	
 }

@@ -31,11 +31,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	
 	@Override // 웹 소켓 연결시
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		TestUser user = (TestUser) session.getAttributes().get("principal");
+		User user = (User) session.getAttributes().get("principal");
 		Integer key = (Integer) session.getAttributes().get("key");
 		ObjectMapper objectMapper = new ObjectMapper();
 		String message = " 님이 들어오셧습니다.";
-		System.out.println("웹소켓으로 입장!!!!!!!");
 		List<User>userList = chatService.getUserList(key);
 		MessageDTO messageDTO = MessageDTO.builder().name(user.getNickname()).uploadFileName(user.getUploadFileName())
 				.message(message).build();
@@ -51,7 +50,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	@Override // 웹 소켓 연결 종료시
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		TestUser user = (TestUser) session.getAttributes().get("principal");
+		User user = (User) session.getAttributes().get("principal");
 		Integer key = (Integer) session.getAttributes().get("key");
 		ObjectMapper objectMapper = new ObjectMapper();
 		String message = " 님이 나가셧습니다.";
@@ -69,7 +68,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
 	@Override // 데이터 통신시
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		TestUser user = (TestUser) session.getAttributes().get("principal");
+		User user = (User) session.getAttributes().get("principal");
 		Integer key = (Integer) session.getAttributes().get("key");
 		ObjectMapper objectMapper = new ObjectMapper();
 		String userMessage = message.getPayload();
@@ -84,7 +83,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	}
 
 	// 파일를 저장하는 함수
-	private void saveFile(TestUser user, String message, int roomId) {
+	private void saveFile(User user, String message, int roomId) {
 		// 메시지 내용
 		String msg = user.getNickname() + ": " + message + "\n";
 		// 파일을 저장한다.

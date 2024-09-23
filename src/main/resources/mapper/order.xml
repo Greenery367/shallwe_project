@@ -31,6 +31,7 @@
 	
 	<select id="orderFindById">
 		SELECT
+		o.id,
 		u.user_id,
 		o.name,
         o.amount,
@@ -41,7 +42,7 @@
 		user_tb u ON o.user_id = u.user_id
 		WHERE
 		u.user_id = #{userId}
-		AND o.amount IS NOT NULL
+		AND o.status = 1 	
 		ORDER BY
 		o.created_at DESC;
 	</select>

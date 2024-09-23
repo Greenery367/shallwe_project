@@ -28,7 +28,8 @@ footer {
     text-align: center;
     background-color: #C0C0C0;
     padding: 50px 0;
-    
+}
+
 .advertise-example-left{
 	padding-top: 25px;
 	padding-right: 25px;
@@ -470,21 +471,6 @@ ul, li {
     align-items: center;
 }
 
-.friend-box-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.friend-container {
-    width: 100%;
-    height: 60px;
-    box-shadow: 0px 8px 6px -6px #E6E6E6;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    margin: 10px;
-}
 
 .friend-icon {
     width: 50px;
@@ -591,4 +577,225 @@ ul, li {
     display: flex;
     justify-content: center;
 }
+
+/* 알람 헤더 스타일 */
+.alarm-header {
+    background-color: white;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;  /* 모서리 위쪽 둥글게 */
+}
+
+.alarm-header span {
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #808080;  /* 선택되지 않은 경우 회색 */
+    transition: color 0.3s;
+}
+
+/* alarm-box를 alarm-bell의 왼쪽 하단에 위치하고, 너비 340px로 설정 */
+.alarm-box {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 400px;  /* 최대 높이 설정 */
+    overflow-y: auto;   /* 알림이 많을 경우 스크롤 */
+    padding: 10px;
+    width: 340px;       /* 너비를 340px로 늘림 */
+}
+
+/* 알림 메시지 내용 줄바꿈 허용 */
+.alarm-message {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* 닉네임과 헤더는 한 줄로만 표시되게 */
+.alarm-header span,
+.alarm-name {
+    white-space: nowrap;   /* 줄바꿈 없이 한 줄로 표시 */
+    overflow: hidden;      /* 넘치는 부분은 숨김 */
+    display: inline-block; /* 인라인 블록으로 설정 */
+    max-width: 100%;       /* 최대 너비 설정 */
+}
+/* 선택된 헤더는 검은색 */
+.alarm-header span.active {
+    color: red;  /* 선택된 항목은 검은색 */
+}
+
+/* 알림 헤더에서 처음에 전체가 선택된 상태 */
+.alarm-all.active {
+    color: #000;  /* '전체'가 선택된 상태로 시작 */
+}
+
+.alarm-header span:hover {
+    background-color: #0056b3;
+}
+
+.alarm-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 알림 항목 스타일 */
+.alarm-element {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    transition: background-color 0.3s;
+}
+
+.alarm-element:hover {
+    background-color: #f9f9f9;
+}
+
+.alarm-pic {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.alarm-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.alarm-message {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 알림 벨 스타일 */
+.alarm-bell {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.alarm-bell:hover {
+    opacity: 0.8;
+}
+
+/* 알림이 없을 경우 표시되는 메시지 */
+.no-alarm-message {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+ /* 원형 체크박스 스타일 */
+    .round-checkbox {
+        width: 25px;
+        height: 25px;
+        appearance: none;
+        border-radius: 50%;
+        border: 2px solid #000;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .round-checkbox:checked {
+        background-color: #fd6f22;
+    }
+
+    /* 삭제 모드 버튼 스타일 */
+    .delete-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .delete-alarms-btn, .cancel-btn {
+        padding: 10px 15px;
+        background-color: #fd6f22;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .cancel-btn {
+        background-color: #ccc;
+    }
+    
+.friend-box-container {
+    display: flex;
+    flex-wrap: wrap; /* 요소들을 가로로 배치하고 넘칠 경우 줄바꿈 */
+    justify-content: space-between; /* 친구 박스 간격 조절 */
+    align-items: center;
+    width: 100%; /* 전체 너비 맞춤 */
+    padding: 10px;
+}
+
+.friend-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* 각 friend-container를 적절한 너비로 설정 (50%보다 살짝 작게) */
+    height: 70px; /* 높이 조정 */
+    margin: 10px 0; /* 위아래 여백 추가 */
+    box-shadow: 0px 4px 6px -4px #E6E6E6;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+}
+
+.friend-container img {
+    width: 40px; /* 프로필 사진 크기 조정 */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.friend-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    overflow: hidden; /* 넘칠 경우 숨김 */
+    text-overflow: ellipsis; /* 넘칠 경우 ... */
+}
+
+.profile-box {
+    position: absolute;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.profile-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-box ul li {
+    margin: 5px 0;
+}
+
+.profile-box ul li a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.profile-box ul li.close a {
+    color: red;
 }

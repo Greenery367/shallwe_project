@@ -68,10 +68,11 @@ public class KakaoPayController {
 	@PostMapping("/send-request/kakao/{totalAmount}")
 	@ResponseBody
 	public ReadyResponseDTO payCashByKakao(@PathVariable("totalAmount") String totalAmount) {
-
+		User user = (User)httpSession.getAttribute("principal");
+		
 		// 1. 가주문 생성하기 (보안을 위한 정보 저장)
 		Long totalPrice = Long.valueOf(totalAmount); // 결제 가격
-		String orderId = orderService.makeNewOrder(1,totalPrice,1, null); // 가주문 생성
+		String orderId = orderService.makeNewOrder(user.getUserId(),totalPrice,1, null); // 가주문 생성
 
 		// 2. 결제 요청 메세지 보내기
 		ReadyResponseDTO readyResponseDTO = kakaoPayService.payReady(totalPrice,orderId); //  결제 요청
@@ -107,10 +108,10 @@ public class KakaoPayController {
 	    	return null;
 	    }
 	    
-	    int userId = 1;
+	 
 	    
 	    // 2. 주문 세부사항을 통해 가주문 - 진주문 대조 확인 (인증)
-	    Order checkOrderRecord = orderService.checkOrderRecord(userId,orderDetail);
+	    Order checkOrderRecord = orderService.checkOrderRecord(user.getUserId(),orderDetail);
 	    
 	    // 3. 만약 주문 테이블이 있다면 ...
 	    if(checkOrderRecord != null) {
@@ -118,7 +119,7 @@ public class KakaoPayController {
 		    ApproveResponseDTO approveResponseDTO = kakaoPayService.payApprove(tid, pgToken);
 		    
 		    // (2) 결제 후 -> DB 상의 유저 캐쉬 변경
-		    userService.updateUserCash(userId,checkOrderRecord.amount);
+		    userService.updateUserCash(user.getUserId(),checkOrderRecord.amount);
 		    
 		    // (3) 주문 상태 변경
 		    orderService.changeOrderStatus(checkOrderRecord.orderId);

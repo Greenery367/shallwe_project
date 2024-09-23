@@ -56,35 +56,12 @@ public class ChatTest {
 		}
 		session.setAttribute("key", id);
 		model.addAttribute("opponent",opponent);
+		model.addAttribute("roomId",roomId);
 		return "chat/chatRoom";
 	}
 	
-	@GetMapping("/list")
-	public String listPage() {
-		return "chat/chatList";
-	}
-	
-	@GetMapping("/sign-in")
-	public String signInPage() {
-		session.invalidate();
-		return "chat/signIn";
-	}
-	
-	@PostMapping("/sign-in")
-	public String postMethodName(TestUser user) {
-		user = matchService.createUser(user);
-		if(user.getUploadFileName() == null) {
-			String name = "694399bb-cb96-4e8c-ac4c-056a12427d7d_winter3.jpeg";
-			user.setUploadFileName(name);
-		}
-		MbtiDTO myMbti = matchService.getMbtiNameById(user.getMbti());
-		session.setAttribute("principal", user);
-		session.setAttribute("mbti", myMbti);
-		return "redirect:/chat/match";
-	}
-	
 	@GetMapping("/match")
-	public String matchPage(HttpServletRequest request,@RequestParam(name="type")int id) throws JsonProcessingException {
+	public String matchPage(HttpServletRequest request) throws JsonProcessingException {
 		User user = (User)session.getAttribute("principal");
 		int mbtiId = matchService.getMbtiIdByUserId(user.getUserId());
 		user.setMbti(mbtiId);
@@ -100,9 +77,13 @@ public class ChatTest {
 	}
 	
 	@GetMapping("/profileInfo")
-	public String getMethodName(@RequestParam("id") int id, Model model) {
+	public String getMethodName(@RequestParam("userId") int id, Model model) {
 		User user = friendService.findByUserID(id);
+		int mbti =	matchService.getMbtiIdByUserId(id);
+		MbtiDTO mbtiDTO = matchService.getMbtiNameById(mbti);
+		System.out.println("MBTI 설명 !!! : " + mbtiDTO);
 		model.addAttribute("user",user);
+		model.addAttribute("mbti",mbtiDTO);
 		return "match/userInfo";
 	}
 	
@@ -114,7 +95,6 @@ public class ChatTest {
 		int roomId = 0;
 		// 친구와 만든 대화방이 있는지 없는지 검사
 		roomId = chatService.checkRoom1vs1(userId, id);
-		System.out.println("방 넘버 !!! : " + roomId);
 		if(roomId != 0) {
 			model.addAttribute("roomId",roomId);
 			session.setAttribute("key", roomId);
@@ -134,6 +114,7 @@ public class ChatTest {
 			session.setAttribute("key", roomId);
 		}
 		model.addAttribute("opponent",opponent);
+		model.addAttribute("roomId",roomId);
 		return "chat/friendChatRoom";
 	}
 	

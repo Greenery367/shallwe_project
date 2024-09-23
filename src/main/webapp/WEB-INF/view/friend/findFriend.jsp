@@ -23,7 +23,7 @@
         <div class="search-result">
             <c:forEach var="user" items="${userList}">
                 <div class="user-profile">
-                    <a href="/chat/profileInfo?id=${user.userId}">
+                    <a href="/chat/profileInfo?userId=${user.userId}">
                         <c:choose>
                             <c:when test="${user.uploadFileName == null}">
                                 <img src="/static/images/defaultProfile.jpeg">
@@ -35,7 +35,7 @@
                     </a>
                     <div class="user-info">
                         <div class="user-name">
-                            <a href="/chat/profileInfo?id=${user.userId}">${user.nickname}</a>
+                            <a href="/chat/profileInfo?userId=${user.userId}">${user.nickname}</a>
                         </div>
                     </div>
                 </div>

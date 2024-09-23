@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.BankDTO;
 import com.example.demo.dto.BankInfoDTO;
+import com.example.demo.dto.CashRefundDTO;
 import com.example.demo.dto.RecordDTO;
 import com.example.demo.repository.OrderRepository;
 import com.example.demo.repository.RefundRepository;
@@ -25,6 +27,7 @@ import com.example.demo.service.AdminService;
 import com.example.demo.service.BankService;
 import com.example.demo.service.MyPageService;
 import com.example.demo.service.RecordService;
+import com.example.demo.service.RefundService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +46,7 @@ public class MyPageController {
 	@Autowired
 	private final RecordService recordService;
 	private final AdminService adminService;
+	private final RefundService refundService; 
 	private final OrderRepository orderRepository;
 	private final RefundRepository refundRepository;
 	
@@ -208,9 +212,20 @@ public class MyPageController {
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
 		
+		System.out.println(orders);
+		List<Boolean> flagList = new ArrayList<>(); 
+		for(int i = 0; i<orders.size(); i++) {
+			System.out.println("~~~~~~~~~~~~"+orders.get(i));
+			System.out.println("~~~~~~~~~~~~"+orders.get(i).getId());
+			Boolean flag = refundService.hasRequestedCashRefund(orders.get(i).getId(), user.getUserId());
+			flagList.add(flag);
+		}
+		
+		System.out.println("-----------------------------------"+flagList);
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
+		model.addAttribute("flagList", flagList);
 		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("user", user);
 		model.addAttribute("orders", orders);
@@ -259,6 +274,24 @@ public class MyPageController {
 		model.addAttribute("refunds", refunds);
 		
 		return "myPage/refundRecord";
+	}
+	
+	@PostMapping("/request-refund")
+	public String requestRefund(@RequestParam("orderId") String orderId) {
+	    User user = (User) session.getAttribute("principal");
+	    Integer userId = user.getUserId();
+	    
+	    // CashRefundDTO 객체 생성
+	    CashRefundDTO cashRefundDTO = CashRefundDTO.builder()
+	        .orderId(orderId)
+	        .userId(userId)
+	        .build();
+
+	    // 환불 요청을 데이터베이스에 삽입
+	    refundRepository.insertRefundRequest(cashRefundDTO);
+
+	    // 환불 요청 후 페이지 리다이렉트
+	    return "redirect:/my-page/charge-list"; // 원하는 페이지로 리다이렉트
 	}
 	
 	

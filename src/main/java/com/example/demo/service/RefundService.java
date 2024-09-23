@@ -13,8 +13,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.demo.dto.CashRefundDTO;
 import com.example.demo.dto.RefundDTO;
 import com.example.demo.dto.RefundResponseDTO;
 import com.example.demo.repository.OrderDetailRepository;
@@ -36,6 +38,17 @@ public class RefundService {
 	public OrderRepository orderRepository;
 	@Autowired
 	public OrderDetailRepository orderDetailRepository;
+	
+	
+	public void requestRefund(CashRefundDTO cashRefundDTO) {
+        // 환불 신청을 DB에 저장
+        refundRepository.insertRefundRequest(cashRefundDTO);
+    }
+	
+	@Transactional
+    public boolean hasRequestedCashRefund(int orderId, int userId) {
+        return refundRepository.checkRefundRequest(orderId, userId) > 0;
+    }
 	
 	/**
 	 * 모든 환불 정보 객체 가져오기

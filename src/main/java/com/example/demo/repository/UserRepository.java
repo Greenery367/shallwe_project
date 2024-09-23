@@ -31,6 +31,9 @@ public interface UserRepository {
 	public List<User> checkWaitFriend(@Param("id")int id);
 	public List<User> checkSendFriend(@Param("id")int id);
 	public List<User> checkFriendList(@Param("id")int id);
+	public int changeUserOnline(@Param("userId")int userId);
+	public int changeUserOffline(@Param("userId")int userId);
+	
 	// 유저 캐쉬 변경
 	public void updateCurrentCash(@Param("userId")int userId, @Param("amount")Long amount);
 }
