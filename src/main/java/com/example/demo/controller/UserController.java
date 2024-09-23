@@ -272,9 +272,10 @@ public class UserController {
 			return "alert";
 		} else {
 //	비밀번호 해싱 처리 개발단계에서 생략
-			if (passwordEncoder.matches(password, user.getPassword())) {
-				// if (password.equals(user.getPassword())) {
+			// if (passwordEncoder.matches(password, user.getPassword())) {
+				if (password.equals(user.getPassword())) {
 				session.setAttribute("principal", user);
+				userService.changeUserOnline(user.getUserId());
 				return "redirect:/user/main";
 			} else {
 				request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
@@ -386,6 +387,7 @@ public class UserController {
 		}
 
 		session.setAttribute("principal", oldUser);
+		userService.changeUserOnline(oldUser.getUserId());
 		return "redirect:/user/main";
 	}
 
@@ -457,6 +459,7 @@ public class UserController {
 			return "sign/socialSignUp";
 		}
 		session.setAttribute("principal", oldUser);
+		userService.changeUserOnline(oldUser.getUserId());
 		return "redirect:/user/main";
 	}
 
@@ -502,6 +505,7 @@ public class UserController {
 		}
 
 		session.setAttribute("principal", oldUser);
+		userService.changeUserOnline(oldUser.getUserId());
 		return "redirect:/user/main";
 	}
 
