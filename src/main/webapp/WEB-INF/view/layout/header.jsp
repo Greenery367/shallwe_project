@@ -89,7 +89,8 @@
 				</div>
 				<div class="menu-container">
 					<a href="" class="menu">게임 강의</a>
-					<ul class="drop-down-menus-game">
+					<div class="drop-down-menus-game">
+					<ul>
 						<div class="game-menu-box">
 							<c:forEach var="category" items="${categoryList}">
 								<li>
@@ -105,10 +106,12 @@
 							</li>
 						</div>
 					</ul>
+					</div>
 				</div>
 				<div class="menu-container">
 					<a href="" class="menu">커뮤니티</a>
-					<ul class="drop-down-menus-game">
+					<div class="drop-down-menus-game">
+					<ul>
 						<div class="game-menu-box">
 							<li>
 								<div
@@ -129,6 +132,7 @@
 							</li>
 						</div>
 					</ul>
+					</div>
 				</div>
 				<div class="menu-container">
 					<a href="" class="menu">친구</a>
@@ -159,9 +163,11 @@
 
 				<div class="menu-container">
 					<a href="/cs/main" class="menu">고객 지원</a>
-					<ul class="drop-down-menus">
+					<div class="drop-down-menus">
+					<ul>
 						<li><h4>Q&A</h4></li>
 					</ul>
+					</div>
 				</div>
 				<div class="menu-container">
 					<a href="" class="menu">콘텐츠</a>
