@@ -48,4 +48,10 @@
 		select * from user_refund_tb
 		where id = #{refundId}
 	</select>
+	
+	<update id="updateRefundStatus">
+		update user_refund_tb
+		set status = 1
+		where id = #{id}
+	</update>
 </mapper>

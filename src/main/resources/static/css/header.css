@@ -486,7 +486,6 @@ footer {
     background-color: #C0C0C0;
     padding: 50px 0;
 }
-
 .advertise-example-left{
 	padding-top: 25px;
 	padding-right: 25px;
@@ -791,41 +790,49 @@ ul, li {
     box-shadow: 0px 8px 6px -6px #666;
 }
 
-.post-board-container {
-    display: flex;
-    width: 750px;
-    height: 300px;
-    justify-content: center;
-    align-items: center;
-}
-
-.board-title {
-    display: flex;
-    width: 100%;
-    height: 20%;
-    align-items: center;
-}
-
-.post-board {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 48%;
-    height: 270px;
-    margin: 10px;
-}
-
-.post-board-small {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 15px;
-    box-shadow: 0px 8px 6px -6px #D3D3D3;
-    height: 120%;
-    background: #f3f4f8;
-    width: 100%;
-}
-
+.post-board-container{
+		display: flex;
+		width: 750px;
+		height: 300px;
+		justify-content: center;
+		align-items: center;
+	}
+	.board-title{
+		display:flex;
+		width: 100%;
+		height: 20%;
+	    align-items: center;
+	}
+	.post-board{
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+		width: 48%;
+		height: 270px;
+		margin: 10px;
+	}
+	.post-board-small{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		border-radius: 15px;
+		box-shadow: 0px 8px 6px -6px #D3D3D3;
+		height: 60%;
+		padding-bottom: 10px;
+		background: #f3f4f8;
+		width: 100%;
+	}
+	.link-box{
+		height: 25%;
+	}	
+	.link-text{
+		display: flex;
+		flex-direction: column;
+  		width: 80%;
+   		height: 100%;
+   	 	white-space: nowrap;
+    	overflow: hidden;
+    }
 .side-menu {
     width: 12%;
     height: 55%;

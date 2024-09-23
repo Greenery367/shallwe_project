@@ -21,6 +21,7 @@ import com.example.demo.repository.model.OrderDetail;
 import com.example.demo.repository.model.User;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.TossPayService;
+import com.example.demo.service.UserService;
 import com.example.demo.utils.SessionUtils;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,11 +34,11 @@ public class TossPayController {
 
 	@Autowired
 	private TossPayService tossPayService;
-	
+	@Autowired
 	private final OrderService orderService;
-	
+	@Autowired
 	private HttpSession httpSession;
-
+	private final UserService userService;
 
 	/**
 	 * 토스 페이 - 결제 전 정보 저장 (정보 무결성)
@@ -54,19 +55,16 @@ public class TossPayController {
 	@PostMapping("/send-request")
 	public void resultTossPay(@RequestBody Map<String, Object> payload) throws UnsupportedEncodingException, URISyntaxException {
 	    
-		
-		
 		// 받은 정보들 파싱
 		String orderId = (String) payload.get("orderId");
 	    Long amount = Long.valueOf(payload.get("totalAmount").toString());
 	    
 	    System.out.println(orderId);
 	    
-	    Integer userId = 1;
-	    // User user = (User)httpSession.getAttribute("principal");
-	    // int userId = user.getUserId();
+	    User user = (User)httpSession.getAttribute("principal");
+	    int userId = user.getUserId();
 	    // tosspayservice를 통해 toss에 결제 요청 - response 값 반환
-	 	String paymentKey = tossPayService.sendTossPayRequest(orderId, userId, amount);
+	 	String paymentKey = tossPayService.sendTossPayRequest(orderId, orderId, userId, amount);
 	 	SessionUtils.addAtribute("paymentKey", paymentKey); // paymentKey 생성
 	 	
 	 	return;
@@ -83,22 +81,35 @@ public class TossPayController {
  	@GetMapping("/success")
     public String resultTossPay(@RequestParam("orderId")String orderId,
     							@RequestParam("paymentKey")String paymentKey,
-    							@RequestParam("amount") Long amount) throws URISyntaxException, IOException, InterruptedException {
+    							@RequestParam("amount") Long amount,
+    							Model model) throws URISyntaxException, IOException, InterruptedException {
     	
-    	//User user = (User) httpSession.getAttribute("principal");
-    	// Integer userId = user.getUserId();
-    	Integer userId = 1;
-    	paymentKey = SessionUtils.getStringAttributeValue("paymentKey");
-    	System.out.println("-----------"+orderId);
-    	System.out.println(paymentKey);
-    	System.out.println(amount);
+ 		User user = (User)httpSession.getAttribute("principal");
+    	Integer userId = user.getUserId();
     	
+    	// 가주문 생성
+	 	tossPayService.sendTossPayRequest(paymentKey, orderId, userId, amount);
+	 	SessionUtils.addAtribute("paymentKey", paymentKey); // paymentKey 생성
     	
-    	// 1. tosspayservice를 통해 toss에 결제 요청 - response 값 반환
-    	String responseEntity = tossPayService.sendTossPayRequestFinish(paymentKey, paymentKey,amount);
+    	// tosspayservice를 통해 toss에 결제 요청 - response 값 반환
+    	String responseEntity = tossPayService.sendTossPayRequestFinish(orderId, paymentKey,amount);
     	String getResult = responseEntity.toString();
     	
-    	return responseEntity;
+    	// 주문 상태 변경
+	    orderService.changeOrderStatus(paymentKey);
+    	
+    	// 유저 캐쉬 상태 변경
+	    orderService.updateUsersCurrentCash(user.getUserId(),amount);
+	    User updateUser = userService.searchByUserId(user.getUserId());
+	    
+	    httpSession.setAttribute("principal",user);
+	    model.addAttribute("user", updateUser);
+    	
+    	if(responseEntity.contains("code")) {
+    		return "/cash/chargeResult" ;
+    	}
+    	
+    	return "/cash/chargeResult" ;
     }
     
     /**

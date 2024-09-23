@@ -31,7 +31,6 @@ public class MatchHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("매치 입장!!!");
 		User user = (User)session.getAttributes().get("principal");
 		TestMatch test = TestMatch.builder().mbti(user.getMbti()).uploadFileName(user.getUploadFileName())
 				.nickname(user.getNickname()).userId(user.getUserId()).build();

@@ -14,12 +14,11 @@
 	</select>
 	
 	<!-- MBTI 궁합별 찾기 -->
-	<select  id="selectMbtiByCompatibility">
+	<select id="selectMbtiByCompatibility">
 		select c.well_matched_mbti_id
-		from mbti_tb as m
-		join Compatibility_tb as c
-		where m.id=c.my_mbti_id and c.compatibility=#{compatibility}
-		group by m.id=1 limit 1;
+		from Compatibility_tb as c
+		where c.compatibility=#{compatibility} and c.my_mbti_id=#{mbtiId}
+		limit 1;
 	</select>
 	
 	<!-- MBTI 테스트 정보 저장 -->
@@ -27,5 +26,14 @@
 		insert into mbti_user_tb (user_id,mbti_id)
 		values (#{userId}, #{mbtiId})
 	</insert>
+	
+	<select id="getRecentInfo">
+		select m.* 
+        from mbti_user_tb as au
+        join mbti_tb as m
+        on au.mbti_id = m.id
+        order by au.created_at desc
+        limit 1;
+	</select>
 
 </mapper>

@@ -18,27 +18,29 @@
 		</div>
 		<div id="opponent-info">
 			<div id="opponent-pic">
-				 <c:choose>
-                        <c:when test="${opponent.uploadFileName == null}">
-                            <img src="/static/images/defaultProfile.jpeg">
-                        </c:when>
-                        <c:otherwise>
-                            <img src="/images/${opponent.uploadFileName}" alt="Profile Picture">
-                        </c:otherwise>
-                   </c:choose>
+				<c:choose>
+					<c:when test="${opponent.uploadFileName == null}">
+						<img src="/static/images/defaultProfile.jpeg">
+					</c:when>
+					<c:otherwise>
+						<img src="/images/${opponent.uploadFileName}" alt="Profile Picture">
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div id="opponent-name">${opponent.nickname}</div>
 		</div>
 		<div id="chatWindow">
 			<!-- 여기에 대화 내용이 추가됩니다 -->
 		</div>
-		<input type="text" class="message">
+		<div class="input-container">
+			<input type="text" class="message">
+			<button class="send-button">전송</button>
+		</div>
 
 	</div>
 	<script>
 	console.log(`${principal.nickname}`);
 	var socket = new WebSocket("ws://localhost:8080/friend");
-	var input = document.querySelector('.message');
 	const profileBox = document.querySelector('.profile-box');
 	profileBox.style.display = 'none';
 	const opponent = document.querySelector('#opponent-pic');
@@ -70,53 +72,65 @@
 	    });
 	});
 	        
-	input.addEventListener('keyup', (event) => {
-		if(event.keyCode === 13 && input.value.trim() !== "") {
-			const chatWindow = document.getElementById("chatWindow");
-			const myMessage = document.createElement("div");
+	const input = document.querySelector('.message');
+	const sendButton = document.querySelector('.send-button');
+
+	function sendMessage() {
+	    if(input.value.trim() !== "") {
+	        const chatWindow = document.getElementById("chatWindow");
+	        const myMessage = document.createElement("div");
 	        const profileImage = document.createElement("img");
 	        const textContent = document.createElement("span");
 	        const messageContent = document.createElement("div");
-			myMessage.classList.add("chat-message");
-			messageContent.classList.add("my-message");
-			if(`${principal.uploadFileName}` === '') {
-				profileImage.src = "/static/images/defaultProfile.jpeg";
-			} else {
-	        profileImage.src = "/images/" + `${principal.uploadFileName}`;
-			}
+	        myMessage.classList.add("chat-message");
+	        messageContent.classList.add("my-message");
+	        if(`${principal.uploadFileName}` === '') {
+	            profileImage.src = "/static/images/defaultProfile.jpeg";
+	        } else {
+	            profileImage.src = "/images/" + `${principal.uploadFileName}`;
+	        }
 	        profileImage.alt = "/images/fukuoka4.gif";
 	        profileImage.classList.add("myProfile-image");
 	        textContent.innerText = input.value;
-			messageContent.appendChild(textContent);
-			myMessage.appendChild(messageContent);
-			myMessage.appendChild(profileImage);
-			chatWindow.appendChild(myMessage);
-			socket.send(input.value);
-			input.value = "";
-			chatWindow.scrollTop = chatWindow.scrollHeight;
-			
-			profileImage.addEventListener('click', function(event) {
-		    		const x = event.pageX;
-			        const y = event.pageY;
-			        profileBox.style.left = x +"px";
-			        profileBox.style.top = y +"px";
-			        document.querySelector(".profile-info").firstChild.
-			        setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
-			        document.querySelector(".report").firstChild.
-			        style.display = 'none'; // 나에게는 신고기능이 안뜨도록 방어
-			        profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
-			        event.stopPropagation(); // 클릭 이벤트 전파 방지
-			        document.querySelector(".close").addEventListener("click", function() {
-				        profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
-				    });
-				    document.addEventListener('click', function(event) {
-				        if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && event.target !== profileImage) {
-				            profileBox.style.display = 'none'; // profile-box 외부를 클릭하면 숨깁니다.
-				        }
-				    });
-			   });
-		}
+	        messageContent.appendChild(textContent);
+	        myMessage.appendChild(messageContent);
+	        myMessage.appendChild(profileImage);
+	        chatWindow.appendChild(myMessage);
+	        socket.send(input.value);
+	        input.value = "";
+	        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+	        profileImage.addEventListener('click', function(event) {
+	            const x = event.pageX;
+	            const y = event.pageY;
+	            profileBox.style.left = x +"px";
+	            profileBox.style.top = y +"px";
+	            document.querySelector(".profile-info").firstChild.
+	            setAttribute("onclick", "window.open('/chat/profileInfo?id=" + `${principal.id}` + "')");
+	            document.querySelector(".report").firstChild.
+	            style.display = 'none'; // 나에게는 신고기능이 안뜨도록 방어
+	            profileBox.style.display = 'block'; // profile-box를 클릭한 위치에 보여줍니다.
+	            event.stopPropagation(); // 클릭 이벤트 전파 방지
+	            document.querySelector(".close").addEventListener("click", function() {
+	                profileBox.style.display = 'none'; // 닫기 버튼 클릭 시 profile-box를 숨깁니다.
+	            });
+	            document.addEventListener('click', function(event) {
+	                if (profileBox.style.display === 'block' && !profileBox.contains(event.target) && event.target !== profileImage) {
+	                    profileBox.style.display = 'none'; // profile-box 외부를 클릭하면 숨깁니다.
+	                }
+	            });
+	        });
+	    }
+	}
+
+	input.addEventListener('keyup', (event) => {
+	    if(event.keyCode === 13) {
+	        sendMessage();
+	    }
 	});
+
+	sendButton.addEventListener('click', sendMessage);
+
 	
 	socket.onmessage = function(event) {
 		const chatWindow = document.getElementById("chatWindow");

@@ -44,6 +44,7 @@ import com.example.demo.handler.exception.DataDeleveryException;
 import com.example.demo.repository.model.Advertise;
 import com.example.demo.repository.model.Alarm;
 import com.example.demo.repository.model.Category;
+import com.example.demo.repository.model.Mbti;
 import com.example.demo.repository.model.News;
 import com.example.demo.repository.model.Notice;
 import com.example.demo.repository.model.User;
@@ -52,6 +53,7 @@ import com.example.demo.service.AlarmService;
 import com.example.demo.service.EmailSendService;
 import com.example.demo.service.FriendService;
 import com.example.demo.service.MatchService;
+import com.example.demo.service.MbtiService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -86,6 +88,10 @@ public class UserController {
 	@Autowired
 	private final EmailSendService emailSendService;
 
+	@Autowired
+	private final MbtiService mbtiService;
+
+	private Integer authNumber;
 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	Random random = new Random();
@@ -124,27 +130,37 @@ public class UserController {
 			model.addAttribute("user", user);
 		}
 
-		// 최신 공지사항 글
+
+		// 최신 공지사항 글 
 		List<Notice> noticeList = noticeService.getAllNotice(0);
 		List<News> newsList = noticeService.getAllnews();
 
-		// 최신 자유게시판 글 5개
-		System.out.println("----------노티스리스트" + noticeList);
-		System.out.println("----------뉴스리스트" + newsList);
-
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("newsList", newsList);
-
+		
+		if(user != null) {
+			List<User> onlineFriendList = friendService.checkOnlineFriend(user.getUserId());
+			model.addAttribute("onlineFriends",onlineFriendList);
+			model.addAttribute("user",user);
+		} else {
+			return "mainPage";
+		}
+		Mbti myMbti = mbtiService.getRecentMbtiInfo(user.getUserId());
+		
+		
 		List<Advertise> advertiseListOne = adminService.selectAdvertisePlaceOne();
 		List<Advertise> advertiseListTwo = adminService.selectAdvertisePlaceTwo();
 		List<Advertise> advertiseListThree = adminService.selectAdvertisePlaceThree();
 		List<Category> categoryList = adminService.selectAllCategory();
-
+		
 		model.addAttribute("advertiseListOne", advertiseListOne);
 		model.addAttribute("advertiseListTwo", advertiseListTwo);
 		model.addAttribute("advertiseListThree", advertiseListThree);
-		model.addAttribute("categoryList", categoryList);
 
+		model.addAttribute("categoryList", categoryList);
+		
+		model.addAttribute("myMbti",myMbti);
+	
 		return "mainPage";
 	}
 
@@ -594,7 +610,9 @@ public class UserController {
 		for (AlarmDTO alarms : alarmList) {
 			alarmIdList.add(alarms.getId());
 		}
-		alarmService.changeStatusBatch(alarmIdList);
+		if(!alarmIdList.isEmpty()) {
+			alarmService.changeStatusBatch(alarmIdList);
+		}
 		return "ok";
 	}
 	

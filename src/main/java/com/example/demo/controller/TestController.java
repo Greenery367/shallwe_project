@@ -23,6 +23,7 @@ import com.example.demo.repository.model.User;
 import com.example.demo.service.MbtiService;
 import com.example.demo.service.NoticeService;
 import com.example.demo.service.QuestionService;
+import com.mysql.cj.Session;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -61,9 +62,9 @@ public class TestController {
 	@GetMapping("/main")
 	public String mainPage(Model model) {
 		
+		User user = (User)httpSession.getAttribute("principal");
 		
-//		
-//		// 최신 공지사항 글 
+		// 최신 공지사항 글 
 		List<Notice> noticeList = noticeService.getAllNotice(0);
 		List<News> newsList = noticeService.getAllnews();
 		
@@ -73,6 +74,8 @@ public class TestController {
 		
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("newsList", newsList);
+		model.addAttribute("user", user);
+		
 		return "mainPage";
 	}
 	
@@ -84,11 +87,13 @@ public class TestController {
 	// http://localhost:8080/test/start-test
 	@GetMapping("/start-test")
 	public String testPage(Model model) {
-		
+
+		User user = (User)httpSession.getAttribute("principal");
 		List<Question> questionList = questionService.getAllQuestion();
 		int progressNumber = 0;
 		model.addAttribute("questionList", questionList);
 		model.addAttribute("progressNumber", progressNumber);
+		model.addAttribute("user", user);
 		return "test/startTestPage";
 	}
 	
@@ -160,15 +165,21 @@ public class TestController {
     	// 키워드 합치기
     	String result=first+second+third+fourth;
     	
-    	System.out.println(result);
+    	System.out.println("~~~~~~~~~~~~키워드"+result);
     	
     	// 키워드를 통해 결과 탐색
     	Mbti resultMbti = mbtiService.selectMbtiByName(result);
     	
+    	System.out.println("~~~~~~~~~~~myMBTI"+resultMbti);
+    	System.out.println("~~~~~~~~~~~myMBTI"+resultMbti.getId());
+    	
     	// 키워드를 통해 궁합 탐색
-    	Mbti goodMatchedMbti = mbtiService.selectMbtiByCompatibility(100);
-    	Mbti badMatchedMbti = mbtiService.selectMbtiByCompatibility(0);
+    	Mbti goodMatchedMbti = mbtiService.selectMbtiByCompatibility(resultMbti.getId(),100);
+    	Mbti badMatchedMbti = mbtiService.selectMbtiByCompatibility(resultMbti.getId(),0);
 
+    	System.out.println("~~~~~~~~~~굿"+goodMatchedMbti);
+    	System.out.println("~~~~~~~~~~뱃"+badMatchedMbti);
+    	
     	// 세션에 데이터 저장
     	model.addAttribute("resultMbti", resultMbti);
     	httpSession.setAttribute("testResult", resultMbti);
@@ -186,6 +197,8 @@ public class TestController {
     		System.out.println(httpSession.getAttribute("principal"));
     	}
     	
+    	
+    	model.addAttribute("user", user);
         // 페이지 리디렉션
         return "/test/resultTest";
 	}

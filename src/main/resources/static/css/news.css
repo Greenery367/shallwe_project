@@ -91,17 +91,20 @@
 	margin-top:20px;
 	margin-bottom:20px;
 }
-
+.notice--container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
 
 
 .notice-container{
     width: 60%;
-    margin: 50px auto;
     padding: 30px;
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     border-radius: 12px;
-    margin-top: 150px; /* 헤더와 네비게이션 바를 고려한 상단 마진 */
     display: flex;
     flex-direction: column;
     align-items: center;

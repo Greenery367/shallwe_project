@@ -79,16 +79,19 @@ public class ChatTest {
 	@GetMapping("/profileInfo")
 	public String getMethodName(@RequestParam("userId") int id, Model model) {
 		User user = friendService.findByUserID(id);
-		int mbti =	matchService.getMbtiIdByUserId(id);
-		MbtiDTO mbtiDTO = matchService.getMbtiNameById(mbti);
-		System.out.println("MBTI 설명 !!! : " + mbtiDTO);
+		if(matchService.getMbtiIdByUserId(id) != null) {
+			System.out.println("--------------dㅇㅇㅇㅇㅇㅇㅇ------------");
+			int mbti =	matchService.getMbtiIdByUserId(id);
+			MbtiDTO mbtiDTO = matchService.getMbtiNameById(mbti);
+			model.addAttribute("mbti",mbtiDTO);
+		}
 		model.addAttribute("user",user);
-		model.addAttribute("mbti",mbtiDTO);
 		return "match/userInfo";
 	}
 	
 	@GetMapping("/friendChat")
 	public String friendChatPage(@RequestParam("id") int id, Model model) {
+		System.out.println("채팅 들어옴!!!!!!!!!!!!!!!!!!!!");
 		User principal = (User)session.getAttribute("principal");
 		User opponent = userService.searchByUserId(id);
 		int userId = principal.getUserId();

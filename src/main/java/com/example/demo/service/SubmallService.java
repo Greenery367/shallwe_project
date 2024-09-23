@@ -23,7 +23,7 @@ import com.example.demo.dto.BankInfoDTO;
 import com.example.demo.dto.ReadyResponseDTO;
 import com.example.demo.dto.RegisterSubmallDTO;
 import com.example.demo.dto.SubmallInfoDTO;
-import com.example.demo.repository.RegisterSubmallRepositroy;
+import com.example.demo.repository.RegisterSubmallRepository;
 import com.example.demo.repository.SubmallRepository;
 import com.example.demo.repository.model.RegisterSubmall;
 import com.example.demo.repository.model.Submall;
@@ -36,7 +36,7 @@ public class SubmallService {
 	private SubmallRepository submallRepository;
 	
 	@Autowired
-	private RegisterSubmallRepositroy registerSubmallRepositroy;
+	private RegisterSubmallRepository registerSubmallRepositroy;
 	
 	@Autowired
 	private BankService bankService;

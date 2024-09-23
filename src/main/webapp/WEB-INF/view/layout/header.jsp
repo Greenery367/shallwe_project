@@ -42,9 +42,9 @@
 					<p>|</p>
 					<c:choose>
 						<c:when test="${user == null }">
-							<a href="/user/sign-in"><b>로그인</b></a>
+							<a href="${pageContext.request.contextPath}//user/sign-in"><b>로그인</b></a>
 							<p>|</p>
-							<a href="/user/sign-up"><b>회원가입</b></a>
+							<a href="${pageContext.request.contextPath}//user/sign-up"><b>회원가입</b></a>
 							<p>|</p>
 						</c:when>
 						<c:otherwise>
@@ -163,7 +163,7 @@
 					</ul>
 				</div>
 				<div class="menu-container">
-					<a href="" class="menu">콘텐츠</a>
+					<a href='${pageContext.request.contextPath}/test/start-test' class="menu">콘텐츠</a>
 					<div class="drop-down-menus">
 						<ul>
 							<li><a
@@ -365,7 +365,7 @@
         if (text === 'ok') {
             // 삭제 성공 후 화면에서 선택된 알람 요소 제거
             selectedAlarms.forEach(id => {
-                const alarmElement = document.querySelector(`input[value='${id}']`).closest('.alarm-element');
+                const alarmElement = document.querySelector('input[value="'+id+'"]').closest('.alarm-element');
                 if (alarmElement) {
                     alarmElement.remove(); // 해당 알람 DOM 요소 제거
                 }

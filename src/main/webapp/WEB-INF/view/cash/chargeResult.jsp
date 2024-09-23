@@ -11,7 +11,7 @@
 			<img src="../static/images/cash.png"> 
 		</div>
 			<h1>결제에 성공했습니다.</h1>
-			
+			<h3>현재 캐쉬 : ${user.currentCash}</h3>
 		</div>
 		
 	</div>

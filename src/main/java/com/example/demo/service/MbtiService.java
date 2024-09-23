@@ -24,8 +24,8 @@ public class MbtiService {
 	}
 	
 	// 궁합도로 mbti 찾기
-	public Mbti selectMbtiByCompatibility(Integer compatibility) {
-		Integer matchedMbtiId = mbtiRepository.selectMbtiByCompatibility(compatibility);
+	public Mbti selectMbtiByCompatibility(Integer mbtiId, Integer compatibility) {
+		Integer matchedMbtiId = mbtiRepository.selectMbtiByCompatibility(mbtiId,compatibility);
 		Mbti matchedMbti = mbtiRepository.selectMbtiById(matchedMbtiId);
 		return matchedMbti;
 	}
@@ -34,5 +34,11 @@ public class MbtiService {
 	public void setMbtiAndUserInfo(Integer userId, Integer mbtiId) {
 		mbtiRepository.addMbtiInfo(userId,mbtiId);
 		return;
+	}
+	
+	// 가장 최근에 테스트한 정보 가져오기
+	public Mbti getRecentMbtiInfo(int userId) {
+		Mbti mbti= mbtiRepository.getRecentInfo(userId);
+		return mbti;
 	}
 }
