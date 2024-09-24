@@ -84,12 +84,18 @@
 ![Screenshot_4](https://github.com/user-attachments/assets/16a8adef-d087-4d15-8031-e468b14ad0fd) &nbsp;
 
 ### (4) 게임 MBTI를 알아보는 테스트 화면
+![테스트](https://github.com/user-attachments/assets/9e3eb46b-5d02-4442-b386-79643669a400)
+![테스트 중](https://github.com/user-attachments/assets/d1525899-8577-4aa6-8fc2-8ef78b9eaf6c)
+![테스트 결과](https://github.com/user-attachments/assets/a0fc8895-8752-42c4-be62-ac2b7ece403d)
+
 
 ### (5) MBTI 유형에 따른 친구 매칭 &nbsp;
 ![Screenshot_6](https://github.com/user-attachments/assets/075ab236-c1f2-42f7-8ac8-ef4eb2335952) &nbsp;
-
+![image](https://github.com/user-attachments/assets/bef82f85-0965-4d3b-87f1-7d666289110b)
+![image](https://github.com/user-attachments/assets/9eaab0b2-7ddd-4ffe-bafe-33e4c24b5bb5)
 
 ### (6) 1:1 실시간 채팅
+![image](https://github.com/user-attachments/assets/10207d42-b9e0-4c48-ad27-13ef53a1d59d)
 
 ### (7) 친구 추가 및 수락
 
