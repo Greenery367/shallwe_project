@@ -34,7 +34,7 @@
 		                <div class="advertise-box-two" data-id="${advertise.id}">
 		                    <div class="advertise-img-two">
 		                         <a href="${advertise.link}" target='_blank'>
-                                    <img src="/static/images/advertise/${advertise.uploadFileName}${advertise.uploadFileName}" alt="광고사진">
+                                    <img src="/static/images/advertise/${advertise.uploadFileName}" alt="광고사진">
                                 </a>
 		                    </div>
 		                </div>
