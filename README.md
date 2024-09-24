@@ -71,12 +71,7 @@
 
 
 ## 5️⃣ ERD 다이어그램
-### (1) 로그인 시퀀스 (직함별로 다른 사이트를 보여주기)
 ![352962757-64de70dc-b27e-437e-bd74-b1c1ab00955f](https://github.com/user-attachments/assets/e110ed64-c948-4191-8a9d-6e8f626b8cfa)
-### (2) 수강신청 시퀀스 (조회) 
-![시퀀스 다이어그램 - 수강신청 조회](https://github.com/user-attachments/assets/0a205c41-6601-4adf-b2c5-8ea595a36ada) 
-### (3) 수강신청 시퀀스 (신청) 
-![시퀀스 다이어그램 - 수강신청](https://github.com/user-attachments/assets/66cf7af1-4c5a-4536-ba82-0e03c6963d69) &nbsp;
 
 ## 6️⃣ 주요 기능 및 화면 소개 &nbsp;
 ![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34) &nbsp;
