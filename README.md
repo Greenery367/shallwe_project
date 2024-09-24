@@ -91,51 +91,42 @@
 ![Screenshot_4](https://github.com/user-attachments/assets/16a8adef-d087-4d15-8031-e468b14ad0fd) &nbsp;
 
 ### (4) 게임 MBTI를 알아보는 테스트 화면
-![테스트](https://github.com/user-attachments/assets/9e3eb46b-5d02-4442-b386-79643669a400)
-![테스트 중](https://github.com/user-attachments/assets/d1525899-8577-4aa6-8fc2-8ef78b9eaf6c)
 ![테스트 결과](https://github.com/user-attachments/assets/a0fc8895-8752-42c4-be62-ac2b7ece403d)
 
 
 ### (5) MBTI 유형에 따른 친구 매칭 &nbsp;
-![Screenshot_6](https://github.com/user-attachments/assets/075ab236-c1f2-42f7-8ac8-ef4eb2335952) &nbsp;
-![image](https://github.com/user-attachments/assets/bef82f85-0965-4d3b-87f1-7d666289110b)&nbsp;
-![image](https://github.com/user-attachments/assets/9eaab0b2-7ddd-4ffe-bafe-33e4c24b5bb5)&nbsp;
+![image](https://github.com/user-attachments/assets/4746cbc4-7872-41fa-9332-92326000965c)
 
 ### (6) 1:1 실시간 채팅
 ![image](https://github.com/user-attachments/assets/10207d42-b9e0-4c48-ad27-13ef53a1d59d)
 
 ### (7) 친구 추가 및 수락
-![image](https://github.com/user-attachments/assets/f3a530b3-a9b7-4e62-954d-2f13ca384569)
-![image](https://github.com/user-attachments/assets/81ea32f5-0f7e-494f-b333-165d43f39666)
+![image](https://github.com/user-attachments/assets/cf4fbaf3-b7cb-4599-9822-f88131e0f58f)
 
 ### (8) 게임 강의 게시판  &nbsp;
 ![Screenshot_9](https://github.com/user-attachments/assets/6dcb7ace-afd9-471a-ad15-d8e13e1178de) &nbsp;
 
 ### (9) 게임 강의 수강 및 포인트 결제 &nbsp;
 ![강의 디테일](https://github.com/user-attachments/assets/5861d2c2-8391-4b8c-8e3d-61c76ddc9bec)  &nbsp;
-![강의 결제](https://github.com/user-attachments/assets/bb6a0937-ecf5-4177-b12e-ae295281a460)  &nbsp;
-
 
 ### (10) 캐쉬 충전 (카카오페이/토스페이먼츠) &nbsp;
 ![Screenshot_1](https://github.com/user-attachments/assets/95ea3182-5409-41c1-9901-17997b414c25) &nbsp;
-![Screenshot_2](https://github.com/user-attachments/assets/4d4922be-df0d-4a38-a910-ea61aaaddcb1) &nbsp;
-![Screenshot_3](https://github.com/user-attachments/assets/a7ad4c00-4673-4483-84ac-abfe97af2acf) &nbsp;
-
 
 ### (11) 커뮤니티 게시판
+![커뮤니티](https://github.com/user-attachments/assets/24b2dd6e-0ae6-405d-bc87-6f9e64e4c63a)
 
 ### (12) 뉴스 및 공지 게시판
 ![뉴스](https://github.com/user-attachments/assets/d24e8b7f-fae3-4eff-94d8-e6dfc289c255)
-![뉴스 디테일](https://github.com/user-attachments/assets/e6e6a465-d2e0-4250-b551-52c5bf0586ae)
-![공지](https://github.com/user-attachments/assets/fbcde347-7c85-43e7-94b9-02fabf6d94c2)
-![공지 디테일](https://github.com/user-attachments/assets/4176b02a-db1d-44ef-90ae-eb119dfea147)
-
 
 ### (13) Q&A 게시판
+![고객지원](https://github.com/user-attachments/assets/b0c18546-bcdf-4e8d-ac0b-5a81e69d70a4)
 
 ### (14) 회원정보 수정
+![회원정보 수정](https://github.com/user-attachments/assets/fdcc4d92-f7aa-46fb-9897-9ae9a13d315a)
 
 ### (11) 캐쉬 충전 및 사용 내역
+![캐쉬 사용 이력](https://github.com/user-attachments/assets/e9a36e69-17de-4c7a-95d1-d7b1e62deaa7)
 
 ### (11) 서브몰 생성 신청 및 환전 내역
+![환전 신청 내역](https://github.com/user-attachments/assets/673ade57-8c71-4a15-b7b4-553556e2aecf)
 
