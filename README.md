@@ -91,13 +91,15 @@
 
 ### (6) 1:1 실시간 채팅
 
-### (7) 친구 추가 및 수락)
+### (7) 친구 추가 및 수락
 
 ### (8) 게임 강의 게시판  &nbsp;
 ![Screenshot_9](https://github.com/user-attachments/assets/6dcb7ace-afd9-471a-ad15-d8e13e1178de) &nbsp;
 
 ### (9) 게임 강의 수강 및 포인트 결제 &nbsp;
-![Screenshot_10](https://github.com/user-attachments/assets/40098f30-1cb8-4f97-8469-33afe2e730e7) &nbsp;
+![강의 디테일](https://github.com/user-attachments/assets/5861d2c2-8391-4b8c-8e3d-61c76ddc9bec)  &nbsp;
+![강의 결제](https://github.com/user-attachments/assets/bb6a0937-ecf5-4177-b12e-ae295281a460)  &nbsp;
+
 
 ### (10) 캐쉬 충전 (카카오페이/토스페이먼츠) &nbsp;
 ![Screenshot_1](https://github.com/user-attachments/assets/95ea3182-5409-41c1-9901-17997b414c25) &nbsp;
@@ -108,6 +110,11 @@
 ### (11) 커뮤니티 게시판
 
 ### (12) 뉴스 및 공지 게시판
+![뉴스](https://github.com/user-attachments/assets/d24e8b7f-fae3-4eff-94d8-e6dfc289c255)
+![뉴스 디테일](https://github.com/user-attachments/assets/e6e6a465-d2e0-4250-b551-52c5bf0586ae)
+![공지](https://github.com/user-attachments/assets/fbcde347-7c85-43e7-94b9-02fabf6d94c2)
+![공지 디테일](https://github.com/user-attachments/assets/4176b02a-db1d-44ef-90ae-eb119dfea147)
+
 
 ### (13) Q&A 게시판
 
