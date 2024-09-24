@@ -85,7 +85,7 @@
 
 ### (4) 게임 MBTI를 알아보는 테스트 화면
 
-### (5) MBTI 유형에 따른 친구 매칭
+### (5) MBTI 유형에 따른 친구 매칭 &nbsp;
 ![Screenshot_6](https://github.com/user-attachments/assets/075ab236-c1f2-42f7-8ac8-ef4eb2335952) &nbsp;
 
 
@@ -93,13 +93,17 @@
 
 ### (7) 친구 추가 및 수락)
 
-### (8) 게임 강의 게시판 
-![Screenshot_7](https://github.com/user-attachments/assets/25ebb3c6-b710-42d5-9229-3bb58cfbc70f) &nbsp;
+### (8) 게임 강의 게시판  &nbsp;
+![Screenshot_9](https://github.com/user-attachments/assets/6dcb7ace-afd9-471a-ad15-d8e13e1178de) &nbsp;
+
+### (9) 게임 강의 수강 및 포인트 결제 &nbsp;
 ![Screenshot_10](https://github.com/user-attachments/assets/40098f30-1cb8-4f97-8469-33afe2e730e7) &nbsp;
 
-### (9) 게임 강의 수강 및 포인트 결제
+### (10) 캐쉬 충전 (카카오페이/토스페이먼츠) &nbsp;
+![Screenshot_1](https://github.com/user-attachments/assets/95ea3182-5409-41c1-9901-17997b414c25) &nbsp;
+![Screenshot_2](https://github.com/user-attachments/assets/4d4922be-df0d-4a38-a910-ea61aaaddcb1) &nbsp;
+![Screenshot_3](https://github.com/user-attachments/assets/a7ad4c00-4673-4483-84ac-abfe97af2acf) &nbsp;
 
-### (10) 캐쉬 충전 (카카오페이/토스페이먼츠)
 
 ### (11) 커뮤니티 게시판
 
