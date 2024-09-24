@@ -47,7 +47,7 @@
 |Lombok||어노테이션을 활용한 간단한 메서드 사용 및 편의성 증가|
 |MySQL Connecter Java|MySQL Connector Java 8.0.21 | Java와 MySQL을 연결한 효율적인 데이터베이스 사용 |
 |MyBatis|3.0.3| 간편한 DB 사용 및 동적 쿼리 작성|
-|Chart.js|| 차트를 사용한 효과적인 데이터 시각화 및 대시보드 제작|
+|Chart.js|4.4.4| 차트를 사용한 효과적인 데이터 시각화 및 대시보드 제작|
 |spring security crypto|4.4.4| Springboot 기반의 간편한 인증 및 보안 처리|
 |spring-boot-starter-websocket|3.0.3| 전이중 통신 및 양방향 통신을 위한 연결 지향 통신 제공|
 
@@ -73,7 +73,43 @@
 ## 5️⃣ ERD 다이어그램
 ![352962757-64de70dc-b27e-437e-bd74-b1c1ab00955f](https://github.com/user-attachments/assets/e110ed64-c948-4191-8a9d-6e8f626b8cfa)
 
+
 ## 6️⃣ 주요 기능 및 화면 소개 &nbsp;
+### (1) 로그인 및 회원가입 (일반/네이버/카카오/구글)
 ![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34) &nbsp;
 
+### (2) ID, PW 찾기
+
+### (3) 메인 화면
+![Screenshot_4](https://github.com/user-attachments/assets/16a8adef-d087-4d15-8031-e468b14ad0fd) &nbsp;
+
+### (4) 게임 MBTI를 알아보는 테스트 화면
+
+### (5) MBTI 유형에 따른 친구 매칭
+![Screenshot_6](https://github.com/user-attachments/assets/075ab236-c1f2-42f7-8ac8-ef4eb2335952) &nbsp;
+
+
+### (6) 1:1 실시간 채팅
+
+### (7) 친구 추가 및 수락)
+
+### (8) 게임 강의 게시판 
+![Screenshot_7](https://github.com/user-attachments/assets/25ebb3c6-b710-42d5-9229-3bb58cfbc70f) &nbsp;
+![Screenshot_10](https://github.com/user-attachments/assets/40098f30-1cb8-4f97-8469-33afe2e730e7) &nbsp;
+
+### (9) 게임 강의 수강 및 포인트 결제
+
+### (10) 캐쉬 충전 (카카오페이/토스페이먼츠)
+
+### (11) 커뮤니티 게시판
+
+### (12) 뉴스 및 공지 게시판
+
+### (13) Q&A 게시판
+
+### (14) 회원정보 수정
+
+### (11) 캐쉬 충전 및 사용 내역
+
+### (11) 서브몰 생성 신청 및 환전 내역
 
