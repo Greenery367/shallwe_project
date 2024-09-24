@@ -39,6 +39,17 @@
 
 ## 4️⃣ 사용 라이브러리 및 외부 API
 ### (1) 사용 라이브러리
+|라이브러리 명|버전|용도|
+|------|---|---|
+|javax servlet api|4.0.1| 커스텀 라이브러리 구현체 사용 |
+|jakarta servlet jsp jstl|3.0.0| 커스텀 라이브러리 구현체 사용을 위한 인터페이스|
+|jackson |2.15.0-rc1 | ObjectMapper API를 통한 JSON 객체 활용|
+|Lombok||어노테이션을 활용한 간단한 메서드 사용 및 편의성 증가|
+|MySQL Connecter Java|MySQL Connector Java 8.0.21 | Java와 MySQL을 연결한 효율적인 데이터베이스 사용 |
+|MyBatis|3.0.3| 간편한 DB 사용 및 동적 쿼리 작성|
+|Chart.js|| 차트를 사용한 효과적인 데이터 시각화 및 대시보드 제작|
+|spring security crypto|4.4.4| Springboot 기반의 간편한 인증 및 보안 처리|
+|spring-boot-starter-websocket|3.0.3| 전이중 통신 및 양방향 통신을 위한 연결 지향 통신 제공|
 
 ### (2) 사용 외부 API
 |기능|API 명|제공|버전|용도|
