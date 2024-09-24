@@ -1,4 +1,4 @@
-
+![유저 로그인](https://github.com/user-attachments/assets/d7e7c670-f493-4060-a931-5fdb63849397)
 # < 🕹️셸위 : 게임 친구 매칭 사이트  >
 &nbsp; 
 &nbsp;
@@ -83,9 +83,10 @@
 ## 6️⃣ 주요 기능 및 화면 소개 &nbsp;
 ### 1. 유저
 #### (1) 로그인 및 회원가입 (일반/네이버/카카오/구글)
-![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34) &nbsp;
+![유저 로그인](https://github.com/user-attachments/assets/0e0a9707-402b-417c-8b81-7eff1cdf66ce)
 
 #### (2) ID, PW 찾기
+![비밀번호 찾기](https://github.com/user-attachments/assets/ea98fd78-821c-4cf6-bfbc-e00b3cff16ec)
 
 #### (3) 메인 화면
 ![Screenshot_4](https://github.com/user-attachments/assets/16a8adef-d087-4d15-8031-e468b14ad0fd) &nbsp;
