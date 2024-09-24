@@ -82,51 +82,54 @@
 
 
 ## 6️⃣ 주요 기능 및 화면 소개 &nbsp;
-### (1) 로그인 및 회원가입 (일반/네이버/카카오/구글)
+### 1. 유저
+#### (1) 로그인 및 회원가입 (일반/네이버/카카오/구글)
 ![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34) &nbsp;
 
-### (2) ID, PW 찾기
+#### (2) ID, PW 찾기
 
-### (3) 메인 화면
+#### (3) 메인 화면
 ![Screenshot_4](https://github.com/user-attachments/assets/16a8adef-d087-4d15-8031-e468b14ad0fd) &nbsp;
 
-### (4) 게임 MBTI를 알아보는 테스트 화면
+#### (4) 게임 MBTI를 알아보는 테스트 화면
 ![테스트 결과](https://github.com/user-attachments/assets/a0fc8895-8752-42c4-be62-ac2b7ece403d)
 
 
-### (5) MBTI 유형에 따른 친구 매칭 &nbsp;
+#### (5) MBTI 유형에 따른 친구 매칭 &nbsp;
 ![image](https://github.com/user-attachments/assets/4746cbc4-7872-41fa-9332-92326000965c)
 
-### (6) 1:1 실시간 채팅
+#### (6) 1:1 실시간 채팅
 ![image](https://github.com/user-attachments/assets/10207d42-b9e0-4c48-ad27-13ef53a1d59d)
 
-### (7) 친구 추가 및 수락
+#### (7) 친구 추가 및 수락
 ![image](https://github.com/user-attachments/assets/cf4fbaf3-b7cb-4599-9822-f88131e0f58f)
 
-### (8) 게임 강의 게시판  &nbsp;
+#### (8) 게임 강의 게시판  &nbsp;
 ![Screenshot_9](https://github.com/user-attachments/assets/6dcb7ace-afd9-471a-ad15-d8e13e1178de) &nbsp;
 
-### (9) 게임 강의 수강 및 포인트 결제 &nbsp;
+#### (9) 게임 강의 수강 및 포인트 결제 &nbsp;
 ![강의 디테일](https://github.com/user-attachments/assets/5861d2c2-8391-4b8c-8e3d-61c76ddc9bec)  &nbsp;
 
-### (10) 캐쉬 충전 (카카오페이/토스페이먼츠) &nbsp;
+#### (10) 캐쉬 충전 (카카오페이/토스페이먼츠) &nbsp;
 ![Screenshot_1](https://github.com/user-attachments/assets/95ea3182-5409-41c1-9901-17997b414c25) &nbsp;
 
-### (11) 커뮤니티 게시판
+#### (11) 커뮤니티 게시판
 ![커뮤니티](https://github.com/user-attachments/assets/24b2dd6e-0ae6-405d-bc87-6f9e64e4c63a)
 
-### (12) 뉴스 및 공지 게시판
+#### (12) 뉴스 및 공지 게시판
 ![뉴스](https://github.com/user-attachments/assets/d24e8b7f-fae3-4eff-94d8-e6dfc289c255)
 
-### (13) Q&A 게시판
+#### (13) Q&A 게시판
 ![고객지원](https://github.com/user-attachments/assets/b0c18546-bcdf-4e8d-ac0b-5a81e69d70a4)
 
-### (14) 회원정보 수정
+#### (14) 회원정보 수정
 ![회원정보 수정](https://github.com/user-attachments/assets/fdcc4d92-f7aa-46fb-9897-9ae9a13d315a)
 
-### (11) 캐쉬 충전 및 사용 내역
+#### (11) 캐쉬 충전 및 사용 내역
 ![캐쉬 사용 이력](https://github.com/user-attachments/assets/e9a36e69-17de-4c7a-95d1-d7b1e62deaa7)
 
-### (11) 서브몰 생성 신청 및 환전 내역
+#### (11) 서브몰 생성 신청 및 환전 내역
 ![환전 신청 내역](https://github.com/user-attachments/assets/673ade57-8c71-4a15-b7b4-553556e2aecf)
 
+
+### 2. 관리자
