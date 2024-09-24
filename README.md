@@ -49,13 +49,13 @@
 
 ## 4️⃣ 사이트맵
 ### (1) 유저
-![Screenshot_1](https://github.com/user-attachments/assets/30bbcd4d-d90a-4cd6-a3bb-1dcd951dced9)
+![Screenshot_1](https://github.com/user-attachments/assets/9233e818-a060-4ce2-b658-465ead28a696)
 
 ### (2) 관리자
 ![Screenshot_3](https://github.com/user-attachments/assets/4c779bbf-6f89-4170-8e9a-4de557db04e6)
 
 
-## 5️⃣ 시퀀스 다이어그램
+## 5️⃣ ERD 다이어그램
 ### (1) 로그인 시퀀스 (직함별로 다른 사이트를 보여주기)
 ![352962757-64de70dc-b27e-437e-bd74-b1c1ab00955f](https://github.com/user-attachments/assets/e110ed64-c948-4191-8a9d-6e8f626b8cfa)
 ### (2) 수강신청 시퀀스 (조회) 
@@ -63,10 +63,7 @@
 ### (3) 수강신청 시퀀스 (신청) 
 ![시퀀스 다이어그램 - 수강신청](https://github.com/user-attachments/assets/66cf7af1-4c5a-4536-ba82-0e03c6963d69) &nbsp;
 
-## 6️⃣ ERD 다이어그램 &nbsp;
+## 6️⃣ 주요 기능 및 화면 소개 &nbsp;
 ![image](https://github.com/user-attachments/assets/c5fbc0f5-5a6a-41f2-bf96-e0d49d4ceb34) &nbsp;
 
-## 7️⃣ 화면 및 기능 설명 
-(1) 공통 - 로그인 &nbsp;
-![로그인](https://github.com/user-attachments/assets/bf23b481-f332-4d10-a428-905937ec026c) &nbsp;
 
