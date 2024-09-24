@@ -27,25 +27,27 @@
 |송원석|팀원| 게임 유형을 활용한 매칭 시스템, 1:1 실시간 채팅, 알림, 친구 추가 및 수락, 채팅 로그 저장을 활용한 신고 기능 구현 |
 |이건우|팀원| 관리자 대시보드, 카테고리 및 게시글 관리, 고객 지원 관리, 강의 관리, 광고 및 배너 순환 로직 기능 구현 |
 |최이제|팀원| 커뮤니티 게시판, 강의 게시판, 회원 정보 수정, 환전, 환불, 서브몰 신청 기능 구현 (유저) |
-## 3️⃣ 서비스 환경 및 사용 라이브러리
+## 3️⃣ 서비스 환경 
+
+## 4️⃣ 사용 라이브러리 및 외부 API
+### (1) 사용 라이브러리
 |유형|구분|서비스 배포 환경|
 |------|---|---|
 |SW|OS| Windows10 |
 ||Browser| Chrome 121.0.6167.161 |
 ||Tool| Spring Tool Suite |
-||BackEnd| Java 17 & MySQL 8.0.26 & h2 & redis & MyBatis|
+||BackEnd| Java 17 & MySQL 8.0.26 & h2 & redis|
 ||Version/Issue 관리| GitHub & GitBash |
 ||Communication| Discord & Notion & Slack|
-### (2) 사용 라이브러리
-|라이브러리명|버전명|용도|
-|------|---|---|
-|HikariCP|HikariCP 5.1.0| Connection Pool을 통한 효율적인 DB 연결 관리 |
-|jakarta.servlet.jsp.jstl|Jakarta.servlet.jsp.jstl.api 3.0.0| 커스텀 라이브러리 구현체 사용을 위한 인터페이스 |
-|jakarta.servlet.jsp.jstl|jakarta.servlet.jsp.jstl 3.0.0| 커스텀 라이브러리 구현체 사용 |
-|Lombok|Lombok| 간편한 생성자 및 메서드 사용 |
-|MySQL Connector Java|MySQL Connector Java 8.0.21| MySQL 테이블, DAO&DTO, 검색 기능 및 페이징 기능 구현 |
-|SLF4J|SLF4J API 2.0.0| 다양한 로깅 프레임워크에 대한 추상화 및 연결 |커스텀 라이브러리 구현체|
-|SLF4J|SLF4J simple 2.0.0| SLF4J 인터페이스를 로깅 구현체와 연결 |커스텀 라이브러리 구현체 사용을 위한 인터페이스|
+### (2) 사용 외부 API
+|기능|API 명|제공|버전|용도|
+|로그인|카카오 로그인|Kakao Developers|---|카카오 소셜 로그인을 통한 간편 로그인 기능 제작|
+||네이버 로그인|Naver Developers|---|네이버 소셜 로그인을 통한 간편 로그인 기능 제작|
+||구글 로그인|Google Cloud|웹버전 9|구글 소셜 로그인을 통한 간편 로그인 기능 제작|
+|이메일 인증|Gmail STMP|Gmail|---|이메일 인증을 통한 보안 및 인증 처리|
+|결제|카카오 페이 온라인 결제|Kakao Pay Developers|v1|사용자 결제 및 결제 취소|
+||토스 페이먼츠 결제|Toss Payments|2022-11-16|사용자 결제 및 결제 취소|
+|지급정산|토스 페이먼츠 지급 대행|Toss Payments||사이트의 현재 지급 가능 금액 확인, 서브몰 신청, 지급 정산|
 
 ## 4️⃣ 사이트맵
 ### (1) 유저
