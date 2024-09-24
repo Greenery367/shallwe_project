@@ -91,13 +91,15 @@
 
 ### (5) MBTI 유형에 따른 친구 매칭 &nbsp;
 ![Screenshot_6](https://github.com/user-attachments/assets/075ab236-c1f2-42f7-8ac8-ef4eb2335952) &nbsp;
-![image](https://github.com/user-attachments/assets/bef82f85-0965-4d3b-87f1-7d666289110b)
-![image](https://github.com/user-attachments/assets/9eaab0b2-7ddd-4ffe-bafe-33e4c24b5bb5)
+![image](https://github.com/user-attachments/assets/bef82f85-0965-4d3b-87f1-7d666289110b)&nbsp;
+![image](https://github.com/user-attachments/assets/9eaab0b2-7ddd-4ffe-bafe-33e4c24b5bb5)&nbsp;
 
 ### (6) 1:1 실시간 채팅
 ![image](https://github.com/user-attachments/assets/10207d42-b9e0-4c48-ad27-13ef53a1d59d)
 
 ### (7) 친구 추가 및 수락
+![image](https://github.com/user-attachments/assets/f3a530b3-a9b7-4e62-954d-2f13ca384569)
+![image](https://github.com/user-attachments/assets/81ea32f5-0f7e-494f-b333-165d43f39666)
 
 ### (8) 게임 강의 게시판  &nbsp;
 ![Screenshot_9](https://github.com/user-attachments/assets/6dcb7ace-afd9-471a-ad15-d8e13e1178de) &nbsp;
