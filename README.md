@@ -1,6 +1,7 @@
 
 # < 🕹️셸위 : 게임 친구 매칭 사이트  >
 &nbsp; 
+### Springboot와 MySQL을 사용한 게임 친구 매칭 사이트
 &nbsp;
 ![logo](https://github.com/user-attachments/assets/a457e67b-c80a-4459-a1d3-ad127d33c923)
 
