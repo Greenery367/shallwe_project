@@ -79,6 +79,8 @@
 
 
 ## 5️⃣ ERD 다이어그램
+![ERD다이어그램](https://github.com/user-attachments/assets/f6214843-2830-4cdd-b50e-afede442ad4e)
+
 
 
 ## 6️⃣ 주요 기능 및 화면 소개 &nbsp;
