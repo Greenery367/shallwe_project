@@ -1,4 +1,4 @@
-![유저 로그인](https://github.com/user-attachments/assets/d7e7c670-f493-4060-a931-5fdb63849397)
+
 # < 🕹️셸위 : 게임 친구 매칭 사이트  >
 &nbsp; 
 &nbsp;
