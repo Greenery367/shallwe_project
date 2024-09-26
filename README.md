@@ -97,7 +97,6 @@
 #### (4) 게임 MBTI를 알아보는 테스트 화면
 ![테스트 결과](https://github.com/user-attachments/assets/a0fc8895-8752-42c4-be62-ac2b7ece403d)
 
-
 #### (5) MBTI 유형에 따른 친구 매칭 &nbsp;
 ![image](https://github.com/user-attachments/assets/4746cbc4-7872-41fa-9332-92326000965c)
 
@@ -134,5 +133,35 @@
 #### (11) 서브몰 생성 신청 및 환전 내역
 ![환전 신청 내역](https://github.com/user-attachments/assets/673ade57-8c71-4a15-b7b4-553556e2aecf)
 
+#### (12) 내 강좌 관리 및 강좌 생성
+![강좌개설](https://github.com/user-attachments/assets/222f2679-3288-4f2a-bce2-3ffc74d5b4a5)
+![강의 목록](https://github.com/user-attachments/assets/a10471eb-8928-4a72-9b9b-c2747bd42518)
+
+
 
 ### 2. 관리자
+#### (1) 로그인 
+![관리자 로그인](https://github.com/user-attachments/assets/2976a4a9-bcfc-4421-9346-78f2e43450ba)
+
+#### (2) 대쉬보드 
+
+#### (3) 강의 관리
+![강의 관리](https://github.com/user-attachments/assets/66c97cc6-bcd3-4852-bc3a-97ccdbd42a6d)
+
+#### (4) 서브몰 신청 및 내역 관리 
+![관리자 서브몰 관리](https://github.com/user-attachments/assets/19c31685-13ad-48c5-a271-ff3e504a6263)
+
+#### (5) 환전 신청 내역 조회 및 승인 
+![관리자-환전 내역 관리](https://github.com/user-attachments/assets/1473ee47-33af-464c-b49c-7ba2de9b3e17)
+
+#### (6) 현금 결제 환불 관리
+![관리자 환불 관리](https://github.com/user-attachments/assets/6b06ffca-0161-4b85-8c87-e8d342745d06)
+
+#### (7) 고객 지원 관리
+![고객지원](https://github.com/user-attachments/assets/78625440-f0bd-4f8d-93b3-a861b7d12fd0)
+
+#### (8) 실시간 광고 배너 관리
+![광고목록](https://github.com/user-attachments/assets/e36a6c12-5011-4e97-8952-82cebdf824ba)
+
+#### (9) 게시글 카테고리/게시글.댓글 관리
+![카테고리 관리](https://github.com/user-attachments/assets/92cb1668-427d-4eb7-8a52-ff5618cb7949)
