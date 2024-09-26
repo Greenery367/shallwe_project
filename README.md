@@ -144,6 +144,8 @@
 ![관리자 로그인](https://github.com/user-attachments/assets/2976a4a9-bcfc-4421-9346-78f2e43450ba)
 
 #### (2) 대쉬보드 
+![Screenshot_3](https://github.com/user-attachments/assets/552c8a7e-de72-400c-95fb-c0da16c20788)
+
 
 #### (3) 강의 관리
 ![강의 관리](https://github.com/user-attachments/assets/66c97cc6-bcd3-4852-bc3a-97ccdbd42a6d)
