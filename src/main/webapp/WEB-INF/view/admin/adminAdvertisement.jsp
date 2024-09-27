@@ -214,24 +214,30 @@
 		<script>
 			document.addEventListener('DOMContentLoaded', () => {
 				
+				// 페이지가 완전히 로드 된 후 스크립트가 실행되도록 지정
+				// advertise-container 클래스의 요소를 선택(여러개)해서 advertiseContainers 변수에 저장
 			    const advertiseContainers = document.querySelectorAll('.advertise-container');
-		
+				
+				// forEach 반복 작업 수행 
 			    advertiseContainers.forEach(container => {
-			        const ads = container.querySelectorAll('.advertise-box-one, .advertise-box-two, .advertise-box-three');
+			    	// advertise-container안의 advertise-box-one, advertise-box-two 클래스의 전환될 광고 요소들을 선택해서
+			        const ads = container.querySelectorAll('.advertise-box-one, .advertise-box-two');
+			    	// 첫번째 광고를 0으로 설정
 			        let currentIndex = 0;
 		
+			    	
 			        function showNextAd() {	
-			            // 현재 활성 광고를 숨김
+			            // 모든 광고 active 제거 - > 광고 숨김
 			            ads.forEach(ad => ad.classList.remove('active'));
 		
-			            // 다음 광고로 이동
+			            // 다음 광고 인덱스를 계산 - 인덱스가 범위를 초과하지 않도록 지정 
 			            currentIndex = (currentIndex + 1) % ads.length;
 		
-			            // 다음 광고를 표시
+			            // 다음 광고에 active를 추가하여 광고 표시
 			            ads[currentIndex].classList.add('active');
 			        }
 		
-			        // 첫 번째 광고를 표시
+			        // 다시 첫번째 광고에 active 클래스를 추가하고 처음부터 광고 표시
 			        if (ads.length > 0) {
 			            ads[0].classList.add('active');
 			        }

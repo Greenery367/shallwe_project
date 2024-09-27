@@ -36,12 +36,22 @@
 		select sum(amount) FROM order_tb where date(created_at) = #{createdAt} group by date(created_at)
 	</select>
 	
-	<!-- 일별 충전 총합 리스트 -->
+	<!-- 일별 충전 + 사용 총합 리스트 -->
 	<select id="countChargeAmountAllDay"  resultType="com.example.demo.dto.CashChargeGraphVO">
-		SELECT DATE(created_at) AS createdAt, SUM(amount) AS amount, id, status
-		FROM order_tb
-		GROUP BY DATE(created_at)
-		ORDER BY DATE(created_at)
+		SELECT 
+		    DATE(o.created_at) AS createdAt, 
+		    SUM(o.amount) AS amount, 
+		    SUM(s.spend) AS spend
+		FROM 
+		    order_tb o
+		LEFT JOIN 
+		    spend_tb s
+		ON 
+		    DATE(o.created_at) = DATE(s.created_at)
+		GROUP BY 
+		    DATE(o.created_at)
+		ORDER BY 
+		    DATE(o.created_at);
 	</select>
 	
 	
@@ -69,7 +79,8 @@
 	                        customer = #{customer},
 	                        link = #{link},
 	                        start_date = #{startDate},
-	                        end_date = #{endDate} 
+	                        end_date = #{endDate},
+	                        status = #{status}
 	                        where id=#{id}
 	</update>
 	

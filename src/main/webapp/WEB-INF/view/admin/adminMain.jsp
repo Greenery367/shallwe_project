@@ -3,38 +3,7 @@
 <%@ include file="/WEB-INF/view/layout/adminHeader.jsp"%>
 			
 				<h2>대시 보드</h2>
-				<p>유저</p>
-				<div class="statistics-user-box">
-					<div class="number-of-user-box">
-						<div class="number-of-user-content">
-							<h1>${numberOfUser}</h1>
-							<p>회원수</p>
-						</div>
-						<div class="number-of-user-info-box">
-							<a href="${pageContext.request.contextPath}/admin/user" class="btn-info">자세히 보기</a>
-						</div>
-					</div>
-
-					<div class="number-of-user-box">
-						<div class="number-of-user-content">
-							<h1>200</h1>
-							<p>누적 매칭수</p>
-						</div>
-						<div class="number-of-user-info-box">
-							<a href="dashboard/matching" class="btn-info">자세히 보기</a>
-						</div>
-					</div>
-					<div class="number-of-user-box">
-						<div class="number-of-user-content">
-							<h1>200 / 10</h1>
-							<p>회원가입/탈퇴수</p>
-						</div>
-						<div class="number-of-user-info-box">
-							<a href="${pageContext.request.contextPath}/admin/user" class="btn-info">자세히 보기</a>
-						</div>
-					</div>
-				</div>
-
+				
 				<p>캐쉬</p>
 				<div class="statistics-user-box">
 					<div class="number-of-user-box">
@@ -76,6 +45,40 @@
 					</div>
 				</div>
 				
+				<p>유저</p>
+				<div class="statistics-user-box">
+					<div class="number-of-user-box">
+						<div class="number-of-user-content">
+							<h1>${numberOfUser}</h1>
+							<p>회원수</p>
+						</div>
+						<div class="number-of-user-info-box">
+							<a href="${pageContext.request.contextPath}/admin/user" class="btn-info">자세히 보기</a>
+						</div>
+					</div>
+
+					<div class="number-of-user-box">
+						<div class="number-of-user-content">
+							<h1>200</h1>
+							<p>누적 매칭수</p>
+						</div>
+						<div class="number-of-user-info-box">
+							<a href="dashboard/matching" class="btn-info">자세히 보기</a>
+						</div>
+					</div>
+					<div class="number-of-user-box">
+						<div class="number-of-user-content">
+							<h1>200 / 10</h1>
+							<p>회원가입/탈퇴수</p>
+						</div>
+						<div class="number-of-user-info-box">
+							<a href="${pageContext.request.contextPath}/admin/user" class="btn-info">자세히 보기</a>
+						</div>
+					</div>
+				</div>
+
+				
+				
 				<p>광고 및 게시판</p>
 				<div class="statistics-user-box">
 					<div class="number-of-user-box">
@@ -113,6 +116,9 @@
 					<div style="position: relative; height: 35vh; width:50%">
 						<canvas id="myChart"></canvas>
 					</div>
+					<div style="position: relative; height: 35vh; width:50%">
+						<canvas id="myChart2"></canvas>
+					</div>
 				</div>
 
 
@@ -120,10 +126,12 @@
 				
 		<script>
 		    const ctx = document.getElementById('myChart');
+		    const ctx2 = document.getElementById('myChart2');
+		    
 		    let dateArray = [];
 		    let amountArray = [];
-		    let amountArray2 = [];  // ctx2에 대한 데이터를 저장할 배열
-		
+		    let spendArray = [];
+			
 		    function makeAmountArray(array, data) {
 		        for (let i = 0; i < data.length; i++) {
 		            let a = data[i].amount; // 'amount' 필드 사용
@@ -152,8 +160,8 @@
 		    fetch('/admin/dashboard')
 		        .then(response => response.json())
 		        .then(data => {
-		            makeAmountArray(amountArray, data);  // ctx1 데이터
-		            makeAmountArray2(amountArray2, data); // ctx2 데이터
+		            makeAmountArray(amountArray, data);  
+		            makeAmountArray2(spendArray, data); 
 		            makeDateArray(dateArray, data);
 		
 		            new Chart(ctx, {
@@ -170,10 +178,35 @@
 		                        },
 		                        {
 		                            label: '일별 전체 사용량',
-		                            data: amountArray2,
+		                            data: spendArray,
 		                            borderWidth: 1,
 		                            borderColor: 'red',  // ctx2 데이터 색상
 		                            fill: false
+		                        }
+		                    ]
+		                },
+		                options: {
+		                    scales: {
+		                        y: {
+		                            beginAtZero: true
+		                        }
+		                    }
+		                }
+		            });
+		            
+		            // 두 번째 그래프 (충전량)
+		            new Chart(ctx2, {
+		                type: 'bar',
+		                data: {
+		                    labels: ["2024-09-12", "2024-09-13", "2024-09-14", "2024-09-15", "2024-09-16", "2024-09-17", "2024-09-18"],
+		                    datasets: [
+		                        {
+		                            label: '회원 가입수',
+		                            data: [5,10,11,53,61,135,55],
+		                            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+		                            borderColor: 'rgba(0, 123, 255, 1)',
+		                            borderWidth: 1,
+		                            fill: true
 		                        }
 		                    ]
 		                },
