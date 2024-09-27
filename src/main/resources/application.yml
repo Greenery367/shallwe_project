@@ -5,7 +5,6 @@ server:
       charset: utf-8
       force: true
 
-
 spring:
 
   data:
@@ -44,8 +43,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: secondclover714@gmail.com
-    password: pawf rjzd mnwd ptsq
+    username: # 이메일 인증 용 gmail 정보 
+    password: # 이메일 인증 용 mail api pw 정보 
     properties:
       mail:
         transport:
@@ -71,23 +70,23 @@ logging:
 
 file: 
   upload-dir: C:\work_spring\upload/
-  advertise-dir: C:\work_js_class\shallwe_project\src\main\resources\static\images\advertise/
+  advertise-dir: C:\Users\KDP\git\shallwe_project\src\main\resources\static\images\advertise/
   
 tenco:
   key: 07f5efbd3004db57fcd53846050461b203e984faa9d957285aa26f8b
-  
-googleClientId:
-  key: 310509781431-ianh0bki0s8pg729fnhtmqqujthsjcqt.apps.googleusercontent.com
 
+# 소셜 로그인 관련 정보  
+googleClientId:
+  key: # 구글 클라이언트 아이디
+    
 googleClientSecret:
-  key: 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
-  
+  key: # 구글 클라이언트 시크릿
+
 kakaoClientId:
-  key: 61e5a7465f3248de0332e984c98de103
+  key: # 카카오 클라이언트 아이디
 
 naverClientId:
-  key: L2nqlUqxr9srIFoflYqq
+  key: # 네이버 클라이언트 아이디
     
 naverClientSecret:
-  key: 44d4mAxRwE
-  
+  key: # 네이버 클라이언트 시크릿 
