@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="/css/adminRefund.css">
 	<div class="main-board">
 	<h1>환불 내역 관리</h1>
-	<c:if test="${refundList != null}">
 			<table class="table">
 				<tr>
 					<th>id</th>
@@ -26,48 +25,35 @@
 						<c:if test="${refundDto.platform == 2 }">토스페이먼츠</c:if>
 					</td>
 					<td><c:if test="${refundDto.status == 0 }">
-						<button class="refund-table" onclick="decideRefund(${refundDto.platform}, ${refundDto.id}, ${refundDto.orderId}, ${refundDto.userId},)">환불 미완료</button></c:if>
+						<button class="refund-table" onclick="decideRefund(${refundDto.platform}, ${refundDto.id})">환불 미완료</button></c:if>
 						<c:if test="${refundDto.status == 1 }"><div>환불 처리 완료</div></c:if>
 					</td>
 					</tr>
 			</c:forEach>
 			</table>
-	</c:if>
-	
 	</div>
-	<script>
-		function decideRefund(platform, id){
-			console.log(platform, id);
-			
-			// 카카오페이 결제 - 환불 처리
-			if(platform == 1){
-				fetch(`http://localhost:8080/admin/refund/send-request/kakao`, {
-		            method: "POST",
-		            headers: {
-		                "Content-Type": "application/json",
-		                // "charset"은 필요하지 않음. 브라우저가 자동으로 처리
-		            },
-		            body: JSON.stringify({"id" : id}) // 요청 본문에 데이터를 포함
-		        })
-			}
-			}
-			
-			
-			// 토스 페이 환불 처리
-			if(platform == 2){
-				fetch(`http://localhost:8080/admin/refund/send-request/toss`, {
-		            method: "POST",
-		            headers: {
-		                "Content-Type": "application/json",
-		                // "charset"은 필요하지 않음. 브라우저가 자동으로 처리
-		            },
-		            body: JSON.stringify({"id" : id}) // 요청 본문에 데이터를 포함
-		        })
-			}
-			 
-		}
-		
-		
-	</script>
+<script>
+    function decideRefund(platform, id) {
+        console.log(platform, id);
+        
+        const url = platform === 1 
+            ? `http://localhost:8080/admin/refund/send-request/kakao` 
+            : `http://localhost:8080/admin/refund/send-request/toss`;
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({"id": id}),
+        })
+        .then(data => {
+            console.log('환불 요청 성공:', data);
+            alert('환불 요청이 성공적으로 처리되었습니다.');
+            // 여기에서 UI 업데이트 (예: 버튼 상태 변경)
+        })
+    }
+</script>
+
 
 <%@ include file="/WEB-INF/view/layout/adminFooter.jsp"%>

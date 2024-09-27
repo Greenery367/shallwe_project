@@ -100,7 +100,7 @@ public class KakaoPayService {
      */
 	private org.springframework.http.HttpHeaders getHeaders(){
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-		headers.set("Authorization", "SECRET_KEY DEVA5A12588C57F001FADBB1F09F61A652DBADF2");
+		headers.set("Authorization", "시크릿키!!!!");
 		headers.set("Content-type", "application/json");
         
         return headers;

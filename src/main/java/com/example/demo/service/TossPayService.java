@@ -89,7 +89,7 @@ public class TossPayService {
 	 * @throws IOException 
 	 */
 	public  String sendTossPayRequestFinish(String orderId, String paymentKey, Long amount) throws URISyntaxException, IOException, InterruptedException {
-		String base64 = "test_sk_4yKeq5bgrpyxEo7Ndn5p8GX0lzW6:";
+		String base64 = "Base64 인증키";
 	    String baseUrl = "https://api.tosspayments.com/v1/payments/confirm";
 
 	    // 요청 본문을 JSON 문자열로 생성
@@ -102,7 +102,7 @@ public class TossPayService {
 
 	    HttpRequest request = HttpRequest.newBuilder()
 	        .uri(URI.create(baseUrl))
-	        .header("Authorization", "Basic dGVzdF9za180eUtlcTViZ3JweXhFbzdOZG41cDhHWDBselc2Og==")
+	        .header("Authorization", "Base64 인증키")
 	        .header("Content-Type", "application/json")
 	        .method("POST", HttpRequest.BodyPublishers.ofString(requestBody))
 	        .build();

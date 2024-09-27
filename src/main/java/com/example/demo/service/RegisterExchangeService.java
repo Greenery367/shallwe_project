@@ -79,7 +79,7 @@ public class RegisterExchangeService {
 		// (1) HttpMessage 만들기
 		HttpRequest request = HttpRequest.newBuilder()
 		    .uri(URI.create("https://api.tosspayments.com/v1/payouts/sub-malls/settlements/balance"))
-		    .header("Authorization", "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSOg==")
+		    .header("Authorization", "Base64 처리")
 		    .method("GET", HttpRequest.BodyPublishers.noBody())
 		    .build();
 		
@@ -151,7 +151,7 @@ public class RegisterExchangeService {
 	   
 	   HttpRequest request = HttpRequest.newBuilder()
 			.uri(URI.create("https://api.tosspayments.com/v1/payouts/sub-malls/settlements"))
-			.header("Authorization", "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSOg==")
+			.header("Authorization", "Base64 인증키")
 			.header("Content-Type", "application/json")
 			.method("POST", HttpRequest.BodyPublishers.ofString(requestBody))
 		    .build();

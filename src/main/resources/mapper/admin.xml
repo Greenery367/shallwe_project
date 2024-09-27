@@ -62,16 +62,17 @@
 		values(#{placeId}, #{title}, #{customer}, #{link}, #{originFileName}, #{uploadFileName}, #{startDate}, #{endDate}, #{status})
 	</insert>
 	
-	<!-- 광고 수정 -->
-	<update id="updateAdvertise">
-			update advertise_tb set place_id = #{placeId},
-							title = #{title},
-	                        customer = #{customer},
-	                        link = #{link},
-	                        start_date = #{startDate},
-	                        end_date = #{endDate} 
-	                        where id=#{id}
-	</update>
+<!-- 광고 수정 -->
+    <update id="updateAdvertise">
+            update advertise_tb set place_id = #{placeId},
+                            title = #{title},
+                            customer = #{customer},
+                            link = #{link},
+                            start_date = #{startDate},
+                            end_date = #{endDate},
+                            status = #{status}
+                            where id=#{id}
+    </update>
 	
 	<!-- 광고 삭제 -->
 	<delete id="deleteAdvertiseById">

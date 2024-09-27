@@ -23,8 +23,8 @@
 					<td>${exchange.submallId}</td>
 					<td>${exchange.amount}</td>
 					<td>${exchange.createdAt}</td>
-					<td><c:if test="${exchange.status == 0 }"><button class="refund-table" value="${exchange.id}" onclick="decideRefund(this)">환불 미완료</button></c:if>
-						<c:if test="${exchange.status != 0 }"><div>환불 처리 완료</div></c:if>
+					<td><c:if test="${exchange.status == 0 }"><button class="refund-table" value="${exchange.id}" onclick="decideRefund(this)">환전 미완료</button></c:if>
+						<c:if test="${exchange.status != 0 }"><div>환전 처리 완료</div></c:if>
 					</td>
 				</tr>
 			</c:forEach>
