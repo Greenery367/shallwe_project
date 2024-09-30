@@ -1,11 +1,13 @@
 
 # < 🕹️셸위 : 게임 친구 매칭 사이트  >
-### Springboot와 MySQL을 사용한 게임 친구 매칭 사이트
+### Springboot와 MyBatis를 사용한 게임 친구 매칭 사이트
 &nbsp;
 &nbsp; 
 ![logo](https://github.com/user-attachments/assets/a457e67b-c80a-4459-a1d3-ad127d33c923)
 
+* 유튜브 시연 영상 : https://www.youtube.com/watch?v=XGrV_bXjmmg
 * 노션 : https://coffee-pike-9e2.notion.site/df2cb01b726b41cdb25713ee339bf99c?pvs=4
+
 
 
 &nbsp;
@@ -43,7 +45,7 @@
 |SW|OS| Windows10 |
 ||Browser| Chrome 121.0.6167.161 |
 ||Tool| Spring Tool Suite |
-||BackEnd| Java 17 & MySQL 8.0.26 & h2 & redis|
+||BackEnd| Java 17 & MySQL 8.0.26 & h2 & redis & MyBatis|
 ||Version/Issue 관리| GitHub & GitBash |
 ||Communication| Discord & Notion & Slack|
 
@@ -54,23 +56,22 @@
 |javax servlet api|4.0.1| 커스텀 라이브러리 구현체 사용 |
 |jakarta servlet jsp jstl|3.0.0| 커스텀 라이브러리 구현체 사용을 위한 인터페이스|
 |jackson |2.15.0-rc1 | ObjectMapper API를 통한 JSON 객체 활용|
-|Lombok||어노테이션을 활용한 간단한 메서드 사용 및 편의성 증가|
+|Lombok|1.18.34|어노테이션을 활용한 간단한 메서드 사용 및 편의성 증가|
 |MySQL Connecter Java|MySQL Connector Java 8.0.21 | Java와 MySQL을 연결한 효율적인 데이터베이스 사용 |
-|MyBatis|3.0.3| 간편한 DB 사용 및 동적 쿼리 작성|
 |Chart.js|4.4.4| 차트를 사용한 효과적인 데이터 시각화 및 대시보드 제작|
 |spring security crypto|4.4.4| Springboot 기반의 간편한 인증 및 보안 처리|
 |spring-boot-starter-websocket|3.0.3| 전이중 통신 및 양방향 통신을 위한 연결 지향 통신 제공|
 
 ### (2) 사용 외부 API
-|기능|API 명|제공|버전|용도|
-|------|------|-----|-----|-----|
-|로그인|카카오 로그인|Kakao Developers||카카오 소셜 로그인을 통한 간편 로그인 기능 제작|
-||네이버 로그인|Naver Developers||네이버 소셜 로그인을 통한 간편 로그인 기능 제작|
-||구글 로그인|Google Cloud|웹버전 9|구글 소셜 로그인을 통한 간편 로그인 기능 제작|
-|이메일 인증|Gmail STMP|Gmail||이메일 인증을 통한 보안 및 인증 처리|
-|결제|카카오 페이 온라인 결제|Kakao Pay Developers|v1|사용자 결제 및 결제 취소|
-||토스 페이먼츠 결제|Toss Payments|2022-11-16|사용자 결제 및 결제 취소|
-|지급정산|토스 페이먼츠 지급 대행|Toss Payments||사이트의 현재 지급 가능 금액 확인, 서브몰 신청, 지급 정산|
+|기능|API 명|제공|용도|
+|------|------|-----|-----|
+|로그인|카카오 로그인|Kakao Developers카카오 소셜 로그인을 통한 간편 로그인 기능 제작|
+||네이버 로그인|Naver Developers|네이버 소셜 로그인을 통한 간편 로그인 기능 제작|
+||구글 로그인|Google Cloud|구글 소셜 로그인을 통한 간편 로그인 기능 제작|
+|이메일 인증|Gmail STMP|Gmail|이메일 인증을 통한 보안 및 인증 처리|
+|결제|카카오 페이 온라인 결제|Kakao Pay Developers|사용자 결제 및 결제 취소|
+||토스 페이먼츠 결제|Toss Payments|사용자 결제 및 결제 취소|
+|지급정산|토스 페이먼츠 지급 대행|Toss Payments|사이트의 현재 지급 가능 금액 확인, 서브몰 신청, 지급 정산|
 
 ## 4️⃣ 사이트맵
 ### (1) 유저
