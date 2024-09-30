@@ -128,7 +128,7 @@ public class RefundService {
 	 */
 	private org.springframework.http.HttpHeaders getKakaoHeaders(){
 		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-		headers.set("Authorization", "시크릿키");
+		headers.set("Authorization", "시크시크릿키");
 		headers.set("Content-type", "application/json");
         
         return headers;
@@ -148,7 +148,7 @@ public class RefundService {
 	 * @throws IOException 
 	 */
 	public List<String> readyRefundToToss(String id) throws IOException, InterruptedException {
-		String base64 = "test_sk_4yKeq5bgrpyxEo7Ndn5p8GX0lzW6";
+		String base64 = "으아악";
 		String encodedKey= new String(Base64.getEncoder().encode((base64+":").getBytes(StandardCharsets.UTF_8)));
 		
 		// order amount 찾기
@@ -159,18 +159,17 @@ public class RefundService {
 
 				HttpRequest request = HttpRequest.newBuilder()
 					    .uri(URI.create("https://api.tosspayments.com/v1/payments/"+order.orderId+"/cancel"))
-					    .header("Authorization", "Basic dGVzdF9za180eUtlcTViZ3JweXhFbzdOZG41cDhHWDBselc2Og==")
+					    .header("Authorization", "우와아앙")
 					    .header("Content-Type", "application/json")
 					    .method("POST", HttpRequest.BodyPublishers.noBody())
 					    .build();
 					HttpResponse<String> response11 = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-					System.out.println("결제 정보!!!--------------"+response11.body());
 
 				Map<String,String> parameters = new HashMap<>();
 				parameters.put("paymentKey", order.orderId);
 				parameters.put("cancelReason", "고객 변심");
 				parameters.put("cancelamount", order.getAmount().toString());
-				parameters.put("refundReceiveAccount ", "{bank: '1111', accountNumber: '1111111111111', holderName: '엄송'}");
+				parameters.put("refundReceiveAccount ", "{bank: '테스트', accountNumber: '테스트계좌번호입니당', holderName: '엄송'}");
 
 				
 				// HttpMessage 만들기
