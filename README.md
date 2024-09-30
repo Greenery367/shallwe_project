@@ -5,7 +5,9 @@
 &nbsp; 
 ![logo](https://github.com/user-attachments/assets/a457e67b-c80a-4459-a1d3-ad127d33c923)
 
+* 유튜브 시연 영상 : https://www.youtube.com/watch?v=XGrV_bXjmmg
 * 노션 : https://coffee-pike-9e2.notion.site/df2cb01b726b41cdb25713ee339bf99c?pvs=4
+
 
 
 &nbsp;
