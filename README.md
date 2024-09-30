@@ -54,7 +54,7 @@
 |javax servlet api|4.0.1| 커스텀 라이브러리 구현체 사용 |
 |jakarta servlet jsp jstl|3.0.0| 커스텀 라이브러리 구현체 사용을 위한 인터페이스|
 |jackson |2.15.0-rc1 | ObjectMapper API를 통한 JSON 객체 활용|
-|Lombok||어노테이션을 활용한 간단한 메서드 사용 및 편의성 증가|
+|Lombok|1.18.34|어노테이션을 활용한 간단한 메서드 사용 및 편의성 증가|
 |MySQL Connecter Java|MySQL Connector Java 8.0.21 | Java와 MySQL을 연결한 효율적인 데이터베이스 사용 |
 |Chart.js|4.4.4| 차트를 사용한 효과적인 데이터 시각화 및 대시보드 제작|
 |spring security crypto|4.4.4| Springboot 기반의 간편한 인증 및 보안 처리|
